@@ -1,0 +1,58 @@
+package io.inprice.scrapper.common.helpers;
+
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+import io.inprice.scrapper.common.logging.Logger;
+import io.inprice.scrapper.common.config.Config;
+
+import java.io.IOException;
+import java.util.concurrent.TimeoutException;
+
+public class RabbitMQ {
+
+	private static final Logger log = new Logger(RabbitMQ.class);
+
+	private static Channel channel;
+
+	public static Channel getChannel() {
+		if (!isChannelActive()) {
+			synchronized (log) {
+				if (!isChannelActive()) {
+					final ConnectionFactory connectionFactory = new ConnectionFactory();
+					connectionFactory.setHost(Config.RABBITMQ_HOST);
+					connectionFactory.setPort(Config.RABBITMQ_PORT);
+					connectionFactory.setUsername(Config.RABBITMQ_USERNAME);
+					connectionFactory.setPassword(Config.RABBITMQ_PASSWORD);
+
+					try {
+						Connection connection = connectionFactory.newConnection();
+						channel = connection.createChannel();
+						channel.exchangeDeclare(Config.RABBITMQ_EXCHANGE, "fanout");
+						channel.queueDeclare(Config.RABBITMQ_TASK_QUEUE, true, false, false, null);
+						channel.queueBind(Config.RABBITMQ_TASK_QUEUE, Config.RABBITMQ_EXCHANGE, "");
+					} catch (Exception e) {
+						log.error("Error in opening RabbitMQ channel", e);
+					}
+				}
+			}
+		}
+
+		return channel;
+	}
+
+	public static void closeChannel() {
+		try {
+			if (isChannelActive()) {
+				channel.close();
+			}
+		} catch (IOException | TimeoutException e) {
+			log.error("Error while RabbitMQ.channel is closed.", e);
+		}
+	}
+
+	public static boolean isChannelActive() {
+		return (channel != null && channel.isOpen());
+	}
+
+}
