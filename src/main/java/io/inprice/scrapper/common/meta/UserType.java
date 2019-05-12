@@ -1,4 +1,4 @@
-package io.inprice.crawler.common.meta;
+package io.inprice.scrapper.common.meta;
 
 public enum UserType {
 

@@ -32,7 +32,6 @@ public class Config {
 	public static final int REDIS_POOL_SIZE;
 	public static final int REDIS_TTL_HOURS_FOR_TOKENS;
 
-
 	// Others
 	public static final long TIME_FOR_TPOOL_TERMINATION;
 	public static final long TIME_FOR_GETTING_ACTIVE_SITES;

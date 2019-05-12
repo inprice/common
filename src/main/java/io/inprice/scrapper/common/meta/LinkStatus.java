@@ -7,8 +7,10 @@ public enum LinkStatus {
     UNKNOWN,
     IMPROPER,
     NOT_FOUND,
+    UNAVAILABLE,
     REPORTED,
     PASSIVATED,
+    RESETTED,
     DEAD;
 
 }
