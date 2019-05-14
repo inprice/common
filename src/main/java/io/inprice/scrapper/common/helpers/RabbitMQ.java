@@ -28,9 +28,16 @@ public class RabbitMQ {
 					try {
 						Connection connection = connectionFactory.newConnection();
 						channel = connection.createChannel();
-						channel.exchangeDeclare(Config.RABBITMQ_EXCHANGE, "fanout");
-						channel.queueDeclare(Config.RABBITMQ_TASK_QUEUE, true, false, false, null);
-						channel.queueBind(Config.RABBITMQ_TASK_QUEUE, Config.RABBITMQ_EXCHANGE, "");
+
+						channel.exchangeDeclare(Config.RABBITMQ_LINK_EXCHANGE, "fanout");
+
+						channel.queueDeclare(Config.RABBITMQ_NEW_LINKS_QUEUE, true, false, false, null);
+						channel.queueDeclare(Config.RABBITMQ_ACTIVE_LINKS_QUEUE, true, false, false, null);
+						channel.queueDeclare(Config.RABBITMQ_FAILED_LINKS_QUEUE, true, false, false, null);
+
+						channel.queueBind(Config.RABBITMQ_NEW_LINKS_QUEUE, Config.RABBITMQ_LINK_EXCHANGE, "");
+						channel.queueBind(Config.RABBITMQ_ACTIVE_LINKS_QUEUE, Config.RABBITMQ_LINK_EXCHANGE, "");
+						channel.queueBind(Config.RABBITMQ_FAILED_LINKS_QUEUE, Config.RABBITMQ_LINK_EXCHANGE, "");
 					} catch (Exception e) {
 						log.error("Error in opening RabbitMQ channel", e);
 					}

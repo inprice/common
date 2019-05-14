@@ -64,11 +64,11 @@ create unique index sector_ix1 on sector (name);
 create table customer (
   id                        bigint auto_increment not null,
   user_type                 varchar(25) not null default 'USER',
+  company_name              varchar(250) not null,
+  contact_name              varchar(150) not null,
   email                     varchar(150) not null,
   password_hash             varchar(250) not null,
   password_salt             varchar(200) not null,
-  company_name              varchar(250) not null,
-  contact_name              varchar(150) not null,
   website                   varchar(150),
   sector_id                 bigint,
   country_id                bigint,
@@ -76,7 +76,7 @@ create table customer (
   primary key (id)
 ) engine=innodb default charset=utf8;
 create unique index customer_ix1 on customer (email);
-create index customer_ix2 on customer (title);
+create index customer_ix2 on customer (company_name);
 alter table customer add foreign key (sector_id) references sector (id);
 alter table customer add foreign key (country_id) references country (id);
 
@@ -145,10 +145,9 @@ alter table product add foreign key (customer_plan_id) references customer_plan 
 
 create table link (
   id                        bigint auto_increment not null,
-  title                     varchar(500),
-  code                      varchar(120),
   url                       varchar(2000) not null,
-  alt_url                   varchar(2000),
+  title                     varchar(500),
+  code                      varchar(70),
   brand                     varchar(150),
   seller                    varchar(150),
   shipment                  varchar(150),
@@ -156,20 +155,23 @@ create table link (
   last_check                datetime,
   last_update               datetime,
   cycle                     int default 0,
-  retry                     int default 0,
   status                    varchar(15) not null default 'NEW',
-  note                      varchar(300),
+  retry                     int default 0,
+  note                      varchar(255),
+  customer_id               bigint,
   customer_plan_id          bigint,
   product_id                bigint,
   site_id                   bigint,
+  website_class_name        varchar(100),
   primary key (id)
 ) engine=innodb default charset=utf8;
 create index link_ix1 on link (cycle, status);
 create index link_ix2 on link (title);
 create index link_ix3 on link (code);
+alter table link add foreign key (customer_id) references customer (id);
 alter table link add foreign key (product_id) references product (id);
-alter table link add foreign key (site_id) references site (id);
 alter table link add foreign key (customer_plan_id) references customer_plan (id);
+alter table link add foreign key (site_id) references site (id);
 
 create table link_price (
   id                        bigint auto_increment not null,

@@ -11,7 +11,6 @@ public class Link extends Model {
     private String title;
     private String code;
     private String url;
-    private String altUrl;
     private String brand;
     private String seller;
     private String shipment;
@@ -19,12 +18,14 @@ public class Link extends Model {
     private Date lastCheck;
     private Date lastUpdate;
     private Integer cycle;
-    private Integer retry;
     private LinkStatus status = LinkStatus.NEW;
+    private Integer retry;
     private String note;
+    private Long customerId;
     private Long customerPlanId;
     private Long productId;
     private Long siteId;
+    private String websiteClassName;
 
     private List<LinkPrice> priceList;
     private List<LinkSpec> specList;
@@ -59,14 +60,6 @@ public class Link extends Model {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public String getAltUrl() {
-        return altUrl;
-    }
-
-    public void setAltUrl(String altUrl) {
-        this.altUrl = altUrl;
     }
 
     public String getBrand() {
@@ -125,14 +118,6 @@ public class Link extends Model {
         this.cycle = cycle;
     }
 
-    public Integer getRetry() {
-        return retry;
-    }
-
-    public void setRetry(Integer retry) {
-        this.retry = retry;
-    }
-
     public LinkStatus getStatus() {
         return status;
     }
@@ -141,12 +126,12 @@ public class Link extends Model {
         this.status = status;
     }
 
-    public Long getCustomerPlanId() {
-        return customerPlanId;
+    public Integer getRetry() {
+        return retry;
     }
 
-    public void setCustomerPlanId(Long customerPlanId) {
-        this.customerPlanId = customerPlanId;
+    public void setRetry(Integer retry) {
+        this.retry = retry;
     }
 
     public String getNote() {
@@ -155,6 +140,22 @@ public class Link extends Model {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
+    }
+
+    public Long getCustomerPlanId() {
+        return customerPlanId;
+    }
+
+    public void setCustomerPlanId(Long customerPlanId) {
+        this.customerPlanId = customerPlanId;
     }
 
     public Long getProductId() {
@@ -171,6 +172,14 @@ public class Link extends Model {
 
     public void setSiteId(Long siteId) {
         this.siteId = siteId;
+    }
+
+    public String getWebsiteClassName() {
+        return websiteClassName;
+    }
+
+    public void setWebsiteClassName(String websiteClassName) {
+        this.websiteClassName = websiteClassName;
     }
 
     public List<LinkPrice> getPriceList() {
@@ -203,7 +212,6 @@ public class Link extends Model {
                 "title='" + title + '\'' +
                 ", code='" + code + '\'' +
                 ", url='" + url + '\'' +
-                ", altUrl='" + altUrl + '\'' +
                 ", brand='" + brand + '\'' +
                 ", seller='" + seller + '\'' +
                 ", shipment='" + shipment + '\'' +
@@ -211,12 +219,14 @@ public class Link extends Model {
                 ", lastCheck=" + lastCheck +
                 ", lastUpdate=" + lastUpdate +
                 ", cycle=" + cycle +
-                ", retry=" + retry +
                 ", status=" + status +
+                ", retry=" + retry +
                 ", note='" + note + '\'' +
+                ", customerId=" + customerId +
                 ", customerPlanId=" + customerPlanId +
                 ", productId=" + productId +
                 ", siteId=" + siteId +
+                ", websiteClassName='" + websiteClassName + '\'' +
                 '}';
     }
 }

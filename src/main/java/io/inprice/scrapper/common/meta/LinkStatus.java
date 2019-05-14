@@ -4,13 +4,14 @@ public enum LinkStatus {
 
     NEW,
     ACTIVE,
-    UNKNOWN,
+    BE_IMPLEMENTED,
     IMPROPER,
-    NOT_FOUND,
     UNAVAILABLE,
-    REPORTED,
-    PASSIVATED,
-    RESETTED,
-    DEAD;
+    SOCKET_ERROR,
+    NETWORK_ERROR,
+    CLASS_PROBLEM,
+    PAUSED,
+    REPORTED
+    ;
 
 }
