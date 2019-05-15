@@ -9,14 +9,28 @@ public class Config {
 	public static final String RABBITMQ_PASSWORD;
 
 	public static final String RABBITMQ_LINK_EXCHANGE;
+	public static final String RABBITMQ_CHANGE_EXCHANGE;
 
 	// Queues
 	public static final String RABBITMQ_NEW_LINKS_QUEUE;
-	public static final String RABBITMQ_ACTIVE_LINKS_QUEUE;
 	public static final String RABBITMQ_SOCKET_ERRORS_QUEUE;
-	public static final String RABBITMQ_FAILED_LINKS_QUEUE;
-	public static final String RABBITMQ_CHANGE_STATUS_QUEUE;
-	public static final String RABBITMQ_CHANGE_PRICE_QUEUE;
+	public static final String RABBITMQ_INTERNAL_ERRORS_QUEUE;
+
+	public static final String RABBITMQ_NETWORK_ERRORS_QUEUE;
+	public static final String RABBITMQ_ACTIVE_LINKS_QUEUE;
+	public static final String RABBITMQ_UNAVAILABLE_LINKS_QUEUE;
+
+	public static final String RABBITMQ_STATUS_CHANGE_QUEUE;
+	public static final String RABBITMQ_PRICE_CHANGE_QUEUE;
+
+	// Crontabs
+	public static final String CRONTAB_FOR_NEW_LINKS;
+	public static final String CRONTAB_FOR_SOCKET_ERRORS;
+	public static final String CRONTAB_FOR_INTERNAL_ERRORS;
+
+	public static final String CRONTAB_FOR_NETWORK_ERRORS;
+	public static final String CRONTAB_FOR_ACTIVE_LINKS;
+	public static final String CRONTAB_FOR_UNAVAILABLE_LINKS;
 
 	// Thread Pools
 	public static final int TPOOLS_MASTER_CAPACITY;
@@ -37,19 +51,15 @@ public class Config {
 	public static final int REDIS_POOL_SIZE;
 	public static final int REDIS_TTL_HOURS_FOR_TOKENS;
 
-	// Crontabs
-	public static final String CRONTAB_FOR_NEW_LINKS;
-	public static final String CRONTAB_FOR_ACTIVE_LINKS;
-	public static final String CRONTAB_FOR_FAILED_LINKS;
-	public static final String CRONTAB_FOR_SOCKET_ERRORS;
-
 	// Waiting times
 	public static final long WAITING_TIME_FOR_AWAIT_TERMINATION;
 	public static final long WAITING_TIME_FOR_GETTING_LINKS_FROM_DB;
 
 	// Retry limits
-	public static final long RETRY_LIMIT_FOR_QUEUE_PROBLEMS;
-	public static final long RETRY_LIMIT_FOR_FAILED_LINKS;
+	public static final int RETRY_LIMIT_FOR_QUEUE_PROBLEMS;
+	public static final int RETRY_LIMIT_FOR_FAILED_LINKS_G1;
+	public static final int RETRY_LIMIT_FOR_FAILED_LINKS_G2;
+	public static final int RETRY_LIMIT_FOR_FAILED_LINKS_G3;
 
 	static {
 		RABBITMQ_HOST = getOrDefault("RABBITMQ_HOST", "localhost");
@@ -58,14 +68,31 @@ public class Config {
 		RABBITMQ_PASSWORD = getOrDefault("RABBITMQ_PASSWORD", "guest");
 
 		RABBITMQ_LINK_EXCHANGE = getOrDefault("RABBITMQ_LINK_EXCHANGE", "links");
+		RABBITMQ_CHANGE_EXCHANGE = getOrDefault("RABBITMQ_CHANGE_EXCHANGE", "changes");
 
+		//minutely
 		RABBITMQ_NEW_LINKS_QUEUE = getOrDefault("RABBITMQ_NEW_LINKS_QUEUE", "new-links");
-		RABBITMQ_ACTIVE_LINKS_QUEUE = getOrDefault("RABBITMQ_ACTIVE_LINKS_QUEUE", "active-links");
 		RABBITMQ_SOCKET_ERRORS_QUEUE = getOrDefault("RABBITMQ_SOCKET_ERRORS_QUEUE", "socket-errors");
-		RABBITMQ_FAILED_LINKS_QUEUE = getOrDefault("RABBITMQ_FAILED_LINKS_QUEUE", "failed-links");
+		RABBITMQ_INTERNAL_ERRORS_QUEUE = getOrDefault("RABBITMQ_INTERNAL_ERRORS_QUEUE", "internal-errors");
 
-		RABBITMQ_CHANGE_STATUS_QUEUE = getOrDefault("RABBITMQ_CHANGE_STATUS_QUEUE", "change-status");
-		RABBITMQ_CHANGE_PRICE_QUEUE = getOrDefault("RABBITMQ_CHANGE_PRICE_QUEUE", "change-price");
+		//hourly
+		RABBITMQ_NETWORK_ERRORS_QUEUE = getOrDefault("RABBITMQ_NETWORK_ERRORS_QUEUE", "network-errors");
+		RABBITMQ_ACTIVE_LINKS_QUEUE = getOrDefault("RABBITMQ_ACTIVE_LINKS_QUEUE", "active-links");
+		RABBITMQ_UNAVAILABLE_LINKS_QUEUE = getOrDefault("RABBITMQ_UNAVAILABLE_LINKS_QUEUE", "unavailable-links");
+
+		//different
+		RABBITMQ_STATUS_CHANGE_QUEUE = getOrDefault("RABBITMQ_STATUS_CHANGE_QUEUE", "status-change");
+		RABBITMQ_PRICE_CHANGE_QUEUE = getOrDefault("RABBITMQ_PRICE_CHANGE_QUEUE", "price-change");
+
+		//minutely
+		CRONTAB_FOR_NEW_LINKS = getOrDefault("CRONTAB_FOR_NEW_LINKS", "0 */4 * * * ?");
+		CRONTAB_FOR_SOCKET_ERRORS = getOrDefault("CRONTAB_FOR_SOCKET_ERRORS", "0 */11 * * * ?");
+		CRONTAB_FOR_INTERNAL_ERRORS = getOrDefault("CRONTAB_FOR_INTERNAL_ERRORS", "0 */23 * * * ?");
+
+		//hourly
+		CRONTAB_FOR_NETWORK_ERRORS = getOrDefault("CRONTAB_FOR_NETWORK_ERRORS", "0 0 */2 * * ?");
+		CRONTAB_FOR_ACTIVE_LINKS = getOrDefault("CRONTAB_FOR_ACTIVE_LINKS", "0 0 */3 * * ?");
+		CRONTAB_FOR_UNAVAILABLE_LINKS = getOrDefault("CRONTAB_FOR_UNAVAILABLE_LINKS", "0 0 */7 * * ?");
 
 		TPOOLS_MASTER_CAPACITY = getOrDefault("TPOOLS_MASTER_CAPACITY", 2);
 		TPOOLS_WORKER_CAPACITY = getOrDefault("TPOOLS_WORKER_CAPACITY", 2);
@@ -87,12 +114,10 @@ public class Config {
 		WAITING_TIME_FOR_GETTING_LINKS_FROM_DB = getOrDefault("WTF_GETTING_LINKS_FROM_DB", 3000L);
 
 		RETRY_LIMIT_FOR_QUEUE_PROBLEMS = getOrDefault("RL_QUEUE_PROBLEMS", 3);
-		RETRY_LIMIT_FOR_FAILED_LINKS = getOrDefault("RL_FAILED_LINKS", 3);
 
-		CRONTAB_FOR_NEW_LINKS = getOrDefault("CRONTAB_FOR_NEW_LINKS", "0 */5 * * * ?");
-		CRONTAB_FOR_ACTIVE_LINKS = getOrDefault("CRONTAB_FOR_ACTIVE_LINKS", "0 0 */3 * * ?");
-		CRONTAB_FOR_SOCKET_ERRORS = getOrDefault("CRONTAB_FOR_SOCKET_ERRORS", "0 */15 * * * ?");
-		CRONTAB_FOR_FAILED_LINKS = getOrDefault("CRONTAB_FOR_FAILED_LINKS", "0 0 */4 * * ?");
+		RETRY_LIMIT_FOR_FAILED_LINKS_G1 = getOrDefault("RL_FAILED_LINKS_G1", 3);
+		RETRY_LIMIT_FOR_FAILED_LINKS_G2 = getOrDefault("RL_FAILED_LINKS_G2", 5);
+		RETRY_LIMIT_FOR_FAILED_LINKS_G3 = getOrDefault("RL_FAILED_LINKS_G3", 10);
 	}
 
 	private static String getOrDefault(String key, String defauld) {

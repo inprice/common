@@ -29,15 +29,28 @@ public class RabbitMQ {
 						Connection connection = connectionFactory.newConnection();
 						channel = connection.createChannel();
 
-						channel.exchangeDeclare(Config.RABBITMQ_LINK_EXCHANGE, "fanout");
+						channel.exchangeDeclare(Config.RABBITMQ_LINK_EXCHANGE, "topic");
+						channel.exchangeDeclare(Config.RABBITMQ_CHANGE_EXCHANGE, "topic");
 
 						channel.queueDeclare(Config.RABBITMQ_NEW_LINKS_QUEUE, true, false, false, null);
+						channel.queueDeclare(Config.RABBITMQ_SOCKET_ERRORS_QUEUE, true, false, false, null);
+						channel.queueDeclare(Config.RABBITMQ_INTERNAL_ERRORS_QUEUE, true, false, false, null);
+						channel.queueDeclare(Config.RABBITMQ_NETWORK_ERRORS_QUEUE, true, false, false, null);
 						channel.queueDeclare(Config.RABBITMQ_ACTIVE_LINKS_QUEUE, true, false, false, null);
-						channel.queueDeclare(Config.RABBITMQ_FAILED_LINKS_QUEUE, true, false, false, null);
+						channel.queueDeclare(Config.RABBITMQ_UNAVAILABLE_LINKS_QUEUE, true, false, false, null);
+
+						channel.queueDeclare(Config.RABBITMQ_STATUS_CHANGE_QUEUE, true, false, false, null);
+						channel.queueDeclare(Config.RABBITMQ_PRICE_CHANGE_QUEUE, true, false, false, null);
 
 						channel.queueBind(Config.RABBITMQ_NEW_LINKS_QUEUE, Config.RABBITMQ_LINK_EXCHANGE, "");
+						channel.queueBind(Config.RABBITMQ_SOCKET_ERRORS_QUEUE, Config.RABBITMQ_LINK_EXCHANGE, "");
+						channel.queueBind(Config.RABBITMQ_INTERNAL_ERRORS_QUEUE, Config.RABBITMQ_LINK_EXCHANGE, "");
+						channel.queueBind(Config.RABBITMQ_NETWORK_ERRORS_QUEUE, Config.RABBITMQ_LINK_EXCHANGE, "");
 						channel.queueBind(Config.RABBITMQ_ACTIVE_LINKS_QUEUE, Config.RABBITMQ_LINK_EXCHANGE, "");
-						channel.queueBind(Config.RABBITMQ_FAILED_LINKS_QUEUE, Config.RABBITMQ_LINK_EXCHANGE, "");
+						channel.queueBind(Config.RABBITMQ_UNAVAILABLE_LINKS_QUEUE, Config.RABBITMQ_LINK_EXCHANGE, "");
+
+						channel.queueBind(Config.RABBITMQ_STATUS_CHANGE_QUEUE, Config.RABBITMQ_CHANGE_EXCHANGE, "");
+						channel.queueBind(Config.RABBITMQ_PRICE_CHANGE_QUEUE, Config.RABBITMQ_CHANGE_EXCHANGE, "");
 					} catch (Exception e) {
 						log.error("Error in opening RabbitMQ channel", e);
 					}

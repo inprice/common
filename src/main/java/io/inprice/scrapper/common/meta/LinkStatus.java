@@ -10,6 +10,7 @@ public enum LinkStatus {
     SOCKET_ERROR,
     NETWORK_ERROR,
     CLASS_PROBLEM,
+    INTERNAL_ERROR,
     PAUSED,
     REPORTED
     ;

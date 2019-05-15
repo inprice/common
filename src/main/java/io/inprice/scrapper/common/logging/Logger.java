@@ -4,10 +4,14 @@ import io.inprice.scrapper.common.utils.DateUtils;
 
 public class Logger {
 
-    private Class clazz;
+    private String name;
+
+    public Logger(String name) {
+        this.name = name;
+    }
 
     public Logger(Class clazz) {
-        this.clazz = clazz;
+        this.name = clazz.getSimpleName();
     }
 
     public void debug(String message, Object... args) {
@@ -64,9 +68,11 @@ public class Logger {
         sb.append(String.format("[%-5s]", level));
         sb.append(" ");
         sb.append(String.format("(%s)", Thread.currentThread().getName()));
-        sb.append(" ");
-        sb.append(clazz.getSimpleName());
-        sb.append(" : ");
+        sb.append(" [");
+        sb.append(name);
+        sb.append(":");
+        sb.append(Thread.currentThread().getStackTrace()[3].getLineNumber());
+        sb.append("] ");
 
         if (message != null) {
             if (args != null && args.length > 0)

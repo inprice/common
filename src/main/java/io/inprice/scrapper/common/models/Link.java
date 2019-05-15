@@ -21,6 +21,7 @@ public class Link extends Model {
     private LinkStatus status = LinkStatus.NEW;
     private Integer retry;
     private String note;
+    private Integer httpStatus;
     private Long customerId;
     private Long customerPlanId;
     private Long productId;
@@ -142,6 +143,14 @@ public class Link extends Model {
         this.note = note;
     }
 
+    public Integer getHttpStatus() {
+        return httpStatus;
+    }
+
+    public void setHttpStatus(Integer httpStatus) {
+        this.httpStatus = httpStatus;
+    }
+
     public Long getCustomerId() {
         return customerId;
     }
@@ -222,6 +231,7 @@ public class Link extends Model {
                 ", status=" + status +
                 ", retry=" + retry +
                 ", note='" + note + '\'' +
+                ", httpStatus=" + httpStatus +
                 ", customerId=" + customerId +
                 ", customerPlanId=" + customerPlanId +
                 ", productId=" + productId +

@@ -58,4 +58,13 @@ public class LinkStatusChange implements Serializable {
     public void setNote(String note) {
         this.note = note;
     }
+
+    @Override
+    public String toString() {
+        return "linkId=" + linkId +
+                ", oldStatus=" + oldStatus +
+                ", newStatus=" + newStatus +
+                ", httpStatus=" + httpStatus +
+                ", note=" + note ;
+    }
 }

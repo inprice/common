@@ -158,6 +158,7 @@ create table link (
   status                    varchar(15) not null default 'NEW',
   retry                     int default 0,
   note                      varchar(255),
+  http_status               int default 0,
   customer_id               bigint,
   customer_plan_id          bigint,
   product_id                bigint,
@@ -177,7 +178,6 @@ create table link_price (
   id                        bigint auto_increment not null,
   link_id                   bigint not null,
   price                     double,
-  stock_status              varchar(100),
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
@@ -197,6 +197,7 @@ create table link_history (
   id                        bigint auto_increment not null,
   link_id                   bigint not null,
   status                    varchar(15) not null,
+  http_status               int default 0,
   insert_at                 timestamp not null default current_timestamp,
  primary key (id)
 ) engine=innodb default charset=utf8;

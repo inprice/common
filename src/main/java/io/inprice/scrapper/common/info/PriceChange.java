@@ -42,4 +42,11 @@ public class PriceChange {
     public void setNewPrice(BigDecimal newPrice) {
         this.newPrice = newPrice;
     }
+
+    @Override
+    public String toString() {
+        return "linkId=" + linkId +
+                ", oldPrice=" + oldPrice +
+                ", newPrice=" + newPrice;
+    }
 }
