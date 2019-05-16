@@ -32,6 +32,9 @@ public class Config {
 	public static final String CRONTAB_FOR_ACTIVE_LINKS;
 	public static final String CRONTAB_FOR_UNAVAILABLE_LINKS;
 
+	// Other crons
+	public static final String CRONTAB_FOR_PRODUCT_PRICE_UPDATE;
+
 	// Thread Pools
 	public static final int TPOOLS_MASTER_CAPACITY;
 	public static final int TPOOLS_WORKER_CAPACITY;
@@ -74,7 +77,6 @@ public class Config {
 		RABBITMQ_NEW_LINKS_QUEUE = getOrDefault("RABBITMQ_NEW_LINKS_QUEUE", "new-links");
 		RABBITMQ_SOCKET_ERRORS_QUEUE = getOrDefault("RABBITMQ_SOCKET_ERRORS_QUEUE", "socket-errors");
 		RABBITMQ_INTERNAL_ERRORS_QUEUE = getOrDefault("RABBITMQ_INTERNAL_ERRORS_QUEUE", "internal-errors");
-
 		//hourly
 		RABBITMQ_NETWORK_ERRORS_QUEUE = getOrDefault("RABBITMQ_NETWORK_ERRORS_QUEUE", "network-errors");
 		RABBITMQ_ACTIVE_LINKS_QUEUE = getOrDefault("RABBITMQ_ACTIVE_LINKS_QUEUE", "active-links");
@@ -85,10 +87,10 @@ public class Config {
 		RABBITMQ_PRICE_CHANGE_QUEUE = getOrDefault("RABBITMQ_PRICE_CHANGE_QUEUE", "price-change");
 
 		//minutely
-		CRONTAB_FOR_NEW_LINKS = getOrDefault("CRONTAB_FOR_NEW_LINKS", "0 */4 * * * ?");
+		CRONTAB_FOR_NEW_LINKS = getOrDefault("CRONTAB_FOR_NEW_LINKS", "0 */3 * * * ?");
+		CRONTAB_FOR_PRODUCT_PRICE_UPDATE = getOrDefault("CRONTAB_FOR_PRODUCT_PRICE_UPDATE", "0 */5 * * * ?");
 		CRONTAB_FOR_SOCKET_ERRORS = getOrDefault("CRONTAB_FOR_SOCKET_ERRORS", "0 */11 * * * ?");
 		CRONTAB_FOR_INTERNAL_ERRORS = getOrDefault("CRONTAB_FOR_INTERNAL_ERRORS", "0 */23 * * * ?");
-
 		//hourly
 		CRONTAB_FOR_NETWORK_ERRORS = getOrDefault("CRONTAB_FOR_NETWORK_ERRORS", "0 0 */2 * * ?");
 		CRONTAB_FOR_ACTIVE_LINKS = getOrDefault("CRONTAB_FOR_ACTIVE_LINKS", "0 0 */3 * * ?");

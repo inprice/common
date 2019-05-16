@@ -143,6 +143,22 @@ create unique index product_ix1 on product (customer_plan_id, code);
 create unique index product_ix2 on product (customer_plan_id, name);
 alter table product add foreign key (customer_plan_id) references customer_plan (id);
 
+create table product_price (
+  id                        bigint auto_increment not null,
+  product_id                bigint not null,
+  min_seller                varchar(150),
+  max_seller                varchar(150),
+  price                     double,
+  position                  int default 3,
+  min_price                 double,
+  avg_price                 double,
+  max_price                 double,
+  insert_at                 timestamp not null default current_timestamp,
+primary key (id)
+) engine=innodb default charset=utf8;
+create index product_price_ix1 on product_price (insert_at);
+alter table product_price add foreign key (product_id) references product (id);
+
 create table link (
   id                        bigint auto_increment not null,
   url                       varchar(2000) not null,

@@ -5,17 +5,12 @@ import java.math.BigDecimal;
 public class PriceChange {
 
     private Long linkId;
-    private BigDecimal oldPrice;
+    private Long productId;
     private BigDecimal newPrice;
 
-    public PriceChange(Long linkId, BigDecimal newPrice) {
+    public PriceChange(Long linkId, Long productId, BigDecimal newPrice) {
         this.linkId = linkId;
-        this.newPrice = newPrice;
-    }
-
-    public PriceChange(Long linkId, BigDecimal oldPrice, BigDecimal newPrice) {
-        this.linkId = linkId;
-        this.oldPrice = oldPrice;
+        this.productId = productId;
         this.newPrice = newPrice;
     }
 
@@ -27,12 +22,12 @@ public class PriceChange {
         this.linkId = linkId;
     }
 
-    public BigDecimal getOldPrice() {
-        return oldPrice;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setOldPrice(BigDecimal oldPrice) {
-        this.oldPrice = oldPrice;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
     public BigDecimal getNewPrice() {
@@ -46,7 +41,7 @@ public class PriceChange {
     @Override
     public String toString() {
         return "linkId=" + linkId +
-                ", oldPrice=" + oldPrice +
+                ", productId=" + productId +
                 ", newPrice=" + newPrice;
     }
 }
