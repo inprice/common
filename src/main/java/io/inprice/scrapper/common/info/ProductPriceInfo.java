@@ -8,6 +8,10 @@ public class ProductPriceInfo {
     private Long productId;
     private BigDecimal price;
 
+    public ProductPriceInfo(Long productId) {
+        this(productId, null);
+    }
+
     public ProductPriceInfo(Long productId, BigDecimal price) {
         this.productId = productId;
         this.price = price;

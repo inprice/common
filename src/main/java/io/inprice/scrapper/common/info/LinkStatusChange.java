@@ -12,11 +12,13 @@ public class LinkStatusChange implements Serializable {
     private LinkStatus newStatus;
     private int httpStatus;
     private String note;
+    private Long productId;
 
     public LinkStatusChange(Link link, LinkStatus newStatus) {
         this.linkId = link.getId();
         this.oldStatus = link.getStatus();
         this.newStatus = newStatus;
+        this.productId = link.getProductId();
     }
 
     public Long getLinkId() {
@@ -59,12 +61,21 @@ public class LinkStatusChange implements Serializable {
         this.note = note;
     }
 
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
     @Override
     public String toString() {
         return "linkId=" + linkId +
                 ", oldStatus=" + oldStatus +
                 ", newStatus=" + newStatus +
                 ", httpStatus=" + httpStatus +
-                ", note=" + note ;
+                ", note=" + note +
+                ", productId=" + productId;
     }
 }

@@ -129,7 +129,7 @@ create table product (
   brand                     varchar(100),
   category                  varchar(150),
   price                     double,
-  position                  int default 3,
+  position                  int default 4,
   last_update               datetime,
   min_seller                varchar(150),
   max_seller                varchar(150),
