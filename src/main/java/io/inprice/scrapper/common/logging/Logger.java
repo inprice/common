@@ -2,6 +2,11 @@ package io.inprice.scrapper.common.logging;
 
 import io.inprice.scrapper.common.utils.DateUtils;
 
+/**
+ * Base logging service
+ *
+ * @author mdpinar
+ */
 public class Logger {
 
     private String name;

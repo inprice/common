@@ -37,6 +37,7 @@ alter table site add foreign key (country_id) references country (id);
 
 create table plan (
   id                        bigint auto_increment not null,
+  plan_type                 varchar(15) not null default 'NORMAL',
   active                    tinyint(1) default 1,
   name                      varchar(30) not null,
   desc_1                    varchar(100),
@@ -47,7 +48,6 @@ create table plan (
   price_1                   double,
   order_no                  smallint,
   css_class                 varchar(150),
-  free                      tinyint(1) default 0,
   primary key (id)
 ) engine=innodb default charset=utf8;
 create unique index plan_ix1 on plan (name);
@@ -161,6 +161,7 @@ alter table product_price add foreign key (product_id) references product (id);
 
 create table link (
   id                        bigint auto_increment not null,
+  activated                 tinyint(1) default 0,
   url                       varchar(2000) not null,
   title                     varchar(500),
   code                      varchar(70),
@@ -171,9 +172,9 @@ create table link (
   last_check                datetime,
   last_update               datetime,
   cycle                     int default 0,
-  status                    varchar(15) not null default 'NEW',
+  status                    varchar(25) not null default 'NEW',
+  previous_status           varchar(25) not null default 'NEW',
   retry                     int default 0,
-  note                      varchar(255),
   http_status               int default 0,
   customer_id               bigint,
   customer_plan_id          bigint,
@@ -212,7 +213,7 @@ alter table link_spec add foreign key (link_id) references link (id);
 create table link_history (
   id                        bigint auto_increment not null,
   link_id                   bigint not null,
-  status                    varchar(15) not null,
+  status                    varchar(25) not null,
   http_status               int default 0,
   insert_at                 timestamp not null default current_timestamp,
  primary key (id)

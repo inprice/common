@@ -2,8 +2,20 @@ package io.inprice.scrapper.common.helpers;
 
 import java.io.*;
 
+/**
+ * This is a helper class to convert Object to byte array and vice versa
+ *
+ * @author mdpinar
+ */
 public class Converter {
 
+    /**
+     * From byte array to Object
+     *
+     * @param byteArray
+     * @param <T>
+     * @return
+     */
     public static <T> T toObject(byte[] byteArray) {
         try {
             ByteArrayInputStream in = new ByteArrayInputStream(byteArray);
@@ -17,6 +29,12 @@ public class Converter {
         return null;
     }
 
+    /**
+     * From Object to byte array
+     *
+     * @param object
+     * @return
+     */
     public static byte[] fromObject(Serializable object) {
         try {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();

@@ -1,9 +1,15 @@
 package io.inprice.scrapper.common.info;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class ProductPriceInfo {
+/**
+ * Info model class for price change notifications for Products
+ *
+ * @author mdpinar
+ */
+public class ProductPriceInfo implements Serializable {
 
     private Long productId;
     private BigDecimal price;

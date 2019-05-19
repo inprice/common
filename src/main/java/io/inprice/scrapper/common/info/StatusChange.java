@@ -1,16 +1,21 @@
 package io.inprice.scrapper.common.info;
 
-import io.inprice.scrapper.common.meta.LinkStatus;
+import io.inprice.scrapper.common.meta.Status;
 import io.inprice.scrapper.common.models.Link;
 
 import java.io.Serializable;
 
-public class LinkStatusChange implements Serializable {
+/**
+ * Info model class for status change notifications
+ *
+ * @author mdpinar
+ */
+public class StatusChange implements Serializable {
 
     private Link link;
-    private LinkStatus newStatus;
+    private Status newStatus;
 
-    public LinkStatusChange(Link link, LinkStatus newStatus) {
+    public StatusChange(Link link, Status newStatus) {
         this.link = link;
         this.newStatus = newStatus;
     }
@@ -23,11 +28,12 @@ public class LinkStatusChange implements Serializable {
         this.link = link;
     }
 
-    public LinkStatus getNewStatus() {
+    public Status getNewStatus() {
         return newStatus;
     }
 
-    public void setNewStatus(LinkStatus newStatus) {
+    public void setNewStatus(Status newStatus) {
         this.newStatus = newStatus;
     }
+
 }

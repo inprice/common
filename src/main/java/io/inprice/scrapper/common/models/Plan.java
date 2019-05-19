@@ -1,9 +1,12 @@
 package io.inprice.scrapper.common.models;
 
+import io.inprice.scrapper.common.meta.PlanType;
+
 import java.math.BigDecimal;
 
 public class Plan extends InfoModel {
 
+    private PlanType type;
     private String desc1;
     private String desc2;
     private String desc3;
@@ -12,7 +15,14 @@ public class Plan extends InfoModel {
     private BigDecimal price1;
     private Integer orderNo;
     private String cssClass;
-    private Boolean free;
+
+    public PlanType getType() {
+        return type;
+    }
+
+    public void setType(PlanType type) {
+        this.type = type;
+    }
 
     public String getDesc1() {
         return desc1;
@@ -78,18 +88,11 @@ public class Plan extends InfoModel {
         this.cssClass = cssClass;
     }
 
-    public Boolean getFree() {
-        return free;
-    }
-
-    public void setFree(Boolean free) {
-        this.free = free;
-    }
-
     @Override
     public String toString() {
         return "Plan{" +
-                "active=" + getActive() +
+                "planType='" + type + '\'' +
+                ", active=" + getActive() +
                 ", name='" + getName() + '\'' +
                 ", desc1='" + desc1 + '\'' +
                 ", desc2='" + desc2 + '\'' +
@@ -99,7 +102,6 @@ public class Plan extends InfoModel {
                 ", price1=" + price1 +
                 ", orderNo=" + orderNo +
                 ", cssClass='" + cssClass + '\'' +
-                ", free=" + free +
                 '}';
     }
 }

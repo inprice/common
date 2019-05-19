@@ -1,5 +1,10 @@
 package io.inprice.scrapper.common.logging;
 
+/**
+ * Loggign levels
+ *
+ * @author mdpinar
+ */
 public enum LogLevel {
 
     DEBUG,

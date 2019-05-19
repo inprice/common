@@ -8,6 +8,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
+ * Utility class to provide functionality for date formatting operations
+ *
  * @author mdpinar
  */
 public class DateUtils {

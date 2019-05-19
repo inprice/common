@@ -1,6 +1,6 @@
 package io.inprice.scrapper.common.models;
 
-import io.inprice.scrapper.common.meta.LinkStatus;
+import io.inprice.scrapper.common.meta.Status;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -18,19 +18,28 @@ public class Link extends Model {
     private Date lastCheck;
     private Date lastUpdate;
     private Integer cycle;
-    private LinkStatus status = LinkStatus.NEW;
+    private Status status = Status.NEW;
+    private Status previousStatus = Status.NEW;
     private Integer retry;
-    private String note;
     private Integer httpStatus;
     private Long customerId;
     private Long customerPlanId;
     private Long productId;
     private Long siteId;
     private String websiteClassName;
+    private Boolean activated;
 
+    /**
+     * The three list fields below never be saved into database.
+     */
     private List<LinkPrice> priceList;
     private List<LinkSpec> specList;
     private List<LinkHistory> historyList;
+
+    /**
+     * Never be saved into database. It is just used for price change event
+     */
+    private BigDecimal productPrice;
 
     public Link() {
     }
@@ -119,12 +128,20 @@ public class Link extends Model {
         this.cycle = cycle;
     }
 
-    public LinkStatus getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(LinkStatus status) {
+    public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Status getPreviousStatus() {
+        return previousStatus;
+    }
+
+    public void setPreviousStatus(Status previousStatus) {
+        this.previousStatus = previousStatus;
     }
 
     public Integer getRetry() {
@@ -133,14 +150,6 @@ public class Link extends Model {
 
     public void setRetry(Integer retry) {
         this.retry = retry;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
     }
 
     public Integer getHttpStatus() {
@@ -191,6 +200,14 @@ public class Link extends Model {
         this.websiteClassName = websiteClassName;
     }
 
+    public Boolean getActivated() {
+        return activated;
+    }
+
+    public void setActivated(Boolean activated) {
+        this.activated = activated;
+    }
+
     public List<LinkPrice> getPriceList() {
         return priceList;
     }
@@ -215,6 +232,14 @@ public class Link extends Model {
         this.historyList = historyList;
     }
 
+    public BigDecimal getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(BigDecimal productPrice) {
+        this.productPrice = productPrice;
+    }
+
     @Override
     public String toString() {
         return "Link{" +
@@ -229,14 +254,15 @@ public class Link extends Model {
                 ", lastUpdate=" + lastUpdate +
                 ", cycle=" + cycle +
                 ", status=" + status +
+                ", previousStatus=" + previousStatus +
                 ", retry=" + retry +
-                ", note='" + note + '\'' +
                 ", httpStatus=" + httpStatus +
                 ", customerId=" + customerId +
                 ", customerPlanId=" + customerPlanId +
                 ", productId=" + productId +
                 ", siteId=" + siteId +
                 ", websiteClassName='" + websiteClassName + '\'' +
+                ", activated=" + activated +
                 '}';
     }
 }

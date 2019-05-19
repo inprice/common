@@ -1,24 +1,24 @@
 package io.inprice.scrapper.common.models;
 
-import io.inprice.scrapper.common.meta.LinkStatus;
+import io.inprice.scrapper.common.meta.Status;
 
 import java.util.Date;
 
 public class LinkHistory extends Model {
 
     private Long linkId;
-    private LinkStatus status = LinkStatus.NEW;
+    private Status status = Status.NEW;
     private Integer httpStatus;
     private Date insertAt;
 
     public LinkHistory() {
     }
 
-    public LinkHistory(LinkStatus status) {
+    public LinkHistory(Status status) {
         this.status = status;
     }
 
-    public LinkHistory(Long linkId, LinkStatus status) {
+    public LinkHistory(Long linkId, Status status) {
         this.linkId = linkId;
         this.status = status;
     }
@@ -31,11 +31,11 @@ public class LinkHistory extends Model {
         this.linkId = linkId;
     }
 
-    public LinkStatus getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(LinkStatus status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
