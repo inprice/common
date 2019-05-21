@@ -6,10 +6,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-public class Link extends Model {
+public class Link extends InfoModel {
 
-    private String title;
-    private String code;
+    private String sku;
     private String url;
     private String brand;
     private String seller;
@@ -48,20 +47,12 @@ public class Link extends Model {
         this.url = url;
     }
 
-    public String getTitle() {
-        return title;
+    public String getSku() {
+        return sku;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
+    public void setSku(String sku) {
+        this.sku = sku;
     }
 
     public String getUrl() {
@@ -243,8 +234,8 @@ public class Link extends Model {
     @Override
     public String toString() {
         return "Link{" +
-                "title='" + title + '\'' +
-                ", code='" + code + '\'' +
+                "sku='" + sku + '\'' +
+                ", name='" + getName() + '\'' +
                 ", url='" + url + '\'' +
                 ", brand='" + brand + '\'' +
                 ", seller='" + seller + '\'' +

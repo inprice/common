@@ -39,6 +39,11 @@ public enum Status {
     ACTIVE("positive"),
 
     /**
+     * Used for links which need to be renewed
+     */
+    RENEWED("positive"),
+
+    /**
      * Used for links whose websites have not been implemented yet.
      * Data won't be collected till implemented
      */
