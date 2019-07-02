@@ -12,8 +12,8 @@ import java.util.Set;
  *      This group will be excluded from analysis and reports.
  *
  *   b) positive
- *      This group is used for ACTIVE state and internal problems like SOCKET_ERROR and ClASS_PROBLEM.
- *      Other than ACTIVE state, the links in this group actually have no problems. So, they are needed to be handled by a developer.
+ *      This group is used for AVAILABLE state and internal problems like SOCKET_ERROR and ClASS_PROBLEM.
+ *      Other than AVAILABLE state, the links in this group actually have no problems. So, they are needed to be handled by a developer.
  *      This group will be included in analysis and reports.
  *
  *   c) negative
@@ -36,7 +36,7 @@ public enum Status {
     /**
      * Used for links which have no problem about collecting data
      */
-    ACTIVE("positive"),
+    AVAILABLE("positive"),
 
     /**
      * Used for links which need to be renewed
@@ -61,11 +61,21 @@ public enum Status {
     IMPROPER("negative"),
 
     /**
+     * Used for indicating links whose data is missing
+     */
+    NO_DATA("negative"),
+
+    /**
      * The links have no sufficient stock are put in this state
      * Data won't be collected till it is available again.
      * Availability checks are done a certain times (look at system parameters)
      */
-    UNAVAILABLE("negative"),
+    OUT_OF_STOCK("negative"),
+
+    /**
+     * Used for indicating links whose data has problem
+     */
+    READ_ERROR("negative"),
 
     /**
      * Used for specifying links whose website block us for data collecting at first step
