@@ -9,6 +9,8 @@ create table country (
   locale                    varchar(5) not null,
   lang                      varchar(30),
   flag                      varchar(10),
+  currency_code             varchar(5) not null,
+  currency_symbol           varchar(5),
   primary key (id)
 ) engine=innodb default charset=utf8;
 create unique index country_ix1 on country (code);
@@ -22,10 +24,6 @@ create table site (
   url                       varchar(250) not null,
   logo                      varchar(250),
   logo_mini                 varchar(250),
-  currency_code             varchar(5) not null,
-  currency_symbol           varchar(5),
-  thousand_separator        varchar(1) default ',',
-  decimal_separator         varchar(1) default '.',
   country_id                bigint   not null,
   class_name                varchar(100) not null,
   insert_at                 timestamp not null default current_timestamp,

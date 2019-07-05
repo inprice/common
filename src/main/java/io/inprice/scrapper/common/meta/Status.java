@@ -61,6 +61,14 @@ public enum Status {
     IMPROPER("negative"),
 
     /**
+     * Used for indicating links whose URLs are not specific
+     * The url may point a search page or a product listing page
+     * A url should refer only one product's page on which price, name... exist
+     * Data never be collected
+     */
+    NOT_SPECIFIC("negative"),
+
+    /**
      * Used for indicating links whose data is missing
      */
     NO_DATA("negative"),

@@ -1,84 +1,89 @@
 -- @author mdpinar
 
-insert into country (id, code, name, locale, lang, flag) values (1, 'us', 'United States', 'en_US', 'English', 'us.png');
-insert into country (id, code, name, locale, lang, flag) values (2, 'uk', 'The United Kingdom', 'en_GB', 'English', 'uk.png');
-insert into country (id, code, name, locale, lang, flag) values (3, 'ca', 'Canada', 'en_CA', 'English', 'ca.png');
-insert into country (id, code, name, locale, lang, flag) values (4, 'au', 'Australia', 'en_AU', 'English', 'au.png');
-insert into country (id, code, name, locale, lang, flag) values (5, 'de', 'Germany', 'de_DE', 'German', 'de.png');
-insert into country (id, code, name, locale, lang, flag) values (6, 'nl', 'The Netherlands', 'nl_NL', 'Dutch', 'nl.png');
-insert into country (id, code, name, locale, lang, flag) values (7, 'fr', 'France', 'fr_FR', 'French', 'fr.png');
-insert into country (id, code, name, locale, lang, flag) values (8, 'it', 'Italy', 'it_IT', 'Italian', 'it.png');
-insert into country (id, code, name, locale, lang, flag) values (9, 'es', 'Spain', 'es_ES', 'Spanish', 'es.png');
-insert into country (id, code, name, locale, lang, flag) values (10,'tr', 'Turkey', 'tr_TR', 'Turkish', 'tr.png');
-insert into country (id, code, name, locale, lang, flag) values (11,'jp', 'Japan', 'ja_JP', 'Japanese', 'jp.png');
-insert into country (id, code, name, locale, lang, flag) values (12,'br', 'Brazil', 'pr_BR', 'Portuguese', 'br.png');
+insert into country (id, code, name, locale, lang, flag, currency_code, currency_symbol) values (1, 'us', 'United States', 'en_US', 'English', 'us.png', 'USD', '$');
+insert into country (id, code, name, locale, lang, flag, currency_code, currency_symbol) values (2, 'uk', 'The United Kingdom', 'en_GB', 'English', 'uk.png', 'GBP', '£');
+insert into country (id, code, name, locale, lang, flag, currency_code, currency_symbol) values (3, 'ca', 'Canada', 'en_CA', 'English', 'ca.png', 'CAD', '$');
+insert into country (id, code, name, locale, lang, flag, currency_code, currency_symbol) values (4, 'au', 'Australia', 'en_AU', 'English', 'au.png', 'AUD', '$');
+insert into country (id, code, name, locale, lang, flag, currency_code, currency_symbol) values (5, 'de', 'Germany', 'de_DE', 'German', 'de.png', 'EUR', '€');
+insert into country (id, code, name, locale, lang, flag, currency_code, currency_symbol) values (6, 'nl', 'The Netherlands', 'nl_NL', 'Dutch', 'nl.png', 'EUR', '€');
+insert into country (id, code, name, locale, lang, flag, currency_code, currency_symbol) values (7, 'fr', 'France', 'fr_FR', 'French', 'fr.png', 'EUR', '€');
+insert into country (id, code, name, locale, lang, flag, currency_code, currency_symbol) values (8, 'it', 'Italy', 'it_IT', 'Italian', 'it.png', 'EUR', '€');
+insert into country (id, code, name, locale, lang, flag, currency_code, currency_symbol) values (9, 'es', 'Spain', 'es_ES', 'Spanish', 'es.png', 'EUR', '€');
+insert into country (id, code, name, locale, lang, flag, currency_code, currency_symbol) values (10,'tr', 'Turkey', 'tr_TR', 'Turkish', 'tr.png', 'TRY', '₺');
 
 -- -------------------------------------------------------
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Amazon US', 'amazon.com', 'https://www.amazon.com', null, null, 'USD', '$',',','.', 1, 'xx.Amazon');
-
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Amazon UK', 'amazon.co.uk', 'https://www.amazon.co.uk', null, null, 'GBP', '£',',','.', 2, 'xx.Amazon');
-
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Amazon CA', 'amazon.ca', 'https://www.amazon.ca', null, null, 'CAD', '$',',','.', 3, 'xx.Amazon');
-
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Amazon AU', 'amazon.com.au', 'https://www.amazon.com.au', null, null, 'AUD', '$',',','.', 4, 'xx.Amazon');
-
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Amazon DE', 'amazon.de', 'https://www.amazon.de', null, null, 'EUR', '€',',','.', 5, 'xx.Amazon');
-
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Amazon NL', 'amazon.nl', 'https://www.amazon.nl', null, null, 'EUR', '€',',','.', 6, 'xx.Amazon');
-
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Amazon FR', 'amazon.fr', 'https://www.amazon.fr', null, null, 'EUR', '€',',','.', 7, 'xx.Amazon');
-
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Amazon IT', 'amazon.it', 'https://www.amazon.it', null, null, 'EUR', '€',',','.', 8, 'xx.Amazon');
-
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Amazon ES', 'amazon.es', 'https://www.amazon.es', null, null, 'EUR', '€',',','.', 9, 'xx.Amazon');
-
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Amazon TR', 'amazon.com.tr', 'https://www.amazon.com.tr', null, null, 'TRY', 'TL',',','.', 10, 'xx.Amazon');
-
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Amazon JP', 'amazon.jp', 'https://www.amazon.jp', null, null, 'YEN', '¥',',','.', 11, 'xx.Amazon');
-
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Amazon BR', 'amazon.com.br', 'https://www.amazon.com.br', null, null, 'BRL', '$',',','.', 12, 'xx.Amazon');
+--  Amazon sites
+-- -------------------------------------------------------
+insert into site (name, domain, url, country_id, class_name)
+values
+    ('Amazon US', 'amazon.com', 'https://www.amazon.com', 1, 'xx.Amazon'),
+    ('Amazon UK', 'amazon.co.uk', 'https://www.amazon.co.uk', 2, 'xx.Amazon'),
+    ('Amazon CA', 'amazon.ca', 'https://www.amazon.ca', 3, 'xx.Amazon'),
+    ('Amazon AU', 'amazon.com.au', 'https://www.amazon.com.au', 4, 'xx.Amazon'),
+    ('Amazon DE', 'amazon.de', 'https://www.amazon.de', 5, 'xx.Amazon'),
+    ('Amazon NL', 'amazon.nl', 'https://www.amazon.nl', 6, 'xx.Amazon'),
+    ('Amazon FR', 'amazon.fr', 'https://www.amazon.fr', 7, 'xx.Amazon'),
+    ('Amazon IT', 'amazon.it', 'https://www.amazon.it', 8, 'xx.Amazon'),
+    ('Amazon ES', 'amazon.es', 'https://www.amazon.es', 9, 'xx.Amazon'),
+    ('Amazon TR', 'amazon.com.tr', 'https://www.amazon.com.tr', 10, 'xx.Amazon');
 
 -- -------------------------------------------------------
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Ebay US', 'ebay.com', 'https://www.ebay.com', null, null, 'USD', '$',',','.', 1, 'xx.Ebay');
-
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Ebay UK', 'ebay.co.uk', 'https://www.ebay.co.uk', null, null, 'GBP', '£',',','.', 2, 'xx.Ebay');
-
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Ebay CA', 'ebay.ca', 'https://www.ebay.ca', null, null, 'CAD', '$',',','.', 3, 'xx.Ebay');
-
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Ebay AU', 'ebay.com.au', 'https://www.ebay.com.au', null, null, 'AUD', '$',',','.', 4, 'xx.Ebay');
-
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Ebay DE', 'ebay.de', 'https://www.ebay.de', null, null, 'EUR', '€',',','.', 5, 'xx.Ebay');
-
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Ebay NL', 'ebay.nl', 'https://www.ebay.nl', null, null, 'EUR', '€',',','.', 6, 'xx.Ebay');
-
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Ebay FR', 'ebay.fr', 'https://www.ebay.fr', null, null, 'EUR', '€',',','.', 7, 'xx.Ebay');
-
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Ebay IT', 'ebay.it', 'https://www.ebay.it', null, null, 'EUR', '€',',','.', 8, 'xx.Ebay');
-
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Ebay ES', 'ebay.es', 'https://www.ebay.es', null, null, 'EUR', '€',',','.', 9, 'xx.Ebay');
+-- Ebay sites
+-- -------------------------------------------------------
+insert into site (name, domain, url, country_id, class_name)
+values
+    ('Ebay US', 'ebay.com', 'https://www.ebay.com', 1, 'xx.Ebay'),
+    ('Ebay UK', 'ebay.co.uk', 'https://www.ebay.co.uk', 2, 'xx.Ebay'),
+    ('Ebay CA', 'ebay.ca', 'https://www.ebay.ca', 3, 'xx.Ebay'),
+    ('Ebay AU', 'ebay.com.au', 'https://www.ebay.com.au', 4, 'xx.Ebay'),
+    ('Ebay DE', 'ebay.de', 'https://www.ebay.de', 5, 'xx.Ebay'),
+    ('Ebay NL', 'ebay.nl', 'https://www.ebay.nl', 6, 'xx.Ebay'),
+    ('Ebay FR', 'ebay.fr', 'https://www.ebay.fr', 7, 'xx.Ebay'),
+    ('Ebay IT', 'ebay.it', 'https://www.ebay.it', 8, 'xx.Ebay'),
+    ('Ebay ES', 'ebay.es', 'https://www.ebay.es', 9, 'xx.Ebay');
 
 -- -------------------------------------------------------
+-- Apple sites
+-- -------------------------------------------------------
+insert into site (name, domain, url, country_id, class_name)
+values
+    ('Apple US', 'apple.com', 'https://www.apple.com', 1, 'xx.Apple'),
+    ('Apple UK', 'apple.com/uk', 'https://www.amazon.com/uk', 2, 'xx.Amazon'),
+    ('Apple CA', 'apple.com/ca', 'https://www.amazon.com/ca', 3, 'xx.Amazon'),
+    ('Apple AU', 'apple.com/au', 'https://www.amazon.com/au', 4, 'xx.Amazon'),
+    ('Apple DE', 'apple.com/de', 'https://www.amazon.com/de', 5, 'xx.Amazon'),
+    ('Apple NL', 'apple.com/nl', 'https://www.amazon.com/nl', 6, 'xx.Amazon'),
+    ('Apple FR', 'apple.com/fr', 'https://www.amazon.com/fr', 7, 'xx.Amazon'),
+    ('Apple IT', 'apple.com/it', 'https://www.amazon.com/it', 8, 'xx.Amazon'),
+    ('Apple ES', 'apple.com/es', 'https://www.amazon.com/es', 9, 'xx.Amazon'),
+    ('Apple TR', 'apple.com/tr', 'https://www.amazon.com/tr', 10, 'xx.Amazon');
+
+-- -------------------------------------------------------
+-- Zalando sites
+-- -------------------------------------------------------
+insert into site (name, domain, url, country_id, class_name)
+values
+    ('Zalando UK', 'zalado.co.uk', 'https://www.zalando.co.uk', 2, 'xx.Zalando'),
+    ('Zalando DE', 'zalado.de', 'https://www.zalando.de', 5, 'xx.Zalando'),
+    ('Zalando NL', 'zalado.nl', 'https://www.zalando.nl', 6, 'xx.Zalando'),
+    ('Zalando FR', 'zalado.fr', 'https://www.zalando.fr', 7, 'xx.Zalando'),
+    ('Zalando IT', 'zalado.it', 'https://www.zalando.it', 8, 'xx.Zalando'),
+    ('Zalando ES', 'zalado.es', 'https://www.zalando.es', 9, 'xx.Zalando');
+
+
+-- -------------------------------------------------------
+-- Australian sites
+-- -------------------------------------------------------
+insert into site (name, domain, url, country_id, class_name)
+values
+    ('AppliancesOnline AU', 'appliancesonline.com.au', 'https://www.appliancesonline.com.au', 4, 'au.AppliancesOnline'),
+    ('AppliancesOnline AU', 'appliancesonline.com.au', 'https://www.appliancesonline.com.au', 4, 'au.AppliancesOnline'),
+    ('Ebay US', 'ebay.com', 'https://www.ebay.com', 1, 'xx.Ebay');
+
+
+-- /
+
+
 insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
 values ('Argos UK', 'argos.co.uk', 'https://www.argos.co.uk', 'https://www.argos.co.uk/homepage-assets/static/img/favicon.ico',
         'https://www.argos.co.uk/homepage-assets/static/img/favicon.ico', 'GBP', '£',',','.', 1, 'uk.Argos');
