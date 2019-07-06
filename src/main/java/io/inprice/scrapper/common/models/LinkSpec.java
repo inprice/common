@@ -1,5 +1,7 @@
 package io.inprice.scrapper.common.models;
 
+import io.inprice.scrapper.common.helpers.StringUtils;
+
 public class LinkSpec extends Model {
 
     private Long linkId;
@@ -10,14 +12,13 @@ public class LinkSpec extends Model {
     }
 
     public LinkSpec(String key, String value) {
-        this.key = key;
-        this.value = value;
+        this(null, key, value);
     }
 
     public LinkSpec(Long linkId, String key, String value) {
         this.linkId = linkId;
-        this.key = key;
-        this.value = value;
+        this.key = StringUtils.fixQuotes(key.trim());
+        this.value = StringUtils.fixQuotes(value.trim());
     }
 
     public Long getLinkId() {
@@ -33,7 +34,7 @@ public class LinkSpec extends Model {
     }
 
     public void setKey(String key) {
-        this.key = key;
+        this.key = StringUtils.fixQuotes(key.trim());
     }
 
     public String getValue() {
@@ -41,6 +42,6 @@ public class LinkSpec extends Model {
     }
 
     public void setValue(String value) {
-        this.value = value;
+        this.value = StringUtils.fixQuotes(value.trim());
     }
 }

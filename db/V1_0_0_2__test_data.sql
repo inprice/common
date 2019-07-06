@@ -30,75 +30,188 @@ values
 -- -------------------------------------------------------
 -- Ebay sites
 -- -------------------------------------------------------
-insert into site (name, domain, url, country_id, class_name)
+insert into site (name, domain, country_id, class_name)
 values
-    ('Ebay US', 'ebay.com', 'https://www.ebay.com', 1, 'xx.Ebay'),
-    ('Ebay UK', 'ebay.co.uk', 'https://www.ebay.co.uk', 2, 'xx.Ebay'),
-    ('Ebay CA', 'ebay.ca', 'https://www.ebay.ca', 3, 'xx.Ebay'),
-    ('Ebay AU', 'ebay.com.au', 'https://www.ebay.com.au', 4, 'xx.Ebay'),
-    ('Ebay DE', 'ebay.de', 'https://www.ebay.de', 5, 'xx.Ebay'),
-    ('Ebay NL', 'ebay.nl', 'https://www.ebay.nl', 6, 'xx.Ebay'),
-    ('Ebay FR', 'ebay.fr', 'https://www.ebay.fr', 7, 'xx.Ebay'),
-    ('Ebay IT', 'ebay.it', 'https://www.ebay.it', 8, 'xx.Ebay'),
-    ('Ebay ES', 'ebay.es', 'https://www.ebay.es', 9, 'xx.Ebay');
+    ('Ebay US', 'ebay.com', 1, 'xx.Ebay'),
+    ('Ebay UK', 'ebay.co.uk', 2, 'xx.Ebay'),
+    ('Ebay CA', 'ebay.ca', 3, 'xx.Ebay'),
+    ('Ebay AU', 'ebay.com.au', 4, 'xx.Ebay'),
+    ('Ebay DE', 'ebay.de', 5, 'xx.Ebay'),
+    ('Ebay NL', 'ebay.nl', 6, 'xx.Ebay'),
+    ('Ebay FR', 'ebay.fr', 7, 'xx.Ebay'),
+    ('Ebay IT', 'ebay.it', 8, 'xx.Ebay'),
+    ('Ebay ES', 'ebay.es', 9, 'xx.Ebay');
 
 -- -------------------------------------------------------
 -- Apple sites
 -- -------------------------------------------------------
-insert into site (name, domain, url, country_id, class_name)
+insert into site (name, domain, country_id, class_name)
 values
-    ('Apple US', 'apple.com', 'https://www.apple.com', 1, 'xx.Apple'),
-    ('Apple UK', 'apple.com/uk', 'https://www.amazon.com/uk', 2, 'xx.Amazon'),
-    ('Apple CA', 'apple.com/ca', 'https://www.amazon.com/ca', 3, 'xx.Amazon'),
-    ('Apple AU', 'apple.com/au', 'https://www.amazon.com/au', 4, 'xx.Amazon'),
-    ('Apple DE', 'apple.com/de', 'https://www.amazon.com/de', 5, 'xx.Amazon'),
-    ('Apple NL', 'apple.com/nl', 'https://www.amazon.com/nl', 6, 'xx.Amazon'),
-    ('Apple FR', 'apple.com/fr', 'https://www.amazon.com/fr', 7, 'xx.Amazon'),
-    ('Apple IT', 'apple.com/it', 'https://www.amazon.com/it', 8, 'xx.Amazon'),
-    ('Apple ES', 'apple.com/es', 'https://www.amazon.com/es', 9, 'xx.Amazon'),
-    ('Apple TR', 'apple.com/tr', 'https://www.amazon.com/tr', 10, 'xx.Amazon');
+    ('Apple US', 'apple.com', 1, 'xx.Apple'),
+    ('Apple UK', 'apple.com/uk', 2, 'xx.Amazon'),
+    ('Apple CA', 'apple.com/ca', 3, 'xx.Amazon'),
+    ('Apple AU', 'apple.com/au', 4, 'xx.Amazon'),
+    ('Apple DE', 'apple.com/de', 5, 'xx.Amazon'),
+    ('Apple NL', 'apple.com/nl', 6, 'xx.Amazon'),
+    ('Apple FR', 'apple.com/fr', 7, 'xx.Amazon'),
+    ('Apple IT', 'apple.com/it', 8, 'xx.Amazon'),
+    ('Apple ES', 'apple.com/es', 9, 'xx.Amazon'),
+    ('Apple TR', 'apple.com/tr', 10, 'xx.Amazon');
+
+-- -------------------------------------------------------
+-- Lidl sites
+-- -------------------------------------------------------
+insert into site (name, domain, country_id, class_name)
+values
+    ('Lidl US', 'lidl.com', 1, 'us.Lidl'),
+    ('Lidl UK', 'lidl.co.uk', 2, 'xx.Lidl'),
+    ('Lidl DE', 'lidl.de', 5, 'xx.Lidl'),
+    ('Lidl NL', 'lidl.nl', 6, 'xx.Lidl'),
+    ('Lidl FR', 'lidl.fr', 7, 'xx.Lidl'),
+    ('Lidl IT', 'lidl.it', 8, 'xx.Lidl'),
+    ('Lidl ES', 'lidl.es', 9, 'xx.Lidl');
+
+-- -------------------------------------------------------
+-- Medimarkt sites
+-- -------------------------------------------------------
+insert into site (name, domain, country_id, class_name)
+values
+    ('Medimarkt DE', 'medimarkt.de', 5, 'de.Medimarkt'),
+    ('Medimarkt NL', 'medimarkt.nl', 6, 'xx.Medimarkt'),
+    ('Medimarkt ES', 'medimarkt.es', 9, 'xx.Medimarkt'),
+    ('Medimarkt TR', 'medimarkt.com.tr', 10, 'xx.Medimarkt');
 
 -- -------------------------------------------------------
 -- Zalando sites
 -- -------------------------------------------------------
-insert into site (name, domain, url, country_id, class_name)
+insert into site (name, domain, country_id, class_name)
 values
-    ('Zalando UK', 'zalado.co.uk', 'https://www.zalando.co.uk', 2, 'xx.Zalando'),
-    ('Zalando DE', 'zalado.de', 'https://www.zalando.de', 5, 'xx.Zalando'),
-    ('Zalando NL', 'zalado.nl', 'https://www.zalando.nl', 6, 'xx.Zalando'),
-    ('Zalando FR', 'zalado.fr', 'https://www.zalando.fr', 7, 'xx.Zalando'),
-    ('Zalando IT', 'zalado.it', 'https://www.zalando.it', 8, 'xx.Zalando'),
-    ('Zalando ES', 'zalado.es', 'https://www.zalando.es', 9, 'xx.Zalando');
+    ('Zalando UK', 'zalado.co.uk', 2, 'xx.Zalando'),
+    ('Zalando DE', 'zalado.de', 5, 'xx.Zalando'),
+    ('Zalando NL', 'zalado.nl', 6, 'xx.Zalando'),
+    ('Zalando FR', 'zalado.fr', 7, 'xx.Zalando'),
+    ('Zalando IT', 'zalado.it', 8, 'xx.Zalando'),
+    ('Zalando ES', 'zalado.es', 9, 'xx.Zalando');
 
+-- -------------------------------------------------------
+-- Bonprix sites
+-- -------------------------------------------------------
+insert into site (name, domain, country_id, class_name)
+values
+    ('Bonprix UK', 'bonprix.co.uk', 2, 'xx.Bonprix'),
+    ('Bonprix DE', 'bonprix.de', 5, 'xx.Bonprix'),
+    ('Bonprix NL', 'bonprix.nl', 6, 'xx.Bonprix'),
+    ('Bonprix FR', 'bonprix.fr', 7, 'xx.Bonprix'),
+    ('Bonprix IT', 'bonprix.it', 8, 'xx.Bonprix');
+
+-- -------------------------------------------------------
+-- Rakuten sites
+-- -------------------------------------------------------
+insert into site (name, domain, country_id, class_name)
+values
+    ('Rakuten DE', 'rakuten.de', 5, 'xx.Rakuten'),
+    ('Rakuten FR', 'fr.shopping.rakuten.com', 7, 'xx.Rakuten');
 
 -- -------------------------------------------------------
 -- Australian sites
 -- -------------------------------------------------------
-insert into site (name, domain, url, country_id, class_name)
+insert into site (name, domain, country_id, class_name)
 values
-    ('AppliancesOnline AU', 'appliancesonline.com.au', 'https://www.appliancesonline.com.au', 4, 'au.AppliancesOnline'),
-    ('AppliancesOnline AU', 'appliancesonline.com.au', 'https://www.appliancesonline.com.au', 4, 'au.AppliancesOnline'),
-    ('Ebay US', 'ebay.com', 'https://www.ebay.com', 1, 'xx.Ebay');
+    ('BigW AU', 'bigw.com.au', 4, 'au.BigW'),
+    ('Kogan AU', 'kogan.com', 4, 'au.Kogan'),
+    ('The Good Guys AU', 'thegoodguys.com.au', 4, 'au.TheGoodGuys'),
+    ('Harvey Norman AU', 'harveynorman.com.au', 4, 'au.HarveyNorman'),
+    ('Appliances Online AU', 'appliancesonline.com.au', 4, 'au.AppliancesOnline');
 
+-- -------------------------------------------------------
+-- Canadian sites
+-- -------------------------------------------------------
+insert into site (name, domain, country_id, class_name)
+values
+    ('BestBuy CA', 'bestbuy.ca', 5, 'ca.BestBuy'),
+    ('Canadian Tire CA', 'canadiantire.ca', 5, 'ca.CanadianTire'),
+    ('Walmart CA', 'walmart.ca', 5, 'ca.Walmart');
 
--- /
+-- -------------------------------------------------------
+-- Germany sites
+-- -------------------------------------------------------
+insert into site (name, domain, country_id, class_name)
+values
+    ('Notebooks Billiger DE', 'notebooksbilliger.de', 3, 'de.NotebooksBilliger'),
+    ('Otto DE', 'otto.de', 3, 'de.Otto');
 
+-- -------------------------------------------------------
+-- Spain sites
+-- -------------------------------------------------------
+insert into site (name, domain, country_id, class_name)
+values
+    ('Electro King ES', 'electroking.es', 9, 'es.ElectroKing'),
+    ('101 Gigas ES', '101gigas.com', 9, 'es.Gigas101'),
+    ('Pixmania ES', 'pixmania.es', 9, 'es.Pixmania'),
+    ('UlaBox ES', 'ulabox.com', 9, 'es.UlaBox');
 
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Argos UK', 'argos.co.uk', 'https://www.argos.co.uk', 'https://www.argos.co.uk/homepage-assets/static/img/favicon.ico',
-        'https://www.argos.co.uk/homepage-assets/static/img/favicon.ico', 'GBP', '£',',','.', 1, 'uk.Argos');
+-- -------------------------------------------------------
+-- France sites
+-- -------------------------------------------------------
+insert into site (name, domain, country_id, class_name)
+values
+    ('Auchan FR', 'auchan.fr', 7, 'fr.Auchan'),
+    ('CDiscount FR', 'cdiscount.com', 7, 'fr.CDiscount'),
+    ('Fnac FR', 'fnac.com', 7, 'fr.Fnac'),
+    ('Laredoute FR', 'laredoute.fr', 7, 'fr.Laredoute');
 
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Gittigidiyor TR', 'gittigidiyor.com', 'https://www.gittigidiyor.com', 'https://www.gittigidiyor.com/fred/framework/assets/img/core/apple-touch-icons/apple-icon-76x76-precomposed.png',
-        'https://www.gittigidiyor.com/fred/framework/assets/img/core/apple-touch-icons/apple-icon-precomposed.png', 'TRY', 'TL',',','.', 3, 'tr.GittiGidiyor');
+-- -------------------------------------------------------
+-- Italy sites
+-- -------------------------------------------------------
+insert into site (name, domain, country_id, class_name)
+values
+    ('EPrice IT', 'eprice.it', 8, 'it.EPrice'),
+    ('Euronics IT', 'euronics.it', 8, 'it.Euronics'),
+    ('MediaWorld IT', 'mediaworld.it', 8, 'it.MediaWorld'),
+    ('VidaXL IT', 'vidaxl.it', 8, 'it.VidaXL');
 
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('Hepsiburada TR', 'hepsiburada.com', 'https://www.hepsiburada.com', 'https://images.hepsiburada.net/assets/sfstatic/Content/images/Icon.png',
-        'https://images.hepsiburada.net/assets/sfstatic/Content/images/favicon.ico', 'TRY', 'TL',',','.', 3, 'tr.HepsiBurada');
+-- -------------------------------------------------------
+-- the Netherlands sites
+-- -------------------------------------------------------
+insert into site (name, domain, country_id, class_name)
+values
+    ('Bol NL', 'bol.com', 6, 'nl.Bol'),
+    ('CoolBlue NL', 'coolblue.nl', 6, 'nl.coolblue'),
+    ('De Bijenkorf NL', 'debijenkorf.nl', 6, 'nl.DeBijenkorf'),
+    ('Wehkamp NL', 'wehkamp.nl', 6, 'nl.Wehkamp');
 
-insert into site (name, domain, url, logo, logo_mini, currency_code, currency_symbol, thousand_separator, decimal_separator, country_id, class_name)
-values ('n11 TR', 'n11.com', 'https://www.n11.com', 'https://n11scdn.akamaized.net/a1/org/15/11/30/54/12/08/66/82/53/32/07/07/87650256438692757713.png',
-        'https://n11scdn.akamaized.net/static/favicon.ico', 'TRY', 'TL',',','.', 3, 'io.inprice.scrapper.manager.websites.tr.N11');
+-- -------------------------------------------------------
+-- Turkey sites
+-- -------------------------------------------------------
+insert into site (name, domain, country_id, class_name)
+values
+    ('Gittigidiyor TR', 'gittigidiyor.com', 10, 'tr.GittiGidiyor'),
+    ('Hepsiburada TR', 'hepsiburada.com', 10, 'tr.HepsiBurada'),
+    ('n11 TR', 'n11.com', 10, 'tr.N11'),
+    ('Teknosa TR', 'teknosa.com', 10, 'tr.Teknosa'),
+    ('Trendyol TR', 'trendyol.com', 10, 'tr.Trendyol');
+
+insert into site (name, domain, country_id, class_name)
+values
+    ('Argos UK', 'argos.co.uk', 2, 'uk.Argos'),
+    ('Asda UK', 'groceries.argos.com', 2, 'uk.Asda'),
+    ('Asos UK', 'asos.com', 2, 'uk.Asos'),
+    ('Currys UK', 'currys.co.uk', 2, 'uk.Currys'),
+    ('Debenhams UK', 'debenhams.com', 2, 'uk.Debenhams'),
+    ('NewLook UK', 'newlook.com', 2, 'uk.NewLook'),
+    ('Zavvi UK', 'zavvi.com', 2, 'uk.Zavvi');
+
+-- -------------------------------------------------------
+-- Canadian sites
+-- -------------------------------------------------------
+insert into site (name, domain, country_id, class_name)
+values
+    ('BestBuy US', 'bestbuy.com', 1, 'us.BestBuy'),
+    ('Bonanza US', 'bonanza.com', 1, 'us.Bonanza'),
+    ('Etsy US', 'etsy.com', 1, 'us.Etsy'),
+    ('Lidl US', 'lidl.com', 1, 'us.Lidl'),
+    ('Target US', 'target.com', 1, 'us.Target'),
+    ('Walmart US', 'walmart.com', 1, 'us.Walmart');
 
 insert into plan (plan_type, name, desc_1, desc_2, desc_3, row_limit, price, price_1, order_no, css_class)
 values ('NORMAL', 'Basic', '30 Days Plan', '$10 for a month', '$100 for a year', 30, 10, 100, 1, '');

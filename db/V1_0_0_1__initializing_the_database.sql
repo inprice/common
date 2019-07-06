@@ -21,16 +21,12 @@ create table site (
   active                    tinyint(1) default 1,
   name                      varchar(100) not null,
   domain                    varchar(100) not null,
-  url                       varchar(250) not null,
-  logo                      varchar(250),
-  logo_mini                 varchar(250),
   country_id                bigint   not null,
   class_name                varchar(100) not null,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
 create unique index site_ix1 on site (name);
-create unique index site_ix2 on site (url);
 alter table site add foreign key (country_id) references country (id);
 
 create table plan (
