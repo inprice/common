@@ -12,20 +12,19 @@ insert into country (id, code, name, locale, lang, flag, currency_code, currency
 insert into country (id, code, name, locale, lang, flag, currency_code, currency_symbol) values (10,'tr', 'Turkey', 'tr_TR', 'Turkish', 'tr.png', 'TRY', '₺');
 
 -- -------------------------------------------------------
---  Amazon sites
--- -------------------------------------------------------
-insert into site (name, domain, url, country_id, class_name)
+--  Amazon site, domain, country_id, class_name)
+insert into site (name, domain, country_id, class_name)
 values
-    ('Amazon US', 'amazon.com', 'https://www.amazon.com', 1, 'xx.Amazon'),
-    ('Amazon UK', 'amazon.co.uk', 'https://www.amazon.co.uk', 2, 'xx.Amazon'),
-    ('Amazon CA', 'amazon.ca', 'https://www.amazon.ca', 3, 'xx.Amazon'),
-    ('Amazon AU', 'amazon.com.au', 'https://www.amazon.com.au', 4, 'xx.Amazon'),
-    ('Amazon DE', 'amazon.de', 'https://www.amazon.de', 5, 'xx.Amazon'),
-    ('Amazon NL', 'amazon.nl', 'https://www.amazon.nl', 6, 'xx.Amazon'),
-    ('Amazon FR', 'amazon.fr', 'https://www.amazon.fr', 7, 'xx.Amazon'),
-    ('Amazon IT', 'amazon.it', 'https://www.amazon.it', 8, 'xx.Amazon'),
-    ('Amazon ES', 'amazon.es', 'https://www.amazon.es', 9, 'xx.Amazon'),
-    ('Amazon TR', 'amazon.com.tr', 'https://www.amazon.com.tr', 10, 'xx.Amazon');
+    ('Amazon US', 'amazon.com', 1, 'xx.Amazon'),
+    ('Amazon UK', 'amazon.co.uk', 2, 'xx.Amazon'),
+    ('Amazon CA', 'amazon.ca', 3, 'xx.Amazon'),
+    ('Amazon AU', 'amazon.com.au', 4, 'xx.Amazon'),
+    ('Amazon DE', 'amazon.de', 5, 'xx.Amazon'),
+    ('Amazon NL', 'amazon.nl', 6, 'xx.Amazon'),
+    ('Amazon FR', 'amazon.fr', 7, 'xx.Amazon'),
+    ('Amazon IT', 'amazon.it', 8, 'xx.Amazon'),
+    ('Amazon ES', 'amazon.es', 9, 'xx.Amazon'),
+    ('Amazon TR', 'amazon.com.tr', 10, 'xx.Amazon');
 
 -- -------------------------------------------------------
 -- Ebay sites
@@ -176,7 +175,7 @@ values
 insert into site (name, domain, country_id, class_name)
 values
     ('Bol NL', 'bol.com', 6, 'nl.Bol'),
-    ('CoolBlue NL', 'coolblue.nl', 6, 'nl.coolblue'),
+    ('CoolBlue NL', 'coolblue.nl', 6, 'nl.CoolBlue'),
     ('De Bijenkorf NL', 'debijenkorf.nl', 6, 'nl.DeBijenkorf'),
     ('Wehkamp NL', 'wehkamp.nl', 6, 'nl.Wehkamp');
 
@@ -201,22 +200,50 @@ values
     ('NewLook UK', 'newlook.com', 2, 'uk.NewLook'),
     ('Zavvi UK', 'zavvi.com', 2, 'uk.Zavvi');
 
--- -------------------------------------------------------
--- Canadian sites
--- -------------------------------------------------------
-insert into site (name, domain, country_id, class_name)
+insert into plan (name, row_limit, price, order_no)
 values
-    ('BestBuy US', 'bestbuy.com', 1, 'us.BestBuy'),
-    ('Bonanza US', 'bonanza.com', 1, 'us.Bonanza'),
-    ('Etsy US', 'etsy.com', 1, 'us.Etsy'),
-    ('Lidl US', 'lidl.com', 1, 'us.Lidl'),
-    ('Target US', 'target.com', 1, 'us.Target'),
-    ('Walmart US', 'walmart.com', 1, 'us.Walmart');
+    ('Micro', 30, 15, 1),
+    ('Small', 100, 30, 2),
+    ('Medium', 250, 50, 3),
+    ('Professional', 500, 80, 4),
+    ('Business', 1000, 120, 5),
+    ('Enterprise', 2500, 200, 6);
 
-insert into plan (plan_type, name, desc_1, desc_2, desc_3, row_limit, price, price_1, order_no, css_class)
-values ('NORMAL', 'Basic', '30 Days Plan', '$10 for a month', '$100 for a year', 30, 10, 100, 1, '');
 
-insert into sector (name) values ('Finance');
-insert into sector (name) values ('Telecommunication');
-insert into sector (name) values ('Gaming');
-insert into sector (name) values ('Entertainment');
+insert into plan_rows (plan_id, description, order_no)
+values
+    (1, 'Suitable for trials', 1),
+    (1, 'Up to 30 product URLs', 2),
+    (1, 'Example: 15 products x 2 competitors, or 10 products x 3 competitors', 3),
+    (1, 'Price updates 4 times a Day', 4),
+    (1, 'Stock availability monitoring', 5),
+    (1, 'Price position comparison', 6),
+    (1, 'Batch product import', 7),
+
+    (2, 'Suitable for startups', 1),
+    (2, 'Up to 100 product URLs', 2),
+    (2, 'Example: 50 products x 2 competitors, or 25 products x 4 competitors', 3),
+    (2, 'Includes all other features in Micro Plan', 20),
+
+    (3, 'Suitable for middle-sized companies', 1),
+    (3, 'Up to 250 product URLs', 2),
+    (3, 'Example: 125 products x 2 competitors, or 50 products x 5 competitors', 3),
+    (3, 'Includes all other features in Small Plan', 20),
+
+    (4, 'Suitable for large companies', 1),
+    (4, 'Up to 500 product URLs', 2),
+    (4, 'Example: 250 products x 2 competitors, or 100 products x 5 competitors', 3),
+    (4, 'Automated daily reports in Excel & PDF format', 4),
+    (4, 'Includes all other features in Medium Plan', 20),
+
+    (5, 'Suitable for large companies', 1),
+    (5, 'Up to 1000 product URLs', 2),
+    (5, 'Example: 250 products x 4 competitors, or 100 products x 10 competitors', 3),
+    (5, 'API Access', 4),
+    (5, 'Includes all other features in Professional Plan', 20),
+
+    (6, 'Suitable for large companies', 1),
+    (6, 'Up to 2500 product URLs', 2),
+    (6, 'Example: 250 products x 10 competitors, or 500 products x 5 competitors', 3),
+    (6, 'Instant price change notification', 4),
+    (6, 'Includes all other features in Business Plan', 20);

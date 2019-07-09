@@ -78,7 +78,7 @@ public enum Status {
      * Data won't be collected till it is available again.
      * Availability checks are done a certain times (look at system parameters)
      */
-    OUT_OF_STOCK("negative"),
+    NOT_AVAILABLE("negative"),
 
     /**
      * Used for indicating links whose data has problem
@@ -115,7 +115,12 @@ public enum Status {
      * Used for links paused by users.
      * Data won't be collected till it is activated again.
      */
-    PAUSED("user");
+    PAUSED("user"),
+
+    /**
+     * Used for paused links to resume.
+     */
+    RESUMED("user");
 
     private String group;
 

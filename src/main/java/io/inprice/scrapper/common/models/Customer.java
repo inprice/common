@@ -13,7 +13,6 @@ public class Customer extends Model {
     private String companyName;
     private String contactName;
     private String website;
-    private Long sectorId;
     private Long countryId;
     private Date insertAt;
 
@@ -77,14 +76,6 @@ public class Customer extends Model {
         this.website = website;
     }
 
-    public Long getSectorId() {
-        return sectorId;
-    }
-
-    public void setSectorId(Long sectorId) {
-        this.sectorId = sectorId;
-    }
-
     public Long getCountryId() {
         return countryId;
     }
@@ -127,7 +118,6 @@ public class Customer extends Model {
                 ", companyName='" + companyName + '\'' +
                 ", contactName='" + contactName + '\'' +
                 ", website='" + website + '\'' +
-                ", sectorId=" + sectorId +
                 ", countryId=" + countryId +
                 ", insertAt=" + insertAt +
                 '}';

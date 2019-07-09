@@ -21,7 +21,7 @@ create table site (
   active                    tinyint(1) default 1,
   name                      varchar(100) not null,
   domain                    varchar(100) not null,
-  country_id                bigint   not null,
+  country_id                bigint not null,
   class_name                varchar(100) not null,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
@@ -31,47 +31,40 @@ alter table site add foreign key (country_id) references country (id);
 
 create table plan (
   id                        bigint auto_increment not null,
-  plan_type                 varchar(15) not null default 'NORMAL',
   active                    tinyint(1) default 1,
   name                      varchar(30) not null,
-  desc_1                    varchar(100),
-  desc_2                    varchar(100),
-  desc_3                    varchar(100),
-  row_limit                 int,
   price                     double,
-  price_1                   double,
+  row_limit                 int,
   order_no                  smallint,
-  css_class                 varchar(150),
   primary key (id)
 ) engine=innodb default charset=utf8;
 create unique index plan_ix1 on plan (name);
 
-create table sector (
+create table plan_rows (
   id                        bigint auto_increment not null,
-  name                      varchar(50) not null,
+  plan_id                   bigint not null,
+  description               varchar(120) not null,
+  order_no                  smallint,
   primary key (id)
 ) engine=innodb default charset=utf8;
-create unique index sector_ix1 on sector (name);
 
 -- customer tables
 
 create table customer (
   id                        bigint auto_increment not null,
-  user_type                 varchar(25) not null default 'USER',
+  user_type                 varchar(25) not null default 'ADMIN',
   company_name              varchar(250) not null,
   contact_name              varchar(150) not null,
   email                     varchar(150) not null,
-  password_hash             varchar(250) not null,
-  password_salt             varchar(200) not null,
   website                   varchar(150),
-  sector_id                 bigint,
+  password_hash             varchar(255) not null,
+  password_salt             varchar(255) not null,
   country_id                bigint,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
 create unique index customer_ix1 on customer (email);
 create index customer_ix2 on customer (company_name);
-alter table customer add foreign key (sector_id) references sector (id);
 alter table customer add foreign key (country_id) references country (id);
 
 create table customer_brand (
@@ -155,7 +148,6 @@ alter table product_price add foreign key (product_id) references product (id);
 
 create table link (
   id                        bigint auto_increment not null,
-  activated                 tinyint(1) default 0,
   url                       varchar(2000) not null,
   sku                       varchar(70),
   name                      varchar(500),
@@ -178,8 +170,8 @@ create table link (
   primary key (id)
 ) engine=innodb default charset=utf8;
 create index link_ix1 on link (cycle, status);
-create index link_ix2 on link (title);
-create index link_ix3 on link (code);
+create index link_ix2 on link (name);
+create index link_ix3 on link (sku);
 alter table link add foreign key (customer_id) references customer (id);
 alter table link add foreign key (product_id) references product (id);
 alter table link add foreign key (customer_plan_id) references customer_plan (id);

@@ -26,7 +26,6 @@ public class Link extends InfoModel {
     private Long productId;
     private Long siteId;
     private String websiteClassName;
-    private Boolean activated;
 
     /**
      * The three list fields below never be saved into database.
@@ -191,14 +190,6 @@ public class Link extends InfoModel {
         this.websiteClassName = websiteClassName;
     }
 
-    public Boolean getActivated() {
-        return activated;
-    }
-
-    public void setActivated(Boolean activated) {
-        this.activated = activated;
-    }
-
     public List<LinkPrice> getPriceList() {
         return priceList;
     }
@@ -253,7 +244,6 @@ public class Link extends InfoModel {
                 ", productId=" + productId +
                 ", siteId=" + siteId +
                 ", websiteClassName='" + websiteClassName + '\'' +
-                ", activated=" + activated +
                 '}';
     }
 }
