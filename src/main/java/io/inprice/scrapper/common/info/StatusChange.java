@@ -15,6 +15,11 @@ public class StatusChange implements Serializable {
     private Link link;
     private Status newStatus;
 
+    public StatusChange(Link link) {
+        this.link = link;
+        this.newStatus = link.getPreviousStatus();
+    }
+
     public StatusChange(Link link, Status newStatus) {
         this.link = link;
         this.newStatus = newStatus;
