@@ -12,7 +12,7 @@ create table country (
   currency_code             varchar(5) not null,
   currency_symbol           varchar(5),
   primary key (id)
-) engine=innodb default charset=utf8;
+) engine=innodb default charset=utf8mb4;
 create unique index country_ix1 on country (code);
 create unique index country_ix2 on country (name);
 
@@ -25,7 +25,7 @@ create table site (
   class_name                varchar(100) not null,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
-) engine=innodb default charset=utf8;
+) engine=innodb default charset=utf8mb4;
 create unique index site_ix1 on site (name);
 alter table site add foreign key (country_id) references country (id);
 
@@ -37,7 +37,7 @@ create table plan (
   row_limit                 int,
   order_no                  smallint,
   primary key (id)
-) engine=innodb default charset=utf8;
+) engine=innodb default charset=utf8mb4;
 create unique index plan_ix1 on plan (name);
 
 create table plan_rows (
@@ -46,7 +46,7 @@ create table plan_rows (
   description               varchar(120) not null,
   order_no                  smallint,
   primary key (id)
-) engine=innodb default charset=utf8;
+) engine=innodb default charset=utf8mb4;
 
 -- customer tables
 
@@ -62,7 +62,7 @@ create table customer (
   country_id                bigint,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
-) engine=innodb default charset=utf8;
+) engine=innodb default charset=utf8mb4;
 create unique index customer_ix1 on customer (email);
 create index customer_ix2 on customer (company_name);
 alter table customer add foreign key (country_id) references country (id);
@@ -73,7 +73,7 @@ create table customer_brand (
   customer_id               bigint,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
-) engine=innodb default charset=utf8;
+) engine=innodb default charset=utf8mb4;
 create unique index customer_brand_ix1 on customer_brand (customer_id, name);
 alter table customer_brand add foreign key (customer_id) references customer (id);
 
@@ -91,7 +91,7 @@ create table customer_plan (
   retry                     int default 0,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
-) engine=innodb default charset=utf8;
+) engine=innodb default charset=utf8mb4;
 create index customer_plan_ix1 on customer_plan (last_collecting_time);
 create index customer_plan_ix2 on customer_plan (due_date);
 alter table customer_plan add foreign key (customer_id) references customer (id);
@@ -104,7 +104,7 @@ create table customer_plan_history (
   collecting_status         tinyint(1),
   insert_at                 timestamp not null default current_timestamp,
 primary key (id)
-) engine=innodb default charset=utf8;
+) engine=innodb default charset=utf8mb4;
 create index customer_plan_history_ix1 on customer_plan (insert_at);
 alter table customer_plan_history add foreign key (customer_plan_id) references customer_plan (id);
 
@@ -114,7 +114,6 @@ create table product (
   code                      varchar(120),
   name                      varchar(500),
   brand                     varchar(100),
-  category                  varchar(150),
   price                     double,
   position                  int default 4,
   last_update               datetime,
@@ -125,7 +124,7 @@ create table product (
   max_price                 double,
   customer_plan_id          bigint,
   primary key (id)
-) engine=innodb default charset=utf8;
+) engine=innodb default charset=utf8mb4;
 create unique index product_ix1 on product (customer_plan_id, code);
 create unique index product_ix2 on product (customer_plan_id, name);
 alter table product add foreign key (customer_plan_id) references customer_plan (id);
@@ -142,7 +141,7 @@ create table product_price (
   max_price                 double,
   insert_at                 timestamp not null default current_timestamp,
 primary key (id)
-) engine=innodb default charset=utf8;
+) engine=innodb default charset=utf8mb4;
 create index product_price_ix1 on product_price (insert_at);
 alter table product_price add foreign key (product_id) references product (id);
 
@@ -155,9 +154,8 @@ create table link (
   seller                    varchar(150),
   shipment                  varchar(150),
   price                     double,
-  last_check                datetime,
+  last_check                datetime default now(),
   last_update               datetime,
-  cycle                     int default 0,
   status                    varchar(25) not null default 'NEW',
   previous_status           varchar(25) not null default 'NEW',
   retry                     int default 0,
@@ -168,8 +166,8 @@ create table link (
   site_id                   bigint,
   website_class_name        varchar(100),
   primary key (id)
-) engine=innodb default charset=utf8;
-create index link_ix1 on link (cycle, status);
+) engine=innodb default charset=utf8mb4;
+create index link_ix1 on link (status);
 create index link_ix2 on link (name);
 create index link_ix3 on link (sku);
 alter table link add foreign key (customer_id) references customer (id);
@@ -183,7 +181,7 @@ create table link_price (
   price                     double,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
-) engine=innodb default charset=utf8;
+) engine=innodb default charset=utf8mb4;
 create index link_price_ix1 on link_price (insert_at);
 alter table link_price add foreign key (link_id) references link (id);
 
@@ -193,7 +191,7 @@ create table link_spec (
   _key                      varchar(100),
   _value                    varchar(500),
   primary key (id)
-) engine=innodb default charset=utf8;
+) engine=innodb default charset=utf8mb4;
 alter table link_spec add foreign key (link_id) references link (id);
 
 create table link_history (
@@ -203,7 +201,7 @@ create table link_history (
   http_status               int default 0,
   insert_at                 timestamp not null default current_timestamp,
  primary key (id)
-) engine=innodb default charset=utf8;
+) engine=innodb default charset=utf8mb4;
 create index link_history_ix1 on link_history (insert_at);
 alter table link_history add foreign key (link_id) references link (id);
 

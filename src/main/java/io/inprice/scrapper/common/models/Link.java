@@ -15,6 +15,7 @@ public class Link extends InfoModel {
     private String shipment;
     private BigDecimal price = BigDecimal.ZERO;
     private Date lastUpdate;
+    private Date lastCheck;
     private Status status = Status.NEW;
     private Status previousStatus = Status.NEW;
     private Integer retry;
@@ -100,11 +101,20 @@ public class Link extends InfoModel {
         this.lastUpdate = lastUpdate;
     }
 
+    public Date getLastCheck() {
+        return lastCheck;
+    }
+
+    public void setLastCheck(Date lastCheck) {
+        this.lastCheck = lastCheck;
+    }
+
     public Status getStatus() {
         return status;
     }
 
     public void setStatus(Status status) {
+        this.previousStatus = this.status;
         this.status = status;
     }
 
@@ -215,6 +225,7 @@ public class Link extends InfoModel {
                 ", shipment='" + shipment + '\'' +
                 ", price=" + price +
                 ", lastUpdate=" + lastUpdate +
+                ", lastCheck=" + lastCheck +
                 ", status=" + status +
                 ", previousStatus=" + previousStatus +
                 ", retry=" + retry +

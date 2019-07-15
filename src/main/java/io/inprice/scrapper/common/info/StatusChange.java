@@ -13,16 +13,14 @@ import java.io.Serializable;
 public class StatusChange implements Serializable {
 
     private Link link;
-    private Status newStatus;
+    private Status oldStatus;
 
-    public StatusChange(Link link) {
-        this.link = link;
-        this.newStatus = link.getPreviousStatus();
+    public StatusChange() {
     }
 
-    public StatusChange(Link link, Status newStatus) {
+    public StatusChange(Link link, Status oldStatus) {
         this.link = link;
-        this.newStatus = newStatus;
+        this.oldStatus = oldStatus;
     }
 
     public Link getLink() {
@@ -33,12 +31,12 @@ public class StatusChange implements Serializable {
         this.link = link;
     }
 
-    public Status getNewStatus() {
-        return newStatus;
+    public Status getOldStatus() {
+        return oldStatus;
     }
 
-    public void setNewStatus(Status newStatus) {
-        this.newStatus = newStatus;
+    public void setOldStatus(Status newStatus) {
+        this.oldStatus = oldStatus;
     }
 
 }

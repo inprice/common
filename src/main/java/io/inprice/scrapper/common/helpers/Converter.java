@@ -1,5 +1,7 @@
 package io.inprice.scrapper.common.helpers;
 
+import io.inprice.scrapper.common.logging.Logger;
+
 import java.io.*;
 
 /**
@@ -9,12 +11,11 @@ import java.io.*;
  */
 public class Converter {
 
+    private static final Logger log = new Logger(Converter.class);
+
     /**
      * From byte array to Object
      *
-     * @param byteArray
-     * @param <T>
-     * @return
      */
     public static <T> T toObject(byte[] byteArray) {
         try {
@@ -23,7 +24,7 @@ public class Converter {
 
             return (T) ois.readObject();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
 
         return null;
@@ -32,8 +33,6 @@ public class Converter {
     /**
      * From Object to byte array
      *
-     * @param object
-     * @return
      */
     public static byte[] fromObject(Serializable object) {
         try {
@@ -45,7 +44,7 @@ public class Converter {
 
             return bos.toByteArray();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e);
         }
 
         return null;
