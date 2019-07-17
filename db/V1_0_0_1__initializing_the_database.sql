@@ -33,7 +33,7 @@ create table plan (
   id                        bigint auto_increment not null,
   active                    tinyint(1) default 1,
   name                      varchar(30) not null,
-  price                     double,
+  price                     double default 0,
   row_limit                 int,
   order_no                  smallint,
   primary key (id)
@@ -82,10 +82,10 @@ create table customer_plan (
   active                    tinyint(1) default 1,
   name                      varchar(50) not null,
   monthly                   tinyint(1) default 1,
-  customer_id               bigint,
+  customer_id               bigint not null,
   brand_id                  bigint,
   plan_id                   bigint,
-  due_date                  datetime,
+  due_date                  datetime not null,
   last_collecting_time      datetime,
   last_collecting_status    tinyint(1),
   retry                     int default 0,
@@ -114,15 +114,15 @@ create table product (
   code                      varchar(120),
   name                      varchar(500),
   brand                     varchar(100),
-  price                     double,
+  price                     double default 0,
   position                  int default 4,
   last_update               datetime,
   min_seller                varchar(150),
   max_seller                varchar(150),
-  min_price                 double,
-  avg_price                 double,
-  max_price                 double,
-  customer_plan_id          bigint,
+  min_price                 double default 0,
+  avg_price                 double default 0,
+  max_price                 double default 0,
+  customer_plan_id          bigint not null,
   primary key (id)
 ) engine=innodb default charset=utf8mb4;
 create unique index product_ix1 on product (customer_plan_id, code);
@@ -134,11 +134,11 @@ create table product_price (
   product_id                bigint not null,
   min_seller                varchar(150),
   max_seller                varchar(150),
-  price                     double,
+  price                     double default 0,
   position                  int default 3,
-  min_price                 double,
-  avg_price                 double,
-  max_price                 double,
+  min_price                 double default 0,
+  avg_price                 double default 0,
+  max_price                 double default 0,
   insert_at                 timestamp not null default current_timestamp,
 primary key (id)
 ) engine=innodb default charset=utf8mb4;
@@ -153,7 +153,7 @@ create table link (
   brand                     varchar(150),
   seller                    varchar(150),
   shipment                  varchar(150),
-  price                     double,
+  price                     double default 0,
   last_check                datetime default now(),
   last_update               datetime,
   status                    varchar(25) not null default 'NEW',
@@ -170,6 +170,8 @@ create table link (
 create index link_ix1 on link (status);
 create index link_ix2 on link (name);
 create index link_ix3 on link (sku);
+create index link_ix4 on link (last_update);
+create index link_ix5 on link (last_check);
 alter table link add foreign key (customer_id) references customer (id);
 alter table link add foreign key (product_id) references product (id);
 alter table link add foreign key (customer_plan_id) references customer_plan (id);
@@ -178,7 +180,7 @@ alter table link add foreign key (site_id) references site (id);
 create table link_price (
   id                        bigint auto_increment not null,
   link_id                   bigint not null,
-  price                     double,
+  price                     double default 0,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8mb4;

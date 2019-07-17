@@ -102,14 +102,14 @@ public enum Status {
      * This state is used for indicating links which we face problem during resolving the class name
      * Availability checks are done a certain times (look at system parameters)
      */
-    CLASS_PROBLEM("positive"),
+    CLASS_PROBLEM("negative"),
 
     /**
      * Used for internal error like 500
      * Data won't be collected till it is available again.
      * Availability checks are done a certain times (look at system parameters)
      */
-    INTERNAL_ERROR("positive"),
+    INTERNAL_ERROR("negative"),
 
     /**
      * Used for links paused by users.
