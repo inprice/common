@@ -41,13 +41,18 @@ public enum Status {
     /**
      * Used for links which need to be renewed
      */
-    RENEWED("positive"),
+    RENEWED("neutral"),
 
     /**
      * Used for links whose websites have not been implemented yet.
      * Data won't be collected till implemented
      */
     BE_IMPLEMENTED("neutral"),
+
+    /**
+     * Used for newly implemented links
+     */
+    IMPLEMENTED("neutral"),
 
     /**
      * Used for links that will never be implemented
@@ -61,12 +66,12 @@ public enum Status {
     IMPROPER("negative"),
 
     /**
-     * Used for indicating links whose URLs are not specific
-     * The url may point a search page or a product listing page
-     * A url should refer only one product's page on which price, name... exist
+     * Used for indicating links whose URLs not specific
+     * The url may point a search page or a product listing page on the website
+     * A url must refer only one product's page on which price, name... exist
      * Data never be collected
      */
-    NOT_SPECIFIC("negative"),
+    NOT_A_PRODUCT_PAGE("negative"),
 
     /**
      * Used for indicating links whose data is missing
@@ -89,7 +94,7 @@ public enum Status {
      * Used for specifying links whose website block us for data collecting at first step
      * Availability checks are done a certain times (look at system parameters)
      */
-    SOCKET_ERROR("positive"),
+    SOCKET_ERROR("neutral"),
 
     /**
      * Used for links returning http error codes greater than 399

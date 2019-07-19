@@ -4,21 +4,35 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * Info model class for price change notifications for Links
+ * Info model for notification of deleted links or links whose prices changed
  *
  * @author mdpinar
  */
-public class PriceChange implements Serializable {
+public class PriceUpdateInfo implements Serializable {
 
+    //if true it means the links is deleted, otherwise, price of the link is updated
+    private boolean isDeleted;
     private Long linkId;
     private Long productId;
     private BigDecimal newPrice;
-    private boolean linkOnly;
 
-    public PriceChange(Long linkId, Long productId, BigDecimal newPrice) {
+    public PriceUpdateInfo(Long linkId, Long productId, BigDecimal newPrice) {
+        this(false, linkId, productId);
+        this.newPrice = newPrice;
+    }
+
+    public PriceUpdateInfo(boolean isDeleted, Long linkId, Long productId) {
+        this.isDeleted = isDeleted;
         this.linkId = linkId;
         this.productId = productId;
-        this.newPrice = newPrice;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
     public Long getLinkId() {
@@ -45,19 +59,13 @@ public class PriceChange implements Serializable {
         this.newPrice = newPrice;
     }
 
-    public boolean isLinkOnly() {
-        return linkOnly;
-    }
-
-    public void setLinkOnly(boolean linkOnly) {
-        this.linkOnly = linkOnly;
-    }
-
     @Override
     public String toString() {
-        return "linkId=" + linkId +
+        return "PriceUpdateInfo{" +
+                "isDeleted=" + isDeleted +
+                ", linkId=" + linkId +
                 ", productId=" + productId +
                 ", newPrice=" + newPrice +
-                ", linkOnly=" + linkOnly;
+                '}';
     }
 }
