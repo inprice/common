@@ -7,6 +7,7 @@ package io.inprice.scrapper.common.meta;
  */
 public enum UserType {
 
+    SUPER,
     ADMIN,
     USER,
     API;
