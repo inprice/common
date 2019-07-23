@@ -2,30 +2,30 @@ package io.inprice.scrapper.common.models;
 
 import java.util.Date;
 
-public class CustomerPlanHistory extends Model {
+public class UserPlanHistory extends Model {
 
-    private Long customerPlanId;
+    private Long userPlanId;
     private Boolean collectingStatus;
     private Date insertAt;
 
-    public CustomerPlanHistory() {
+    public UserPlanHistory() {
     }
 
-    public CustomerPlanHistory(Boolean collectingStatus) {
+    public UserPlanHistory(Boolean collectingStatus) {
         this.collectingStatus = collectingStatus;
     }
 
-    public CustomerPlanHistory(Long customerPlanId, Boolean collectingStatus) {
-        this.customerPlanId = customerPlanId;
+    public UserPlanHistory(Long userPlanId, Boolean collectingStatus) {
+        this.userPlanId = userPlanId;
         this.collectingStatus = collectingStatus;
     }
 
-    public Long getCustomerPlanId() {
-        return customerPlanId;
+    public Long getUserPlanId() {
+        return userPlanId;
     }
 
-    public void setCustomerPlanId(Long customerPlanId) {
-        this.customerPlanId = customerPlanId;
+    public void setUserPlanId(Long userPlanId) {
+        this.userPlanId = userPlanId;
     }
 
     public Boolean getCollectingStatus() {

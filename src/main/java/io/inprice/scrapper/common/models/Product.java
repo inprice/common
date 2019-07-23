@@ -18,7 +18,7 @@ public class Product extends InfoModel {
     private BigDecimal minPrice;
     private BigDecimal avgPrice;
     private BigDecimal maxPrice;
-    private Long customerPlanId;
+    private Long userPlanId;
 
     public String getCode() {
         return code;
@@ -108,12 +108,12 @@ public class Product extends InfoModel {
         this.maxPrice = maxPrice;
     }
 
-    public Long getCustomerPlanId() {
-        return customerPlanId;
+    public Long getUserPlanId() {
+        return userPlanId;
     }
 
-    public void setCustomerPlanId(Long customerPlanId) {
-        this.customerPlanId = customerPlanId;
+    public void setUserPlanId(Long userPlanId) {
+        this.userPlanId = userPlanId;
     }
 
     @Override
@@ -132,7 +132,7 @@ public class Product extends InfoModel {
                 ", minPrice=" + minPrice +
                 ", avgPrice=" + avgPrice +
                 ", maxPrice=" + maxPrice +
-                ", customerPlanId=" + customerPlanId +
+                ", userPlanId=" + userPlanId +
                 '}';
     }
 }

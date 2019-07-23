@@ -2,14 +2,14 @@ package io.inprice.scrapper.common.models;
 
 import java.util.Date;
 
-public class CustomerPlan extends InfoModel {
+public class UserPlan extends InfoModel {
 
     private Boolean monthly;
     private Date dueDate;
     private Date lastCollectingTime;
     private Boolean lastCollectingStatus;
     private Integer retry;
-    private Long customerId;
+    private Long userId;
     private Long brandId;
     private Long planId;
     private Date insertAt;
@@ -54,12 +54,12 @@ public class CustomerPlan extends InfoModel {
         this.retry = retry;
     }
 
-    public Long getCustomerId() {
-        return customerId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Long getBrandId() {
@@ -88,7 +88,7 @@ public class CustomerPlan extends InfoModel {
 
     @Override
     public String toString() {
-        return "CustomerPlan{" +
+        return "UserPlan{" +
                 "active=" + getName() +
                 ", name='" + getName() + '\'' +
                 ", monthly=" + monthly +
@@ -96,7 +96,7 @@ public class CustomerPlan extends InfoModel {
                 ", lastCollectingTime=" + lastCollectingTime +
                 ", lastCollectingStatus=" + lastCollectingStatus +
                 ", retry=" + retry +
-                ", customerId=" + customerId +
+                ", userId=" + userId +
                 ", brandId=" + brandId +
                 ", planId=" + planId +
                 ", insertAt=" + insertAt +

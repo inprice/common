@@ -20,8 +20,8 @@ public class Link extends InfoModel {
     private Status previousStatus = Status.NEW;
     private Integer retry;
     private Integer httpStatus;
-    private Long customerId;
-    private Long customerPlanId;
+    private Long userId;
+    private Long userPlanId;
     private Long productId;
     private Long siteId;
     private String websiteClassName;
@@ -142,20 +142,20 @@ public class Link extends InfoModel {
         this.httpStatus = httpStatus;
     }
 
-    public Long getCustomerId() {
-        return customerId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public Long getCustomerPlanId() {
-        return customerPlanId;
+    public Long getUserPlanId() {
+        return userPlanId;
     }
 
-    public void setCustomerPlanId(Long customerPlanId) {
-        this.customerPlanId = customerPlanId;
+    public void setUserPlanId(Long userPlanId) {
+        this.userPlanId = userPlanId;
     }
 
     public Long getProductId() {
@@ -230,8 +230,8 @@ public class Link extends InfoModel {
                 ", previousStatus=" + previousStatus +
                 ", retry=" + retry +
                 ", httpStatus=" + httpStatus +
-                ", customerId=" + customerId +
-                ", customerPlanId=" + customerPlanId +
+                ", userId=" + userId +
+                ", userPlanId=" + userPlanId +
                 ", productId=" + productId +
                 ", siteId=" + siteId +
                 ", websiteClassName='" + websiteClassName + '\'' +

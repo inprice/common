@@ -4,7 +4,7 @@ import io.inprice.scrapper.common.meta.UserType;
 
 import java.util.Date;
 
-public class Customer extends Model {
+public class User extends Model {
 
     private UserType userType = UserType.USER;
     private String email;
@@ -110,7 +110,7 @@ public class Customer extends Model {
 
     @Override
     public String toString() {
-        return "Customer{" +
+        return "User{" +
                 "userType=" + userType +
                 ", email='" + email + '\'' +
                 ", passwordHash='" + passwordHash + '\'' +

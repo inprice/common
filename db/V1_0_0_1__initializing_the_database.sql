@@ -48,9 +48,9 @@ create table plan_rows (
   primary key (id)
 ) engine=innodb default charset=utf8mb4;
 
--- customer tables
+-- user tables
 
-create table customer (
+create table user (
   id                        bigint auto_increment not null,
   user_type                 varchar(25) not null default 'ADMIN',
   company_name              varchar(250) not null,
@@ -63,26 +63,26 @@ create table customer (
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8mb4;
-create unique index customer_ix1 on customer (email);
-create index customer_ix2 on customer (company_name);
-alter table customer add foreign key (country_id) references country (id);
+create unique index user_ix1 on user (email);
+create index user_ix2 on user (company_name);
+alter table user add foreign key (country_id) references country (id);
 
-create table customer_brand (
+create table user_brand (
   id                        bigint auto_increment not null,
   name                      varchar(150) not null,
-  customer_id               bigint,
+  user_id                   bigint,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8mb4;
-create unique index customer_brand_ix1 on customer_brand (customer_id, name);
-alter table customer_brand add foreign key (customer_id) references customer (id);
+create unique index user_brand_ix1 on user_brand (user_id, name);
+alter table user_brand add foreign key (user_id) references user (id);
 
-create table customer_plan (
+create table user_plan (
   id                        bigint auto_increment not null,
   active                    tinyint(1) default 1,
   name                      varchar(50) not null,
   monthly                   tinyint(1) default 1,
-  customer_id               bigint not null,
+  user_id                   bigint not null,
   brand_id                  bigint,
   plan_id                   bigint,
   due_date                  datetime not null,
@@ -92,21 +92,21 @@ create table customer_plan (
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8mb4;
-create index customer_plan_ix1 on customer_plan (last_collecting_time);
-create index customer_plan_ix2 on customer_plan (due_date);
-alter table customer_plan add foreign key (customer_id) references customer (id);
-alter table customer_plan add foreign key (brand_id) references customer_brand (id);
-alter table customer_plan add foreign key (plan_id) references plan (id);
+create index user_plan_ix1 on user_plan (last_collecting_time);
+create index user_plan_ix2 on user_plan (due_date);
+alter table user_plan add foreign key (user_id) references user (id);
+alter table user_plan add foreign key (brand_id) references user_brand (id);
+alter table user_plan add foreign key (plan_id) references plan (id);
 
-create table customer_plan_history (
+create table user_plan_history (
   id                        bigint auto_increment not null,
-  customer_plan_id          bigint,
+  user_plan_id              bigint,
   collecting_status         tinyint(1),
   insert_at                 timestamp not null default current_timestamp,
 primary key (id)
 ) engine=innodb default charset=utf8mb4;
-create index customer_plan_history_ix1 on customer_plan (insert_at);
-alter table customer_plan_history add foreign key (customer_plan_id) references customer_plan (id);
+create index user_plan_history_ix1 on user_plan (insert_at);
+alter table user_plan_history add foreign key (user_plan_id) references user_plan (id);
 
 create table product (
   id                        bigint auto_increment not null,
@@ -122,12 +122,12 @@ create table product (
   min_price                 double default 0,
   avg_price                 double default 0,
   max_price                 double default 0,
-  customer_plan_id          bigint not null,
+  user_plan_id              bigint not null,
   primary key (id)
 ) engine=innodb default charset=utf8mb4;
-create unique index product_ix1 on product (customer_plan_id, code);
-create unique index product_ix2 on product (customer_plan_id, name);
-alter table product add foreign key (customer_plan_id) references customer_plan (id);
+create unique index product_ix1 on product (user_plan_id, code);
+create unique index product_ix2 on product (user_plan_id, name);
+alter table product add foreign key (user_plan_id) references user_plan (id);
 
 create table product_price (
   id                        bigint auto_increment not null,
@@ -160,8 +160,8 @@ create table link (
   previous_status           varchar(25) not null default 'NEW',
   retry                     int default 0,
   http_status               int default 0,
-  customer_id               bigint,
-  customer_plan_id          bigint,
+  user_id                   bigint,
+  user_plan_id              bigint,
   product_id                bigint,
   site_id                   bigint,
   website_class_name        varchar(100),
@@ -172,9 +172,9 @@ create index link_ix2 on link (name);
 create index link_ix3 on link (sku);
 create index link_ix4 on link (last_update);
 create index link_ix5 on link (last_check);
-alter table link add foreign key (customer_id) references customer (id);
+alter table link add foreign key (user_id) references user (id);
 alter table link add foreign key (product_id) references product (id);
-alter table link add foreign key (customer_plan_id) references customer_plan (id);
+alter table link add foreign key (user_plan_id) references user_plan (id);
 alter table link add foreign key (site_id) references site (id);
 
 create table link_price (

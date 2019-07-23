@@ -2,10 +2,10 @@ package io.inprice.scrapper.common.models;
 
 import java.util.Date;
 
-public class CustomerBrand extends Model {
+public class UserBrand extends Model {
 
     private String name;
-    private Long customerId;
+    private Long userId;
     private Date insertAt;
 
     public String getName() {
@@ -16,12 +16,12 @@ public class CustomerBrand extends Model {
         this.name = name;
     }
 
-    public Long getCustomerId() {
-        return customerId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Date getInsertAt() {
@@ -34,9 +34,9 @@ public class CustomerBrand extends Model {
 
     @Override
     public String toString() {
-        return "CustomerBrand{" +
+        return "UserBrand{" +
                 "name='" + name + '\'' +
-                ", customerId=" + customerId +
+                ", userId=" + userId +
                 ", insertAt=" + insertAt +
                 '}';
     }
