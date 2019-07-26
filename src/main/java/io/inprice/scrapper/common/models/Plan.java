@@ -1,12 +1,14 @@
 package io.inprice.scrapper.common.models;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Plan extends InfoModel {
 
     private BigDecimal price;
     private Integer rowLimit;
     private Integer orderNo;
+    private List<PlanRows> planRows;
 
     public Integer getRowLimit() {
         return rowLimit;
@@ -30,6 +32,14 @@ public class Plan extends InfoModel {
 
     public void setOrderNo(Integer orderNo) {
         this.orderNo = orderNo;
+    }
+
+    public List<PlanRows> getPlanRows() {
+        return planRows;
+    }
+
+    public void setPlanRows(List<PlanRows> planRows) {
+        this.planRows = planRows;
     }
 
     @Override

@@ -2,16 +2,14 @@ package io.inprice.scrapper.common.models;
 
 import java.util.Date;
 
-public class UserPlan extends InfoModel {
+public class Workspace extends InfoModel {
 
     private Boolean monthly;
     private Date dueDate;
     private Date lastCollectingTime;
     private Boolean lastCollectingStatus;
     private Integer retry;
-    private Long userId;
-    private Long brandId;
-    private Long planId;
+    private Long companyId;
     private Date insertAt;
 
     public Boolean getMonthly() {
@@ -54,28 +52,12 @@ public class UserPlan extends InfoModel {
         this.retry = retry;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getCompanyId() {
+        return companyId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getBrandId() {
-        return brandId;
-    }
-
-    public void setBrandId(Long brandId) {
-        this.brandId = brandId;
-    }
-
-    public Long getPlanId() {
-        return planId;
-    }
-
-    public void setPlanId(Long planId) {
-        this.planId = planId;
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 
     public Date getInsertAt() {
@@ -88,7 +70,7 @@ public class UserPlan extends InfoModel {
 
     @Override
     public String toString() {
-        return "UserPlan{" +
+        return "Workspace{" +
                 "active=" + getName() +
                 ", name='" + getName() + '\'' +
                 ", monthly=" + monthly +
@@ -96,9 +78,7 @@ public class UserPlan extends InfoModel {
                 ", lastCollectingTime=" + lastCollectingTime +
                 ", lastCollectingStatus=" + lastCollectingStatus +
                 ", retry=" + retry +
-                ", userId=" + userId +
-                ", brandId=" + brandId +
-                ", planId=" + planId +
+                ", companyId=" + companyId +
                 ", insertAt=" + insertAt +
                 '}';
     }

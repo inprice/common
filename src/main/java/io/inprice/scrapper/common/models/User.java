@@ -4,21 +4,19 @@ import io.inprice.scrapper.common.meta.UserType;
 
 import java.util.Date;
 
-public class User extends Model {
+public class User extends InfoModel {
 
     private UserType userType = UserType.USER;
     private String email;
     private String passwordHash;
     private String passwordSalt;
-    private String companyName;
-    private String contactName;
-    private String website;
-    private Long countryId;
+    private Long companyId;
     private Date insertAt;
 
-    //transient fields
+    /**
+     * The field below never be saved into database. It is used just during validating new users
+     */
     private String password;
-    private String token;
 
     public UserType getUserType() {
         return userType;
@@ -52,36 +50,12 @@ public class User extends Model {
         this.passwordSalt = passwordSalt;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public Long getCompanyId() {
+        return companyId;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getContactName() {
-        return contactName;
-    }
-
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
-    public Long getCountryId() {
-        return countryId;
-    }
-
-    public void setCountryId(Long countryId) {
-        this.countryId = countryId;
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 
     public Date getInsertAt() {
@@ -100,14 +74,6 @@ public class User extends Model {
         this.password = password;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -115,10 +81,7 @@ public class User extends Model {
                 ", email='" + email + '\'' +
                 ", passwordHash='" + passwordHash + '\'' +
                 ", passwordSalt='" + passwordSalt + '\'' +
-                ", companyName='" + companyName + '\'' +
-                ", contactName='" + contactName + '\'' +
-                ", website='" + website + '\'' +
-                ", countryId=" + countryId +
+                ", companyId=" + companyId +
                 ", insertAt=" + insertAt +
                 '}';
     }

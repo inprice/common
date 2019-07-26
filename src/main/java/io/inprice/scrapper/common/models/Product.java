@@ -1,7 +1,5 @@
 package io.inprice.scrapper.common.models;
 
-import io.inprice.scrapper.common.utils.DateUtils;
-
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -9,7 +7,6 @@ public class Product extends InfoModel {
 
     private String code;
     private String brand;
-    private String category;
     private BigDecimal price;
     private Integer position;
     private Date lastUpdate;
@@ -18,7 +15,7 @@ public class Product extends InfoModel {
     private BigDecimal minPrice;
     private BigDecimal avgPrice;
     private BigDecimal maxPrice;
-    private Long userPlanId;
+    private Long workspaceId;
 
     public String getCode() {
         return code;
@@ -34,14 +31,6 @@ public class Product extends InfoModel {
 
     public void setBrand(String brand) {
         this.brand = brand;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public BigDecimal getPrice() {
@@ -108,12 +97,12 @@ public class Product extends InfoModel {
         this.maxPrice = maxPrice;
     }
 
-    public Long getUserPlanId() {
-        return userPlanId;
+    public Long getWorkspaceId() {
+        return workspaceId;
     }
 
-    public void setUserPlanId(Long userPlanId) {
-        this.userPlanId = userPlanId;
+    public void setWorkspaceId(Long workspaceId) {
+        this.workspaceId = workspaceId;
     }
 
     @Override
@@ -123,7 +112,6 @@ public class Product extends InfoModel {
                 ", active='" + getActive() + '\'' +
                 ", name='" + getName() + '\'' +
                 ", brand='" + brand + '\'' +
-                ", category='" + category + '\'' +
                 ", price=" + price +
                 ", position=" + position +
                 ", lastUpdate=" + lastUpdate +
@@ -132,7 +120,7 @@ public class Product extends InfoModel {
                 ", minPrice=" + minPrice +
                 ", avgPrice=" + avgPrice +
                 ", maxPrice=" + maxPrice +
-                ", userPlanId=" + userPlanId +
+                ", workspaceId=" + workspaceId +
                 '}';
     }
 }

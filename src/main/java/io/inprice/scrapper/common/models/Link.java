@@ -8,8 +8,8 @@ import java.util.List;
 
 public class Link extends InfoModel {
 
-    private String sku;
     private String url;
+    private String sku;
     private String brand;
     private String seller;
     private String shipment;
@@ -20,11 +20,11 @@ public class Link extends InfoModel {
     private Status previousStatus = Status.NEW;
     private Integer retry;
     private Integer httpStatus;
-    private Long userId;
-    private Long userPlanId;
+    private String websiteClassName;
+    private Long companyId;
+    private Long workspaceId;
     private Long productId;
     private Long siteId;
-    private String websiteClassName;
 
     /**
      * The three list fields below never be saved into database.
@@ -34,14 +34,22 @@ public class Link extends InfoModel {
     private List<LinkHistory> historyList;
 
     /**
-     * Never be saved into database. It is just used for price change event
+     * The field below never be saved into database.
      */
-    private BigDecimal productPrice;
+    private BigDecimal productPrice = BigDecimal.ZERO;
 
     public Link() {
     }
 
     public Link(String url) {
+        this.url = url;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
         this.url = url;
     }
 
@@ -51,14 +59,6 @@ public class Link extends InfoModel {
 
     public void setSku(String sku) {
         this.sku = sku;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public String getBrand() {
@@ -142,20 +142,20 @@ public class Link extends InfoModel {
         this.httpStatus = httpStatus;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getCompanyId() {
+        return companyId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 
-    public Long getUserPlanId() {
-        return userPlanId;
+    public Long getWorkspaceId() {
+        return workspaceId;
     }
 
-    public void setUserPlanId(Long userPlanId) {
-        this.userPlanId = userPlanId;
+    public void setWorkspaceId(Long workspaceId) {
+        this.workspaceId = workspaceId;
     }
 
     public Long getProductId() {
@@ -230,11 +230,12 @@ public class Link extends InfoModel {
                 ", previousStatus=" + previousStatus +
                 ", retry=" + retry +
                 ", httpStatus=" + httpStatus +
-                ", userId=" + userId +
-                ", userPlanId=" + userPlanId +
+                ", websiteClassName='" + websiteClassName + '\'' +
+                ", productPrice=" + productPrice +
+                ", companyId=" + companyId +
+                ", workspaceId=" + workspaceId +
                 ", productId=" + productId +
                 ", siteId=" + siteId +
-                ", websiteClassName='" + websiteClassName + '\'' +
                 '}';
     }
 }

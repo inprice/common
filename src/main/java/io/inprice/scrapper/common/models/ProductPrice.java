@@ -6,26 +6,14 @@ import java.util.Date;
 public class ProductPrice extends Model {
 
     private Long productId;
-    private String  minSeller;
-    private String  maxSeller;
+    private String minSeller;
+    private String maxSeller;
     private BigDecimal price;
+    private Integer position;
     private BigDecimal minPrice;
     private BigDecimal avgPrice;
     private BigDecimal maxPrice;
     private Date insertAt;
-
-    public ProductPrice() {
-    }
-
-    public ProductPrice(Long productId, String minSeller, String maxSeller, BigDecimal price, BigDecimal minPrice, BigDecimal avgPrice, BigDecimal maxPrice) {
-        this.productId = productId;
-        this.minSeller = minSeller;
-        this.maxSeller = maxSeller;
-        this.price = price;
-        this.minPrice = minPrice;
-        this.avgPrice = avgPrice;
-        this.maxPrice = maxPrice;
-    }
 
     public Long getProductId() {
         return productId;
@@ -57,6 +45,14 @@ public class ProductPrice extends Model {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Integer getPosition() {
+        return position;
+    }
+
+    public void setPosition(Integer position) {
+        this.position = position;
     }
 
     public BigDecimal getMinPrice() {
