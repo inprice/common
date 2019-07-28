@@ -9,6 +9,7 @@ public class LinkHistory extends Model {
     private Long linkId;
     private Status status = Status.NEW;
     private Integer httpStatus;
+    private Long companyId;
     private Date insertAt;
 
     public LinkHistory() {
@@ -45,6 +46,14 @@ public class LinkHistory extends Model {
 
     public void setHttpStatus(Integer httpStatus) {
         this.httpStatus = httpStatus;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 
     public Date getInsertAt() {

@@ -4,21 +4,13 @@ import java.util.Date;
 
 public class Workspace extends InfoModel {
 
-    private Boolean monthly;
     private Date dueDate;
     private Date lastCollectingTime;
     private Boolean lastCollectingStatus;
     private Integer retry;
+    private Long planId;
     private Long companyId;
     private Date insertAt;
-
-    public Boolean getMonthly() {
-        return monthly;
-    }
-
-    public void setMonthly(Boolean monthly) {
-        this.monthly = monthly;
-    }
 
     public Date getDueDate() {
         return dueDate;
@@ -52,6 +44,14 @@ public class Workspace extends InfoModel {
         this.retry = retry;
     }
 
+    public Long getPlanId() {
+        return planId;
+    }
+
+    public void setPlanId(Long planId) {
+        this.planId = planId;
+    }
+
     public Long getCompanyId() {
         return companyId;
     }
@@ -73,11 +73,11 @@ public class Workspace extends InfoModel {
         return "Workspace{" +
                 "active=" + getName() +
                 ", name='" + getName() + '\'' +
-                ", monthly=" + monthly +
                 ", dueDate=" + dueDate +
                 ", lastCollectingTime=" + lastCollectingTime +
                 ", lastCollectingStatus=" + lastCollectingStatus +
                 ", retry=" + retry +
+                ", planId=" + planId +
                 ", companyId=" + companyId +
                 ", insertAt=" + insertAt +
                 '}';

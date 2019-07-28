@@ -1,6 +1,6 @@
 package io.inprice.scrapper.common.models;
 
-public class Country extends Model {
+public class Country extends Model implements Comparable<Country> {
 
     private String code;
     private String name;
@@ -73,5 +73,10 @@ public class Country extends Model {
                 ", lang='" + lang + '\'' +
                 ", flag='" + flag + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Country other) {
+        return this.getName().compareTo(other.getName());
     }
 }

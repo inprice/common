@@ -1,6 +1,7 @@
 package io.inprice.scrapper.common.utils;
 
-import io.inprice.scrapper.common.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,7 +15,7 @@ import java.util.Date;
  */
 public class DateUtils {
 
-    private static final Logger logger = new Logger(DateUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(DateUtils.class);
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
     private static final SimpleDateFormat sdfForDB = new SimpleDateFormat("yyyy-MM-dd");

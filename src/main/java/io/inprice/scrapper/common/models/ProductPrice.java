@@ -13,6 +13,7 @@ public class ProductPrice extends Model {
     private BigDecimal minPrice;
     private BigDecimal avgPrice;
     private BigDecimal maxPrice;
+    private Long companyId;
     private Date insertAt;
 
     public Long getProductId() {
@@ -77,6 +78,14 @@ public class ProductPrice extends Model {
 
     public void setMaxPrice(BigDecimal maxPrice) {
         this.maxPrice = maxPrice;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 
     public Date getInsertAt() {

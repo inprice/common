@@ -6,6 +6,7 @@ public class WorkspaceHistory extends Model {
 
     private Long workspaceId;
     private Boolean collectingStatus;
+    private Long companyId;
     private Date insertAt;
 
     public Long getWorkspaceId() {
@@ -22,6 +23,14 @@ public class WorkspaceHistory extends Model {
 
     public void setCollectingStatus(Boolean collectingStatus) {
         this.collectingStatus = collectingStatus;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 
     public Date getInsertAt() {

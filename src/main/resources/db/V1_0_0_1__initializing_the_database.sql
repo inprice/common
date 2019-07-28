@@ -51,13 +51,13 @@ create table plan_rows (
 create table company (
   id                        bigint auto_increment not null,
   name                      varchar(250) not null,
-  contact                   varchar(150) not null,
   website                   varchar(150),
+  owner_id                  bigint,
   country_id                bigint,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
-create unique index company_ix1 on company (name);
+create index company_ix1 on company (name);
 alter table company add foreign key (country_id) references country (id);
 
 create table user (
@@ -65,10 +65,10 @@ create table user (
   active                    tinyint(1) default 1,
   user_type                 varchar(25) not null default 'USER',
   name                      varchar(150) not null,
-  email                     varchar(150) not null,
+  email                     varchar(250) not null,
   password_hash             varchar(255) not null,
   password_salt             varchar(255) not null,
-  company_id                bigint,
+  company_id                bigint not null,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
@@ -79,23 +79,25 @@ create table workspace (
   id                        bigint auto_increment not null,
   active                    tinyint(1) default 1,
   name                      varchar(50) not null,
-  monthly                   tinyint(1) default 1,
   due_date                  datetime not null,
   last_collecting_time      datetime,
   last_collecting_status    tinyint(1),
   retry                     int default 0,
-  company_id                bigint,
+  plan_id                   bigint not null,
+  company_id                bigint not null,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
 create index workspace_ix1 on workspace (last_collecting_time);
 create index workspace_ix2 on workspace (due_date);
+alter table workspace add foreign key (plan_id) references plan (id);
 alter table workspace add foreign key (company_id) references company (id);
 
 create table workspace_history (
   id                        bigint auto_increment not null,
   workspace_id              bigint,
   collecting_status         tinyint(1),
+  company_id                bigint not null,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
@@ -116,6 +118,7 @@ create table product (
   min_price                 double default 0,
   avg_price                 double default 0,
   max_price                 double default 0,
+  company_id                bigint not null,
   workspace_id              bigint not null,
   primary key (id)
 ) engine=innodb default charset=utf8;
@@ -133,6 +136,7 @@ create table product_price (
   min_price                 double default 0,
   avg_price                 double default 0,
   max_price                 double default 0,
+  company_id                bigint not null,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
@@ -175,6 +179,7 @@ create table link_price (
   id                        bigint auto_increment not null,
   link_id                   bigint not null,
   price                     double default 0,
+  company_id                bigint not null,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
@@ -186,6 +191,7 @@ create table link_spec (
   link_id                   bigint not null,
   _key                      varchar(100),
   _value                    varchar(500),
+  company_id                bigint not null,
   primary key (id)
 ) engine=innodb default charset=utf8;
 alter table link_spec add foreign key (link_id) references link (id);
@@ -195,6 +201,7 @@ create table link_history (
   link_id                   bigint not null,
   status                    varchar(25) not null,
   http_status               int default 0,
+  company_id                bigint not null,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;

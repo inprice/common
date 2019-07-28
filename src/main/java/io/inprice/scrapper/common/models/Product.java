@@ -15,6 +15,7 @@ public class Product extends InfoModel {
     private BigDecimal minPrice;
     private BigDecimal avgPrice;
     private BigDecimal maxPrice;
+    private Long companyId;
     private Long workspaceId;
 
     public String getCode() {
@@ -97,6 +98,14 @@ public class Product extends InfoModel {
         this.maxPrice = maxPrice;
     }
 
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
     public Long getWorkspaceId() {
         return workspaceId;
     }
@@ -120,6 +129,7 @@ public class Product extends InfoModel {
                 ", minPrice=" + minPrice +
                 ", avgPrice=" + avgPrice +
                 ", maxPrice=" + maxPrice +
+                ", companyId=" + companyId +
                 ", workspaceId=" + workspaceId +
                 '}';
     }

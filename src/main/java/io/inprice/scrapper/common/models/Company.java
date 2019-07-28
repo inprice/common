@@ -1,11 +1,14 @@
 package io.inprice.scrapper.common.models;
 
+import java.util.Date;
+
 public class Company extends Model {
 
     private String name;
-    private String contact;
     private String website;
     private Long countryId;
+    private Long ownerId;
+    private Date insertAt;
 
     public String getName() {
         return name;
@@ -13,14 +16,6 @@ public class Company extends Model {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
     }
 
     public String getWebsite() {
@@ -31,6 +26,14 @@ public class Company extends Model {
         this.website = website;
     }
 
+    public Long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
+    }
+
     public Long getCountryId() {
         return countryId;
     }
@@ -39,13 +42,22 @@ public class Company extends Model {
         this.countryId = countryId;
     }
 
+    public Date getInsertAt() {
+        return insertAt;
+    }
+
+    public void setInsertAt(Date insertAt) {
+        this.insertAt = insertAt;
+    }
+
     @Override
     public String toString() {
         return "Company{" +
                 "name='" + name + '\'' +
-                ", contact='" + contact + '\'' +
                 ", website='" + website + '\'' +
                 ", countryId=" + countryId +
+                ", ownerId=" + ownerId +
+                ", insertAt=" + insertAt +
                 '}';
     }
 }

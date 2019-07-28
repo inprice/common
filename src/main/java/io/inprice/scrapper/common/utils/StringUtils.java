@@ -1,4 +1,4 @@
-package io.inprice.scrapper.common.helpers;
+package io.inprice.scrapper.common.utils;
 
 public class StringUtils {
 

@@ -7,6 +7,7 @@ public class LinkPrice extends Model {
 
     private Long linkId;
     private BigDecimal price;
+    private Long companyId;
     private Date insertAt;
 
     public LinkPrice() {
@@ -31,6 +32,14 @@ public class LinkPrice extends Model {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 
     public Date getInsertAt() {
