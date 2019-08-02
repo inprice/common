@@ -8,6 +8,7 @@ public class LinkSpec extends Model {
     private String key;
     private String value;
     private Long companyId;
+    private Long workspaceId;
 
     public LinkSpec() {
     }
@@ -52,5 +53,13 @@ public class LinkSpec extends Model {
 
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
+    }
+
+    public Long getWorkspaceId() {
+        return workspaceId;
+    }
+
+    public void setWorkspaceId(Long workspaceId) {
+        this.workspaceId = workspaceId;
     }
 }

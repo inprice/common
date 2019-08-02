@@ -6,8 +6,8 @@ public class Company extends Model {
 
     private String name;
     private String website;
+    private Long adminId;
     private Long countryId;
-    private Long ownerId;
     private Date insertAt;
 
     public String getName() {
@@ -26,12 +26,12 @@ public class Company extends Model {
         this.website = website;
     }
 
-    public Long getOwnerId() {
-        return ownerId;
+    public Long getAdminId() {
+        return adminId;
     }
 
-    public void setOwnerId(Long ownerId) {
-        this.ownerId = ownerId;
+    public void setAdminId(Long adminId) {
+        this.adminId = adminId;
     }
 
     public Long getCountryId() {
@@ -55,8 +55,8 @@ public class Company extends Model {
         return "Company{" +
                 "name='" + name + '\'' +
                 ", website='" + website + '\'' +
+                ", adminId=" + adminId +
                 ", countryId=" + countryId +
-                ", ownerId=" + ownerId +
                 ", insertAt=" + insertAt +
                 '}';
     }

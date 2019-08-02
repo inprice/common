@@ -14,6 +14,7 @@ public class ProductPrice extends Model {
     private BigDecimal avgPrice;
     private BigDecimal maxPrice;
     private Long companyId;
+    private Long workspaceId;
     private Date insertAt;
 
     public Long getProductId() {
@@ -86,6 +87,14 @@ public class ProductPrice extends Model {
 
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
+    }
+
+    public Long getWorkspaceId() {
+        return workspaceId;
+    }
+
+    public void setWorkspaceId(Long workspaceId) {
+        this.workspaceId = workspaceId;
     }
 
     public Date getInsertAt() {

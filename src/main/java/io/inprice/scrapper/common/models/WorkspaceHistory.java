@@ -4,18 +4,10 @@ import java.util.Date;
 
 public class WorkspaceHistory extends Model {
 
-    private Long workspaceId;
     private Boolean collectingStatus;
     private Long companyId;
+    private Long workspaceId;
     private Date insertAt;
-
-    public Long getWorkspaceId() {
-        return workspaceId;
-    }
-
-    public void setWorkspaceId(Long workspaceId) {
-        this.workspaceId = workspaceId;
-    }
 
     public Boolean getCollectingStatus() {
         return collectingStatus;
@@ -31,6 +23,14 @@ public class WorkspaceHistory extends Model {
 
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
+    }
+
+    public Long getWorkspaceId() {
+        return workspaceId;
+    }
+
+    public void setWorkspaceId(Long workspaceId) {
+        this.workspaceId = workspaceId;
     }
 
     public Date getInsertAt() {

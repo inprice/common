@@ -1,7 +1,5 @@
 -- @author mdpinar
 
--- info tables
-
 create table country (
   id                        bigint auto_increment not null,
   code                      varchar(2) not null,
@@ -52,7 +50,7 @@ create table company (
   id                        bigint auto_increment not null,
   name                      varchar(250) not null,
   website                   varchar(150),
-  owner_id                  bigint,
+  admin_id                  bigint,
   country_id                bigint,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
@@ -137,6 +135,7 @@ create table product_price (
   avg_price                 double default 0,
   max_price                 double default 0,
   company_id                bigint not null,
+  workspace_id              bigint,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
@@ -180,6 +179,7 @@ create table link_price (
   link_id                   bigint not null,
   price                     double default 0,
   company_id                bigint not null,
+  workspace_id              bigint,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
@@ -192,6 +192,7 @@ create table link_spec (
   _key                      varchar(100),
   _value                    varchar(500),
   company_id                bigint not null,
+  workspace_id              bigint,
   primary key (id)
 ) engine=innodb default charset=utf8;
 alter table link_spec add foreign key (link_id) references link (id);
@@ -202,6 +203,7 @@ create table link_history (
   status                    varchar(25) not null,
   http_status               int default 0,
   company_id                bigint not null,
+  workspace_id              bigint,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;

@@ -13,11 +13,6 @@ public class User extends InfoModel {
     private Long companyId;
     private Date insertAt;
 
-    /**
-     * The field below never be saved into database. It is used just during validating new users
-     */
-    private String password;
-
     public UserType getUserType() {
         return userType;
     }
@@ -66,21 +61,13 @@ public class User extends InfoModel {
         this.insertAt = insertAt;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     @Override
     public String toString() {
         return "User{" +
-                "userType=" + userType +
+                "active=" + getActive() +
+                ", userType=" + userType +
+                ", name='" + getName() + '\'' +
                 ", email='" + email + '\'' +
-                ", passwordHash='" + passwordHash + '\'' +
-                ", passwordSalt='" + passwordSalt + '\'' +
                 ", companyId=" + companyId +
                 ", insertAt=" + insertAt +
                 '}';
