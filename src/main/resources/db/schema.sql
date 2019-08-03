@@ -62,15 +62,17 @@ create table user (
   id                        bigint auto_increment not null,
   active                    tinyint(1) default 1,
   user_type                 varchar(25) not null default 'USER',
-  name                      varchar(150) not null,
+  full_name                 varchar(150) not null,
   email                     varchar(250) not null,
   password_hash             varchar(255) not null,
   password_salt             varchar(255) not null,
   company_id                bigint not null,
+  last_login_at             timestamp,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
 create unique index user_ix1 on user (email);
+create index user_ix2 on user (last_login_at);
 alter table user add foreign key (company_id) references company (id);
 
 create table workspace (

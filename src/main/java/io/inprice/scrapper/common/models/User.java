@@ -4,14 +4,25 @@ import io.inprice.scrapper.common.meta.UserType;
 
 import java.util.Date;
 
-public class User extends InfoModel {
+public class User extends Model {
 
+    private Boolean active;
     private UserType userType = UserType.USER;
+    private String fullName;
     private String email;
     private String passwordHash;
     private String passwordSalt;
     private Long companyId;
+    private Date lastLoginAt;
     private Date insertAt;
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 
     public UserType getUserType() {
         return userType;
@@ -19,6 +30,14 @@ public class User extends InfoModel {
 
     public void setUserType(UserType userType) {
         this.userType = userType;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {
@@ -53,6 +72,14 @@ public class User extends InfoModel {
         this.companyId = companyId;
     }
 
+    public Date getLastLoginAt() {
+        return lastLoginAt;
+    }
+
+    public void setLastLoginAt(Date lastLoginAt) {
+        this.lastLoginAt = lastLoginAt;
+    }
+
     public Date getInsertAt() {
         return insertAt;
     }
@@ -64,11 +91,12 @@ public class User extends InfoModel {
     @Override
     public String toString() {
         return "User{" +
-                "active=" + getActive() +
+                "active=" + active +
                 ", userType=" + userType +
-                ", name='" + getName() + '\'' +
+                ", fullName='" + fullName + '\'' +
                 ", email='" + email + '\'' +
                 ", companyId=" + companyId +
+                ", lastLoginAt=" + lastLoginAt +
                 ", insertAt=" + insertAt +
                 '}';
     }
