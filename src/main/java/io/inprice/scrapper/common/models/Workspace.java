@@ -71,7 +71,8 @@ public class Workspace extends InfoModel {
     @Override
     public String toString() {
         return "Workspace{" +
-                "active=" + getName() +
+                "id=" + getId() +
+                ", active=" + getActive() +
                 ", name='" + getName() + '\'' +
                 ", dueDate=" + dueDate +
                 ", lastCollectingTime=" + lastCollectingTime +

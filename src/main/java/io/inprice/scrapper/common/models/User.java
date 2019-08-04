@@ -13,6 +13,7 @@ public class User extends Model {
     private String passwordHash;
     private String passwordSalt;
     private Long companyId;
+    private Long defaultWorkspaceId;
     private Date lastLoginAt;
     private Date insertAt;
 
@@ -72,6 +73,14 @@ public class User extends Model {
         this.companyId = companyId;
     }
 
+    public Long getDefaultWorkspaceId() {
+        return defaultWorkspaceId;
+    }
+
+    public void setDefaultWorkspaceId(Long defaultWorkspaceId) {
+        this.defaultWorkspaceId = defaultWorkspaceId;
+    }
+
     public Date getLastLoginAt() {
         return lastLoginAt;
     }
@@ -91,11 +100,15 @@ public class User extends Model {
     @Override
     public String toString() {
         return "User{" +
-                "active=" + active +
+                "id=" + getId() +
+                ", active=" + active +
                 ", userType=" + userType +
                 ", fullName='" + fullName + '\'' +
                 ", email='" + email + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
+                ", passwordSalt='" + passwordSalt + '\'' +
                 ", companyId=" + companyId +
+                ", defaultWorkspaceId=" + defaultWorkspaceId +
                 ", lastLoginAt=" + lastLoginAt +
                 ", insertAt=" + insertAt +
                 '}';

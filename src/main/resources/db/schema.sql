@@ -67,6 +67,7 @@ create table user (
   password_hash             varchar(255) not null,
   password_salt             varchar(255) not null,
   company_id                bigint not null,
+  default_workspace_id      bigint,
   last_login_at             timestamp,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
@@ -79,11 +80,11 @@ create table workspace (
   id                        bigint auto_increment not null,
   active                    tinyint(1) default 1,
   name                      varchar(50) not null,
-  due_date                  datetime not null,
+  due_date                  datetime not null default now(),
   last_collecting_time      datetime,
   last_collecting_status    tinyint(1),
   retry                     int default 0,
-  plan_id                   bigint not null,
+  plan_id                   bigint,
   company_id                bigint not null,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
