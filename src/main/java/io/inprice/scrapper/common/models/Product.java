@@ -7,6 +7,7 @@ public class Product extends InfoModel {
 
     private String code;
     private String brand;
+    private String category;
     private BigDecimal price;
     private Integer position;
     private Date lastUpdate;
@@ -32,6 +33,14 @@ public class Product extends InfoModel {
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public BigDecimal getPrice() {
@@ -121,6 +130,7 @@ public class Product extends InfoModel {
                 ", active='" + getActive() + '\'' +
                 ", name='" + getName() + '\'' +
                 ", brand='" + brand + '\'' +
+                ", category='" + category + '\'' +
                 ", price=" + price +
                 ", position=" + position +
                 ", lastUpdate=" + lastUpdate +

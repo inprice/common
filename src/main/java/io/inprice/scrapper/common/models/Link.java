@@ -6,10 +6,11 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-public class Link extends InfoModel {
+public class Link extends Model {
 
     private String url;
     private String sku;
+    private String name;
     private String brand;
     private String seller;
     private String shipment;
@@ -59,6 +60,14 @@ public class Link extends InfoModel {
 
     public void setSku(String sku) {
         this.sku = sku;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getBrand() {
@@ -218,8 +227,7 @@ public class Link extends InfoModel {
     public String toString() {
         return "Link{" +
                 "sku='" + sku + '\'' +
-                ", name='" + getName() + '\'' +
-                ", url='" + url + '\'' +
+                ", name='" + name + '\'' +
                 ", brand='" + brand + '\'' +
                 ", seller='" + seller + '\'' +
                 ", shipment='" + shipment + '\'' +
@@ -236,6 +244,7 @@ public class Link extends InfoModel {
                 ", workspaceId=" + workspaceId +
                 ", productId=" + productId +
                 ", siteId=" + siteId +
+                ", url='" + url + '\'' +
                 '}';
     }
 }

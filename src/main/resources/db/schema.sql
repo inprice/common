@@ -111,6 +111,7 @@ create table product (
   code                      varchar(120),
   name                      varchar(500),
   brand                     varchar(100),
+  category                  varchar(100),
   price                     double default 0,
   position                  int default 4,
   last_update               datetime,
@@ -138,7 +139,7 @@ create table product_price (
   avg_price                 double default 0,
   max_price                 double default 0,
   company_id                bigint not null,
-  workspace_id              bigint,
+  workspace_id              bigint not null,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
@@ -182,7 +183,8 @@ create table link_price (
   link_id                   bigint not null,
   price                     double default 0,
   company_id                bigint not null,
-  workspace_id              bigint,
+  workspace_id              bigint not null,
+  product_id                bigint not null,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
@@ -195,7 +197,8 @@ create table link_spec (
   _key                      varchar(100),
   _value                    varchar(500),
   company_id                bigint not null,
-  workspace_id              bigint,
+  workspace_id              bigint not null,
+  product_id                bigint not null,
   primary key (id)
 ) engine=innodb default charset=utf8;
 alter table link_spec add foreign key (link_id) references link (id);
@@ -206,7 +209,8 @@ create table link_history (
   status                    varchar(25) not null,
   http_status               int default 0,
   company_id                bigint not null,
-  workspace_id              bigint,
+  workspace_id              bigint not null,
+  product_id                bigint not null,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;

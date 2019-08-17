@@ -1,5 +1,7 @@
 package io.inprice.scrapper.common.info;
 
+import io.inprice.scrapper.common.models.Link;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -13,17 +15,21 @@ public class PriceUpdateInfo implements Serializable {
     //if true it means the links is deleted, otherwise, price of the link is updated
     private boolean isDeleted;
     private Long linkId;
+    private Long companyId;
+    private Long workspaceId;
     private Long productId;
     private BigDecimal newPrice;
 
-    public PriceUpdateInfo(Long linkId, Long productId, BigDecimal newPrice) {
-        this(false, linkId, productId);
-        this.newPrice = newPrice;
+    public PriceUpdateInfo(Link link) {
+        this(false, link.getId(), link.getCompanyId(), link.getWorkspaceId(), link.getProductId());
+        this.newPrice = link.getPrice();
     }
 
-    public PriceUpdateInfo(boolean isDeleted, Long linkId, Long productId) {
+    public PriceUpdateInfo(boolean isDeleted, Long linkId, Long companyId, Long workspaceId, Long productId) {
         this.isDeleted = isDeleted;
         this.linkId = linkId;
+        this.companyId = companyId;
+        this.workspaceId = workspaceId;
         this.productId = productId;
     }
 
@@ -41,6 +47,22 @@ public class PriceUpdateInfo implements Serializable {
 
     public void setLinkId(Long linkId) {
         this.linkId = linkId;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public Long getWorkspaceId() {
+        return workspaceId;
+    }
+
+    public void setWorkspaceId(Long workspaceId) {
+        this.workspaceId = workspaceId;
     }
 
     public Long getProductId() {
@@ -64,6 +86,8 @@ public class PriceUpdateInfo implements Serializable {
         return "PriceUpdateInfo{" +
                 "isDeleted=" + isDeleted +
                 ", linkId=" + linkId +
+                ", companyId=" + companyId +
+                ", workspaceId=" + workspaceId +
                 ", productId=" + productId +
                 ", newPrice=" + newPrice +
                 '}';
