@@ -2,7 +2,7 @@ package io.inprice.scrapper.common.models;
 
 public class InfoModel extends Model {
 
-    private Boolean active;
+    private Boolean active = Boolean.TRUE;
     private String name;
 
     public Boolean getActive() {

@@ -67,13 +67,10 @@ create table user (
   password_hash             varchar(255) not null,
   password_salt             varchar(255) not null,
   company_id                bigint not null,
-  default_workspace_id      bigint,
-  last_login_at             timestamp,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
 create unique index user_ix1 on user (email);
-create index user_ix2 on user (last_login_at);
 alter table user add foreign key (company_id) references company (id);
 
 create table workspace (
@@ -108,8 +105,8 @@ alter table workspace_history add foreign key (workspace_id) references workspac
 create table product (
   id                        bigint auto_increment not null,
   active                    tinyint(1) default 1,
-  code                      varchar(120),
-  name                      varchar(500),
+  code                      varchar(120) not null,
+  name                      varchar(500) not null,
   brand                     varchar(100),
   category                  varchar(100),
   price                     double default 0,

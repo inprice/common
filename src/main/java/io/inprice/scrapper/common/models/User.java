@@ -13,8 +13,6 @@ public class User extends Model {
     private String passwordHash;
     private String passwordSalt;
     private Long companyId;
-    private Long defaultWorkspaceId;
-    private Date lastLoginAt;
     private Date insertAt;
 
     public Boolean getActive() {
@@ -73,22 +71,6 @@ public class User extends Model {
         this.companyId = companyId;
     }
 
-    public Long getDefaultWorkspaceId() {
-        return defaultWorkspaceId;
-    }
-
-    public void setDefaultWorkspaceId(Long defaultWorkspaceId) {
-        this.defaultWorkspaceId = defaultWorkspaceId;
-    }
-
-    public Date getLastLoginAt() {
-        return lastLoginAt;
-    }
-
-    public void setLastLoginAt(Date lastLoginAt) {
-        this.lastLoginAt = lastLoginAt;
-    }
-
     public Date getInsertAt() {
         return insertAt;
     }
@@ -108,8 +90,6 @@ public class User extends Model {
                 ", passwordHash='" + passwordHash + '\'' +
                 ", passwordSalt='" + passwordSalt + '\'' +
                 ", companyId=" + companyId +
-                ", defaultWorkspaceId=" + defaultWorkspaceId +
-                ", lastLoginAt=" + lastLoginAt +
                 ", insertAt=" + insertAt +
                 '}';
     }
