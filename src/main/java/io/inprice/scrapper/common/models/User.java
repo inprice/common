@@ -7,7 +7,7 @@ import java.util.Date;
 public class User extends Model {
 
     private Boolean active;
-    private UserType userType = UserType.USER;
+    private UserType userType = UserType.READER;
     private String fullName;
     private String email;
     private String passwordHash;

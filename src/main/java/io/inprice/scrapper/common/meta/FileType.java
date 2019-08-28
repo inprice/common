@@ -5,9 +5,10 @@ package io.inprice.scrapper.common.meta;
  *
  * @author mdpinar
  */
-public enum UserType {
+public enum FileType {
 
-    ADMIN,
-    EDITOR,
-    READER;
+    CSV,
+    LINK_LIST,
+    EBAY_SKU,
+    AMAZON_ASIN;
 }

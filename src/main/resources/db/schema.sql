@@ -61,7 +61,7 @@ alter table company add foreign key (country_id) references country (id);
 create table user (
   id                        bigint auto_increment not null,
   active                    tinyint(1) default 1,
-  user_type                 varchar(25) not null default 'USER',
+  user_type                 varchar(25) not null default 'READER',
   full_name                 varchar(150) not null,
   email                     varchar(250) not null,
   password_hash             varchar(255) not null,
@@ -213,3 +213,60 @@ create table link_history (
 ) engine=innodb default charset=utf8;
 create index link_history_ix1 on link_history (insert_at);
 alter table link_history add foreign key (link_id) references link (id);
+
+create table product_import (
+  id                        bigint auto_increment not null,
+  file_type                 varchar(15) not null default 'CSV',
+  row_count                 int default 0,
+  inserted                  int default 0,
+  duplicated                int default 0,
+  ignored                   int default 0,
+  company_id                bigint not null,
+  workspace_id              bigint not null,
+  insert_at                 timestamp not null default current_timestamp,
+  primary key (id)
+) engine=innodb default charset=utf8;
+create index product_import_ix1 on product_import (insert_at);
+
+create table product_import_row (
+  id                        bigint auto_increment not null,
+  line                      varchar(2000),
+  url                       varchar(2000),
+  status                    varchar(25) not null,
+  description               varchar(255),
+  import_id                 bigint not null,
+  company_id                bigint not null,
+  workspace_id              bigint not null,
+  product_id                bigint not null,
+  primary key (id)
+) engine=innodb default charset=utf8;
+alter table product_import_row add foreign key (import_id) references product_import (id);
+
+create table link_import (
+  id                        bigint auto_increment not null,
+  product_id                bigint not null,
+  product_name              varchar(500) not null,
+  row_count                 int default 0,
+  inserted                  int default 0,
+  duplicated                int default 0,
+  ignored                   int default 0,
+  company_id                bigint not null,
+  workspace_id              bigint not null,
+  insert_at                 timestamp not null default current_timestamp,
+  primary key (id)
+) engine=innodb default charset=utf8;
+create index link_import_ix1 on link_import (insert_at);
+
+create table link_import_row (
+  id                        bigint auto_increment not null,
+  url                       varchar(2000),
+  status                    varchar(25) not null,
+  description               varchar(255),
+  product_id                bigint not null,
+  import_id                 bigint not null,
+  company_id                bigint not null,
+  workspace_id              bigint not null,
+  link_id                   bigint not null,
+  primary key (id)
+) engine=innodb default charset=utf8;
+alter table link_import_row add foreign key (import_id) references link_import (id);
