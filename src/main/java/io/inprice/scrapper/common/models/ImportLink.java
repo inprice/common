@@ -1,32 +1,35 @@
 package io.inprice.scrapper.common.models;
 
+import io.inprice.scrapper.common.meta.ImportType;
 import io.inprice.scrapper.common.meta.Status;
 
-public class ProductImportRow extends Model {
+import java.util.Date;
 
-    private String line;
-    private String url;
+public class ImportLink extends Model {
+
+    private ImportType importType;
+    private String data;
     private Status status;
     private String description;
-    private Long importId;
+    private Long productId;
     private Long companyId;
     private Long workspaceId;
-    private Long productId;
+    private Date insertedAt;
 
-    public String getLine() {
-        return line;
+    public ImportType getImportType() {
+        return importType;
     }
 
-    public void setLine(String line) {
-        this.line = line;
+    public void setImportType(ImportType importType) {
+        this.importType = importType;
     }
 
-    public String getUrl() {
-        return url;
+    public String getData() {
+        return data;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setData(String data) {
+        this.data = data;
     }
 
     public Status getStatus() {
@@ -45,12 +48,12 @@ public class ProductImportRow extends Model {
         this.description = description;
     }
 
-    public Long getImportId() {
-        return importId;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setImportId(Long importId) {
-        this.importId = importId;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
     public Long getCompanyId() {
@@ -69,25 +72,25 @@ public class ProductImportRow extends Model {
         this.workspaceId = workspaceId;
     }
 
-    public Long getProductId() {
-        return productId;
+    public Date getInsertedAt() {
+        return insertedAt;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setInsertedAt(Date insertedAt) {
+        this.insertedAt = insertedAt;
     }
 
     @Override
     public String toString() {
-        return "ProductImportRows{" +
-                "line='" + line + '\'' +
-                ", url='" + url + '\'' +
+        return "ProductImport{" +
+                "importType=" + importType +
+                ", data='" + data + '\'' +
                 ", status=" + status +
                 ", description='" + description + '\'' +
-                ", importId=" + importId +
+                ", productId=" + productId +
                 ", companyId=" + companyId +
                 ", workspaceId=" + workspaceId +
-                ", productId=" + productId +
+                ", insertedAt=" + insertedAt +
                 '}';
     }
 }

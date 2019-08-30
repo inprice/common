@@ -1,14 +1,14 @@
 package io.inprice.scrapper.common.meta;
 
 /**
- * User types
+ * Import types
  *
  * @author mdpinar
  */
-public enum FileType {
+public enum ImportType {
 
     CSV,
-    LINK_LIST,
     EBAY_SKU,
     AMAZON_ASIN;
+
 }

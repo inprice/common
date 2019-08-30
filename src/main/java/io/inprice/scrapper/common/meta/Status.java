@@ -55,6 +55,11 @@ public enum Status {
     IMPLEMENTED("neutral"),
 
     /**
+     * Used for duplicate links/products
+     */
+    DUPLICATE("negative"),
+
+    /**
      * Used for links that will never be implemented
      */
     WONT_BE_IMPLEMENTED("negative"),

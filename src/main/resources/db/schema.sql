@@ -214,59 +214,58 @@ create table link_history (
 create index link_history_ix1 on link_history (insert_at);
 alter table link_history add foreign key (link_id) references link (id);
 
-create table product_import (
+create table import_product (
   id                        bigint auto_increment not null,
-  file_type                 varchar(15) not null default 'CSV',
-  row_count                 int default 0,
-  inserted                  int default 0,
-  duplicated                int default 0,
-  ignored                   int default 0,
+  import_type               varchar(15) not null,
+  status                    varchar(25) not null,
+  result                    varchar(255),
+  total_count               int default 0,
+  insert_count              int default 0,
+  duplicate_count           int default 0,
+  problem_count             int default 0,
   company_id                bigint not null,
   workspace_id              bigint not null,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
-create index product_import_ix1 on product_import (insert_at);
 
-create table product_import_row (
+create table import_product_row (
   id                        bigint auto_increment not null,
-  line                      varchar(2000),
-  url                       varchar(2000),
-  status                    varchar(25) not null,
-  description               varchar(255),
   import_id                 bigint not null,
+  import_type               varchar(15) not null,
+  data                      varchar(1024) not null,
+  status                    varchar(25) not null,
+  description               varchar(500),
   company_id                bigint not null,
   workspace_id              bigint not null,
-  product_id                bigint not null,
   primary key (id)
 ) engine=innodb default charset=utf8;
-alter table product_import_row add foreign key (import_id) references product_import (id);
 
-create table link_import (
+create table import_link (
   id                        bigint auto_increment not null,
   product_id                bigint not null,
-  product_name              varchar(500) not null,
-  row_count                 int default 0,
-  inserted                  int default 0,
-  duplicated                int default 0,
-  ignored                   int default 0,
+  status                    varchar(25) not null,
+  result                    varchar(255),
+  total_count               int default 0,
+  insert_count              int default 0,
+  duplicate_count           int default 0,
+  problem_count             int default 0,
+  company_id                bigint not null,
+  workspace_id              bigint not null,
+  insert_at                 timestamp not null default current_timestamp,
+primary key (id)
+) engine=innodb default charset=utf8;
+
+create table import_link_row (
+  id                        bigint auto_increment not null,
+  import_id                 bigint not null,
+  import_type               varchar(15) not null,
+  data                      varchar(1024) not null,
+  status                    varchar(25) not null,
+  description               varchar(255),
+  product_id                bigint not null,
   company_id                bigint not null,
   workspace_id              bigint not null,
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
-create index link_import_ix1 on link_import (insert_at);
-
-create table link_import_row (
-  id                        bigint auto_increment not null,
-  url                       varchar(2000),
-  status                    varchar(25) not null,
-  description               varchar(255),
-  product_id                bigint not null,
-  import_id                 bigint not null,
-  company_id                bigint not null,
-  workspace_id              bigint not null,
-  link_id                   bigint not null,
-  primary key (id)
-) engine=innodb default charset=utf8;
-alter table link_import_row add foreign key (import_id) references link_import (id);
