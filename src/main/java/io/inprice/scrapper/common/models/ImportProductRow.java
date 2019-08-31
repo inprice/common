@@ -3,6 +3,8 @@ package io.inprice.scrapper.common.models;
 import io.inprice.scrapper.common.meta.ImportType;
 import io.inprice.scrapper.common.meta.Status;
 
+import java.io.Serializable;
+
 public class ImportProductRow extends Model {
 
     private Long importId;
@@ -12,6 +14,8 @@ public class ImportProductRow extends Model {
     private String description;
     private Long companyId;
     private Long workspaceId;
+
+    private Object productDTO;
 
     public Long getImportId() {
         return importId;
@@ -67,6 +71,14 @@ public class ImportProductRow extends Model {
 
     public void setWorkspaceId(Long workspaceId) {
         this.workspaceId = workspaceId;
+    }
+
+    public Object getProductDTO() {
+        return productDTO;
+    }
+
+    public void setProductDTO(Object productDTO) {
+        this.productDTO = productDTO;
     }
 
     @Override
