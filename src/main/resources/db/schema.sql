@@ -240,32 +240,3 @@ create table import_product_row (
   workspace_id              bigint not null,
   primary key (id)
 ) engine=innodb default charset=utf8;
-
-create table import_link (
-  id                        bigint auto_increment not null,
-  product_id                bigint not null,
-  status                    varchar(25) not null,
-  result                    varchar(255),
-  total_count               int default 0,
-  insert_count              int default 0,
-  duplicate_count           int default 0,
-  problem_count             int default 0,
-  company_id                bigint not null,
-  workspace_id              bigint not null,
-  insert_at                 timestamp not null default current_timestamp,
-primary key (id)
-) engine=innodb default charset=utf8;
-
-create table import_link_row (
-  id                        bigint auto_increment not null,
-  import_id                 bigint not null,
-  import_type               varchar(15) not null,
-  data                      varchar(1024) not null,
-  status                    varchar(25) not null,
-  description               varchar(255),
-  product_id                bigint not null,
-  company_id                bigint not null,
-  workspace_id              bigint not null,
-  insert_at                 timestamp not null default current_timestamp,
-  primary key (id)
-) engine=innodb default charset=utf8;
