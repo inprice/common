@@ -3,6 +3,7 @@ package io.inprice.scrapper.common.models;
 import io.inprice.scrapper.common.meta.ImportType;
 
 import java.util.Date;
+import java.util.List;
 
 public class ImportProduct extends Model {
 
@@ -16,6 +17,8 @@ public class ImportProduct extends Model {
     private Long companyId;
     private Long workspaceId;
     private Date insertedAt;
+
+    private List<String> problemList;
 
     public ImportType getImportType() {
         return importType;
@@ -105,12 +108,24 @@ public class ImportProduct extends Model {
         this.insertCount++;
     }
 
+    public void decInsertCount() {
+        this.insertCount--;
+    }
+
     public void incDuplicateCount() {
         this.duplicateCount++;
     }
 
     public void incProblemCount() {
         this.problemCount++;
+    }
+
+    public List<String> getProblemList() {
+        return problemList;
+    }
+
+    public void setProblemList(List<String> problemList) {
+        this.problemList = problemList;
     }
 
     @Override
