@@ -25,4 +25,26 @@ public class NumberUtils {
         }
     }
 
+    public static Integer toInteger(String val) {
+        if (val != null && ! val.trim().isEmpty()) {
+            try {
+                return Integer.parseInt(val);
+            } catch (Exception e) {
+                //
+            }
+        }
+        return null;
+    }
+
+    public static Long toLong(String val) {
+        if (val != null && ! val.trim().isEmpty()) {
+            try {
+                return Long.parseLong(val);
+            } catch (Exception e) {
+                //
+            }
+        }
+        return null;
+    }
+
 }
