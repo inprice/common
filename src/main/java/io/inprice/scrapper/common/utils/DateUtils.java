@@ -1,5 +1,6 @@
 package io.inprice.scrapper.common.utils;
 
+import io.inprice.scrapper.common.info.TimePeriod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -7,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Utility class to provide functionality for date formatting operations
@@ -117,6 +119,39 @@ public class DateUtils {
         }
 
         return null;
+    }
+
+    /**
+     * Converts shortened time statement to its long equivalent as SECONDS
+     *
+     * 1S or 1s means one second
+     * 1M or 1m means one minute
+     * 1H or 1h means one hour
+     * 1D or 1d means one day
+     */
+    public static TimePeriod parseTimePeriod(String timePeriodStatement) {
+        final char type = timePeriodStatement.charAt(timePeriodStatement.length()-1);
+
+        TimeUnit timeUnit = TimeUnit.SECONDS;
+        switch (type) {
+            case 'm':
+            case 'M': {
+                timeUnit = TimeUnit.MINUTES;
+                break;
+            }
+            case 'h':
+            case 'H': {
+                timeUnit = TimeUnit.HOURS;
+                break;
+            }
+            case 'd':
+            case 'D': {
+                timeUnit = TimeUnit.DAYS;
+                break;
+            }
+        }
+        int interval = NumberUtils.toInteger(timePeriodStatement.substring(0, timePeriodStatement.length()-1));
+        return  new TimePeriod(interval, timeUnit);
     }
 
 }
