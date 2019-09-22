@@ -154,4 +154,17 @@ public class DateUtils {
         return  new TimePeriod(interval, timeUnit);
     }
 
+    public static Long parseTimePeriodAsMillis(String timePeriodStatement) {
+        TimePeriod tp = parseTimePeriod(timePeriodStatement);
+
+        //SECONDS
+        long val = tp.getInterval() * 1000;
+
+        if (tp.getTimeUnit().ordinal() >= TimeUnit.MINUTES.ordinal()) val *= 60;
+        if (tp.getTimeUnit().ordinal() >= TimeUnit.HOURS.ordinal()) val *= 60;
+        if (tp.getTimeUnit().ordinal() == TimeUnit.DAYS.ordinal()) val *= 24;
+
+        return val;
+    }
+
 }

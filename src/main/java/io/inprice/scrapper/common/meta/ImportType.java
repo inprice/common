@@ -8,6 +8,7 @@ package io.inprice.scrapper.common.meta;
 public enum ImportType {
 
     CSV,
+    URL,
     EBAY_SKU,
     AMAZON_ASIN;
 

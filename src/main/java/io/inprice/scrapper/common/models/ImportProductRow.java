@@ -4,16 +4,17 @@ import io.inprice.scrapper.common.meta.ImportType;
 import io.inprice.scrapper.common.meta.Status;
 
 import java.io.Serializable;
+import java.util.Date;
 
-public class ImportProductRow extends Model {
+public class ImportProductRow implements Serializable {
 
     private Long importId;
     private ImportType importType;
     private String data;
-    private Status status;
+    private Status status = Status.NEW;
+    private Date lastUpdate;
     private String description;
-    private Long companyId;
-    private Long workspaceId;
+    private Long linkId;
 
     private Object productDTO;
 
@@ -49,6 +50,14 @@ public class ImportProductRow extends Model {
         this.status = status;
     }
 
+    public Date getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -57,20 +66,12 @@ public class ImportProductRow extends Model {
         this.description = description;
     }
 
-    public Long getCompanyId() {
-        return companyId;
+    public Long getLinkId() {
+        return linkId;
     }
 
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
-    }
-
-    public Long getWorkspaceId() {
-        return workspaceId;
-    }
-
-    public void setWorkspaceId(Long workspaceId) {
-        this.workspaceId = workspaceId;
+    public void setLinkId(Long linkId) {
+        this.linkId = linkId;
     }
 
     public Object getProductDTO() {
@@ -79,18 +80,5 @@ public class ImportProductRow extends Model {
 
     public void setProductDTO(Object productDTO) {
         this.productDTO = productDTO;
-    }
-
-    @Override
-    public String toString() {
-        return "ProductImport{" +
-                "importId=" + importId +
-                ", importType=" + importType +
-                ", data='" + data + '\'' +
-                ", status=" + status +
-                ", description='" + description + '\'' +
-                ", companyId=" + companyId +
-                ", workspaceId=" + workspaceId +
-                '}';
     }
 }

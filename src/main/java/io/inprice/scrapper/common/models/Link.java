@@ -1,5 +1,6 @@
 package io.inprice.scrapper.common.models;
 
+import io.inprice.scrapper.common.meta.ImportType;
 import io.inprice.scrapper.common.meta.Status;
 
 import java.math.BigDecimal;
@@ -26,6 +27,10 @@ public class Link extends Model {
     private Long workspaceId;
     private Long productId;
     private Long siteId;
+
+    //these fields below are related to product importing!
+    private Long importId;
+    private Long importRowId;
 
     /**
      * The three list fields below never be saved into database.
@@ -223,10 +228,27 @@ public class Link extends Model {
         this.productPrice = productPrice;
     }
 
+    public Long getImportId() {
+        return importId;
+    }
+
+    public void setImportId(Long importId) {
+        this.importId = importId;
+    }
+
+    public Long getImportRowId() {
+        return importRowId;
+    }
+
+    public void setImportRowId(Long importRowId) {
+        this.importRowId = importRowId;
+    }
+
     @Override
     public String toString() {
         return "Link{" +
-                "sku='" + sku + '\'' +
+                "url='" + url + '\'' +
+                ", sku='" + sku + '\'' +
                 ", name='" + name + '\'' +
                 ", brand='" + brand + '\'' +
                 ", seller='" + seller + '\'' +
@@ -239,12 +261,16 @@ public class Link extends Model {
                 ", retry=" + retry +
                 ", httpStatus=" + httpStatus +
                 ", websiteClassName='" + websiteClassName + '\'' +
-                ", productPrice=" + productPrice +
                 ", companyId=" + companyId +
                 ", workspaceId=" + workspaceId +
                 ", productId=" + productId +
                 ", siteId=" + siteId +
-                ", url='" + url + '\'' +
+                ", importId=" + importId +
+                ", importRowId=" + importRowId +
+                ", priceList=" + priceList +
+                ", specList=" + specList +
+                ", historyList=" + historyList +
+                ", productPrice=" + productPrice +
                 '}';
     }
 }

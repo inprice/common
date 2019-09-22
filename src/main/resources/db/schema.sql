@@ -117,6 +117,7 @@ create table product (
   min_price                 double default 0,
   avg_price                 double default 0,
   max_price                 double default 0,
+  import_id                 bigint,
   company_id                bigint not null,
   workspace_id              bigint not null,
   primary key (id)
@@ -163,6 +164,8 @@ create table link (
   workspace_id              bigint,
   product_id                bigint,
   site_id                   bigint,
+  import_id                 bigint,
+  import_row_id             bigint,
   primary key (id)
 ) engine=innodb default charset=utf8;
 create index link_ix1 on link (status);
@@ -228,15 +231,20 @@ create table import_product (
   insert_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
+alter table link add foreign key (import_id) references import_product (id);
+alter table product add foreign key (import_id) references import_product (id);
 
 create table import_product_row (
   id                        bigint auto_increment not null,
   import_id                 bigint not null,
   import_type               varchar(15) not null,
   data                      varchar(1024) not null,
-  status                    varchar(25) not null,
-  description               varchar(500),
+  status                    varchar(25) not null default 'NEW',
+  last_update               datetime,
+  description               varchar(255),
+  link_id                   bigint,
   company_id                bigint not null,
   workspace_id              bigint not null,
   primary key (id)
 ) engine=innodb default charset=utf8;
+alter table link add foreign key (import_row_id) references import_product_row (id);
