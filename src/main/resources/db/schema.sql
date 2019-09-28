@@ -21,7 +21,7 @@ create table site (
   domain                    varchar(100) not null,
   class_name                varchar(100) not null,
   country_id                bigint not null,
-  insert_at                 timestamp not null default current_timestamp,
+  created_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
 create unique index site_ix1 on site (name);
@@ -52,7 +52,7 @@ create table company (
   website                   varchar(150),
   admin_id                  bigint,
   country_id                bigint,
-  insert_at                 timestamp not null default current_timestamp,
+  created_at                 timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
 create index company_ix1 on company (name);
@@ -67,7 +67,7 @@ create table user (
   password_hash             varchar(255) not null,
   password_salt             varchar(255) not null,
   company_id                bigint not null,
-  insert_at                 timestamp not null default current_timestamp,
+  created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
 create unique index user_ix1 on user (email);
@@ -83,7 +83,7 @@ create table workspace (
   retry                     int default 0,
   plan_id                   bigint,
   company_id                bigint not null,
-  insert_at                 timestamp not null default current_timestamp,
+  created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
 create index workspace_ix1 on workspace (last_collecting_time);
@@ -96,10 +96,10 @@ create table workspace_history (
   workspace_id              bigint,
   collecting_status         tinyint(1),
   company_id                bigint not null,
-  insert_at                 timestamp not null default current_timestamp,
+  created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
-create index workspace_history_ix1 on workspace (insert_at);
+create index workspace_history_ix1 on workspace (created_at);
 alter table workspace_history add foreign key (workspace_id) references workspace (id);
 
 create table product (
@@ -120,6 +120,7 @@ create table product (
   import_id                 bigint,
   company_id                bigint not null,
   workspace_id              bigint not null,
+  created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
 create index product_ix1 on product (workspace_id, code);
@@ -138,10 +139,10 @@ create table product_price (
   max_price                 double default 0,
   company_id                bigint not null,
   workspace_id              bigint not null,
-  insert_at                 timestamp not null default current_timestamp,
+  created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
-create index product_price_ix1 on product_price (insert_at);
+create index product_price_ix1 on product_price (created_at);
 alter table product_price add foreign key (product_id) references product (id);
 
 create table link (
@@ -185,10 +186,10 @@ create table link_price (
   company_id                bigint not null,
   workspace_id              bigint not null,
   product_id                bigint not null,
-  insert_at                 timestamp not null default current_timestamp,
+  created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
-create index link_price_ix1 on link_price (insert_at);
+create index link_price_ix1 on link_price (created_at);
 alter table link_price add foreign key (link_id) references link (id);
 
 create table link_spec (
@@ -211,10 +212,10 @@ create table link_history (
   company_id                bigint not null,
   workspace_id              bigint not null,
   product_id                bigint not null,
-  insert_at                 timestamp not null default current_timestamp,
+  created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
-create index link_history_ix1 on link_history (insert_at);
+create index link_history_ix1 on link_history (created_at);
 alter table link_history add foreign key (link_id) references link (id);
 
 create table import_product (
@@ -228,7 +229,7 @@ create table import_product (
   problem_count             int default 0,
   company_id                bigint not null,
   workspace_id              bigint not null,
-  insert_at                 timestamp not null default current_timestamp,
+  created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
 alter table link add foreign key (import_id) references import_product (id);

@@ -13,7 +13,7 @@ public class User extends Model {
     private String passwordHash;
     private String passwordSalt;
     private Long companyId;
-    private Date insertAt;
+    private Date createdAt;
 
     public Boolean getActive() {
         return active;
@@ -71,12 +71,12 @@ public class User extends Model {
         this.companyId = companyId;
     }
 
-    public Date getInsertAt() {
-        return insertAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setInsertAt(Date insertAt) {
-        this.insertAt = insertAt;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     @Override
@@ -90,7 +90,7 @@ public class User extends Model {
                 ", passwordHash='" + passwordHash + '\'' +
                 ", passwordSalt='" + passwordSalt + '\'' +
                 ", companyId=" + companyId +
-                ", insertAt=" + insertAt +
+                ", createdAt=" + createdAt +
                 '}';
     }
 }

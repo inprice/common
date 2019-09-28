@@ -7,7 +7,7 @@ public class WorkspaceHistory extends Model {
     private Boolean collectingStatus;
     private Long companyId;
     private Long workspaceId;
-    private Date insertAt;
+    private Date createdAt;
 
     public Boolean getCollectingStatus() {
         return collectingStatus;
@@ -33,11 +33,11 @@ public class WorkspaceHistory extends Model {
         this.workspaceId = workspaceId;
     }
 
-    public Date getInsertAt() {
-        return insertAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setInsertAt(Date insertAt) {
-        this.insertAt = insertAt;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

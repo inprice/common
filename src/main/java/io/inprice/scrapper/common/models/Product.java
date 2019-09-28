@@ -18,6 +18,7 @@ public class Product extends InfoModel {
     private BigDecimal maxPrice;
     private Long companyId;
     private Long workspaceId;
+    private Date createdAt;
 
     public String getCode() {
         return code;
@@ -123,6 +124,14 @@ public class Product extends InfoModel {
         this.workspaceId = workspaceId;
     }
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -141,6 +150,7 @@ public class Product extends InfoModel {
                 ", maxPrice=" + maxPrice +
                 ", companyId=" + companyId +
                 ", workspaceId=" + workspaceId +
+                ", createdAt=" + createdAt +
                 '}';
     }
 }

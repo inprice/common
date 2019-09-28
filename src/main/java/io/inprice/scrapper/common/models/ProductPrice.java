@@ -15,7 +15,7 @@ public class ProductPrice extends Model {
     private BigDecimal maxPrice;
     private Long companyId;
     private Long workspaceId;
-    private Date insertAt;
+    private Date createdAt;
 
     public Long getProductId() {
         return productId;
@@ -97,11 +97,11 @@ public class ProductPrice extends Model {
         this.workspaceId = workspaceId;
     }
 
-    public Date getInsertAt() {
-        return insertAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setInsertAt(Date insertAt) {
-        this.insertAt = insertAt;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

@@ -8,7 +8,7 @@ public class Company extends Model {
     private String website;
     private Long adminId;
     private Long countryId;
-    private Date insertAt;
+    private Date createdAt;
 
     public String getName() {
         return name;
@@ -42,12 +42,12 @@ public class Company extends Model {
         this.countryId = countryId;
     }
 
-    public Date getInsertAt() {
-        return insertAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setInsertAt(Date insertAt) {
-        this.insertAt = insertAt;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class Company extends Model {
                 ", website='" + website + '\'' +
                 ", adminId=" + adminId +
                 ", countryId=" + countryId +
-                ", insertAt=" + insertAt +
+                ", createdAt=" + createdAt +
                 '}';
     }
 }

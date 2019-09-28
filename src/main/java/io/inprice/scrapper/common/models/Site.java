@@ -7,7 +7,7 @@ public class Site extends InfoModel {
     private String domain;
     private String className;
     private Long countryId;
-    private Date insertAt;
+    private Date createdAt;
 
     public String getDomain() {
         return domain;
@@ -33,12 +33,12 @@ public class Site extends InfoModel {
         this.countryId = countryId;
     }
 
-    public Date getInsertAt() {
-        return insertAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setInsertAt(Date insertAt) {
-        this.insertAt = insertAt;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class Site extends InfoModel {
                 ", domain='" + domain + '\'' +
                 ", className='" + className + '\'' +
                 ", countryId=" + countryId +
-                ", insertAt=" + insertAt +
+                ", createdAt=" + createdAt +
                 '}';
     }
 }

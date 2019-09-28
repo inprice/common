@@ -10,7 +10,7 @@ public class Workspace extends InfoModel {
     private Integer retry;
     private Long planId;
     private Long companyId;
-    private Date insertAt;
+    private Date createdAt;
 
     public Date getDueDate() {
         return dueDate;
@@ -60,12 +60,12 @@ public class Workspace extends InfoModel {
         this.companyId = companyId;
     }
 
-    public Date getInsertAt() {
-        return insertAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setInsertAt(Date insertAt) {
-        this.insertAt = insertAt;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class Workspace extends InfoModel {
                 ", retry=" + retry +
                 ", planId=" + planId +
                 ", companyId=" + companyId +
-                ", insertAt=" + insertAt +
+                ", createdAt=" + createdAt +
                 '}';
     }
 }

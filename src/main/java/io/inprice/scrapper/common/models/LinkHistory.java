@@ -11,7 +11,7 @@ public class LinkHistory extends Model {
     private Integer httpStatus;
     private Long companyId;
     private Long workspaceId;
-    private Date insertAt;
+    private Date createdAt;
 
     public LinkHistory() {
     }
@@ -65,11 +65,11 @@ public class LinkHistory extends Model {
         this.workspaceId = workspaceId;
     }
 
-    public Date getInsertAt() {
-        return insertAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setInsertAt(Date insertAt) {
-        this.insertAt = insertAt;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

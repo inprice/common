@@ -9,7 +9,7 @@ public class LinkPrice extends Model {
     private BigDecimal price;
     private Long companyId;
     private Long workspaceId;
-    private Date insertAt;
+    private Date createdAt;
 
     public LinkPrice() {
     }
@@ -51,11 +51,11 @@ public class LinkPrice extends Model {
         this.workspaceId = workspaceId;
     }
 
-    public Date getInsertAt() {
-        return insertAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setInsertAt(Date insertAt) {
-        this.insertAt = insertAt;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }
