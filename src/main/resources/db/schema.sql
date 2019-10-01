@@ -232,6 +232,7 @@ create table import_product (
   created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
+alter table import_product add foreign key (workspace_id) references workspace (id);
 alter table link add foreign key (import_id) references import_product (id);
 alter table product add foreign key (import_id) references import_product (id);
 
