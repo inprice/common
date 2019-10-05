@@ -19,6 +19,7 @@ public class ImportProduct extends Model {
     private Date insertedAt;
 
     private List<String> problemList;
+    private List<ImportProductRow> rowList;
 
     public ImportType getImportType() {
         return importType;
@@ -126,6 +127,14 @@ public class ImportProduct extends Model {
 
     public void setProblemList(List<String> problemList) {
         this.problemList = problemList;
+    }
+
+    public List<ImportProductRow> getRowList() {
+        return rowList;
+    }
+
+    public void setRowList(List<ImportProductRow> rowList) {
+        this.rowList = rowList;
     }
 
     @Override

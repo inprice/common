@@ -6,7 +6,7 @@ import io.inprice.scrapper.common.meta.Status;
 import java.io.Serializable;
 import java.util.Date;
 
-public class ImportProductRow implements Serializable {
+public class ImportProductRow extends Model {
 
     private Long importId;
     private ImportType importType;
@@ -15,6 +15,8 @@ public class ImportProductRow implements Serializable {
     private Date lastUpdate;
     private String description;
     private Long linkId;
+    private Long companyId;
+    private Long workspaceId;
 
     private Object productDTO;
 
@@ -74,6 +76,22 @@ public class ImportProductRow implements Serializable {
         this.linkId = linkId;
     }
 
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public Long getWorkspaceId() {
+        return workspaceId;
+    }
+
+    public void setWorkspaceId(Long workspaceId) {
+        this.workspaceId = workspaceId;
+    }
+
     public Object getProductDTO() {
         return productDTO;
     }
@@ -81,4 +99,5 @@ public class ImportProductRow implements Serializable {
     public void setProductDTO(Object productDTO) {
         this.productDTO = productDTO;
     }
+
 }

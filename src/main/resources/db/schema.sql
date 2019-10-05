@@ -123,6 +123,7 @@ create table product (
   created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
+create unique index product_ux1 on product (company_id, workspace_id, code);
 create index product_ix1 on product (workspace_id, code);
 create index product_ix2 on product (workspace_id, name);
 alter table product add foreign key (workspace_id) references workspace (id);
@@ -250,3 +251,21 @@ create table import_product_row (
   primary key (id)
 ) engine=innodb default charset=utf8;
 alter table link add foreign key (import_row_id) references import_product_row (id);
+
+create table ticket (
+  id                        bigint auto_increment not null,
+  status                    varchar(25) not null default 'NEW',
+  source                    varchar(10) not null,
+  ticket_type               varchar(12) not null,
+  description               varchar(255) not null,
+  link_id                   bigint,
+  product_id                bigint,
+  workspace_id              bigint,
+  company_id                bigint not null,
+  user_id                   bigint not null,
+  created_at                timestamp not null default current_timestamp,
+  primary key (id)
+) engine=innodb default charset=utf8;
+create index ticket_ix1 on ticket (created_at, source);
+alter table ticket add foreign key (company_id) references company (id);
+alter table ticket add foreign key (user_id) references user (id);
