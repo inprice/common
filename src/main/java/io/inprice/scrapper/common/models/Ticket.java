@@ -16,7 +16,7 @@ public class Ticket extends Model {
     private Long productId;
     private Long workspaceId;
     private Long companyId;
-    private Long userId;
+    private Long reportedBy;
     private Date createdAt;
 
     public TicketSource getSource() {
@@ -83,12 +83,12 @@ public class Ticket extends Model {
         this.companyId = companyId;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getReportedBy() {
+        return reportedBy;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setReportedBy(Long reportedBy) {
+        this.reportedBy = reportedBy;
     }
 
     public Date getCreatedAt() {

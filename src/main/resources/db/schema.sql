@@ -261,10 +261,9 @@ create table ticket (
   link_id                   bigint,
   product_id                bigint,
   workspace_id              bigint,
-  company_id                bigint not null,
-  user_id                   bigint,
+  company_id                bigint,
+  reported_by               bigint not null,
   created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
 create index ticket_ix1 on ticket (created_at, source);
-alter table ticket add foreign key (company_id) references company (id);
