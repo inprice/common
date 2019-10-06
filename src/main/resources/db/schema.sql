@@ -52,7 +52,7 @@ create table company (
   website                   varchar(150),
   admin_id                  bigint,
   country_id                bigint,
-  created_at                 timestamp not null default current_timestamp,
+  created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
 create index company_ix1 on company (name);
@@ -262,10 +262,9 @@ create table ticket (
   product_id                bigint,
   workspace_id              bigint,
   company_id                bigint not null,
-  user_id                   bigint not null,
+  user_id                   bigint,
   created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
 create index ticket_ix1 on ticket (created_at, source);
 alter table ticket add foreign key (company_id) references company (id);
-alter table ticket add foreign key (user_id) references user (id);

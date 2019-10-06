@@ -4,5 +4,6 @@ public enum TicketSource {
     LINK,
     PRODUCT,
     WORKSPACE,
-    COMPANY
+    COMPANY,
+    USER
 }
