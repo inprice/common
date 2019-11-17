@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Workspace extends InfoModel {
 
+    private Boolean master;
     private Date dueDate;
     private Date lastCollectingTime;
     private Boolean lastCollectingStatus;
@@ -11,6 +12,14 @@ public class Workspace extends InfoModel {
     private Long planId;
     private Long companyId;
     private Date createdAt;
+
+    public Boolean getMaster() {
+        return master;
+    }
+
+    public void setMaster(Boolean master) {
+        this.master = master;
+    }
 
     public Date getDueDate() {
         return dueDate;
@@ -72,6 +81,7 @@ public class Workspace extends InfoModel {
     public String toString() {
         return "Workspace{" +
                 "id=" + getId() +
+                ", master=" + getMaster() +
                 ", active=" + getActive() +
                 ", name='" + getName() + '\'' +
                 ", dueDate=" + dueDate +

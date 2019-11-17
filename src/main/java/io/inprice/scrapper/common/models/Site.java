@@ -6,7 +6,7 @@ public class Site extends InfoModel {
 
     private String domain;
     private String className;
-    private Long countryId;
+    private String country;
     private Date createdAt;
 
     public String getDomain() {
@@ -25,12 +25,12 @@ public class Site extends InfoModel {
         this.className = className;
     }
 
-    public Long getCountryId() {
-        return countryId;
+    public String getCountry() {
+        return country;
     }
 
-    public void setCountryId(Long countryId) {
-        this.countryId = countryId;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public Date getCreatedAt() {
@@ -48,7 +48,7 @@ public class Site extends InfoModel {
                 ", name='" + getName() + '\'' +
                 ", domain='" + domain + '\'' +
                 ", className='" + className + '\'' +
-                ", countryId=" + countryId +
+                ", country=" + country +
                 ", createdAt=" + createdAt +
                 '}';
     }

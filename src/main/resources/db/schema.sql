@@ -1,31 +1,16 @@
 -- @author mdpinar
 
-create table country (
-  id                        bigint auto_increment not null,
-  code                      varchar(2) not null,
-  name                      varchar(50) not null,
-  locale                    varchar(5) not null,
-  lang                      varchar(30),
-  flag                      varchar(10),
-  currency_code             varchar(5) not null,
-  currency_symbol           varchar(5),
-  primary key (id)
-) engine=innodb default charset=utf8;
-create unique index country_ix1 on country (code);
-create unique index country_ix2 on country (name);
-
 create table site (
   id                        bigint auto_increment not null,
   active                    tinyint(1) default 1,
   name                      varchar(100) not null,
   domain                    varchar(100) not null,
   class_name                varchar(100) not null,
-  country_id                bigint not null,
-  created_at                 timestamp not null default current_timestamp,
+  country                   varchar(60) not null,
+  created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
 create unique index site_ix1 on site (name);
-alter table site add foreign key (country_id) references country (id);
 
 create table plan (
   id                        bigint auto_increment not null,
@@ -51,30 +36,16 @@ create table company (
   name                      varchar(250) not null,
   website                   varchar(150),
   admin_id                  bigint,
-  country_id                bigint,
+  country                   varchar(50) not null,
+  sector                    varchar(30) not null,
   created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
 create index company_ix1 on company (name);
-alter table company add foreign key (country_id) references country (id);
-
-create table user (
-  id                        bigint auto_increment not null,
-  active                    tinyint(1) default 1,
-  user_type                 varchar(25) not null default 'READER',
-  full_name                 varchar(150) not null,
-  email                     varchar(250) not null,
-  password_hash             varchar(255) not null,
-  password_salt             varchar(255) not null,
-  company_id                bigint not null,
-  created_at                timestamp not null default current_timestamp,
-  primary key (id)
-) engine=innodb default charset=utf8;
-create unique index user_ix1 on user (email);
-alter table user add foreign key (company_id) references company (id);
 
 create table workspace (
   id                        bigint auto_increment not null,
+  master                    tinyint(1) default 0,
   active                    tinyint(1) default 1,
   name                      varchar(50) not null,
   due_date                  datetime not null default now(),
@@ -86,10 +57,27 @@ create table workspace (
   created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
-create index workspace_ix1 on workspace (last_collecting_time);
-create index workspace_ix2 on workspace (due_date);
 alter table workspace add foreign key (plan_id) references plan (id);
 alter table workspace add foreign key (company_id) references company (id);
+create index workspace_ix1 on workspace (last_collecting_time);
+create index workspace_ix2 on workspace (due_date);
+
+create table user (
+  id                        bigint auto_increment not null,
+  active                    tinyint(1) default 1,
+  user_type                 varchar(25) not null default 'READER',
+  full_name                 varchar(150) not null,
+  email                     varchar(250) not null,
+  password_hash             varchar(255) not null,
+  password_salt             varchar(255) not null,
+  company_id                bigint not null,
+  workspace_id              bigint not null,
+  created_at                timestamp not null default current_timestamp,
+  primary key (id)
+) engine=innodb default charset=utf8;
+alter table user add foreign key (company_id) references company (id);
+alter table user add foreign key (workspace_id) references workspace (id);
+create unique index user_ix1 on user (email);
 
 create table workspace_history (
   id                        bigint auto_increment not null,
@@ -99,8 +87,8 @@ create table workspace_history (
   created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
-create index workspace_history_ix1 on workspace (created_at);
 alter table workspace_history add foreign key (workspace_id) references workspace (id);
+create index workspace_history_ix1 on workspace (created_at);
 
 create table product (
   id                        bigint auto_increment not null,
@@ -123,10 +111,10 @@ create table product (
   created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
+alter table product add foreign key (workspace_id) references workspace (id);
 create unique index product_ux1 on product (company_id, workspace_id, code);
 create index product_ix1 on product (workspace_id, code);
 create index product_ix2 on product (workspace_id, name);
-alter table product add foreign key (workspace_id) references workspace (id);
 
 create table product_price (
   id                        bigint auto_increment not null,
@@ -143,8 +131,8 @@ create table product_price (
   created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
-create index product_price_ix1 on product_price (created_at);
 alter table product_price add foreign key (product_id) references product (id);
+create index product_price_ix1 on product_price (created_at);
 
 create table link (
   id                        bigint auto_increment not null,
@@ -170,15 +158,15 @@ create table link (
   import_row_id             bigint,
   primary key (id)
 ) engine=innodb default charset=utf8;
+alter table link add foreign key (company_id) references company (id);
+alter table link add foreign key (workspace_id) references workspace (id);
+alter table link add foreign key (product_id) references product (id);
+alter table link add foreign key (site_id) references site (id);
 create index link_ix1 on link (status);
 create index link_ix2 on link (name);
 create index link_ix3 on link (sku);
 create index link_ix4 on link (last_update);
 create index link_ix5 on link (last_check);
-alter table link add foreign key (company_id) references company (id);
-alter table link add foreign key (workspace_id) references workspace (id);
-alter table link add foreign key (product_id) references product (id);
-alter table link add foreign key (site_id) references site (id);
 
 create table link_price (
   id                        bigint auto_increment not null,
@@ -190,8 +178,8 @@ create table link_price (
   created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
-create index link_price_ix1 on link_price (created_at);
 alter table link_price add foreign key (link_id) references link (id);
+create index link_price_ix1 on link_price (created_at);
 
 create table link_spec (
   id                        bigint auto_increment not null,
@@ -216,8 +204,8 @@ create table link_history (
   created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb default charset=utf8;
-create index link_history_ix1 on link_history (created_at);
 alter table link_history add foreign key (link_id) references link (id);
+create index link_history_ix1 on link_history (created_at);
 
 create table import_product (
   id                        bigint auto_increment not null,

@@ -13,6 +13,7 @@ public class User extends Model {
     private String passwordHash;
     private String passwordSalt;
     private Long companyId;
+    private Long workspaceId;
     private Date createdAt;
 
     public Boolean getActive() {
@@ -71,6 +72,14 @@ public class User extends Model {
         this.companyId = companyId;
     }
 
+    public Long getWorkspaceId() {
+        return workspaceId;
+    }
+
+    public void setWorkspaceId(Long workspaceId) {
+        this.workspaceId = workspaceId;
+    }
+
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -90,6 +99,7 @@ public class User extends Model {
                 ", passwordHash='" + passwordHash + '\'' +
                 ", passwordSalt='" + passwordSalt + '\'' +
                 ", companyId=" + companyId +
+                ", workspaceId=" + workspaceId +
                 ", createdAt=" + createdAt +
                 '}';
     }

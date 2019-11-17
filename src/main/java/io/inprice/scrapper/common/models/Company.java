@@ -7,7 +7,8 @@ public class Company extends Model {
     private String name;
     private String website;
     private Long adminId;
-    private Long countryId;
+    private String country;
+    private String sector;
     private Date createdAt;
 
     public String getName() {
@@ -34,12 +35,20 @@ public class Company extends Model {
         this.adminId = adminId;
     }
 
-    public Long getCountryId() {
-        return countryId;
+    public String getCountry() {
+        return country;
     }
 
-    public void setCountryId(Long countryId) {
-        this.countryId = countryId;
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getSector() {
+        return sector;
+    }
+
+    public void setSector(String sector) {
+        this.sector = sector;
     }
 
     public Date getCreatedAt() {
@@ -56,7 +65,8 @@ public class Company extends Model {
                 "name='" + name + '\'' +
                 ", website='" + website + '\'' +
                 ", adminId=" + adminId +
-                ", countryId=" + countryId +
+                ", country=" + country +
+                ", sector=" + sector +
                 ", createdAt=" + createdAt +
                 '}';
     }
