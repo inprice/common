@@ -1,13 +1,13 @@
 package io.inprice.scrapper.common.models;
 
-import io.inprice.scrapper.common.meta.UserType;
+import io.inprice.scrapper.common.meta.Role;
 
 import java.util.Date;
 
 public class User extends Model {
 
     private Boolean active;
-    private UserType userType = UserType.READER;
+    private Role role = Role.reader;
     private String fullName;
     private String email;
     private String passwordHash;
@@ -24,12 +24,12 @@ public class User extends Model {
         this.active = active;
     }
 
-    public UserType getUserType() {
-        return userType;
+    public Role getRole() {
+        return role;
     }
 
-    public void setUserType(UserType userType) {
-        this.userType = userType;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public String getFullName() {
@@ -93,7 +93,7 @@ public class User extends Model {
         return "User{" +
                 "id=" + getId() +
                 ", active=" + active +
-                ", userType=" + userType +
+                ", role=" + role +
                 ", fullName='" + fullName + '\'' +
                 ", email='" + email + '\'' +
                 ", passwordHash='" + passwordHash + '\'' +

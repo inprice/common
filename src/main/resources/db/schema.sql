@@ -65,7 +65,7 @@ create index workspace_ix2 on workspace (due_date);
 create table user (
   id                        bigint auto_increment not null,
   active                    tinyint(1) default 1,
-  user_type                 varchar(25) not null default 'READER',
+  role                      varchar(25) not null default 'READER',
   full_name                 varchar(150) not null,
   email                     varchar(250) not null,
   password_hash             varchar(255) not null,
