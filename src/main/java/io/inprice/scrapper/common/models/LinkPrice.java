@@ -1,61 +1,30 @@
 package io.inprice.scrapper.common.models;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class LinkPrice extends Model {
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-    private Long linkId;
-    private BigDecimal price;
-    private Long companyId;
-    private Long workspaceId;
-    private Date createdAt;
+@Getter
+@Setter
+@NoArgsConstructor
+public class LinkPrice implements Serializable {
 
-    public LinkPrice() {
-    }
+  private static final long serialVersionUID = 6818942944451174569L;
 
-    public LinkPrice(Long linkId, BigDecimal price) {
-        this.linkId = linkId;
-        this.price = price;
-    }
+  private Long id;
+  private Long linkId;
+  private BigDecimal price;
+  private Long productId;
+  private Long companyId;
+  private Date createdAt;
 
-    public Long getLinkId() {
-        return linkId;
-    }
+  public LinkPrice(Long linkId, BigDecimal price) {
+    this.linkId = linkId;
+    this.price = price;
+  }
 
-    public void setLinkId(Long linkId) {
-        this.linkId = linkId;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public Long getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
-    }
-
-    public Long getWorkspaceId() {
-        return workspaceId;
-    }
-
-    public void setWorkspaceId(Long workspaceId) {
-        this.workspaceId = workspaceId;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
 }

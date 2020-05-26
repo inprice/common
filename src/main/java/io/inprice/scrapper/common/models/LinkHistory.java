@@ -1,75 +1,35 @@
 package io.inprice.scrapper.common.models;
 
-import io.inprice.scrapper.common.meta.Status;
-
+import java.io.Serializable;
 import java.util.Date;
 
-public class LinkHistory extends Model {
+import io.inprice.scrapper.common.meta.LinkStatus;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-    private Long linkId;
-    private Status status = Status.NEW;
-    private Integer httpStatus;
-    private Long companyId;
-    private Long workspaceId;
-    private Date createdAt;
+@Getter
+@Setter
+@NoArgsConstructor
+public class LinkHistory implements Serializable {
 
-    public LinkHistory() {
-    }
+  private static final long serialVersionUID = 885057701505049080L;
 
-    public LinkHistory(Status status) {
-        this.status = status;
-    }
+  private Long id;
+  private Long linkId;
+  private LinkStatus status = LinkStatus.NEW;
+  private Integer httpStatus;
+  private Long productId;
+  private Long companyId;
+  private Date createdAt;
 
-    public LinkHistory(Long linkId, Status status) {
-        this.linkId = linkId;
-        this.status = status;
-    }
+  public LinkHistory(LinkStatus status) {
+    this.status = status;
+  }
 
-    public Long getLinkId() {
-        return linkId;
-    }
+  public LinkHistory(Long linkId, LinkStatus status) {
+    this.linkId = linkId;
+    this.status = status;
+  }
 
-    public void setLinkId(Long linkId) {
-        this.linkId = linkId;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public Integer getHttpStatus() {
-        return httpStatus;
-    }
-
-    public void setHttpStatus(Integer httpStatus) {
-        this.httpStatus = httpStatus;
-    }
-
-    public Long getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
-    }
-
-    public Long getWorkspaceId() {
-        return workspaceId;
-    }
-
-    public void setWorkspaceId(Long workspaceId) {
-        this.workspaceId = workspaceId;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
 }

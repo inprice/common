@@ -1,42 +1,31 @@
 package io.inprice.scrapper.common.info;
 
-import io.inprice.scrapper.common.meta.Status;
-import io.inprice.scrapper.common.models.Link;
-
 import java.io.Serializable;
+
+import io.inprice.scrapper.common.meta.LinkStatus;
+import io.inprice.scrapper.common.models.Link;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Info model class for status change notifications
  *
  * @author mdpinar
  */
+@Getter
+@Setter
+@NoArgsConstructor
 public class StatusChange implements Serializable {
 
-    private Link link;
-    private Status oldStatus;
+  private static final long serialVersionUID = -7240482576220187098L;
 
-    public StatusChange() {
-    }
+  private Link link;
+  private LinkStatus oldStatus;
 
-    public StatusChange(Link link, Status oldStatus) {
-        this.link = link;
-        this.oldStatus = oldStatus;
-    }
-
-    public Link getLink() {
-        return link;
-    }
-
-    public void setLink(Link link) {
-        this.link = link;
-    }
-
-    public Status getOldStatus() {
-        return oldStatus;
-    }
-
-    public void setOldStatus(Status newStatus) {
-        this.oldStatus = oldStatus;
-    }
+  public StatusChange(Link link, LinkStatus oldStatus) {
+    this.link = link;
+    this.oldStatus = oldStatus;
+  }
 
 }

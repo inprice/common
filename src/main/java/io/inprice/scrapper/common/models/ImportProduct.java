@@ -1,155 +1,34 @@
 package io.inprice.scrapper.common.models;
 
-import io.inprice.scrapper.common.meta.ImportType;
-
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-public class ImportProduct extends Model {
+import io.inprice.scrapper.common.info.ProductDTO;
+import io.inprice.scrapper.common.meta.ImportType;
+import io.inprice.scrapper.common.meta.LinkStatus;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-    private ImportType importType;
-    private int status;
-    private String result;
-    private int totalCount;
-    private int insertCount;
-    private int duplicateCount;
-    private int problemCount;
-    private Long companyId;
-    private Long workspaceId;
-    private Date insertedAt;
+@Getter
+@Setter
+@ToString
+public class ImportProduct implements Serializable {
 
-    private List<String> problemList;
-    private List<ImportProductRow> rowList;
+  private static final long serialVersionUID = 1099808351397302194L;
 
-    public ImportType getImportType() {
-        return importType;
-    }
+  private Long id;
+  private ImportType importType;
+  private String data;
+  private LinkStatus status = LinkStatus.NEW;
+  private Date lastCheck;
+  private Date lastUpdate;
+  private Integer retry;
+  private Integer httpStatus;
+  private String description;
+  private Long companyId;
+  private Date createdAt;
 
-    public void setImportType(ImportType importType) {
-        this.importType = importType;
-    }
+  private ProductDTO productDTO;
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
-    }
-
-    public int getTotalCount() {
-        return totalCount;
-    }
-
-    public void setTotalCount(int totalCount) {
-        this.totalCount = totalCount;
-    }
-
-    public int getInsertCount() {
-        return insertCount;
-    }
-
-    public void setInsertCount(int insertCount) {
-        this.insertCount = insertCount;
-    }
-
-    public int getDuplicateCount() {
-        return duplicateCount;
-    }
-
-    public void setDuplicateCount(int duplicateCount) {
-        this.duplicateCount = duplicateCount;
-    }
-
-    public int getProblemCount() {
-        return problemCount;
-    }
-
-    public void setProblemCount(int problemCount) {
-        this.problemCount = problemCount;
-    }
-
-    public Long getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
-    }
-
-    public Long getWorkspaceId() {
-        return workspaceId;
-    }
-
-    public void setWorkspaceId(Long workspaceId) {
-        this.workspaceId = workspaceId;
-    }
-
-    public Date getInsertedAt() {
-        return insertedAt;
-    }
-
-    public void setInsertedAt(Date insertedAt) {
-        this.insertedAt = insertedAt;
-    }
-
-    public void incTotalCount() {
-        this.totalCount++;
-    }
-
-    public void incInsertCount() {
-        this.insertCount++;
-    }
-
-    public void decInsertCount() {
-        this.insertCount--;
-    }
-
-    public void incDuplicateCount() {
-        this.duplicateCount++;
-    }
-
-    public void incProblemCount() {
-        this.problemCount++;
-    }
-
-    public List<String> getProblemList() {
-        return problemList;
-    }
-
-    public void setProblemList(List<String> problemList) {
-        this.problemList = problemList;
-    }
-
-    public List<ImportProductRow> getRowList() {
-        return rowList;
-    }
-
-    public void setRowList(List<ImportProductRow> rowList) {
-        this.rowList = rowList;
-    }
-
-    @Override
-    public String toString() {
-        return "ImportProduct{" +
-                "importType=" + importType +
-                ", status=" + status +
-                ", result='" + result + '\'' +
-                ", totalCount=" + totalCount +
-                ", insertCount=" + insertCount +
-                ", duplicateCount=" + duplicateCount +
-                ", problemCount=" + problemCount +
-                ", companyId=" + companyId +
-                ", workspaceId=" + workspaceId +
-                ", insertedAt=" + insertedAt +
-                '}';
-    }
 }

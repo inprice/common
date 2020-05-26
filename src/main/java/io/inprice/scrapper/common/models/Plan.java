@@ -1,54 +1,22 @@
 package io.inprice.scrapper.common.models;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 
-public class Plan extends InfoModel {
+import lombok.Getter;
+import lombok.Setter;
 
-    private BigDecimal price;
-    private Integer rowLimit;
-    private Integer orderNo;
-    private List<PlanRows> planRows;
+@Getter
+@Setter
+public class Plan implements Serializable {
 
-    public Integer getRowLimit() {
-        return rowLimit;
-    }
+  private static final long serialVersionUID = -4787008755878198572L;
 
-    public void setRowLimit(Integer rowLimit) {
-        this.rowLimit = rowLimit;
-    }
+  private String name;
+  private String description;
+  private BigDecimal price;
+  private Integer rowLimit;
+  private Integer userLimit;
+  private Integer orderNo;
 
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public Integer getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(Integer orderNo) {
-        this.orderNo = orderNo;
-    }
-
-    public List<PlanRows> getPlanRows() {
-        return planRows;
-    }
-
-    public void setPlanRows(List<PlanRows> planRows) {
-        this.planRows = planRows;
-    }
-
-    @Override
-    public String toString() {
-        return "Plan{" +
-                "name=" + getName() +
-                "price=" + price +
-                ", rowLimit=" + rowLimit +
-                ", orderNo=" + orderNo +
-                '}';
-    }
 }
