@@ -69,39 +69,39 @@ public class SysProps {
   }
 
   public static String MQ_STATUS_CHANGES_ROUTING() {
-    return System.getenv().getOrDefault("MQ_STATUS_CHANGES_ROUTING", "status.change");
+    return System.getenv().getOrDefault("MQ_STATUS_CHANGES_ROUTING", "changes.status");
   }
 
   public static String MQ_PRICE_CHANGES_ROUTING() {
-    return System.getenv().getOrDefault("MQ_PRICE_CHANGES_ROUTING", "price.change");
+    return System.getenv().getOrDefault("MQ_PRICE_CHANGES_ROUTING", "changes.price");
   }
 
   public static String MQ_NEW_LINKS_QUEUE() {
-    return System.getenv().getOrDefault("MQ_NEW_LINKS_QUEUE", "links-new");
+    return System.getenv().getOrDefault("MQ_NEW_LINKS_QUEUE", "new-links");
   }
 
   public static String MQ_AVALIABLE_LINKS_QUEUE() {
-    return System.getenv().getOrDefault("MQ_AVALIABLE_LINKS_QUEUE", "links-available");
+    return System.getenv().getOrDefault("MQ_AVALIABLE_LINKS_QUEUE", "available-links");
   }
 
   public static String MQ_FAILED_LINKS_QUEUE() {
-    return System.getenv().getOrDefault("MQ_FAILED_LINKS_QUEUE", "links-failed");
+    return System.getenv().getOrDefault("MQ_FAILED_LINKS_QUEUE", "failed-links");
   }
 
   public static String MQ_TOBE_AVAILABLE_LINKS_QUEUE() {
-    return System.getenv().getOrDefault("MQ_QUEUE_TOBE_AVAILABLE_LINK", "links-tobe-available");
+    return System.getenv().getOrDefault("MQ_QUEUE_TOBE_AVAILABLE_LINK", "tobe-available-links");
   }
 
-  public static String MQ_QUEUE_DELETED_LINKS() {
-    return System.getenv().getOrDefault("MQ_QUEUE_DELETED_LINKS", "links-deleted");
+  public static String MQ_DELETED_LINKS_QUEUE() {
+    return System.getenv().getOrDefault("MQ_DELETED_LINKS_QUEUE", "deleted-links");
   }
 
   public static String MQ_STATUS_CHANGE_QUEUE() {
-    return System.getenv().getOrDefault("MQ_STATUS_CHANGE_QUEUE", "changes-status");
+    return System.getenv().getOrDefault("MQ_STATUS_CHANGE_QUEUE", "status-changes");
   }
 
   public static String MQ_PRICE_CHANGE_QUEUE() {
-    return System.getenv().getOrDefault("MQ_PRICE_CHANGE_QUEUE", "changes-price");
+    return System.getenv().getOrDefault("MQ_PRICE_CHANGE_QUEUE", "price-changes");
   }
 
   public static String DB_DRIVER() {

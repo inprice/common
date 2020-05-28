@@ -16,14 +16,15 @@ public class ProductPrice implements Serializable {
   private Long id;
   private Long productId;
   private BigDecimal price;
-  private BigDecimal avgPrice;
   private Integer position;
   private String minPlatform;
   private String minSeller;
   private BigDecimal minPrice;
+  private BigDecimal avgPrice;
   private String maxPlatform;
   private String maxSeller;
   private BigDecimal maxPrice;
+  private Integer linksCount;
   private Long companyId;
   private Date createdAt;
 

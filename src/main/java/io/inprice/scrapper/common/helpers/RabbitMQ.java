@@ -40,7 +40,7 @@ public class RabbitMQ {
 
               channel.exchangeDeclare(SysProps.MQ_LINKS_EXCHANGE(), "topic");
               channel.exchangeDeclare(SysProps.MQ_CHANGES_EXCHANGE(), "topic");
-              channel.exchangeDeclare(SysProps.MQ_DEAD_LETTERS_EXCHANGE(), "direct");
+              channel.exchangeDeclare(SysProps.MQ_DEAD_LETTERS_EXCHANGE(), "topic");
 
               Map<String, Object> args = new HashMap<String, Object>();
               args.put("x-dead-letter-exchange", SysProps.MQ_DEAD_LETTERS_EXCHANGE());
@@ -51,7 +51,7 @@ public class RabbitMQ {
               channel.queueDeclare(SysProps.MQ_TOBE_AVAILABLE_LINKS_QUEUE(), true, false, false, args);
               channel.queueDeclare(SysProps.MQ_STATUS_CHANGE_QUEUE(), true, false, false, args);
               channel.queueDeclare(SysProps.MQ_PRICE_CHANGE_QUEUE(), true, false, false, args);
-              channel.queueDeclare(SysProps.MQ_QUEUE_DELETED_LINKS(), true, false, false, args);
+              channel.queueDeclare(SysProps.MQ_DELETED_LINKS_QUEUE(), true, false, false, args);
 
               channel.queueBind(SysProps.MQ_NEW_LINKS_QUEUE(), SysProps.MQ_LINKS_EXCHANGE(), SysProps.MQ_NEW_LINKS_ROUTING() + ".#");
               channel.queueBind(SysProps.MQ_AVALIABLE_LINKS_QUEUE(), SysProps.MQ_LINKS_EXCHANGE(), SysProps.MQ_AVAILABLE_LINKS_ROUTING() + ".#");
@@ -59,7 +59,7 @@ public class RabbitMQ {
               channel.queueBind(SysProps.MQ_TOBE_AVAILABLE_LINKS_QUEUE(), SysProps.MQ_LINKS_EXCHANGE(), SysProps.MQ_TOBE_AVAILABLE_LINKS_ROUTING() + ".#");
               channel.queueBind(SysProps.MQ_STATUS_CHANGE_QUEUE(), SysProps.MQ_CHANGES_EXCHANGE(), SysProps.MQ_STATUS_CHANGES_ROUTING() + ".#");
               channel.queueBind(SysProps.MQ_PRICE_CHANGE_QUEUE(), SysProps.MQ_CHANGES_EXCHANGE(), SysProps.MQ_PRICE_CHANGES_ROUTING() + ".#");
-              channel.queueBind(SysProps.MQ_QUEUE_DELETED_LINKS(), SysProps.MQ_CHANGES_EXCHANGE(), SysProps.MQ_DELETED_LINKS_ROUTING() + ".#");
+              channel.queueBind(SysProps.MQ_DELETED_LINKS_QUEUE(), SysProps.MQ_CHANGES_EXCHANGE(), SysProps.MQ_DELETED_LINKS_ROUTING() + ".#");
 
               isHealthy = true;
               log.info("Connected to RabbitMQ server and checked all the exchanges and queues");
@@ -92,8 +92,8 @@ public class RabbitMQ {
 	}
 
 	public static void publish(String exchange, String routingKey, Serializable message) {
-		try {
-			channel.basicPublish(exchange, routingKey, null, SerializationUtils.serialize(message));
+    try {
+			getChannel().basicPublish(exchange, routingKey, null, SerializationUtils.serialize(message));
 		} catch (IOException e) {
 			log.error("Failed to send a message to queue", e);
 		}

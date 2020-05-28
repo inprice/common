@@ -235,10 +235,11 @@ public class Database {
 
   /**
    * For batch executions without any continual transaction
+   * It is expected to be successful all the queries given as parameter
    *
    */
   public boolean executeBatchQueries(List<String> queries, String errorMessage) {
-    return executeBatchQueries(queries, errorMessage, 0);
+    return executeBatchQueries(queries, errorMessage, queries.size());
   }
 
   public boolean executeBatchQueries(List<String> queries, String errorMessage, int expectedSuccessfulStatementCount) {
