@@ -11,12 +11,12 @@ import lombok.ToString;
 @ToString
 public class ProductDTO {
 
-    private Long id;
-    private String code;
-    private String name;
-    private String brand;
-    private String category;
-    private BigDecimal price;
-    private Long importId;
+  private Long id;
+  private String code;
+  private String name;
+  private String brand;
+  private String category;
+  private BigDecimal price;
+  private Long importId;
 
 }

@@ -22,17 +22,12 @@ public class Product implements Serializable {
   private String brand;
   private String category;
   private BigDecimal price;
-  private Integer position;
-  private String minPlatform;
-  private String minSeller;
-  private BigDecimal minPrice;
-  private BigDecimal avgPrice;
-  private String maxPlatform;
-  private String maxSeller;
-  private BigDecimal maxPrice;
-  private Integer linksCount;
+  private Long lastPriceId;
   private Long companyId;
   private Date updatedAt;
   private Date createdAt;
+
+  //transient
+  private ProductPrice priceDetails;
 
 }

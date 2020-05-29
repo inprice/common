@@ -16,15 +16,20 @@ public class ProductPrice implements Serializable {
   private Long id;
   private Long productId;
   private BigDecimal price;
-  private Integer position;
   private String minPlatform;
   private String minSeller;
   private BigDecimal minPrice;
+  private BigDecimal minDiff;
   private BigDecimal avgPrice;
+  private BigDecimal avgDiff;
   private String maxPlatform;
   private String maxSeller;
   private BigDecimal maxPrice;
-  private Integer linksCount;
+  private BigDecimal maxDiff;
+  private Integer competitors;
+  private Integer position;
+  private Integer ranking;
+  private Integer rankingWith; //the number of other competitors having the same price
   private Long companyId;
   private Date createdAt;
 
