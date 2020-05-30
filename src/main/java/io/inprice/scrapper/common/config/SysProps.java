@@ -104,6 +104,10 @@ public class SysProps {
     return System.getenv().getOrDefault("MQ_PRICE_CHANGE_QUEUE", "price-changes");
   }
 
+  public static String MQ_STATUS_DEAD_LETTERS_QUEUE() {
+    return System.getenv().getOrDefault("MQ_DEAD_LETTERS_QUEUE", "dead-letters");
+  }
+
   public static String DB_DRIVER() {
     String def = APP_ENV().equals(AppEnv.TEST) ? "h2" : "mysql";
     return System.getenv().getOrDefault("DB_DRIVER", def);

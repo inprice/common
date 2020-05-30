@@ -27,7 +27,6 @@ public class Product implements Serializable {
   private Date updatedAt;
   private Date createdAt;
 
-  //transient
   private ProductPrice priceDetails;
 
 }

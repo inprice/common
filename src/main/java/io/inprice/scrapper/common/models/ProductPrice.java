@@ -30,6 +30,7 @@ public class ProductPrice implements Serializable {
   private Integer position;
   private Integer ranking;
   private Integer rankingWith; //the number of other competitors having the same price
+  private BigDecimal suggestedPrice;
   private Long companyId;
   private Date createdAt;
 

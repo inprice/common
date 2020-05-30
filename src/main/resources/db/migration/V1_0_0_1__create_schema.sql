@@ -122,6 +122,7 @@ create table product_price (
   position                  smallint default 3,
   ranking                   smallint default 0,
   ranking_with              smallint default 0,
+  suggested_price           double default 0,
   company_id                bigint not null,
   created_at                timestamp not null default current_timestamp,
   primary key (id),
