@@ -80,7 +80,7 @@ public class RabbitMQ {
 	}
 
   public static synchronized void closeConnection() {
-    if (connection != null || connection.isOpen()) {
+    if (connection != null && connection.isOpen()) {
       try {
         connection.close();
       } catch (IOException e) {

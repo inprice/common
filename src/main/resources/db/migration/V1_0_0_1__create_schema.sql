@@ -140,7 +140,7 @@ create table link (
   seller                    varchar(150),
   shipment                  varchar(150),
   price                     double default 0,
-  last_check                datetime default now(),
+  last_check                datetime,
   last_update               datetime,
   pre_status                varchar(25) not null default 'NEW',
   status                    varchar(25) not null default 'NEW',

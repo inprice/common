@@ -7,6 +7,7 @@ import io.inprice.scrapper.common.models.Link;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Info model class for status change notifications
@@ -16,6 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class StatusChange implements Serializable {
 
   private static final long serialVersionUID = -7240482576220187098L;

@@ -12,9 +12,10 @@ public class NumberUtils {
         sb.append(ch);
     }
     String trimmed = sb.toString();
-    boolean commaDecimal = (trimmed.length() > 3 && trimmed.charAt(trimmed.length() - 3) == ',');
+    boolean commaDecimal = (trimmed.length() > 3
+        && (trimmed.charAt(trimmed.length() - 3) == ',' || trimmed.charAt(trimmed.length() - 3) == '.'));
 
-    String pure = trimmed.replaceAll("[^\\d.]", "");
+    String pure = trimmed.replaceAll("[^\\d]", "").replaceAll("\\.", "");
 
     if (commaDecimal) {
       int ix = pure.length() - 2;
