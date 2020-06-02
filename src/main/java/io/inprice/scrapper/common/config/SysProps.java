@@ -17,7 +17,7 @@ public class SysProps {
   }
 
   public static boolean APP_SHOW_QUERIES() {
-    return "true".equals(System.getenv().getOrDefault("APP_SHOW_QUERIES", "false").toLowerCase());
+    return "true".equals(System.getenv().getOrDefault("APP_SHOW_QUERIES", "true").toLowerCase());
   }
 
   public static String MQ_HOST() {
@@ -36,8 +36,8 @@ public class SysProps {
     return System.getenv().getOrDefault("MQ_PASSWORD", "guest");
   }
 
-  public static String MQ_LINKS_EXCHANGE() {
-    return System.getenv().getOrDefault("MQ_LINKS_EXCHANGE", "links");
+  public static String MQ_COMPETITORS_EXCHANGE() {
+    return System.getenv().getOrDefault("MQ_COMPETITORS_EXCHANGE", "competitors");
   }
 
   public static String MQ_CHANGES_EXCHANGE() {
@@ -48,52 +48,60 @@ public class SysProps {
     return System.getenv().getOrDefault("MQ_DEAD_LETTERS_EXCHANGE", "dead-letters");
   }
 
-  public static String MQ_DELETED_LINKS_ROUTING() {
-    return System.getenv().getOrDefault("MQ_DELETED_LINKS_ROUTING", "links.deleted");
+  public static String MQ_TOBE_CLASSIFIED_COMPETITORS_ROUTING() {
+    return System.getenv().getOrDefault("MQ_TOBE_CLASSIFIED_COMPETITORS_ROUTING", "competitors.tobe-avaliable");
   }
 
-  public static String MQ_NEW_LINKS_ROUTING() {
-    return System.getenv().getOrDefault("MQ_NEW_LINKS_ROUTING", "links.new");
+  public static String MQ_FAILED_COMPETITORS_ROUTING() {
+    return System.getenv().getOrDefault("MQ_FAILED_COMPETITORS_ROUTING", "competitors.failed");
   }
 
-  public static String MQ_FAILED_LINKS_ROUTING() {
-    return System.getenv().getOrDefault("MQ_FAILED_LINKS_ROUTING", "links.failed");
+  public static String MQ_BLOCKED_COMPETITORS_ROUTING() {
+    return System.getenv().getOrDefault("MQ_BLOCKED_COMPETITORS_ROUTING", "competitors.blocked");
   }
 
-  public static String MQ_AVAILABLE_LINKS_ROUTING() {
-    return System.getenv().getOrDefault("MQ_AVAILABLE_LINKS_ROUTING", "links.available");
+  public static String MQ_AVAILABLE_COMPETITORS_ROUTING() {
+    return System.getenv().getOrDefault("MQ_AVAILABLE_COMPETITORS_ROUTING", "competitors.available");
   }
 
-  public static String MQ_TOBE_AVAILABLE_LINKS_ROUTING() {
-    return System.getenv().getOrDefault("MQ_TOBE_AVAILABLE_LINKS_ROUTING", "links.tobe-available");
+  public static String MQ_TOBE_AVAILABLE_COMPETITORS_ROUTING() {
+    return System.getenv().getOrDefault("MQ_TOBE_AVAILABLE_COMPETITORS_ROUTING", "competitors.tobe-available");
   }
 
   public static String MQ_STATUS_CHANGES_ROUTING() {
-    return System.getenv().getOrDefault("MQ_STATUS_CHANGES_ROUTING", "changes.status");
+    return System.getenv().getOrDefault("MQ_STATUS_CHANGES_ROUTING", "status.changes");
   }
 
   public static String MQ_PRICE_CHANGES_ROUTING() {
-    return System.getenv().getOrDefault("MQ_PRICE_CHANGES_ROUTING", "changes.price");
+    return System.getenv().getOrDefault("MQ_PRICE_CHANGES_ROUTING", "price.changes");
   }
 
-  public static String MQ_NEW_LINKS_QUEUE() {
-    return System.getenv().getOrDefault("MQ_NEW_LINKS_QUEUE", "new-links");
+  public static String MQ_PRICE_REFRESH_ROUTING() {
+    return System.getenv().getOrDefault("MQ_PRICE_REFRESH_ROUTING", "price.refresh");
   }
 
-  public static String MQ_AVALIABLE_LINKS_QUEUE() {
-    return System.getenv().getOrDefault("MQ_AVALIABLE_LINKS_QUEUE", "available-links");
+  public static String MQ_CATCH_ALL_QUEUE() {
+    return System.getenv().getOrDefault("MQ_CATCH_ALL_QUEUE", "catch-all");
   }
 
-  public static String MQ_FAILED_LINKS_QUEUE() {
-    return System.getenv().getOrDefault("MQ_FAILED_LINKS_QUEUE", "failed-links");
+  public static String MQ_TOBE_CLASSIFIED_COMPETITORS_QUEUE() {
+    return System.getenv().getOrDefault("MQ_TOBE_CLASSIFIED_COMPETITORS_QUEUE", "tobe-classified-competitors");
   }
 
-  public static String MQ_TOBE_AVAILABLE_LINKS_QUEUE() {
-    return System.getenv().getOrDefault("MQ_QUEUE_TOBE_AVAILABLE_LINK", "tobe-available-links");
+  public static String MQ_AVALIABLE_COMPETITORS_QUEUE() {
+    return System.getenv().getOrDefault("MQ_AVALIABLE_COMPETITORS_QUEUE", "available-competitors");
   }
 
-  public static String MQ_DELETED_LINKS_QUEUE() {
-    return System.getenv().getOrDefault("MQ_DELETED_LINKS_QUEUE", "deleted-links");
+  public static String MQ_FAILED_COMPETITORS_QUEUE() {
+    return System.getenv().getOrDefault("MQ_FAILED_COMPETITORS_QUEUE", "failed-competitors");
+  }
+
+  public static String MQ_BLOCKED_COMPETITORS_QUEUE() {
+    return System.getenv().getOrDefault("MQ_BLOCKED_COMPETITORS_QUEUE", "blocked-competitors");
+  }
+
+  public static String MQ_TOBE_AVAILABLE_COMPETITORS_QUEUE() {
+    return System.getenv().getOrDefault("MQ_QUEUE_TOBE_AVAILABLE_COMPETITOR", "tobe-available-competitors");
   }
 
   public static String MQ_STATUS_CHANGE_QUEUE() {
@@ -102,6 +110,10 @@ public class SysProps {
 
   public static String MQ_PRICE_CHANGE_QUEUE() {
     return System.getenv().getOrDefault("MQ_PRICE_CHANGE_QUEUE", "price-changes");
+  }
+
+  public static String MQ_PRICE_REFRESH_QUEUE() {
+    return System.getenv().getOrDefault("MQ_PRICE_REFRESH_QUEUE", "price-refreshes");
   }
 
   public static String MQ_STATUS_DEAD_LETTERS_QUEUE() {

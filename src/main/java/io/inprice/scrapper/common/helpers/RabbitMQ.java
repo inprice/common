@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.inprice.scrapper.common.config.SysProps;
+import io.inprice.scrapper.common.meta.AppEnv;
 
 public class RabbitMQ {
 
@@ -35,30 +36,38 @@ public class RabbitMQ {
         connection = cf.newConnection();
         channel = connection.createChannel();
         
-        channel.exchangeDeclare(SysProps.MQ_LINKS_EXCHANGE(), "topic");
+        channel.exchangeDeclare(SysProps.MQ_COMPETITORS_EXCHANGE(), "topic");
         channel.exchangeDeclare(SysProps.MQ_CHANGES_EXCHANGE(), "topic");
         channel.exchangeDeclare(SysProps.MQ_DEAD_LETTERS_EXCHANGE(), "topic");
 
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("x-dead-letter-exchange", SysProps.MQ_DEAD_LETTERS_EXCHANGE());
 
-        channel.queueDeclare(SysProps.MQ_NEW_LINKS_QUEUE(), true, false, false, args);
-        channel.queueDeclare(SysProps.MQ_AVALIABLE_LINKS_QUEUE(), true, false, false, args);
-        channel.queueDeclare(SysProps.MQ_FAILED_LINKS_QUEUE(), true, false, false, args);
-        channel.queueDeclare(SysProps.MQ_TOBE_AVAILABLE_LINKS_QUEUE(), true, false, false, args);
+        channel.queueDeclare(SysProps.MQ_TOBE_CLASSIFIED_COMPETITORS_QUEUE(), true, false, false, args);
+        channel.queueDeclare(SysProps.MQ_AVALIABLE_COMPETITORS_QUEUE(), true, false, false, args);
+        channel.queueDeclare(SysProps.MQ_FAILED_COMPETITORS_QUEUE(), true, false, false, args);
+        channel.queueDeclare(SysProps.MQ_BLOCKED_COMPETITORS_QUEUE(), true, false, false, args);
+        channel.queueDeclare(SysProps.MQ_TOBE_AVAILABLE_COMPETITORS_QUEUE(), true, false, false, args);
         channel.queueDeclare(SysProps.MQ_STATUS_CHANGE_QUEUE(), true, false, false, args);
         channel.queueDeclare(SysProps.MQ_PRICE_CHANGE_QUEUE(), true, false, false, args);
-        channel.queueDeclare(SysProps.MQ_DELETED_LINKS_QUEUE(), true, false, false, args);
+        channel.queueDeclare(SysProps.MQ_PRICE_REFRESH_QUEUE(), true, false, false, args);
+        channel.queueDeclare(SysProps.MQ_CATCH_ALL_QUEUE(), true, false, false, null);
         channel.queueDeclare(SysProps.MQ_DEAD_LETTERS_EXCHANGE(), true, false, false, null);
 
-        channel.queueBind(SysProps.MQ_NEW_LINKS_QUEUE(), SysProps.MQ_LINKS_EXCHANGE(), SysProps.MQ_NEW_LINKS_ROUTING() + ".#");
-        channel.queueBind(SysProps.MQ_AVALIABLE_LINKS_QUEUE(), SysProps.MQ_LINKS_EXCHANGE(), SysProps.MQ_AVAILABLE_LINKS_ROUTING() + ".#");
-        channel.queueBind(SysProps.MQ_FAILED_LINKS_QUEUE(), SysProps.MQ_LINKS_EXCHANGE(), SysProps.MQ_FAILED_LINKS_ROUTING() + ".#");
-        channel.queueBind(SysProps.MQ_TOBE_AVAILABLE_LINKS_QUEUE(), SysProps.MQ_LINKS_EXCHANGE(), SysProps.MQ_TOBE_AVAILABLE_LINKS_ROUTING() + ".#");
+        channel.queueBind(SysProps.MQ_TOBE_CLASSIFIED_COMPETITORS_QUEUE(), SysProps.MQ_COMPETITORS_EXCHANGE(), SysProps.MQ_TOBE_CLASSIFIED_COMPETITORS_ROUTING() + ".#");
+        channel.queueBind(SysProps.MQ_AVALIABLE_COMPETITORS_QUEUE(), SysProps.MQ_COMPETITORS_EXCHANGE(), SysProps.MQ_AVAILABLE_COMPETITORS_ROUTING() + ".#");
+        channel.queueBind(SysProps.MQ_FAILED_COMPETITORS_QUEUE(), SysProps.MQ_COMPETITORS_EXCHANGE(), SysProps.MQ_FAILED_COMPETITORS_ROUTING() + ".#");
+        channel.queueBind(SysProps.MQ_BLOCKED_COMPETITORS_QUEUE(), SysProps.MQ_COMPETITORS_EXCHANGE(), SysProps.MQ_BLOCKED_COMPETITORS_ROUTING() + ".#");
+        channel.queueBind(SysProps.MQ_TOBE_AVAILABLE_COMPETITORS_QUEUE(), SysProps.MQ_COMPETITORS_EXCHANGE(), SysProps.MQ_TOBE_AVAILABLE_COMPETITORS_ROUTING() + ".#");
         channel.queueBind(SysProps.MQ_STATUS_CHANGE_QUEUE(), SysProps.MQ_CHANGES_EXCHANGE(), SysProps.MQ_STATUS_CHANGES_ROUTING() + ".#");
         channel.queueBind(SysProps.MQ_PRICE_CHANGE_QUEUE(), SysProps.MQ_CHANGES_EXCHANGE(), SysProps.MQ_PRICE_CHANGES_ROUTING() + ".#");
-        channel.queueBind(SysProps.MQ_DELETED_LINKS_QUEUE(), SysProps.MQ_CHANGES_EXCHANGE(), SysProps.MQ_DELETED_LINKS_ROUTING() + ".#");
+        channel.queueBind(SysProps.MQ_PRICE_REFRESH_QUEUE(), SysProps.MQ_CHANGES_EXCHANGE(), SysProps.MQ_PRICE_REFRESH_ROUTING() + ".#");
         channel.queueBind(SysProps.MQ_DEAD_LETTERS_EXCHANGE(), SysProps.MQ_DEAD_LETTERS_EXCHANGE(), "#");
+
+        if (SysProps.APP_ENV().equals(AppEnv.DEV)) {
+          channel.queueBind(SysProps.MQ_CATCH_ALL_QUEUE(), SysProps.MQ_COMPETITORS_EXCHANGE(), "#");
+          channel.queueBind(SysProps.MQ_CATCH_ALL_QUEUE(), SysProps.MQ_CHANGES_EXCHANGE(), "#");
+        }
 
         log.info("Connected to RabbitMQ server and checked all the exchanges and queues");
 
@@ -97,8 +106,8 @@ public class RabbitMQ {
 		}
 	}
 
-	public static void publishLink(Channel channel, String routingKey, String message) {
-		publish(channel, SysProps.MQ_LINKS_EXCHANGE(), routingKey, message);
+	public static void publishCompetitor(Channel channel, String routingKey, String message) {
+		publish(channel, SysProps.MQ_COMPETITORS_EXCHANGE(), routingKey, message);
 	}
 
 	public static void publish(Channel channel, String exchange, String routingKey, String message) {

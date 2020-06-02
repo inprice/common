@@ -5,7 +5,7 @@ import java.util.Date;
 
 import io.inprice.scrapper.common.info.ProductDTO;
 import io.inprice.scrapper.common.meta.ImportType;
-import io.inprice.scrapper.common.meta.LinkStatus;
+import io.inprice.scrapper.common.meta.CompetitorStatus;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,7 +20,7 @@ public class ImportProduct implements Serializable {
   private Long id;
   private ImportType importType;
   private String data;
-  private LinkStatus status = LinkStatus.NEW;
+  private CompetitorStatus status = CompetitorStatus.TOBE_CLASSIFIED;
   private Date lastCheck;
   private Date lastUpdate;
   private Integer retry;

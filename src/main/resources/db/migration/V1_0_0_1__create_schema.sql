@@ -16,7 +16,7 @@ create table site (
 create table plan (
   name                      varchar(15) not null,
   description               varchar(70),
-  price                     double default 0,
+  price                     decimal(9,2) default 0,
   row_limit                 smallint,
   user_limit                smallint default 0,
   order_no                  smallint,
@@ -93,7 +93,7 @@ create table product (
   name                      varchar(500) not null,
   brand                     varchar(100),
   category                  varchar(100),
-  price                     double default 0,
+  price                     decimal(9,2) default 0,
   last_price_id             bigint,
   company_id                bigint not null,
   updated_at                datetime,
@@ -107,22 +107,22 @@ alter table product add foreign key (company_id) references company (id);
 create table product_price (
   id                        bigint auto_increment not null,
   product_id                bigint not null,
-  price                     double default 0,
+  price                     decimal(9,2) default 0,
   min_platform              varchar(50),
   min_seller                varchar(50),
-  min_price                 double default 0,
-  min_diff                  double(3,2) default 0,
-  avg_price                 double default 0,
-  avg_diff                  double(3,2) default 0,
+  min_price                 decimal(9,2) default 0,
+  min_diff                  decimal(6,2) default 0,
+  avg_price                 decimal default 0,
+  avg_diff                  decimal(6,2) default 0,
   max_platform              varchar(50),
   max_seller                varchar(50),
-  max_price                 double default 0,
-  max_diff                  double(3,2) default 0,
+  max_price                 decimal(9,2) default 0,
+  max_diff                  decimal(6,2) default 0,
   competitors               smallint default 0,
   position                  smallint default 3,
   ranking                   smallint default 0,
   ranking_with              smallint default 0,
-  suggested_price           double default 0,
+  suggested_price           decimal(9,2) default 0,
   company_id                bigint not null,
   created_at                timestamp not null default current_timestamp,
   primary key (id),
@@ -130,7 +130,7 @@ create table product_price (
 ) engine=innodb;
 alter table product_price add foreign key (product_id) references product (id);
 
-create table link (
+create table competitor (
   id                        bigint auto_increment not null,
   url                       varchar(1024) not null,
   url_hash                  varchar(32) not null,
@@ -139,11 +139,11 @@ create table link (
   brand                     varchar(150),
   seller                    varchar(150),
   shipment                  varchar(150),
-  price                     double default 0,
+  price                     decimal(9,2) default 0,
   last_check                datetime,
   last_update               datetime,
-  pre_status                varchar(25) not null default 'NEW',
-  status                    varchar(25) not null default 'NEW',
+  pre_status                varchar(25) not null default 'TOBE_CLASSIFIED',
+  status                    varchar(25) not null default 'TOBE_CLASSIFIED',
   retry                     smallint default 0,
   http_status               smallint default 0,
   website_class_name        varchar(100),
@@ -158,36 +158,36 @@ create table link (
   key ix4 (last_update),
   key ix5 (last_check)
 ) engine=innodb;
-alter table link add foreign key (product_id) references product (id);
-alter table link add foreign key (site_id) references site (id);
-alter table link add foreign key (company_id) references company (id);
+alter table competitor add foreign key (product_id) references product (id);
+alter table competitor add foreign key (site_id) references site (id);
+alter table competitor add foreign key (company_id) references company (id);
 
-create table link_price (
+create table competitor_price (
   id                        bigint auto_increment not null,
-  link_id                   bigint not null,
-  price                     double default 0,
+  competitor_id             bigint not null,
+  price                     decimal(9,2) default 0,
   product_id                bigint not null,
   company_id                bigint not null,
   created_at                timestamp not null default current_timestamp,
   primary key (id),
   key ix1 (created_at)
 ) engine=innodb;
-alter table link_price add foreign key (link_id) references link (id);
+alter table competitor_price add foreign key (competitor_id) references competitor (id);
 
-create table link_spec (
+create table competitor_spec (
   id                        bigint auto_increment not null,
-  link_id                   bigint not null,
+  competitor_id             bigint not null,
   _key                      varchar(100),
   _value                    varchar(500),
   product_id                bigint not null,
   company_id                bigint not null,
   primary key (id)
 ) engine=innodb;
-alter table link_spec add foreign key (link_id) references link (id);
+alter table competitor_spec add foreign key (competitor_id) references competitor (id);
 
-create table link_history (
+create table competitor_history (
   id                        bigint auto_increment not null,
-  link_id                   bigint not null,
+  competitor_id             bigint not null,
   status                    varchar(25) not null,
   http_status               smallint default 0,
   product_id                bigint not null,
@@ -196,13 +196,13 @@ create table link_history (
   primary key (id),
   key ix1 (created_at)
 ) engine=innodb;
-alter table link_history add foreign key (link_id) references link (id);
+alter table competitor_history add foreign key (competitor_id) references competitor (id);
 
 create table import_product (
   id                        bigint auto_increment not null,
   import_type               enum('CSV', 'EBAY_SKU', 'AMAZON_ASIN') not null default 'CSV',
   data                      varchar(1024),
-  status                    varchar(25) not null default 'NEW',
+  status                    varchar(25) not null default 'TOBE_CLASSIFIED',
   last_check                datetime default now(),
   last_update               datetime,
   retry                     smallint default 0,

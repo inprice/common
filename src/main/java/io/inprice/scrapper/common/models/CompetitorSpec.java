@@ -10,22 +10,22 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class LinkSpec implements Serializable {
+public class CompetitorSpec implements Serializable {
 
    private static final long serialVersionUID = -7641858030475659639L;
 
    private Long id;
-   private Long linkId;
+   private Long competitorId;
    private String key;
    private String value;
    private Long companyId;
 
-   public LinkSpec(String key, String value) {
+   public CompetitorSpec(String key, String value) {
       this(null, key, value);
    }
 
-   public LinkSpec(Long linkId, String key, String value) {
-      this.linkId = linkId;
+   public CompetitorSpec(Long competitorId, String key, String value) {
+      this.competitorId = competitorId;
       this.key = StringUtils.fixQuotes(key.trim());
       this.value = StringUtils.fixQuotes(value.trim());
    }

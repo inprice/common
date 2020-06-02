@@ -11,19 +11,19 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class LinkPrice implements Serializable {
+public class CompetitorPrice implements Serializable {
 
   private static final long serialVersionUID = 6818942944451174569L;
 
   private Long id;
-  private Long linkId;
+  private Long competitorId;
   private BigDecimal price;
   private Long productId;
   private Long companyId;
   private Date createdAt;
 
-  public LinkPrice(Long linkId, BigDecimal price) {
-    this.linkId = linkId;
+  public CompetitorPrice(Long competitorId, BigDecimal price) {
+    this.competitorId = competitorId;
     this.price = price;
   }
 
