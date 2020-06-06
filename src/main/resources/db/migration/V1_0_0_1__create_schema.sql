@@ -14,13 +14,14 @@ create table site (
 ) engine=innodb;
 
 create table plan (
+  id                        bigint auto_increment not null,
   name                      varchar(15) not null,
   description               varchar(70),
   price                     decimal(9,2) default 0,
-  row_limit                 smallint,
-  user_limit                smallint default 0,
+  product_limit             smallint,
   order_no                  smallint,
-  primary key (name)
+  primary key (id),
+  unique key ix1 (name)
 ) engine=innodb;
 
 create table user (
@@ -39,20 +40,22 @@ create table company (
   id                        bigint auto_increment not null,
   name                      varchar(70) not null,
   admin_id                  bigint not null,
-  plan_name                 varchar(15),
-  plan_status               enum('NOT_SET', 'ACTIVE', 'PAUSED', 'CANCELLED') not null default 'NOT_SET',
   due_date                  datetime,
   retry                     smallint default 0,
   last_collecting_time      datetime,
   last_collecting_status    boolean default false,
   currency_code             char(3),
   currency_format           varchar(16),
+  plan_id                   bigint,
+  plan_status               enum('NOT_SET', 'ACTIVE', 'PAUSED', 'CANCELLED') not null default 'NOT_SET',
+  product_limit             smallint default 0,
+  product_count             smallint default 0,
   created_at                timestamp not null default current_timestamp,
   primary key (id),
   key ix1 (name)
 ) engine=innodb;
 alter table company add foreign key (admin_id) references user (id);
-alter table company add foreign key (plan_name) references plan (name);
+alter table company add foreign key (plan_id) references plan (id);
 
 create table membership (
   id                        bigint auto_increment not null,
@@ -217,3 +220,16 @@ create table import_product (
   key ix4 (created_at)
 ) engine=innodb;
 alter table import_product add foreign key (company_id) references company (id);
+
+create table coupon (
+  code                      char(8) not null,
+  description               varchar(50),
+  days                      smallint default 14,
+  plan_id                   bigint,
+  issued_at                 timestamp,
+  issued_company_id         bigint,
+  created_at                timestamp not null default current_timestamp,
+  primary key (code)
+) engine=innodb;
+alter table coupon add foreign key (plan_id) references plan (id);
+alter table coupon add foreign key (issued_company_id) references company (id);

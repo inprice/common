@@ -20,12 +20,14 @@ public class Company implements Serializable {
   private String currencyCode;
   private String currencyFormat;
   private Long adminId;
-  private String planName;
-  private PlanStatus planStatus;
   private Date dueDate;
   private Integer retry = 0;
   private Date lastCollectingTime;
   private Boolean lastCollectingStatus = Boolean.FALSE;
+  private Long planId;
+  private PlanStatus planStatus;
+  private Integer productLimit = 0;
+  private Integer productCount = 0;
   private Date createdAt = new Date();
 
 }

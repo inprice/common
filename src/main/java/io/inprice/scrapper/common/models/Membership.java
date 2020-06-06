@@ -30,5 +30,7 @@ public class Membership implements Serializable {
   // transient
   private String companyName;
   private String currencyFormat;
+  private Long planId;
+  private String planName;
 
 }

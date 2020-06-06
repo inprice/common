@@ -12,11 +12,11 @@ public class Plan implements Serializable {
 
   private static final long serialVersionUID = -4787008755878198572L;
 
+  private Long id;
   private String name;
   private String description;
   private BigDecimal price;
-  private Integer rowLimit;
-  private Integer userLimit;
+  private Integer productLimit;
   private Integer orderNo;
 
 }

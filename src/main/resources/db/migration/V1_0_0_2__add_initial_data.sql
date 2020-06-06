@@ -189,15 +189,20 @@ values
     ('NewLook UK', 'newlook.com', 'United Kingdom', 'uk.NewLook'),
     ('Zavvi UK', 'zavvi.com', 'United Kingdom', 'uk.Zavvi');
 
-insert into plan (name, row_limit, user_limit, price, order_no)
+insert into plan (name, product_limit, price, order_no)
 values
-    ('Micro', 5, 1, 10, 1),
-    ('Micro+', 10, 1, 15, 2),
-    ('Small', 25, 2, 15, 3),
-    ('Small+', 50, 2, 25, 4),
-    ('Pro', 100, 3, 50, 5),
-    ('Pro+', 150, 5, 100, 6),
-    ('Business', 250, 10, 150, 7),
-    ('Business+', 500, 25, 250, 8),
-    ('Enterprise', 1000, 50, 400, 9),
-    ('Enterprise+', 10000, 500, 1000, 10);
+    ('Micro', 5, 10, 1),
+    ('Micro+', 10, 15, 2),
+    ('Small', 25, 15, 3),
+    ('Small+', 50, 25, 4),
+    ('Pro', 100, 50, 5),
+    ('Pro+', 150, 100, 6),
+    ('Business', 250, 150, 7),
+    ('Business+', 500, 250, 8),
+    ('Enterprise', 1000, 400, 9),
+    ('Enterprise+', 10000, 1000, 10);
+
+insert into coupon (code, description, days, plan_id)
+values
+    ('UQ4LW93F', '14 days coupon code for Micro plan', 14, 1),
+    ('YK2XR6LT', '30 days coupon code for Micro+ plan', 30, 2);
