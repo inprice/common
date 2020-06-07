@@ -31,6 +31,5 @@ public class Membership implements Serializable {
   private String companyName;
   private String currencyFormat;
   private Long planId;
-  private String planName;
 
 }

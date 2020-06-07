@@ -60,14 +60,14 @@ values
     ('Lidl ES', 'lidl.es', 'Spain', 'xx.Lidl');
 
 -- -------------------------------------------------------
--- Medimarkt sites
+-- Mediamarkt sites
 -- -------------------------------------------------------
 insert into site (name, domain, country, class_name)
 values
-    ('Medimarkt DE', 'medimarkt.de', 'Germany', 'de.Medimarkt'),
-    ('Medimarkt NL', 'medimarkt.nl', 'Netherlands', 'xx.Medimarkt'),
-    ('Medimarkt ES', 'medimarkt.es', 'Spain', 'xx.Medimarkt'),
-    ('Medimarkt TR', 'medimarkt.com.tr', 'Turkey', 'xx.Medimarkt');
+    ('MediaMarkt DE', 'mediamarkt.de', 'Germany', 'de.MediaMarkt'),
+    ('MediaMarkt NL', 'mediamarkt.nl', 'Netherlands', 'xx.MediaMarkt'),
+    ('MediaMarkt ES', 'mediamarkt.es', 'Spain', 'xx.MediaMarkt'),
+    ('MediaMarkt TR', 'mediamarkt.com.tr', 'Turkey', 'xx.MediaMarkt');
 
 -- -------------------------------------------------------
 -- Zalando sites

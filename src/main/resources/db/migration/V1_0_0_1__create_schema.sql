@@ -115,7 +115,7 @@ create table product_price (
   min_seller                varchar(50),
   min_price                 decimal(9,2) default 0,
   min_diff                  decimal(6,2) default 0,
-  avg_price                 decimal default 0,
+  avg_price                 decimal(9,2) default 0,
   avg_diff                  decimal(6,2) default 0,
   max_platform              varchar(50),
   max_seller                varchar(50),
