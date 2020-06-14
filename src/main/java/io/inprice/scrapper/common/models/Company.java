@@ -3,7 +3,7 @@ package io.inprice.scrapper.common.models;
 import java.io.Serializable;
 import java.util.Date;
 
-import io.inprice.scrapper.common.meta.PlanStatus;
+import io.inprice.scrapper.common.meta.CompanyStatus;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -25,7 +25,7 @@ public class Company implements Serializable {
   private Date lastCollectingTime;
   private Boolean lastCollectingStatus = Boolean.FALSE;
   private Long planId;
-  private PlanStatus planStatus;
+  private CompanyStatus status;
   private Integer productLimit = 0;
   private Integer productCount = 0;
   private Date createdAt = new Date();

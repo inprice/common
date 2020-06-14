@@ -19,4 +19,6 @@ public class ProductDTO {
   private BigDecimal price;
   private Long importId;
 
+  private Long companyId;
+
 }

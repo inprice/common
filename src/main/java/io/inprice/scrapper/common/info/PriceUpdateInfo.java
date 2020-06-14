@@ -2,7 +2,9 @@ package io.inprice.scrapper.common.info;
 
 import io.inprice.scrapper.common.models.Competitor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -14,6 +16,8 @@ import java.math.BigDecimal;
  */
 @Getter
 @Setter
+@ToString
+@NoArgsConstructor
 public class PriceUpdateInfo implements Serializable {
 
   private static final long serialVersionUID = 1390654039767500676L;

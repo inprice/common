@@ -68,6 +68,10 @@ public class SysProps {
     return System.getenv().getOrDefault("MQ_TOBE_AVAILABLE_COMPETITORS_ROUTING", "competitors.tobe-available");
   }
 
+  public static String MQ_PRODUCT_CREATIONS_ROUTING() {
+    return System.getenv().getOrDefault("MQ_PRODUCT_CREATIONS_ROUTING", "product.creations");
+  }
+
   public static String MQ_STATUS_CHANGES_ROUTING() {
     return System.getenv().getOrDefault("MQ_STATUS_CHANGES_ROUTING", "status.changes");
   }
@@ -102,6 +106,10 @@ public class SysProps {
 
   public static String MQ_TOBE_AVAILABLE_COMPETITORS_QUEUE() {
     return System.getenv().getOrDefault("MQ_QUEUE_TOBE_AVAILABLE_COMPETITOR", "tobe-available-competitors");
+  }
+
+  public static String MQ_PRODUCT_CREATION_QUEUE() {
+    return System.getenv().getOrDefault("MQ_PRODUCT_CREATION_QUEUE", "create-product");
   }
 
   public static String MQ_STATUS_CHANGE_QUEUE() {

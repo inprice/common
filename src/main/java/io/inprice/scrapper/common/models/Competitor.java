@@ -7,12 +7,14 @@ import java.util.List;
 
 import io.inprice.scrapper.common.meta.CompetitorStatus;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 public class Competitor implements Serializable {
 
   private static final long serialVersionUID = 2206190984817621818L;
@@ -39,20 +41,15 @@ public class Competitor implements Serializable {
   private Date createdAt;
 
   /**
-   * The three list fields below never be saved into database.
+   * Transient fields and never be saved into db.
+   * So do not rely on them
    */
   private String platform;
+  private BigDecimal productPrice = BigDecimal.ZERO;
+
   private List<CompetitorPrice> priceList;
   private List<CompetitorSpec> specList;
   private List<CompetitorHistory> historyList;
-
-  /**
-   * The field below never be saved into database.
-   */
-  private BigDecimal productPrice = BigDecimal.ZERO;
-
-  public Competitor() {
-  }
 
   public Competitor(String url) {
     this.url = url;

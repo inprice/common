@@ -16,8 +16,8 @@ import lombok.ToString;
  */
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
+@NoArgsConstructor
 public class StatusChange implements Serializable {
 
   private static final long serialVersionUID = -7240482576220187098L;

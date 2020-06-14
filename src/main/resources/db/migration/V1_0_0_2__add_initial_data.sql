@@ -74,12 +74,12 @@ values
 -- -------------------------------------------------------
 insert into site (name, domain, country, class_name)
 values
-    ('Zalando UK', 'zalado.co.uk', 'United Kingdom', 'xx.Zalando'),
-    ('Zalando DE', 'zalado.de', 'Germany', 'xx.Zalando'),
-    ('Zalando NL', 'zalado.nl', 'Netherlands', 'xx.Zalando'),
-    ('Zalando FR', 'zalado.fr', 'France', 'xx.Zalando'),
-    ('Zalando IT', 'zalado.it', 'Italy', 'xx.Zalando'),
-    ('Zalando ES', 'zalado.es', 'Spain', 'xx.Zalando');
+    ('Zalando UK', 'zalando.co.uk', 'United Kingdom', 'xx.Zalando'),
+    ('Zalando DE', 'zalando.de', 'Germany', 'xx.Zalando'),
+    ('Zalando NL', 'zalando.nl', 'Netherlands', 'xx.Zalando'),
+    ('Zalando FR', 'zalando.fr', 'France', 'xx.Zalando'),
+    ('Zalando IT', 'zalando.it', 'Italy', 'xx.Zalando'),
+    ('Zalando ES', 'zalando.es', 'Spain', 'xx.Zalando');
 
 -- -------------------------------------------------------
 -- Bonprix sites

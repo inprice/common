@@ -48,6 +48,7 @@ public class RabbitMQ {
         channel.queueDeclare(SysProps.MQ_FAILED_COMPETITORS_QUEUE(), true, false, false, args);
         channel.queueDeclare(SysProps.MQ_BLOCKED_COMPETITORS_QUEUE(), true, false, false, args);
         channel.queueDeclare(SysProps.MQ_TOBE_AVAILABLE_COMPETITORS_QUEUE(), true, false, false, args);
+        channel.queueDeclare(SysProps.MQ_PRODUCT_CREATION_QUEUE(), true, false, false, args);
         channel.queueDeclare(SysProps.MQ_STATUS_CHANGE_QUEUE(), true, false, false, args);
         channel.queueDeclare(SysProps.MQ_PRICE_CHANGE_QUEUE(), true, false, false, args);
         channel.queueDeclare(SysProps.MQ_PRICE_REFRESH_QUEUE(), true, false, false, args);
@@ -59,6 +60,7 @@ public class RabbitMQ {
         channel.queueBind(SysProps.MQ_FAILED_COMPETITORS_QUEUE(), SysProps.MQ_COMPETITORS_EXCHANGE(), SysProps.MQ_FAILED_COMPETITORS_ROUTING() + ".#");
         channel.queueBind(SysProps.MQ_BLOCKED_COMPETITORS_QUEUE(), SysProps.MQ_COMPETITORS_EXCHANGE(), SysProps.MQ_BLOCKED_COMPETITORS_ROUTING() + ".#");
         channel.queueBind(SysProps.MQ_TOBE_AVAILABLE_COMPETITORS_QUEUE(), SysProps.MQ_COMPETITORS_EXCHANGE(), SysProps.MQ_TOBE_AVAILABLE_COMPETITORS_ROUTING() + ".#");
+        channel.queueBind(SysProps.MQ_PRODUCT_CREATION_QUEUE(), SysProps.MQ_CHANGES_EXCHANGE(), SysProps.MQ_PRODUCT_CREATIONS_ROUTING() + ".#");
         channel.queueBind(SysProps.MQ_STATUS_CHANGE_QUEUE(), SysProps.MQ_CHANGES_EXCHANGE(), SysProps.MQ_STATUS_CHANGES_ROUTING() + ".#");
         channel.queueBind(SysProps.MQ_PRICE_CHANGE_QUEUE(), SysProps.MQ_CHANGES_EXCHANGE(), SysProps.MQ_PRICE_CHANGES_ROUTING() + ".#");
         channel.queueBind(SysProps.MQ_PRICE_REFRESH_QUEUE(), SysProps.MQ_CHANGES_EXCHANGE(), SysProps.MQ_PRICE_REFRESH_ROUTING() + ".#");

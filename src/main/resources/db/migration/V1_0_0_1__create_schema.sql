@@ -39,6 +39,7 @@ create table user (
 create table company (
   id                        bigint auto_increment not null,
   name                      varchar(70) not null,
+  status                    enum('NOT_SET', 'ACTIVE', 'PAUSED', 'STOPPED') not null default 'NOT_SET',
   admin_id                  bigint not null,
   due_date                  datetime,
   retry                     smallint default 0,
@@ -47,7 +48,6 @@ create table company (
   currency_code             char(3),
   currency_format           varchar(16),
   plan_id                   bigint,
-  plan_status               enum('NOT_SET', 'ACTIVE', 'PAUSED', 'CANCELLED') not null default 'NOT_SET',
   product_limit             smallint default 0,
   product_count             smallint default 0,
   created_at                timestamp not null default current_timestamp,
@@ -200,26 +200,6 @@ create table competitor_history (
   key ix1 (created_at)
 ) engine=innodb;
 alter table competitor_history add foreign key (competitor_id) references competitor (id);
-
-create table import_product (
-  id                        bigint auto_increment not null,
-  import_type               enum('CSV', 'EBAY_SKU', 'AMAZON_ASIN') not null default 'CSV',
-  data                      varchar(1024),
-  status                    varchar(25) not null default 'TOBE_CLASSIFIED',
-  last_check                datetime default now(),
-  last_update               datetime,
-  retry                     smallint default 0,
-  http_status               smallint default 0,
-  description               varchar(250),
-  company_id                bigint not null,
-  created_at                timestamp not null,
-  primary key (id),
-  key ix1 (status),
-  key ix2 (last_update),
-  key ix3 (last_check),
-  key ix4 (created_at)
-) engine=innodb;
-alter table import_product add foreign key (company_id) references company (id);
 
 create table coupon (
   code                      char(8) not null,

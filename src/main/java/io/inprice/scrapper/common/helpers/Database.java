@@ -85,6 +85,7 @@ public class Database {
   public void commit(Connection con) {
     try {
       con.commit();
+      con.setAutoCommit(true);
     } catch (SQLException ex) {
       //
     }
@@ -93,6 +94,7 @@ public class Database {
   public void rollback(Connection con) {
     try {
       con.rollback();
+      con.setAutoCommit(true);
     } catch (SQLException ex) {
       //
     }
@@ -231,6 +233,15 @@ public class Database {
       log.error(errorMessage, e);
     }
     return result;
+  }
+
+  public void executeBatchQueries(Connection con, List<String> queries) throws SQLException {
+    try (Statement sta = con.createStatement()) {
+      for (String query : queries) {
+        sta.addBatch(query);
+      }
+      sta.executeBatch();
+    }
   }
 
   /**
