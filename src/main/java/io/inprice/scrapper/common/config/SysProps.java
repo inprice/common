@@ -20,6 +20,10 @@ public class SysProps {
     return "true".equals(System.getenv().getOrDefault("APP_SHOW_QUERIES", "true").toLowerCase());
   }
 
+  public static String MQ_URI() {
+    return System.getenv().getOrDefault("MQ_URI", null);
+  }
+
   public static String MQ_HOST() {
     return System.getenv().getOrDefault("MQ_HOST", "localhost");
   }

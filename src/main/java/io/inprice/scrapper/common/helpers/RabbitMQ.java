@@ -27,15 +27,21 @@ public class RabbitMQ {
     while (connection == null || !connection.isOpen()) {
       try {
         ConnectionFactory cf = new ConnectionFactory();
-        cf.setHost(SysProps.MQ_HOST());
-        cf.setPort(SysProps.MQ_PORT());
-        cf.setUsername(SysProps.MQ_USERNAME());
-        cf.setPassword(SysProps.MQ_PASSWORD());
-        cf.setAutomaticRecoveryEnabled(true);
-    
+        if (SysProps.MQ_URI() != null) {
+          cf.setUri(SysProps.MQ_URI());
+        } else {
+          cf.setHost(SysProps.MQ_HOST());
+          cf.setPort(SysProps.MQ_PORT());
+          cf.setUsername(SysProps.MQ_USERNAME());
+          cf.setPassword(SysProps.MQ_PASSWORD());
+        }
+
+        cf.setRequestedHeartbeat(30);
+        cf.setConnectionTimeout(30000);
+
         connection = cf.newConnection();
         channel = connection.createChannel();
-        
+
         channel.exchangeDeclare(SysProps.MQ_COMPETITORS_EXCHANGE(), "topic");
         channel.exchangeDeclare(SysProps.MQ_CHANGES_EXCHANGE(), "topic");
         channel.exchangeDeclare(SysProps.MQ_DEAD_LETTERS_EXCHANGE(), "topic");

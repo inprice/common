@@ -11,7 +11,18 @@ public class NumberUtils {
       if ((ch >= '0' && ch <= '9') || ch == ',' || ch == '.')
         sb.append(ch);
     }
+
     String trimmed = sb.toString();
+
+    if (trimmed.charAt(0) == '.' || trimmed.charAt(0) == ',') {
+      trimmed = "0" + trimmed;
+    }
+    if (trimmed.charAt(trimmed.length()-1) == '.' || trimmed.charAt(trimmed.length()-1) == ',') {
+      trimmed += "00";
+    } else if (trimmed.length() > 2 && (trimmed.charAt(trimmed.length()-2) == '.' || trimmed.charAt(trimmed.length()-2) == ',')) {
+      trimmed += "0";
+    }      
+
     boolean commaDecimal = (trimmed.length() > 3
         && (trimmed.charAt(trimmed.length() - 3) == ',' || trimmed.charAt(trimmed.length() - 3) == '.'));
 
