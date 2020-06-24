@@ -40,36 +40,47 @@ public class Database {
   }
 
   private void doMigrations() {
-    Flyway flyway = Flyway.configure().dataSource(this.conString, SysProps.DB_USERNAME(), SysProps.DB_PASSWORD())
-        .load();
-    flyway.migrate();
+    try {
+      Flyway flyway = Flyway.configure().dataSource(this.conString, SysProps.DB_USERNAME(), SysProps.DB_PASSWORD())
+          .load();
+      flyway.migrate();
+    } catch (Exception e) {
+      log.warn("connection string: "+ this.conString);
+      log.warn("username: "+ SysProps.DB_USERNAME());
+      log.warn("password: "+ SysProps.DB_PASSWORD());
+      log.error("Unable to init migrations", e);
+    }
   }
 
   private void connect() {
     doMigrations();
 
-    HikariConfig hConf = new HikariConfig();
-    hConf.setJdbcUrl(conString);
-    hConf.setUsername(SysProps.DB_USERNAME());
-    hConf.setPassword(SysProps.DB_PASSWORD());
+    try {
+        HikariConfig hConf = new HikariConfig();
+      hConf.setJdbcUrl(conString);
+      hConf.setUsername(SysProps.DB_USERNAME());
+      hConf.setPassword(SysProps.DB_PASSWORD());
 
-    if (SysProps.APP_ENV().equals(AppEnv.TEST))
-      hConf.setConnectionTimeout(3 * 1000); // three seconds
-    else
-      hConf.setConnectionTimeout(10 * 1000); // ten seconds
+      if (SysProps.APP_ENV().equals(AppEnv.TEST))
+        hConf.setConnectionTimeout(3 * 1000); // three seconds
+      else
+        hConf.setConnectionTimeout(10 * 1000); // ten seconds
 
-    hConf.addDataSourceProperty("cachePrepStmts", "true");
-    hConf.addDataSourceProperty("prepStmtCacheSize", "250");
-    hConf.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-    hConf.addDataSourceProperty("useServerPrepStmts", "true");
-    hConf.addDataSourceProperty("useLocalSessionState", "true");
-    hConf.addDataSourceProperty("rewriteBatchedStatements", "true");
-    hConf.addDataSourceProperty("cacheResultSetMetadata", "true");
-    hConf.addDataSourceProperty("cacheServerConfiguration", "true");
-    hConf.addDataSourceProperty("elideSetAutoCommits", "true");
-    hConf.addDataSourceProperty("maintainTimeStats", "false");
+      hConf.addDataSourceProperty("cachePrepStmts", "true");
+      hConf.addDataSourceProperty("prepStmtCacheSize", "250");
+      hConf.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+      hConf.addDataSourceProperty("useServerPrepStmts", "true");
+      hConf.addDataSourceProperty("useLocalSessionState", "true");
+      hConf.addDataSourceProperty("rewriteBatchedStatements", "true");
+      hConf.addDataSourceProperty("cacheResultSetMetadata", "true");
+      hConf.addDataSourceProperty("cacheServerConfiguration", "true");
+      //hConf.addDataSourceProperty("elideSetAutoCommits", "true");
+      hConf.addDataSourceProperty("maintainTimeStats", "false");
 
-    ds = new HikariDataSource(hConf);
+      ds = new HikariDataSource(hConf);
+    } catch (Exception e) {
+      log.error("Unable to connect to db", e);
+    }
   }
 
   public Connection getConnection() throws SQLException {
@@ -199,7 +210,6 @@ public class Database {
    */
   public boolean executeQuery(String query, String errorMessage) {
     try (Connection con = getConnection(); PreparedStatement pst = con.prepareStatement(query)) {
-
       if (SysProps.APP_SHOW_QUERIES()) {
         log.info(" Q-> " + query);
       }
@@ -219,7 +229,10 @@ public class Database {
 
     try (Statement sta = con.createStatement()) {
       for (String query : queries) {
-        sta.addBatch(query);
+          if (SysProps.APP_SHOW_QUERIES()) {
+            log.info(" Q-> " + query);
+          }
+          sta.addBatch(query);
       }
 
       int[] affected = sta.executeBatch();
@@ -238,7 +251,10 @@ public class Database {
   public void executeBatchQueries(Connection con, List<String> queries) throws SQLException {
     try (Statement sta = con.createStatement()) {
       for (String query : queries) {
-        sta.addBatch(query);
+          if (SysProps.APP_SHOW_QUERIES()) {
+            log.info(" Q-> " + query);
+          }
+          sta.addBatch(query);
       }
       sta.executeBatch();
     }

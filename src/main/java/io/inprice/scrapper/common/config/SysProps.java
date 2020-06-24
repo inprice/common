@@ -25,7 +25,7 @@ public class SysProps {
   }
 
   public static String MQ_HOST() {
-    return System.getenv().getOrDefault("MQ_HOST", "localhost");
+    return System.getenv().getOrDefault("MQ_HOST", "127.0.0.1");
   }
 
   public static int MQ_PORT() {
@@ -138,7 +138,7 @@ public class SysProps {
   }
 
   public static String DB_HOST() {
-    String def = APP_ENV().equals(AppEnv.TEST) ? "mem" : "//localhost";
+    String def = APP_ENV().equals(AppEnv.TEST) ? "mem" : "//127.0.0.1";
     return System.getenv().getOrDefault("DB_HOST", def);
   }
 
@@ -169,7 +169,7 @@ public class SysProps {
   }
 
   public static String REDIS_HOST() {
-    return System.getenv().getOrDefault("REDIS_HOST", "localhost");
+    return System.getenv().getOrDefault("REDIS_HOST", "127.0.0.1");
   }
 
   public static int REDIS_PORT() {
