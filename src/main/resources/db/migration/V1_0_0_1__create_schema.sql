@@ -89,15 +89,25 @@ create table user_session (
 alter table user_session add foreign key (user_id) references user (id);
 alter table user_session add foreign key (company_id) references company (id);
 
+-- used for lookup fields like brand and category
+create table lookup (
+  id                        bigint auto_increment not null,
+  company_id                bigint not null,
+  type                      enum('BRAND', 'CATEGORY') not null default 'BRAND',
+  name                      varchar(50),
+  primary key (id)
+) engine=innodb;
+alter table lookup add foreign key (company_id) references company (id);
+
 create table product (
   id                        bigint auto_increment not null,
   active                    boolean default true,
-  code                      varchar(120) not null,
+  code                      varchar(50) not null,
   name                      varchar(500) not null,
-  brand                     varchar(100),
-  category                  varchar(100),
   price                     decimal(9,2) default 0,
   last_price_id             bigint,
+  brand_id                  bigint,
+  category_id               bigint,
   company_id                bigint not null,
   updated_at                datetime,
   created_at                timestamp not null default current_timestamp,
@@ -106,6 +116,8 @@ create table product (
   key ix2 (company_id, name)
 ) engine=innodb;
 alter table product add foreign key (company_id) references company (id);
+alter table product add foreign key (brand_id) references lookup (id);
+alter table product add foreign key (category_id) references lookup (id);
 
 create table product_price (
   id                        bigint auto_increment not null,

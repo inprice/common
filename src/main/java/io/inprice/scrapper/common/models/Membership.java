@@ -27,7 +27,7 @@ public class Membership implements Serializable {
   private Date updatedAt;
   private Date createdAt = new Date();
 
-  // transient
+  //transients
   private String companyName;
   private String currencyFormat;
   private Long planId;

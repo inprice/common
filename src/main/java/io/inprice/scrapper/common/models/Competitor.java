@@ -40,10 +40,7 @@ public class Competitor implements Serializable {
   private Long companyId;
   private Date createdAt;
 
-  /**
-   * Transient fields and never be saved into db.
-   * So do not rely on them
-   */
+  //transients
   private String platform;
   private BigDecimal productPrice = BigDecimal.ZERO;
 

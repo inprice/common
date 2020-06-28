@@ -19,14 +19,17 @@ public class Product implements Serializable {
   private Boolean active = Boolean.TRUE;
   private String code;
   private String name;
-  private String brand;
-  private String category;
   private BigDecimal price;
-  private Long lastPriceId;
+  private Long brandId;
+  private Long categoryId;
   private Long companyId;
+  private Long lastPriceId;
   private Date updatedAt;
   private Date createdAt;
 
+  //transients
+  private String brand;
+  private String category;
   private ProductPrice priceDetails;
 
 }

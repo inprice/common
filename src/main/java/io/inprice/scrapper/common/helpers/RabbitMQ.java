@@ -20,11 +20,14 @@ public class RabbitMQ {
 	private static final Logger log = LoggerFactory.getLogger(RabbitMQ.class);
 
   private static Connection connection;
+  private static int conRetry;
 
 	public synchronized static Channel openChannel() {
     Channel channel = null;
 
-    while (connection == null || !connection.isOpen()) {
+    int retryLimit = 30;
+
+    while (conRetry < retryLimit && (connection == null || !connection.isOpen())) {
       try {
         ConnectionFactory cf = new ConnectionFactory();
         if (SysProps.MQ_URI() != null) {
@@ -78,10 +81,12 @@ public class RabbitMQ {
         }
 
         log.info("Connected to RabbitMQ server and checked all the exchanges and queues");
+        conRetry = 0;
 
       } catch (Exception e) {
-        log.error("Failed to connect to RabbitMQ server, trying again in 3 seconds! " + e.getMessage());
+        log.error("Failed to connect to RabbitMQ server, trying again in 3 seconds. {}, Retry: {}/{}", e.getMessage(), conRetry+1, retryLimit);
         try {
+          conRetry++;
           Thread.sleep(3000);
         } catch (InterruptedException ignored) { }
       }

@@ -1,6 +1,7 @@
 package io.inprice.scrapper.common.config;
 
 import io.inprice.scrapper.common.meta.AppEnv;
+import io.inprice.scrapper.common.utils.NumberUtils;
 
 public class SysProps {
 
@@ -13,11 +14,15 @@ public class SysProps {
   }
 
   public static int WAITING_TIME_FOR_TERMINATION() {
-    return new Integer(System.getenv().getOrDefault("WAITING_TIME_FOR_TERMINATION", "30"));
+    return NumberUtils.toInteger(System.getenv().getOrDefault("WAITING_TIME_FOR_TERMINATION", "30"));
   }
 
   public static boolean APP_SHOW_QUERIES() {
     return "true".equals(System.getenv().getOrDefault("APP_SHOW_QUERIES", "true").toLowerCase());
+  }
+
+  public static int HTTP_CONNECTION_TIMEOUT() {
+    return NumberUtils.toInteger(System.getenv().getOrDefault("HTTP_CONNECTION_TIMEOUT", "10"));
   }
 
   public static String MQ_URI() {
@@ -29,7 +34,7 @@ public class SysProps {
   }
 
   public static int MQ_PORT() {
-    return new Integer(System.getenv().getOrDefault("MQ_PORT", "5672"));
+    return NumberUtils.toInteger(System.getenv().getOrDefault("MQ_PORT", "5672"));
   }
 
   public static String MQ_USERNAME() {
@@ -138,12 +143,12 @@ public class SysProps {
   }
 
   public static String DB_HOST() {
-    String def = APP_ENV().equals(AppEnv.TEST) ? "mem" : "//127.0.0.1";
+    String def = APP_ENV().equals(AppEnv.TEST) ? "mem" : "//localhost";
     return System.getenv().getOrDefault("DB_HOST", def);
   }
 
   public static int DB_PORT() {
-    return new Integer(System.getenv().getOrDefault("DB_PORT", "3306"));
+    return NumberUtils.toInteger(System.getenv().getOrDefault("DB_PORT", "3306"));
   }
 
   public static String DB_DATABASE() {
@@ -173,7 +178,7 @@ public class SysProps {
   }
 
   public static int REDIS_PORT() {
-    return new Integer(System.getenv().getOrDefault("REDIS_PORT", "6379"));
+    return NumberUtils.toInteger(System.getenv().getOrDefault("REDIS_PORT", "6379"));
   }
 
   public static String REDIS_PASSWORD() {
