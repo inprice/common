@@ -119,7 +119,7 @@ public class Database {
     }
   }
 
-  public void close(Connection con, Statement pst) {
+  private void close(Connection con, Statement pst) {
     try {
       if (pst != null)
         pst.close();
