@@ -4,10 +4,10 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>io.inprice.scrapper</groupId>
+  <groupId>io.inprice</groupId>
   <artifactId>common</artifactId>
   <version>1.0.0</version>
-  <name>Common utilities project for Scrapper</name>
+  <packaging>jar</packaging>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
