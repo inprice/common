@@ -45,9 +45,11 @@ public class Database {
           .load();
       flyway.migrate();
     } catch (Exception e) {
-      log.warn("connection string: "+ this.conString);
-      log.warn("username: "+ SysProps.DB_USERNAME());
-      log.warn("password: "+ SysProps.DB_PASSWORD());
+      log.warn("Connection: "+ this.conString);
+      if (! SysProps.APP_ENV().equals(AppEnv.PROD)) {
+        log.warn("username: "+ SysProps.DB_USERNAME());
+        log.warn("password: "+ SysProps.DB_PASSWORD());
+      }
       log.error("Unable to init migrations", e);
     }
   }

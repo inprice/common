@@ -3,6 +3,7 @@ package io.inprice.common.models;
 import java.io.Serializable;
 import java.util.Date;
 
+import io.inprice.common.meta.SubsStatus;
 import io.inprice.common.meta.UserRole;
 import io.inprice.common.meta.UserStatus;
 import lombok.Getter;
@@ -31,5 +32,7 @@ public class Membership implements Serializable {
   private String companyName;
   private String currencyFormat;
   private Long planId;
+  private SubsStatus subsStatus;
+  private Date subsRenewalAt;
 
 }
