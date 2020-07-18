@@ -237,6 +237,7 @@ create table coupon (
   code                      char(8) not null,
   description               varchar(50),
   days                      smallint default 14,
+  issued_company_id         bigint,
   issued_at                 timestamp,
   plan_id                   bigint not null,
   created_at                timestamp not null default current_timestamp,
