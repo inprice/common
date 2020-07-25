@@ -21,7 +21,6 @@ create table plan (
   description               varchar(70),
   price                     decimal(9,2) default 0,
   product_limit             smallint,
-  stripe_prod_id            varchar(255) not null,
   primary key (id)
 ) engine=innodb;
 
@@ -50,12 +49,14 @@ create table company (
   subs_id                   varchar(255),
   subs_status               enum('NOT_SET', 'ACTIVE', 'COUPONED', 'PAST_DUE', 'CANCELLED') not null default 'NOT_SET',
   subs_renewal_at           timestamp,
+  subs_customer_id          varchar(255),
   title                     varchar(255),
   address_1                 varchar(255),
   address_2                 varchar(255),
-  town_or_city              varchar(70),
   postcode                  varchar(8),
-  country                   varchar(70),
+  city                      varchar(70),
+  state                     varchar(70),
+  country                   varchar(2),
   created_at                timestamp not null default current_timestamp,
   primary key (id),
   key ix1 (subs_renewal_at),

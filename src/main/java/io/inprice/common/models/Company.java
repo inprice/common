@@ -26,11 +26,13 @@ public class Company implements Serializable {
   private String subsId;
   private SubsStatus subsStatus;
   private Date subsRenewalAt;
+  private String subsCustomerId;
   private String title;
   private String address1;
   private String address2;
-  private String townOrCity;
   private String postcode;
+  private String city;
+  private String state;
   private String country;
   private Date createdAt = new Date();
 

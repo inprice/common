@@ -189,10 +189,10 @@ values
     ('NewLook UK', 'newlook.com', 'United Kingdom', 'uk.NewLook'),
     ('Zavvi UK', 'zavvi.com', 'United Kingdom', 'uk.Zavvi');
 
-insert into plan (name, product_limit, price, order_no, stripe_prod_id)
+insert into plan (name, product_limit, price, order_no)
 values
-    ('Micro', 5, 7, 1, 'prod_HalMSgkBM1pemU'),
-    ('Micro Plus', 10, 10, 2, 'prod_HalO2XgvA1yIsa');
+    ('Micro Plan', 5, 7, 1),
+    ('Micro Plus Plan', 10, 10, 2);
     /*
     ('Small', 25, 20, 3),
     ('Small+', 50, 30, 4),
