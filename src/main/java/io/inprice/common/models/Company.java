@@ -22,7 +22,7 @@ public class Company implements Serializable {
   private Integer productLimit = 0;
   private Integer productCount = 0;
   private Long adminId;
-  private Long planId;
+  private Integer planId;
   private String subsId;
   private SubsStatus subsStatus;
   private Date subsRenewalAt;

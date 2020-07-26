@@ -13,17 +13,6 @@ create table site (
   unique key ix1 (name)
 ) engine=innodb;
 
-create table plan (
-  id                        bigint auto_increment not null,
-  active                    boolean default true,
-  order_no                  smallint,
-  name                      varchar(15) not null,
-  description               varchar(70),
-  price                     decimal(9,2) default 0,
-  product_limit             smallint,
-  primary key (id)
-) engine=innodb;
-
 create table user (
   id                        bigint auto_increment not null,
   email                     varchar(100) not null,
@@ -45,7 +34,7 @@ create table company (
   product_limit             smallint default 0,
   product_count             smallint default 0,
   admin_id                  bigint not null,
-  plan_id                   bigint,
+  plan_id                   smallint,
   subs_id                   varchar(255),
   subs_status               enum('NOT_SET', 'ACTIVE', 'COUPONED', 'PAST_DUE', 'CANCELLED') not null default 'NOT_SET',
   subs_renewal_at           timestamp,
@@ -63,7 +52,6 @@ create table company (
   key ix2 (name)
 ) engine=innodb;
 alter table company add foreign key (admin_id) references user (id);
-alter table company add foreign key (plan_id) references plan (id);
 
 create table subs_event (
   id                        bigint auto_increment not null,
@@ -240,8 +228,7 @@ create table coupon (
   days                      smallint default 14,
   issued_company_id         bigint,
   issued_at                 timestamp,
-  plan_id                   bigint not null,
+  plan_id                   smallint not null,
   created_at                timestamp not null default current_timestamp,
   primary key (code)
 ) engine=innodb;
-alter table coupon add foreign key (plan_id) references plan (id);

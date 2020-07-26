@@ -31,7 +31,7 @@ public class Membership implements Serializable {
   //transients
   private String companyName;
   private String currencyFormat;
-  private Long planId;
+  private Integer planId;
   private SubsStatus subsStatus;
   private Date subsRenewalAt;
 

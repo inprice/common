@@ -189,19 +189,6 @@ values
     ('NewLook UK', 'newlook.com', 'United Kingdom', 'uk.NewLook'),
     ('Zavvi UK', 'zavvi.com', 'United Kingdom', 'uk.Zavvi');
 
-insert into plan (name, product_limit, price, order_no)
-values
-    ('Micro Plan', 5, 7, 1),
-    ('Micro Plus Plan', 10, 10, 2);
-    /*
-    ('Small', 25, 20, 3),
-    ('Small+', 50, 30, 4),
-    ('Pro', 100, 50, 5),
-    ('Pro+', 250, 100, 6),
-    ('Business', 500, 180, 7),
-    ('Business+', 1000, 300, 8);
-    */
-
 insert into coupon (code, description, days, plan_id)
 values
     ('UQ4LW93F', '14 days for Micro plan', 14, 1),
@@ -229,29 +216,29 @@ values
     ('KV3NB28U', '14 days for Micro plan', 14, 1),
     ('LN3GE5CM', '14 days for Micro plan', 14, 1),
     ('LW4XD6KN', '14 days for Micro plan', 14, 1),
-    ('MF6HB5A3', '14 days for Micro+ plan', 30, 2),
-    ('MU9KR6B4', '14 days for Micro+ plan', 30, 2),
-    ('MX7AU98C', '14 days for Micro+ plan', 30, 2),
-    ('NM9GR4XV', '14 days for Micro+ plan', 30, 2),
-    ('PV3KT6SB', '14 days for Micro+ plan', 30, 2),
-    ('PV5WG742', '14 days for Micro+ plan', 30, 2),
-    ('QC5NV8JU', '14 days for Micro+ plan', 30, 2),
-    ('QS9XM3H6', '14 days for Micro+ plan', 30, 2),
-    ('RV6EY31B', '14 days for Micro+ plan', 30, 2),
-    ('SV5CN4PD', '14 days for Micro+ plan', 30, 2),
-    ('UM7AL5TU', '14 days for Micro+ plan', 30, 2),
-    ('UZ4VK1SE', '14 days for Micro+ plan', 30, 2),
-    ('VN7FH1UU', '14 days for Micro+ plan', 30, 2),
-    ('WB2RL3QH', '14 days for Micro+ plan', 30, 2),
-    ('WB3YL2Z6', '14 days for Micro+ plan', 30, 2),
-    ('WN4PX3MB', '14 days for Micro+ plan', 30, 2),
-    ('WP8TR2XW', '14 days for Micro+ plan', 30, 2),
-    ('WV7PL69U', '14 days for Micro+ plan', 30, 2),
-    ('XJ2DT63X', '14 days for Micro+ plan', 30, 2),
-    ('XT3QG6LV', '14 days for Micro+ plan', 30, 2),
-    ('YA5RT4L8', '14 days for Micro+ plan', 30, 2),
-    ('YU8AE6N4', '14 days for Micro+ plan', 30, 2),
-    ('ZE2UA3V4', '14 days for Micro+ plan', 30, 2),
-    ('ZT5RA2EH', '14 days for Micro+ plan', 30, 2),
-    ('ZX4EF7NX', '14 days for Micro+ plan', 30, 2),
-    ('YK2XR6LT', '30 days for Micro+ plan', 30, 2);
+    ('MF6HB5A3', '14 days for Micro Plus plan', 30, 2),
+    ('MU9KR6B4', '14 days for Micro Plus plan', 30, 2),
+    ('MX7AU98C', '14 days for Micro Plus plan', 30, 2),
+    ('NM9GR4XV', '14 days for Micro Plus plan', 30, 2),
+    ('PV3KT6SB', '14 days for Micro Plus plan', 30, 2),
+    ('PV5WG742', '14 days for Micro Plus plan', 30, 2),
+    ('QC5NV8JU', '14 days for Micro Plus plan', 30, 2),
+    ('QS9XM3H6', '14 days for Micro Plus plan', 30, 2),
+    ('RV6EY31B', '14 days for Micro Plus plan', 30, 2),
+    ('SV5CN4PD', '14 days for Micro Plus plan', 30, 2),
+    ('UM7AL5TU', '14 days for Micro Plus plan', 30, 2),
+    ('UZ4VK1SE', '14 days for Micro Plus plan', 30, 2),
+    ('VN7FH1UU', '14 days for Micro Plus plan', 30, 2),
+    ('WB2RL3QH', '14 days for Micro Plus plan', 30, 2),
+    ('WB3YL2Z6', '14 days for Micro Plus plan', 30, 2),
+    ('WN4PX3MB', '14 days for Micro Plus plan', 30, 2),
+    ('WP8TR2XW', '14 days for Micro Plus plan', 30, 2),
+    ('WV7PL69U', '14 days for Micro Plus plan', 30, 2),
+    ('XJ2DT63X', '14 days for Micro Plus plan', 30, 2),
+    ('XT3QG6LV', '14 days for Micro Plus plan', 30, 2),
+    ('YA5RT4L8', '14 days for Micro Plus plan', 30, 2),
+    ('YU8AE6N4', '14 days for Micro Plus plan', 30, 2),
+    ('ZE2UA3V4', '14 days for Micro Plus plan', 30, 2),
+    ('ZT5RA2EH', '14 days for Micro Plus plan', 30, 2),
+    ('ZX4EF7NX', '14 days for Micro Plus plan', 30, 2),
+    ('YK2XR6LT', '30 days for Micro Plus plan', 30, 2);
