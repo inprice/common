@@ -36,7 +36,7 @@ create table company (
   admin_id                  bigint not null,
   plan_id                   smallint,
   subs_id                   varchar(255),
-  subs_status               enum('NOT_SET', 'ACTIVE', 'COUPONED', 'PAST_DUE', 'CANCELLED') not null default 'NOT_SET',
+  subs_status               enum('NOT_SET', 'ACTIVE', 'COUPONED', 'STOPPED', 'CANCELLED') not null default 'NOT_SET',
   subs_renewal_at           timestamp,
   subs_customer_id          varchar(255),
   title                     varchar(255),
@@ -49,22 +49,26 @@ create table company (
   created_at                timestamp not null default current_timestamp,
   primary key (id),
   key ix1 (subs_renewal_at),
-  key ix2 (name)
+  key ix2 (name),
+  key ix3 (subs_customer_id)
 ) engine=innodb;
 alter table company add foreign key (admin_id) references user (id);
 
-create table subs_event (
+create table subs_trans (
   id                        bigint auto_increment not null,
   company_id                bigint not null,
-  event_type                enum('SUBSCRIPTION', 'COUPON') not null default 'SUBSCRIPTION',
+  event_source              enum('SUBSCRIPTION', 'COUPON') not null default 'SUBSCRIPTION',
   event_id                  varchar(255),
-  event                     varchar(30) not null,
-  data                      text not null,
+  event                     varchar(255) not null,
+  successful                boolean default false,
+  reason                    varchar(255),
+  description               varchar(255),
+  file_url                  varchar(255),
   created_at                timestamp not null default current_timestamp,
   primary key (id),
   key ix1 (created_at)
 ) engine=innodb;
-alter table subs_event add foreign key (company_id) references company (id);
+alter table subs_trans add foreign key (company_id) references company (id);
 
 create table membership (
   id                        bigint auto_increment not null,

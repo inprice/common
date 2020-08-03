@@ -5,7 +5,7 @@ public enum SubsStatus {
   NOT_SET,
   ACTIVE,
   COUPONED,
-  PAST_DUE,
+  STOPPED,
   CANCELLED;
 
 }
