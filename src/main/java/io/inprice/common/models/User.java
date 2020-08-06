@@ -5,11 +5,9 @@ import java.util.Date;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 public class User implements Serializable {
 
   private static final long serialVersionUID = 1753526228909974777L;
@@ -20,6 +18,13 @@ public class User implements Serializable {
   private String timezone;
   private String passwordHash;
   private String passwordSalt;
+  private String stripeCustId;
   private Date createdAt;
+
+  @Override
+  public String toString() {
+    return "[createdAt=" + createdAt + ", email=" + email + ", id=" + id + ", name=" + name + ", timezone="
+        + timezone + "]";
+  }
 
 }

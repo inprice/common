@@ -7,19 +7,8 @@ create table site (
   domain                    varchar(100) not null,
   country                   varchar(50) not null,
   class_name                varchar(100) not null,
-  logo_url                  varchar(250),
+  logo_url                  varchar(255),
   created_at                timestamp not null default current_timestamp,
-  primary key (id),
-  unique key ix1 (name)
-) engine=innodb;
-
-create table plan (
-  id                        bigint auto_increment not null,
-  name                      varchar(15) not null,
-  description               varchar(70),
-  price                     decimal(9,2) default 0,
-  product_limit             smallint,
-  order_no                  smallint,
   primary key (id),
   unique key ix1 (name)
 ) engine=innodb;
@@ -31,6 +20,7 @@ create table user (
   timezone                  varchar(30),
   password_hash             varchar(255) not null,
   password_salt             varchar(255) not null,
+  stripe_cust_id            varchar(255),
   created_at                timestamp not null default current_timestamp,
   primary key (id),
   unique key ix1 (email)
@@ -39,23 +29,46 @@ create table user (
 create table company (
   id                        bigint auto_increment not null,
   name                      varchar(70) not null,
-  status                    enum('NOT_SET', 'ACTIVE', 'PAUSED', 'STOPPED') not null default 'NOT_SET',
-  admin_id                  bigint not null,
-  due_date                  datetime,
-  retry                     smallint default 0,
-  last_collecting_time      datetime,
-  last_collecting_status    boolean default false,
   currency_code             char(3),
   currency_format           varchar(16),
-  plan_id                   bigint,
   product_limit             smallint default 0,
   product_count             smallint default 0,
+  admin_id                  bigint not null,
+  plan_id                   smallint,
+  subs_id                   varchar(255),
+  subs_status               enum('NOT_SET', 'ACTIVE', 'COUPONED', 'STOPPED', 'CANCELLED') not null default 'NOT_SET',
+  subs_renewal_at           timestamp,
+  subs_customer_id          varchar(255),
+  title                     varchar(255),
+  address_1                 varchar(255),
+  address_2                 varchar(255),
+  postcode                  varchar(8),
+  city                      varchar(70),
+  state                     varchar(70),
+  country                   varchar(2),
   created_at                timestamp not null default current_timestamp,
   primary key (id),
-  key ix1 (name)
+  key ix1 (subs_renewal_at),
+  key ix2 (name),
+  key ix3 (subs_customer_id)
 ) engine=innodb;
 alter table company add foreign key (admin_id) references user (id);
-alter table company add foreign key (plan_id) references plan (id);
+
+create table subs_trans (
+  id                        bigint auto_increment not null,
+  company_id                bigint not null,
+  event_source              enum('SUBSCRIPTION', 'COUPON') not null default 'SUBSCRIPTION',
+  event_id                  varchar(255),
+  event                     varchar(255) not null,
+  successful                boolean default false,
+  reason                    varchar(255),
+  description               varchar(255),
+  file_url                  varchar(255),
+  created_at                timestamp not null default current_timestamp,
+  primary key (id),
+  key ix1 (created_at)
+) engine=innodb;
+alter table subs_trans add foreign key (company_id) references company (id);
 
 create table membership (
   id                        bigint auto_increment not null,
@@ -162,8 +175,8 @@ create table competitor (
   retry                     smallint default 0,
   http_status               smallint default 0,
   website_class_name        varchar(100),
-  product_id                bigint,
   site_id                   bigint,
+  product_id                bigint,
   company_id                bigint,
   created_at                timestamp not null default current_timestamp,
   primary key (id),
@@ -217,11 +230,9 @@ create table coupon (
   code                      char(8) not null,
   description               varchar(50),
   days                      smallint default 14,
-  plan_id                   bigint,
-  issued_at                 timestamp,
   issued_company_id         bigint,
+  issued_at                 timestamp,
+  plan_id                   smallint not null,
   created_at                timestamp not null default current_timestamp,
   primary key (code)
 ) engine=innodb;
-alter table coupon add foreign key (plan_id) references plan (id);
-alter table coupon add foreign key (issued_company_id) references company (id);

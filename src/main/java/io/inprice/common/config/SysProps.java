@@ -143,7 +143,7 @@ public class SysProps {
   }
 
   public static String DB_HOST() {
-    String def = APP_ENV().equals(AppEnv.TEST) ? "mem" : "//localhost";
+    String def = APP_ENV().equals(AppEnv.TEST) ? "mem" : "//127.0.0.1";
     return System.getenv().getOrDefault("DB_HOST", def);
   }
 
