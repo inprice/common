@@ -169,7 +169,7 @@ public class SysProps {
   public static String DB_ADDITIONS() {
     String def = APP_ENV().equals(AppEnv.TEST)
         ? ";init=runscript from 'classpath:db/schema.sql'; runscript from 'classpath:db/data.sql'"
-        : "";
+        : "?useSSL=false";
     return System.getenv().getOrDefault("DB_ADDITIONS", def);
   }
 
