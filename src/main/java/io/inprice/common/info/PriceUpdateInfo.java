@@ -28,10 +28,12 @@ public class PriceUpdateInfo implements Serializable {
   private Long companyId;
   private Long productId;
   private BigDecimal newPrice;
+  private Integer position = 3;
 
   public PriceUpdateInfo(Competitor competitor) {
     this(false, competitor.getId(), competitor.getProductId(), competitor.getCompanyId());
     this.newPrice = competitor.getPrice();
+    this.position = competitor.getPosition();
   }
 
   public PriceUpdateInfo(boolean isDeleted, Long competitorId, Long productId, Long companyId) {

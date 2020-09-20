@@ -280,7 +280,7 @@ public class Database {
       con = getTransactionalConnection();
       sta = con.createStatement();
 
-      for (String query : queries) {
+      for (String query: queries) {
         sta.addBatch(query);
         if (SysProps.APP_SHOW_QUERIES()) {
           log.info(" Q-> " + query);
@@ -292,18 +292,10 @@ public class Database {
       result = false;
       int successfulStatementCount = 0;
 
-      for (int aff : affected) {
-        if (expectedSuccessfulStatementCount > 0) {
-          if (aff > 0)
-            successfulStatementCount++;
-          if (successfulStatementCount >= expectedSuccessfulStatementCount) {
-            result = true;
-            break;
-          }
-        } else {
-          if (aff < 1) {
-            break;
-          }
+      for (int aff: affected) {
+        if (aff >= 0 && (++successfulStatementCount >= expectedSuccessfulStatementCount)) {
+          result = true;
+          break;
         }
       }
 
@@ -311,8 +303,7 @@ public class Database {
         commit(con);
       } else {
         rollback(con);
-        if (!SysProps.APP_ENV().equals(AppEnv.TEST) && !errorMessage.contains("to delete"))
-          log.error(errorMessage);
+        log.error(errorMessage);
       }
 
     } catch (SQLException e) {

@@ -18,6 +18,7 @@ public class CompetitorPrice implements Serializable {
   private Long id;
   private Long competitorId;
   private BigDecimal price;
+  private Integer position;
   private Long productId;
   private Long companyId;
   private Date createdAt;

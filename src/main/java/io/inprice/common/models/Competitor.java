@@ -28,6 +28,7 @@ public class Competitor implements Serializable {
   private String seller;
   private String shipment;
   private BigDecimal price = BigDecimal.ZERO;
+  private Integer position;
   private Date lastUpdate;
   private Date lastCheck;
   private CompetitorStatus status = CompetitorStatus.TOBE_CLASSIFIED;

@@ -20,6 +20,7 @@ public class Product implements Serializable {
   private String code;
   private String name;
   private BigDecimal price;
+  private Integer position;
   private Long brandId;
   private Long categoryId;
   private Long companyId;

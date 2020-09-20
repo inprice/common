@@ -3,7 +3,9 @@ package io.inprice.common.models;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
+import io.inprice.common.info.ProductCompetitor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,5 +35,8 @@ public class ProductPrice implements Serializable {
   private BigDecimal suggestedPrice;
   private Long companyId;
   private Date createdAt;
+
+  //transients
+  private List<ProductCompetitor> prodCompList; //used in price update ops.
 
 }
