@@ -25,118 +25,6 @@ public class SysProps {
     return NumberUtils.toInteger(System.getenv().getOrDefault("HTTP_CONNECTION_TIMEOUT", "10"));
   }
 
-  public static String MQ_URI() {
-    return System.getenv().getOrDefault("MQ_URI", null);
-  }
-
-  public static String MQ_HOST() {
-    return System.getenv().getOrDefault("MQ_HOST", "127.0.0.1");
-  }
-
-  public static int MQ_PORT() {
-    return NumberUtils.toInteger(System.getenv().getOrDefault("MQ_PORT", "5672"));
-  }
-
-  public static String MQ_USERNAME() {
-    return System.getenv().getOrDefault("MQ_USERNAME", "guest");
-  }
-
-  public static String MQ_PASSWORD() {
-    return System.getenv().getOrDefault("MQ_PASSWORD", "guest");
-  }
-
-  public static String MQ_COMPETITORS_EXCHANGE() {
-    return System.getenv().getOrDefault("MQ_COMPETITORS_EXCHANGE", "competitors");
-  }
-
-  public static String MQ_CHANGES_EXCHANGE() {
-    return System.getenv().getOrDefault("MQ_CHANGES_EXCHANGE", "changes");
-  }
-
-  public static String MQ_DEAD_LETTERS_EXCHANGE() {
-    return System.getenv().getOrDefault("MQ_DEAD_LETTERS_EXCHANGE", "dead-letters");
-  }
-
-  public static String MQ_TOBE_CLASSIFIED_COMPETITORS_ROUTING() {
-    return System.getenv().getOrDefault("MQ_TOBE_CLASSIFIED_COMPETITORS_ROUTING", "competitors.tobe-avaliable");
-  }
-
-  public static String MQ_FAILED_COMPETITORS_ROUTING() {
-    return System.getenv().getOrDefault("MQ_FAILED_COMPETITORS_ROUTING", "competitors.failed");
-  }
-
-  public static String MQ_BLOCKED_COMPETITORS_ROUTING() {
-    return System.getenv().getOrDefault("MQ_BLOCKED_COMPETITORS_ROUTING", "competitors.blocked");
-  }
-
-  public static String MQ_AVAILABLE_COMPETITORS_ROUTING() {
-    return System.getenv().getOrDefault("MQ_AVAILABLE_COMPETITORS_ROUTING", "competitors.available");
-  }
-
-  public static String MQ_TOBE_AVAILABLE_COMPETITORS_ROUTING() {
-    return System.getenv().getOrDefault("MQ_TOBE_AVAILABLE_COMPETITORS_ROUTING", "competitors.tobe-available");
-  }
-
-  public static String MQ_PRODUCT_CREATIONS_ROUTING() {
-    return System.getenv().getOrDefault("MQ_PRODUCT_CREATIONS_ROUTING", "product.creations");
-  }
-
-  public static String MQ_STATUS_CHANGES_ROUTING() {
-    return System.getenv().getOrDefault("MQ_STATUS_CHANGES_ROUTING", "status.changes");
-  }
-
-  public static String MQ_PRICE_CHANGES_ROUTING() {
-    return System.getenv().getOrDefault("MQ_PRICE_CHANGES_ROUTING", "price.changes");
-  }
-
-  public static String MQ_PRICE_REFRESH_ROUTING() {
-    return System.getenv().getOrDefault("MQ_PRICE_REFRESH_ROUTING", "price.refresh");
-  }
-
-  public static String MQ_CATCH_ALL_QUEUE() {
-    return System.getenv().getOrDefault("MQ_CATCH_ALL_QUEUE", "catch-all");
-  }
-
-  public static String MQ_TOBE_CLASSIFIED_COMPETITORS_QUEUE() {
-    return System.getenv().getOrDefault("MQ_TOBE_CLASSIFIED_COMPETITORS_QUEUE", "tobe-classified-competitors");
-  }
-
-  public static String MQ_AVALIABLE_COMPETITORS_QUEUE() {
-    return System.getenv().getOrDefault("MQ_AVALIABLE_COMPETITORS_QUEUE", "available-competitors");
-  }
-
-  public static String MQ_FAILED_COMPETITORS_QUEUE() {
-    return System.getenv().getOrDefault("MQ_FAILED_COMPETITORS_QUEUE", "failed-competitors");
-  }
-
-  public static String MQ_BLOCKED_COMPETITORS_QUEUE() {
-    return System.getenv().getOrDefault("MQ_BLOCKED_COMPETITORS_QUEUE", "blocked-competitors");
-  }
-
-  public static String MQ_TOBE_AVAILABLE_COMPETITORS_QUEUE() {
-    return System.getenv().getOrDefault("MQ_QUEUE_TOBE_AVAILABLE_COMPETITOR", "tobe-available-competitors");
-  }
-
-  public static String MQ_PRODUCT_CREATION_QUEUE() {
-    return System.getenv().getOrDefault("MQ_PRODUCT_CREATION_QUEUE", "create-product");
-  }
-
-  public static String MQ_STATUS_CHANGE_QUEUE() {
-    return System.getenv().getOrDefault("MQ_STATUS_CHANGE_QUEUE", "status-changes");
-  }
-
-  public static String MQ_PRICE_CHANGE_QUEUE() {
-    return System.getenv().getOrDefault("MQ_PRICE_CHANGE_QUEUE", "price-changes");
-  }
-
-  public static String MQ_PRICE_REFRESH_QUEUE() {
-    return System.getenv().getOrDefault("MQ_PRICE_REFRESH_QUEUE", "price-refreshes");
-  }
-
-  public static String MQ_STATUS_DEAD_LETTERS_QUEUE() {
-    return System.getenv().getOrDefault("MQ_DEAD_LETTERS_QUEUE", "dead-letters");
-  }
-
   public static String DB_DRIVER() {
     String def = APP_ENV().equals(AppEnv.TEST) ? "h2" : "mysql";
     return System.getenv().getOrDefault("DB_DRIVER", def);
@@ -183,6 +71,26 @@ public class SysProps {
 
   public static String REDIS_PASSWORD() {
     return System.getenv().getOrDefault("REDIS_PASSWORD", null);
+  }
+
+  public static String TOPIC_TOBE_CLASSIFIED_LINKS() {
+    return System.getenv().getOrDefault("TOPIC_TOBE_CLASSIFIED_LINKS", "tobe-classified-links");
+  }
+
+  public static String TOPIC_TOBE_AVAILABLE_LINKS() {
+    return System.getenv().getOrDefault("TOPIC_TOBE_AVAILABLE_LINKS", "tobe-available-links");
+  }
+
+  public static String TOPIC_AVALIABLE_LINKS() {
+    return System.getenv().getOrDefault("TOPIC_AVALIABLE_LINKS", "available-links");
+  }
+
+  public static String TOPIC_FAILED_LINKS() {
+    return System.getenv().getOrDefault("TOPIC_FAILED_LINKS", "failed-links");
+  }
+
+  public static String TOPIC_BLOCKED_LINKS() {
+    return System.getenv().getOrDefault("TOPIC_BLOCKED_LINKS", "blocked-links");
   }
 
 }

@@ -21,7 +21,7 @@ public class Site implements Serializable {
   private String country;
   private String className;
   private String logoUrl;
-  private String status; //if it is not null then every competitor link pointing this site will be having the same status here!
+  private String status; //if it is not null then every link link pointing this site will be having the same status here!
   private Date createdAt;
 
 }

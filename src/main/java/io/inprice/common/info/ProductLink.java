@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ProductCompetitor implements Serializable {
+public class ProductLink implements Serializable {
 
   private static final long serialVersionUID = 373006989454188752L;
 

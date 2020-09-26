@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import io.inprice.common.info.ProductCompetitor;
+import io.inprice.common.info.ProductLink;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,15 +28,15 @@ public class ProductPrice implements Serializable {
   private String maxSeller;
   private BigDecimal maxPrice;
   private BigDecimal maxDiff;
-  private Integer competitors;
+  private Integer links;
   private Integer position;
   private Integer ranking;
-  private Integer rankingWith; //the number of other competitors having the same price
+  private Integer rankingWith; //the number of other links having the same price
   private BigDecimal suggestedPrice;
   private Long companyId;
   private Date createdAt;
 
   //transients
-  private List<ProductCompetitor> prodCompList; //used in price update ops.
+  private List<ProductLink> prodCompList; //used in price update ops.
 
 }

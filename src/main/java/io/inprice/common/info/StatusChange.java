@@ -2,8 +2,8 @@ package io.inprice.common.info;
 
 import java.io.Serializable;
 
-import io.inprice.common.meta.CompetitorStatus;
-import io.inprice.common.models.Competitor;
+import io.inprice.common.meta.LinkStatus;
+import io.inprice.common.models.Link;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,11 +22,11 @@ public class StatusChange implements Serializable {
 
   private static final long serialVersionUID = -7240482576220187098L;
 
-  private Competitor competitor;
-  private CompetitorStatus oldStatus;
+  private Link link;
+  private LinkStatus oldStatus;
 
-  public StatusChange(Competitor competitor, CompetitorStatus oldStatus) {
-    this.competitor = competitor;
+  public StatusChange(Link link, LinkStatus oldStatus) {
+    this.link = link;
     this.oldStatus = oldStatus;
   }
 

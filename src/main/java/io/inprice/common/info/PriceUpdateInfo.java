@@ -1,6 +1,6 @@
 package io.inprice.common.info;
 
-import io.inprice.common.models.Competitor;
+import io.inprice.common.models.Link;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * Info model for notification of deleted competitors or competitors whose prices changed
+ * Info model for notification of deleted links or links whose prices changed
  *
  * @author mdpinar
  */
@@ -22,23 +22,23 @@ public class PriceUpdateInfo implements Serializable {
 
   private static final long serialVersionUID = 1390654039767500676L;
 
-  // true means the competitors is deleted, otherwise, price of the competitor is updated
+  // true means the links is deleted, otherwise, price of the link is updated
   private boolean isDeleted;
-  private Long competitorId;
+  private Long linkId;
   private Long companyId;
   private Long productId;
   private BigDecimal newPrice;
   private Integer position = 3;
 
-  public PriceUpdateInfo(Competitor competitor) {
-    this(false, competitor.getId(), competitor.getProductId(), competitor.getCompanyId());
-    this.newPrice = competitor.getPrice();
-    this.position = competitor.getPosition();
+  public PriceUpdateInfo(Link link) {
+    this(false, link.getId(), link.getProductId(), link.getCompanyId());
+    this.newPrice = link.getPrice();
+    this.position = link.getPosition();
   }
 
-  public PriceUpdateInfo(boolean isDeleted, Long competitorId, Long productId, Long companyId) {
+  public PriceUpdateInfo(boolean isDeleted, Long linkId, Long productId, Long companyId) {
     this.isDeleted = isDeleted;
-    this.competitorId = competitorId;
+    this.linkId = linkId;
     this.productId = productId;
     this.companyId = companyId;
   }

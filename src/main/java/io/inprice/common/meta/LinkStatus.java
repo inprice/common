@@ -4,110 +4,110 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * This class consists of several statuses that are used to manage competitors's
+ * This class consists of several statuses that are used to manage links's
  * positions.
  *
- * The statuses below are divided into three groups: a) neutral The competitors
+ * The statuses below are divided into three groups: a) neutral The links
  * in this group are needed to be handled differently. NEW status, for example,
  * is the initial position. This group will be excluded from analysis and
  * reports.
  *
  * b) positive This group is used for AVAILABLE state and internal problems like
- * SOCKET_ERROR and ClASS_PROBLEM. Other than AVAILABLE state, the competitors
+ * SOCKET_ERROR and ClASS_PROBLEM. Other than AVAILABLE state, the links
  * in this group actually have no problems. So, they are needed to be handled by
  * a developer. This group will be included in analysis and reports.
  *
  * c) negative This group is used for troubled states like UNAVAILABLE and
- * NETWORK_ERROR. The competitors in this group have problems in network or
+ * NETWORK_ERROR. The links in this group have problems in network or
  * e-commerce website. This group will be excluded from analysis and reports.
  *
- * d) user User driven competitors take place in this group. This group will be
+ * d) user User driven links take place in this group. This group will be
  * excluded from analysis and reports.
  *
  */
-public enum CompetitorStatus {
+public enum LinkStatus {
 
   /**
-   * The initial state. Used for first recorded competitors.
+   * The initial state. Used for first recorded links.
    */
   TOBE_CLASSIFIED("neutral"),
 
   /**
-   * Used for competitors which need to be renewed
+   * Used for links which need to be renewed
    */
   TOBE_RENEWED("neutral"),
 
   /**
-   * Used for competitors whose websites have not been implemented yet. Data won't
+   * Used for links whose websites have not been implemented yet. Data won't
    * be collected till implemented
    */
   TOBE_IMPLEMENTED("neutral"),
 
   /**
-   * Used for newly implemented competitors
+   * Used for newly implemented links
    */
   IMPLEMENTED("neutral"),
 
   /**
-   * Used for competitors which have no problem about collecting data
+   * Used for links which have no problem about collecting data
    */
   AVAILABLE("positive"),
 
   /**
-   * Used for competitors that will never be implemented
+   * Used for links that will never be implemented
    */
   WONT_BE_IMPLEMENTED("negative"),
 
   /**
-   * Used for duplicate competitors/products
+   * Used for duplicate links/products
    */
   DUPLICATE("negative"),
 
   /**
-   * Used for indicating competitors whose URLs are wrong Data never be collected
+   * Used for indicating links whose URLs are wrong Data never be collected
    */
   IMPROPER("negative"),
 
   /**
-   * Used for indicating competitors whose URLs not specific The url may point a
+   * Used for indicating links whose URLs not specific The url may point a
    * search page or a product listing page on the website A url must refer only
    * one product's page on which price, name... exist Data never be collected
    */
   NOT_A_PRODUCT_PAGE("negative"),
 
   /**
-   * Used for indicating competitors whose data is missing
+   * Used for indicating links whose data is missing
    */
   NO_DATA("negative"),
 
   /**
-   * The competitors have no sufficient stock are put in this state Data won't be
+   * The links have no sufficient stock are put in this state Data won't be
    * collected till it is available again. Availability checks are done a certain
    * times (look at system parameters)
    */
   NOT_AVAILABLE("negative"),
 
   /**
-   * Used for indicating competitors whose data has problem
+   * Used for indicating links whose data has problem
    */
   READ_ERROR("negative"),
 
   /**
-   * Used for specifying competitors whose website block us for data collecting at
+   * Used for specifying links whose website block us for data collecting at
    * first step Availability checks are done a certain times (look at system
    * parameters)
    */
   SOCKET_ERROR("neutral"),
 
   /**
-   * Used for competitors returning http error codes greater than 399 Data won't
+   * Used for links returning http error codes greater than 399 Data won't
    * be collected till it is available again. Availability checks are done a
    * certain times (look at system parameters)
    */
   NETWORK_ERROR("negative"),
 
   /**
-   * This state is used for indicating competitors which we face problem during
+   * This state is used for indicating links which we face problem during
    * resolving the class name Availability checks are done a certain times (look
    * at system parameters)
    */
@@ -121,46 +121,46 @@ public enum CompetitorStatus {
   INTERNAL_ERROR("negative"),
 
   /**
-   * Used for blocked competitors like 503
+   * Used for blocked links like 503
    */
   BLOCKED("negative"),
 
   /**
-   * Used for competitors paused by users. Data won't be collected till it is
+   * Used for links paused by users. Data won't be collected till it is
    * activated again.
    */
   PAUSED("user"),
 
   /**
-   * Used for paused competitors to resume.
+   * Used for paused links to resume.
    */
   RESUMED("user");
 
   private String group;
 
-  CompetitorStatus(String group) {
+  LinkStatus(String group) {
     this.group = group;
   }
 
   /**
    * Set of positive statuses
    */
-  private static final Set<CompetitorStatus> positiveSet = new HashSet<>();
+  private static final Set<LinkStatus> positiveSet = new HashSet<>();
 
   /**
    * Set of negative statuses
    */
-  private static final Set<CompetitorStatus> negativeSet = new HashSet<>();
+  private static final Set<LinkStatus> negativeSet = new HashSet<>();
 
   /**
    * Set of user driven statuses
    */
-  private static final Set<CompetitorStatus> userDrivenSet = new HashSet<>();
+  private static final Set<LinkStatus> userDrivenSet = new HashSet<>();
 
   /**
    * Set of neutral statuses
    */
-  private static final Set<CompetitorStatus> neutralSet = new HashSet<>();
+  private static final Set<LinkStatus> neutralSet = new HashSet<>();
 
   /**
    * Joined statues of positives separated by comma
@@ -186,7 +186,7 @@ public enum CompetitorStatus {
    * Separating all the statuses by groups
    */
   static {
-    for (CompetitorStatus ls : values()) {
+    for (LinkStatus ls : values()) {
       switch (ls.group) {
         case "positive": {
           positiveSet.add(ls);
@@ -229,13 +229,13 @@ public enum CompetitorStatus {
   }
 
   /**
-   * Finds CompetitorStatus by given name
+   * Finds LinkStatus by given name
    *
    * @param name
-   * @return CompetitorStatus
+   * @return LinkStatus
    */
-  public CompetitorStatus findByName(String name) {
-    return CompetitorStatus.valueOf(name);
+  public LinkStatus findByName(String name) {
+    return LinkStatus.valueOf(name);
   }
 
   public String getGroup() {
@@ -274,19 +274,19 @@ public enum CompetitorStatus {
     return joinedNeutrals;
   }
 
-  public Set<CompetitorStatus> getPositiveSet() {
+  public Set<LinkStatus> getPositiveSet() {
     return positiveSet;
   }
 
-  public Set<CompetitorStatus> getNegativeSet() {
+  public Set<LinkStatus> getNegativeSet() {
     return negativeSet;
   }
 
-  public Set<CompetitorStatus> getUserDrivenSet() {
+  public Set<LinkStatus> getUserDrivenSet() {
     return userDrivenSet;
   }
 
-  public Set<CompetitorStatus> getNeutralSet() {
+  public Set<LinkStatus> getNeutralSet() {
     return neutralSet;
   }
 

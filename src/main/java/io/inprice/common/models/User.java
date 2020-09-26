@@ -21,10 +21,4 @@ public class User implements Serializable {
   private String stripeCustId;
   private Date createdAt;
 
-  @Override
-  public String toString() {
-    return "[createdAt=" + createdAt + ", email=" + email + ", id=" + id + ", name=" + name + ", timezone="
-        + timezone + "]";
-  }
-
 }
