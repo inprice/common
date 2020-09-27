@@ -20,7 +20,7 @@ public class MembershipMapper implements RowMapper<Membership> {
     if (Helper.hasColumn(rs, "id")) m.setId(rs.getLong("id"));
     if (Helper.hasColumn(rs, "email")) m.setEmail(rs.getString("email"));
     if (Helper.hasColumn(rs, "user_id")) m.setUserId(Helper.nullLongHandler(rs, "user_id"));
-    if (Helper.hasColumn(rs, "company_id")) m.setCompanyId(Helper.nullLongHandler(rs, "company_id"));
+    if (Helper.hasColumn(rs, "company_id")) m.setCompanyId(rs.getLong("company_id"));
     if (Helper.hasColumn(rs, "role")) m.setRole(UserRole.valueOf(rs.getString("role")));
     if (Helper.hasColumn(rs, "status")) m.setStatus(UserStatus.valueOf(rs.getString("status")));
     if (Helper.hasColumn(rs, "pre_status")) m.setPreStatus(UserStatus.valueOf(rs.getString("pre_status")));
