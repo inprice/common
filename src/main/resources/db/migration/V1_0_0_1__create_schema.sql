@@ -71,7 +71,7 @@ create table subs_trans (
 ) engine=innodb;
 alter table subs_trans add foreign key (company_id) references company (id);
 
-create table membership (
+create table member (
   id                        bigint auto_increment not null,
   email                     varchar(100) not null,
   user_id                   bigint,
@@ -85,8 +85,8 @@ create table membership (
   primary key (id),
   key ix1 (email)
 ) engine=innodb;
-alter table membership add foreign key (user_id) references user (id);
-alter table membership add foreign key (company_id) references company (id);
+alter table member add foreign key (user_id) references user (id);
+alter table member add foreign key (company_id) references company (id);
 
 create table user_session (
   _hash                     varchar(32) not null,
@@ -148,7 +148,7 @@ create table product_price (
   max_seller                varchar(50),
   max_price                 decimal(9,2) default 0,
   max_diff                  decimal(6,2) default 0,
-  links               smallint default 0,
+  links                     smallint default 0,
   position                  smallint default 3,
   ranking                   smallint default 0,
   ranking_with              smallint default 0,
@@ -195,7 +195,7 @@ alter table link add foreign key (company_id) references company (id);
 
 create table link_price (
   id                        bigint auto_increment not null,
-  link_id             bigint not null,
+  link_id                   bigint not null,
   price                     decimal(9,2) default 0,
   position                  smallint default 3,
   product_id                bigint not null,
@@ -208,7 +208,7 @@ alter table link_price add foreign key (link_id) references link (id);
 
 create table link_spec (
   id                        bigint auto_increment not null,
-  link_id             bigint not null,
+  link_id                   bigint not null,
   _key                      varchar(100),
   _value                    varchar(500),
   product_id                bigint not null,
@@ -219,7 +219,7 @@ alter table link_spec add foreign key (link_id) references link (id);
 
 create table link_history (
   id                        bigint auto_increment not null,
-  link_id             bigint not null,
+  link_id                   bigint not null,
   status                    varchar(25) not null,
   http_status               smallint default 0,
   product_id                bigint not null,

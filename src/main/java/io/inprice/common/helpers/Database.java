@@ -6,6 +6,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.flywaydb.core.Flyway;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
+import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +35,7 @@ public class Database {
   }
 
   public static Handle getHandle() {
+    if (jdbi == null) connect();
     return jdbi.open();
   }
 
@@ -93,6 +95,7 @@ public class Database {
 
       dataSource = new HikariDataSource(hConf);
       jdbi = Jdbi.create(dataSource);
+      jdbi.installPlugin(new SqlObjectPlugin());
     } catch (Exception e) {
       log.error("Unable to connect to db", e);
     }

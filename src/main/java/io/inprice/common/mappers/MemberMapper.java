@@ -9,23 +9,23 @@ import org.jdbi.v3.core.statement.StatementContext;
 import io.inprice.common.meta.SubsStatus;
 import io.inprice.common.meta.UserRole;
 import io.inprice.common.meta.UserStatus;
-import io.inprice.common.models.Membership;
+import io.inprice.common.models.Member;
 
-public class MembershipMapper implements RowMapper<Membership> {
+public class MemberMapper implements RowMapper<Member> {
 
   @Override
-  public Membership map(ResultSet rs, StatementContext ctx) throws SQLException {
-    Membership m = new Membership();
+  public Member map(ResultSet rs, StatementContext ctx) throws SQLException {
+    Member m = new Member();
 
     if (Helper.hasColumn(rs, "id")) m.setId(rs.getLong("id"));
     if (Helper.hasColumn(rs, "email")) m.setEmail(rs.getString("email"));
     if (Helper.hasColumn(rs, "user_id")) m.setUserId(Helper.nullLongHandler(rs, "user_id"));
-    if (Helper.hasColumn(rs, "company_id")) m.setCompanyId(rs.getLong("company_id"));
     if (Helper.hasColumn(rs, "role")) m.setRole(UserRole.valueOf(rs.getString("role")));
     if (Helper.hasColumn(rs, "status")) m.setStatus(UserStatus.valueOf(rs.getString("status")));
     if (Helper.hasColumn(rs, "pre_status")) m.setPreStatus(UserStatus.valueOf(rs.getString("pre_status")));
     if (Helper.hasColumn(rs, "retry")) m.setRetry(Helper.nullIntegerHandler(rs, "retry"));
     if (Helper.hasColumn(rs, "updated_at")) m.setUpdatedAt(rs.getTimestamp("updated_at"));
+    if (Helper.hasColumn(rs, "company_id")) m.setCompanyId(rs.getLong("company_id"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 
     //transients

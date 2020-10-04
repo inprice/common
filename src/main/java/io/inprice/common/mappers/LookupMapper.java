@@ -16,8 +16,8 @@ public class LookupMapper implements RowMapper<Lookup> {
     Lookup m = new Lookup();
 
     if (Helper.hasColumn(rs, "id")) m.setId(rs.getLong("id"));
-    if (Helper.hasColumn(rs, "company_id")) m.setCompanyId(rs.getLong("company_id"));
     if (Helper.hasColumn(rs, "name")) m.setName(rs.getString("name"));
+    if (Helper.hasColumn(rs, "company_id")) m.setCompanyId(rs.getLong("company_id"));
     
     if (Helper.hasColumn(rs, "type")) {
       String type = rs.getString("type");

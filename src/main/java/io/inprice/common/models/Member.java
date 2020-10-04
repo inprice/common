@@ -13,7 +13,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Membership implements Serializable {
+public class Member implements Serializable {
 
   private static final long serialVersionUID = -7793356216234713734L;
 
@@ -28,7 +28,7 @@ public class Membership implements Serializable {
   private Date updatedAt;
   private Date createdAt = new Date();
 
-  //transients
+  // transient
   private String companyName;
   private String currencyFormat;
   private Integer planId;
