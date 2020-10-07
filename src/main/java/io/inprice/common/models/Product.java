@@ -3,6 +3,7 @@ package io.inprice.common.models;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Set;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,16 +22,13 @@ public class Product implements Serializable {
   private String name;
   private BigDecimal price;
   private Integer position;
-  private Long brandId;
-  private Long categoryId;
   private Long companyId;
   private Long lastPriceId;
   private Date updatedAt;
   private Date createdAt;
 
   //transients
-  private String brand;
-  private String category;
   private ProductPrice priceDetails;
+  private Set<String> tags;
 
 }

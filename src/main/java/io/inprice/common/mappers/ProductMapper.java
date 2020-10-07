@@ -20,13 +20,9 @@ public class ProductMapper implements RowMapper<Product> {
     if (Helper.hasColumn(rs, "active")) m.setActive(rs.getBoolean("active"));
     if (Helper.hasColumn(rs, "code")) m.setCode(rs.getString("code"));
     if (Helper.hasColumn(rs, "name")) m.setName(rs.getString("name"));
-    if (Helper.hasColumn(rs, "brand")) m.setBrand(rs.getString("brand"));
-    if (Helper.hasColumn(rs, "category")) m.setCategory(rs.getString("category"));
     if (Helper.hasColumn(rs, "price")) m.setPrice(rs.getBigDecimal("price"));
     if (Helper.hasColumn(rs, "position")) m.setPosition(rs.getInt("position"));
     if (Helper.hasColumn(rs, "last_price_id")) m.setLastPriceId(Helper.nullLongHandler(rs, "last_price_id"));
-    if (Helper.hasColumn(rs, "brand_id")) m.setBrandId(Helper.nullLongHandler(rs, "brand_id"));
-    if (Helper.hasColumn(rs, "category_id")) m.setCategoryId(Helper.nullLongHandler(rs, "category_id"));
     if (Helper.hasColumn(rs, "company_id")) m.setCompanyId(Helper.nullLongHandler(rs, "company_id"));
     if (Helper.hasColumn(rs, "updated_at")) m.setUpdatedAt(rs.getTimestamp("updated_at"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
