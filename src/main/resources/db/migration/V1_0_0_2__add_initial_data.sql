@@ -1,7 +1,13 @@
 -- @author mdpinar
 
 -- -------------------------------------------------------
---  Amazon site, domain, country, class_name)
+--  Test site
+insert into site (name, domain, country, class_name)
+values
+    ('Test 01', 'sanal.com', 'Demoland', 'zz.Sanal');
+
+-- -------------------------------------------------------
+--  Amazon site
 insert into site (name, domain, country, class_name)
 values
     ('Amazon US', 'amazon.com', 'United States', 'xx.Amazon'),

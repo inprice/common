@@ -7,6 +7,7 @@ create table site (
   domain                    varchar(100) not null,
   country                   varchar(50) not null,
   class_name                varchar(100) not null,
+  status                    varchar(25),
   logo_url                  varchar(255),
   created_at                timestamp not null default current_timestamp,
   primary key (id),
@@ -70,7 +71,7 @@ create table subs_trans (
 ) engine=innodb;
 alter table subs_trans add foreign key (company_id) references company (id);
 
-create table membership (
+create table member (
   id                        bigint auto_increment not null,
   email                     varchar(100) not null,
   user_id                   bigint,
@@ -84,8 +85,8 @@ create table membership (
   primary key (id),
   key ix1 (email)
 ) engine=innodb;
-alter table membership add foreign key (user_id) references user (id);
-alter table membership add foreign key (company_id) references company (id);
+alter table member add foreign key (user_id) references user (id);
+alter table member add foreign key (company_id) references company (id);
 
 create table user_session (
   _hash                     varchar(32) not null,
@@ -102,25 +103,14 @@ create table user_session (
 alter table user_session add foreign key (user_id) references user (id);
 alter table user_session add foreign key (company_id) references company (id);
 
--- used for lookup fields like brand and category
-create table lookup (
-  id                        bigint auto_increment not null,
-  company_id                bigint not null,
-  type                      enum('BRAND', 'CATEGORY') not null default 'BRAND',
-  name                      varchar(50),
-  primary key (id)
-) engine=innodb;
-alter table lookup add foreign key (company_id) references company (id);
-
 create table product (
   id                        bigint auto_increment not null,
   active                    boolean default true,
   code                      varchar(50) not null,
   name                      varchar(500) not null,
   price                     decimal(9,2) default 0,
+  position                  smallint default 3,
   last_price_id             bigint,
-  brand_id                  bigint,
-  category_id               bigint,
   company_id                bigint not null,
   updated_at                datetime,
   created_at                timestamp not null default current_timestamp,
@@ -129,8 +119,6 @@ create table product (
   key ix2 (company_id, name)
 ) engine=innodb;
 alter table product add foreign key (company_id) references company (id);
-alter table product add foreign key (brand_id) references lookup (id);
-alter table product add foreign key (category_id) references lookup (id);
 
 create table product_price (
   id                        bigint auto_increment not null,
@@ -146,7 +134,7 @@ create table product_price (
   max_seller                varchar(50),
   max_price                 decimal(9,2) default 0,
   max_diff                  decimal(6,2) default 0,
-  competitors               smallint default 0,
+  links                     smallint default 0,
   position                  smallint default 3,
   ranking                   smallint default 0,
   ranking_with              smallint default 0,
@@ -158,7 +146,18 @@ create table product_price (
 ) engine=innodb;
 alter table product_price add foreign key (product_id) references product (id);
 
-create table competitor (
+create table product_tag (
+  id                        bigint auto_increment not null,
+  name                      varchar(30) not null,
+  product_id                bigint not null,
+  company_id                bigint not null,
+  primary key (id),
+  key ix1 (name)
+) engine=innodb;
+alter table product_tag add foreign key (product_id) references product (id);
+alter table product_tag add foreign key (company_id) references company (id);
+
+create table link (
   id                        bigint auto_increment not null,
   url                       varchar(1024) not null,
   url_hash                  varchar(32) not null,
@@ -168,6 +167,7 @@ create table competitor (
   seller                    varchar(150),
   shipment                  varchar(150),
   price                     decimal(9,2) default 0,
+  position                  smallint default 3,
   last_check                datetime,
   last_update               datetime,
   pre_status                varchar(25) not null default 'TOBE_CLASSIFIED',
@@ -186,36 +186,37 @@ create table competitor (
   key ix4 (last_update),
   key ix5 (last_check)
 ) engine=innodb;
-alter table competitor add foreign key (product_id) references product (id);
-alter table competitor add foreign key (site_id) references site (id);
-alter table competitor add foreign key (company_id) references company (id);
+alter table link add foreign key (product_id) references product (id);
+alter table link add foreign key (site_id) references site (id);
+alter table link add foreign key (company_id) references company (id);
 
-create table competitor_price (
+create table link_price (
   id                        bigint auto_increment not null,
-  competitor_id             bigint not null,
+  link_id                   bigint not null,
   price                     decimal(9,2) default 0,
+  position                  smallint default 3,
   product_id                bigint not null,
   company_id                bigint not null,
   created_at                timestamp not null default current_timestamp,
   primary key (id),
   key ix1 (created_at)
 ) engine=innodb;
-alter table competitor_price add foreign key (competitor_id) references competitor (id);
+alter table link_price add foreign key (link_id) references link (id);
 
-create table competitor_spec (
+create table link_spec (
   id                        bigint auto_increment not null,
-  competitor_id             bigint not null,
+  link_id                   bigint not null,
   _key                      varchar(100),
   _value                    varchar(500),
   product_id                bigint not null,
   company_id                bigint not null,
   primary key (id)
 ) engine=innodb;
-alter table competitor_spec add foreign key (competitor_id) references competitor (id);
+alter table link_spec add foreign key (link_id) references link (id);
 
-create table competitor_history (
+create table link_history (
   id                        bigint auto_increment not null,
-  competitor_id             bigint not null,
+  link_id                   bigint not null,
   status                    varchar(25) not null,
   http_status               smallint default 0,
   product_id                bigint not null,
@@ -224,7 +225,7 @@ create table competitor_history (
   primary key (id),
   key ix1 (created_at)
 ) engine=innodb;
-alter table competitor_history add foreign key (competitor_id) references competitor (id);
+alter table link_history add foreign key (link_id) references link (id);
 
 create table coupon (
   code                      char(8) not null,

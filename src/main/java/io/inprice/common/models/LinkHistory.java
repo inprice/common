@@ -3,7 +3,7 @@ package io.inprice.common.models;
 import java.io.Serializable;
 import java.util.Date;
 
-import io.inprice.common.meta.CompetitorStatus;
+import io.inprice.common.meta.LinkStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,24 +11,24 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CompetitorHistory implements Serializable {
+public class LinkHistory implements Serializable {
 
   private static final long serialVersionUID = 885057701505049080L;
 
   private Long id;
-  private Long competitorId;
-  private CompetitorStatus status = CompetitorStatus.TOBE_CLASSIFIED;
+  private Long linkId;
+  private LinkStatus status = LinkStatus.TOBE_CLASSIFIED;
   private Integer httpStatus;
   private Long productId;
   private Long companyId;
   private Date createdAt;
 
-  public CompetitorHistory(CompetitorStatus status) {
+  public LinkHistory(LinkStatus status) {
     this.status = status;
   }
 
-  public CompetitorHistory(Long competitorId, CompetitorStatus status) {
-    this.competitorId = competitorId;
+  public LinkHistory(Long linkId, LinkStatus status) {
+    this.linkId = linkId;
     this.status = status;
   }
 

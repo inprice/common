@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import io.inprice.common.meta.CompetitorStatus;
+import io.inprice.common.meta.LinkStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +15,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class Competitor implements Serializable {
+public class Link implements Serializable {
 
   private static final long serialVersionUID = 2206190984817621818L;
 
@@ -28,10 +28,11 @@ public class Competitor implements Serializable {
   private String seller;
   private String shipment;
   private BigDecimal price = BigDecimal.ZERO;
+  private Integer position;
   private Date lastUpdate;
   private Date lastCheck;
-  private CompetitorStatus status = CompetitorStatus.TOBE_CLASSIFIED;
-  private CompetitorStatus preStatus = CompetitorStatus.TOBE_CLASSIFIED;
+  private LinkStatus status = LinkStatus.TOBE_CLASSIFIED;
+  private LinkStatus preStatus = LinkStatus.TOBE_CLASSIFIED;
   private Integer retry;
   private Integer httpStatus;
   private String websiteClassName;
@@ -44,11 +45,11 @@ public class Competitor implements Serializable {
   private String platform;
   private BigDecimal productPrice = BigDecimal.ZERO;
 
-  private List<CompetitorPrice> priceList;
-  private List<CompetitorSpec> specList;
-  private List<CompetitorHistory> historyList;
+  private List<LinkPrice> priceList;
+  private List<LinkSpec> specList;
+  private List<LinkHistory> historyList;
 
-  public Competitor(String url) {
+  public Link(String url) {
     this.url = url;
   }
 
