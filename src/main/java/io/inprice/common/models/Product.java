@@ -3,7 +3,7 @@ package io.inprice.common.models;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +29,6 @@ public class Product implements Serializable {
 
   //transients
   private ProductPrice priceDetails;
-  private Set<String> tags;
+  private List<String> tags;
 
 }

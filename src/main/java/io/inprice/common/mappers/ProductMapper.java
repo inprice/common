@@ -27,25 +27,7 @@ public class ProductMapper implements RowMapper<Product> {
     if (Helper.hasColumn(rs, "updated_at")) m.setUpdatedAt(rs.getTimestamp("updated_at"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 
-    //zero price
     ProductPrice pp = new ProductPrice();
-    pp.setPrice(BigDecimal.ZERO);
-    pp.setMinPlatform("NA");
-    pp.setMinSeller("NA");
-    pp.setMinPrice(BigDecimal.ZERO);
-    pp.setMinDiff(BigDecimal.ZERO);
-    pp.setAvgPrice(BigDecimal.ZERO);
-    pp.setAvgDiff(BigDecimal.ZERO);
-    pp.setMaxPlatform("NA");
-    pp.setMaxSeller("NA");
-    pp.setMaxPrice(BigDecimal.ZERO);
-    pp.setMaxDiff(BigDecimal.ZERO);
-    pp.setLinks(0);
-    pp.setPosition(3);
-    pp.setRanking(0);
-    pp.setRankingWith(0);
-    pp.setSuggestedPrice(BigDecimal.ZERO);
-
     if (m.getLastPriceId() != null) {
       if (Helper.hasColumn(rs, "price")) pp.setPrice(rs.getBigDecimal("price"));
       if (Helper.hasColumn(rs, "min_platform")) pp.setMinPlatform(rs.getString("min_platform"));
