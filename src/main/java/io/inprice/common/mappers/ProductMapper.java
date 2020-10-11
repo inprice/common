@@ -1,6 +1,5 @@
 package io.inprice.common.mappers;
 
-import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

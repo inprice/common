@@ -2,6 +2,7 @@ package io.inprice.common.repository;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jdbi.v3.core.Handle;
@@ -89,7 +90,7 @@ public class CommonRepository {
           result.setMaxPrice(productPrice);
           result.setMaxDiff(BigDecimal.ZERO);
         }
-        result.setProdCompList(prodLinkList);
+        //TODO: result.setProdCompList(prodLinkList); ??
       }
     }
 
@@ -123,7 +124,10 @@ public class CommonRepository {
 
         if (aff1 > 0) {
           //if any link position changed then review and update its all links' positions accordingly
-          for (ProductLink pl: pp.getProdCompList()) {
+          //TODO: bu ne ya hu? duzeltilecek
+          List<ProductLink> plList = new ArrayList<>();
+          //for (ProductLink pl: pp.getProdCompList()) {
+          for (ProductLink pl: plList) {
             int newPosition = pl.getPosition();
             if (pl.getPrice().compareTo(pp.getMinPrice()) <= 0) {
               newPosition = 1;

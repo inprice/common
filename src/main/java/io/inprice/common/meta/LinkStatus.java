@@ -33,6 +33,11 @@ public enum LinkStatus {
   TOBE_CLASSIFIED("neutral"),
 
   /**
+   * After first state, links become CLASSIFIED so that they are collected to be AVAILABLE
+   */
+  CLASSIFIED("neutral"),
+
+  /**
    * Used for links which need to be renewed
    */
   TOBE_RENEWED("neutral"),
@@ -141,6 +146,10 @@ public enum LinkStatus {
   LinkStatus(String group) {
     this.group = group;
   }
+  /**
+   * Set of positive statuses
+   */
+  private static final Set<String> stringSet;
 
   /**
    * Set of positive statuses
@@ -186,7 +195,12 @@ public enum LinkStatus {
    * Separating all the statuses by groups
    */
   static {
+    stringSet = new HashSet<>(values().length);
+
     for (LinkStatus ls : values()) {
+
+      stringSet.add(ls.name());
+
       switch (ls.group) {
         case "positive": {
           positiveSet.add(ls);
@@ -256,6 +270,10 @@ public enum LinkStatus {
 
   public boolean isNeutral() {
     return "neutral".equals(group);
+  }
+
+  public static Set<String> getStringSet() {
+    return stringSet;
   }
 
   public static StringBuilder getJoinedPositives() {

@@ -43,7 +43,6 @@ public class Link implements Serializable {
 
   //transients
   private String platform;
-  private BigDecimal productPrice = BigDecimal.ZERO;
 
   private List<LinkPrice> priceList;
   private List<LinkSpec> specList;

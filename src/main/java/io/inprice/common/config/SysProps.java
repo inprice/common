@@ -73,24 +73,4 @@ public class SysProps {
     return System.getenv().getOrDefault("REDIS_PASSWORD", null);
   }
 
-  public static String TOPIC_TOBE_CLASSIFIED_LINKS() {
-    return System.getenv().getOrDefault("TOPIC_TOBE_CLASSIFIED_LINKS", "tobe-classified-links");
-  }
-
-  public static String TOPIC_TOBE_AVAILABLE_LINKS() {
-    return System.getenv().getOrDefault("TOPIC_TOBE_AVAILABLE_LINKS", "tobe-available-links");
-  }
-
-  public static String TOPIC_AVALIABLE_LINKS() {
-    return System.getenv().getOrDefault("TOPIC_AVALIABLE_LINKS", "available-links");
-  }
-
-  public static String TOPIC_FAILED_LINKS() {
-    return System.getenv().getOrDefault("TOPIC_FAILED_LINKS", "failed-links");
-  }
-
-  public static String TOPIC_BLOCKED_LINKS() {
-    return System.getenv().getOrDefault("TOPIC_BLOCKED_LINKS", "blocked-links");
-  }
-
 }

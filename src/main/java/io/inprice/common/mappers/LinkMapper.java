@@ -45,7 +45,6 @@ public class LinkMapper implements RowMapper<Link> {
 
     //transients
     if (Helper.hasColumn(rs, "platform")) m.setPlatform(rs.getString("platform"));
-    if (Helper.hasColumn(rs, "product_price")) m.setProductPrice(rs.getBigDecimal("product_price"));
 
     return m;
   }
