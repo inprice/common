@@ -73,4 +73,12 @@ public class SysProps {
     return System.getenv().getOrDefault("REDIS_PASSWORD", null);
   }
 
+  public static String REDIS_ACTIVE_LINKS_TOPIC() {
+    return System.getenv().getOrDefault("REDIS_ACTIVE_LINKS_TOPIC", "active-links");
+  }
+
+  public static String REDIS_STATUS_CHANGE_TOPIC() {
+    return System.getenv().getOrDefault("REDIS_STATUS_CHANGE_TOPIC", "status-change");
+  }
+
 }

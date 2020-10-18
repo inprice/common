@@ -2,7 +2,6 @@ package io.inprice.common.repository;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.jdbi.v3.core.Handle;
@@ -13,158 +12,145 @@ import io.inprice.common.models.ProductPrice;
 
 public class CommonRepository {
 
-  public ProductPrice getProductPrice(Handle handle, Long productId) {
-    ProductPrice result = null;
+  /**
+   * Adjusts product and its links' positions and rankings.
+   * In order to do that, investigates all the links under the product
+   * and build a ProductPrice object up. With this object, two db operations
+   * are consecutively executed: insert a new row into product_price and update product itself
+   * 
+   * @param transactional - db connection
+   * @param id - product id
+   * @param basePrice - product price
+   * 
+   * @return true if all the queries successfully executed
+   */
+  public static boolean adjustProductPrice(Handle transactional, Long id, BigDecimal basePrice, Long priceChangingLinkId) {
+    CommonDao commonDao = transactional.attach(CommonDao.class);
 
-    CommonDao commonDao = handle.attach(CommonDao.class);
+    // links are fetched in price order (lowest comes first)
+    List<ProductLink> activeLinks = commonDao.findProductLinkList(id, LinkStatus.AVAILABLE.name());
 
-    List<ProductLink> prodLinkList = commonDao.getProductLinkList(productId, LinkStatus.AVAILABLE);
-    if (prodLinkList.size() > 0) {
+    ProductPrice prodPrice = null;
+    if (activeLinks.size() > 0) {
 
-      BigDecimal productPrice = commonDao.getProductPrice(productId);
-      if (productPrice != null) {
+      ProductLink plFirst = activeLinks.get(0);
+      ProductLink plLast = activeLinks.get(activeLinks.size() - 1);
 
-        ProductLink plFirst = prodLinkList.get(0);
-        ProductLink plLast = prodLinkList.get(prodLinkList.size() - 1);
+      prodPrice = new ProductPrice();
+      prodPrice.setProductId(plFirst.getProductId());
+      prodPrice.setPrice(basePrice);
+      prodPrice.setLinks(activeLinks.size());
+      prodPrice.setCompanyId(plFirst.getCompanyId());
+      prodPrice.setMinPlatform(plFirst.getPlatform());
+      prodPrice.setMinSeller(plFirst.getSeller());
+      prodPrice.setMinPrice(plFirst.getPrice());
+      prodPrice.setAvgPrice(basePrice);
+      prodPrice.setMaxPlatform(plLast.getPlatform());
+      prodPrice.setMaxSeller(plLast.getSeller());
+      prodPrice.setMaxPrice(plLast.getPrice());
+      prodPrice.setSuggestedPrice(basePrice);
 
-        result = new ProductPrice();
-        result.setProductId(plFirst.getProductId());
-        result.setPrice(productPrice);
-        result.setLinks(prodLinkList.size());
-        result.setCompanyId(plFirst.getCompanyId());
-        result.setMinPlatform(plFirst.getSiteName());
-        result.setMinSeller(plFirst.getSeller());
-        result.setMinPrice(plFirst.getPrice());
-        result.setAvgPrice(productPrice);
-        result.setMaxPlatform(plLast.getSiteName());
-        result.setMaxSeller(plLast.getSeller());
-        result.setMaxPrice(plLast.getPrice());
-        result.setSuggestedPrice(productPrice);
-
-        //finding total, ranking and rankingWith
-        int ranking = 0;
-        int rankingWith = 0;
-        BigDecimal total = BigDecimal.ZERO;
-        for (ProductLink pl: prodLinkList) {
-          total = total.add(pl.getPrice());
-          if (ranking == 0 && productPrice.compareTo(pl.getPrice()) <= 0) {
-            ranking = pl.getRanking();
-          }
-          if (productPrice.compareTo(pl.getPrice()) == 0) {
-            rankingWith++;
-          }
+      //finding total, ranking and rankingWith
+      int ranking = 0;
+      int rankingWith = 0;
+      BigDecimal total = BigDecimal.ZERO;
+      for (ProductLink pl: activeLinks) {
+        total = total.add(pl.getPrice());
+        if (ranking == 0 && basePrice.compareTo(pl.getPrice()) <= 0) {
+          ranking = pl.getRanking();
         }
-        if (ranking == 0) {
-          ranking = plLast.getRanking() + 1;
+        if (basePrice.compareTo(pl.getPrice()) == 0) {
+          rankingWith++;
         }
-        result.setRanking(ranking);
-        result.setRankingWith(rankingWith);
-
-        // finding avg price
-        if (total.compareTo(BigDecimal.ZERO) > 0) {
-          result.setAvgPrice(total.divide(BigDecimal.valueOf(prodLinkList.size()), 2, BigDecimal.ROUND_HALF_UP));
-        }
-
-        // setting diffs
-        result.setMinDiff(findDiff(result.getPrice(), plFirst.getPrice()));
-        result.setAvgDiff(findDiff(result.getPrice(), result.getAvgPrice()));
-        result.setMaxDiff(findDiff(result.getPrice(), plLast.getPrice()));
-
-        //finding product position
-        if (productPrice.compareTo(result.getMinPrice()) <= 0) {
-          result.setPosition(1);
-          result.setMinPlatform("Yours");
-          result.setMinSeller("You");
-          result.setMinPrice(productPrice);
-          result.setMinDiff(BigDecimal.ZERO);
-        } else if (productPrice.compareTo(result.getAvgPrice()) < 0) {
-          result.setPosition(2);
-        } else if (productPrice.compareTo(result.getAvgPrice()) == 0) {
-          result.setPosition(3);
-        } else if (productPrice.compareTo(result.getMaxPrice()) < 0) {
-          result.setPosition(4);
-        } else {
-          result.setPosition(5);
-          result.setMaxPlatform("Yours");
-          result.setMaxSeller("You");
-          result.setMaxPrice(productPrice);
-          result.setMaxDiff(BigDecimal.ZERO);
-        }
-        //TODO: result.setProdCompList(prodLinkList); ??
       }
+      if (ranking == 0) {
+        ranking = plLast.getRanking() + 1;
+      }
+      prodPrice.setRanking(ranking);
+      prodPrice.setRankingWith(rankingWith);
+
+      // finding avg basePrice
+      if (total.compareTo(BigDecimal.ZERO) > 0) {
+        prodPrice.setAvgPrice(total.divide(BigDecimal.valueOf(activeLinks.size()), 2, BigDecimal.ROUND_HALF_UP));
+      }
+
+      // setting diffs
+      prodPrice.setMinDiff(findDiff(prodPrice.getPrice(), plFirst.getPrice()));
+      prodPrice.setAvgDiff(findDiff(prodPrice.getPrice(), prodPrice.getAvgPrice()));
+      prodPrice.setMaxDiff(findDiff(prodPrice.getPrice(), plLast.getPrice()));
+
+      //finding product position
+      if (basePrice.compareTo(prodPrice.getMinPrice()) <= 0) {
+        prodPrice.setPosition(1);
+        prodPrice.setMinPlatform("Yours");
+        prodPrice.setMinSeller("You");
+        prodPrice.setMinPrice(basePrice);
+        prodPrice.setMinDiff(BigDecimal.ZERO);
+      } else if (basePrice.compareTo(prodPrice.getAvgPrice()) < 0) {
+        prodPrice.setPosition(2);
+      } else if (basePrice.compareTo(prodPrice.getAvgPrice()) == 0) {
+        prodPrice.setPosition(3);
+      } else if (basePrice.compareTo(prodPrice.getMaxPrice()) < 0) {
+        prodPrice.setPosition(4);
+      } else {
+        prodPrice.setPosition(5);
+        prodPrice.setMaxPlatform("Yours");
+        prodPrice.setMaxSeller("You");
+        prodPrice.setMaxPrice(basePrice);
+        prodPrice.setMaxDiff(BigDecimal.ZERO);
+      }
+
+    } 
+    
+    //updating product for new position and price_id
+    boolean isOK = false;
+    if (prodPrice != null) {
+      long prodPriceId = commonDao.insertProductPrice(prodPrice);
+      if (prodPriceId > 0) {
+        isOK = commonDao.setProductPosition(id, prodPrice.getPosition(), prodPriceId);
+        //updating each link for new position
+        if (isOK) {
+          adjustLinksPrices(commonDao, prodPrice, activeLinks, priceChangingLinkId);
+        }
+      }
+    } else { // has no active link
+      isOK = commonDao.zeroizeProductPrice(id);
     }
 
-    return result;
+    return isOK;
   }
 
-  private BigDecimal findDiff(BigDecimal first, BigDecimal second) {
+  private static void adjustLinksPrices(CommonDao commonDao, ProductPrice pp, List<ProductLink> activeLinks, Long priceChangingLinkId) {
+    for (ProductLink pl: activeLinks) {
+      int position = pl.getPosition();
+      if (pl.getPrice().compareTo(pp.getMinPrice()) <= 0) {
+        position = 1;
+      } else if (pl.getPrice().compareTo(pp.getAvgPrice()) < 0) {
+        position = 2;
+      } else if (pl.getPrice().compareTo(pp.getAvgPrice()) == 0) {
+        position = 3;
+      } else if (pl.getPrice().compareTo(pp.getMaxPrice()) < 0) {
+        position = 4;
+      } else {
+        position = 5;
+      }
+
+      if (position != pl.getPosition().intValue()) {
+        commonDao.setLinkPosition(pl.getId(), position);
+        if (priceChangingLinkId != null && priceChangingLinkId.equals(pl.getId())) {
+          commonDao.insertLinkPrice(pl.getId(), pl.getPrice(), position, pl.getProductId(), pl.getCompanyId());
+        }
+      }
+    }
+  }
+
+  private static BigDecimal findDiff(BigDecimal first, BigDecimal second) {
     BigDecimal BigDecimal_AHUNDRED = new BigDecimal(100);
-    BigDecimal result = BigDecimal_AHUNDRED;
+    BigDecimal prodPrice = BigDecimal_AHUNDRED;
     if (first.compareTo(BigDecimal.ZERO) > 0 && second.compareTo(BigDecimal.ZERO) > 0) {
-     result = second.divide(first, 4, RoundingMode.HALF_UP).subtract(BigDecimal.ONE).multiply(BigDecimal_AHUNDRED).setScale(2);
+     prodPrice = second.divide(first, 4, RoundingMode.HALF_UP).subtract(BigDecimal.ONE).multiply(BigDecimal_AHUNDRED).setScale(2);
     }
-    return result;
-  }
-
-  public boolean updatePrice(Handle handle, List<ProductPrice> ppList, List<Long> zeroizeIdList) {
-    CommonDao commonDao = handle.attach(CommonDao.class);
-
-    int aff3 = 0;
-
-    if (ppList != null) {
-      for (ProductPrice pp : ppList) {
-
-        int aff1 = 
-          commonDao.updateProductPrice(
-            pp.getProductId(), 
-            pp.getPrice(), 
-            pp.getPosition(), 
-            commonDao.insertProductPrice(pp)
-          );
-
-        if (aff1 > 0) {
-          //if any link position changed then review and update its all links' positions accordingly
-          //TODO: bu ne ya hu? duzeltilecek
-          List<ProductLink> plList = new ArrayList<>();
-          //for (ProductLink pl: pp.getProdCompList()) {
-          for (ProductLink pl: plList) {
-            int newPosition = pl.getPosition();
-            if (pl.getPrice().compareTo(pp.getMinPrice()) <= 0) {
-              newPosition = 1;
-            } else if (pl.getPrice().compareTo(pp.getAvgPrice()) < 0) {
-              newPosition = 2;
-            } else if (pl.getPrice().compareTo(pp.getAvgPrice()) == 0) {
-              newPosition = 3;
-            } else if (pl.getPrice().compareTo(pp.getMaxPrice()) < 0) {
-              newPosition = 4;
-            } else {
-              newPosition = 5;
-            }
-
-            if (newPosition != pl.getPosition().intValue()) {
-              int aff2 = commonDao.setPosition(pl.getId(), newPosition);
-
-              if (aff2 > 0) {
-                aff3 = 
-                  commonDao.insertLinkPrice(
-                    pl.getId(),
-                    pl.getPrice(),
-                    newPosition,
-                    pl.getProductId(),
-                    pl.getCompanyId()
-                  );
-              }
-            }
-          }
-        }
-      }
-    }
-
-    if (zeroizeIdList != null && zeroizeIdList.size() > 0) {
-      aff3 = commonDao.zeroizePositions(zeroizeIdList);
-    }
-
-    return aff3 > 0;
+    return prodPrice;
   }
 
 }

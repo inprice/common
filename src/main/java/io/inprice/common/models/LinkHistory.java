@@ -17,7 +17,8 @@ public class LinkHistory implements Serializable {
 
   private Long id;
   private Long linkId;
-  private LinkStatus status = LinkStatus.TOBE_CLASSIFIED;
+  private LinkStatus status;
+  private String problem;
   private Integer httpStatus;
   private Long productId;
   private Long companyId;

@@ -16,6 +16,7 @@ public class LinkMapper implements RowMapper<Link> {
     Link m = new Link();
 
     if (Helper.hasColumn(rs, "id")) m.setId(rs.getLong("id"));
+    if (Helper.hasColumn(rs, "active")) m.setActive(rs.getBoolean("active"));
     if (Helper.hasColumn(rs, "url")) m.setUrl(rs.getString("url"));
     if (Helper.hasColumn(rs, "url_hash")) m.setUrlHash(rs.getString("url_hash"));
     if (Helper.hasColumn(rs, "sku")) m.setSku(rs.getString("sku"));
@@ -26,11 +27,12 @@ public class LinkMapper implements RowMapper<Link> {
     if (Helper.hasColumn(rs, "price")) m.setPrice(rs.getBigDecimal("price"));
     if (Helper.hasColumn(rs, "last_check")) m.setLastCheck(rs.getTimestamp("last_check"));
     if (Helper.hasColumn(rs, "last_update")) m.setLastUpdate(rs.getTimestamp("last_update"));
+    if (Helper.hasColumn(rs, "problem")) m.setProblem(rs.getString("problem"));
     if (Helper.hasColumn(rs, "retry")) m.setRetry(Helper.nullIntegerHandler(rs, "retry"));
     if (Helper.hasColumn(rs, "http_status")) m.setHttpStatus(Helper.nullIntegerHandler(rs, "http_status"));
     if (Helper.hasColumn(rs, "website_class_name")) m.setWebsiteClassName(rs.getString("website_class_name"));
     if (Helper.hasColumn(rs, "site_id")) m.setSiteId(Helper.nullLongHandler(rs, "site_id"));
-    if (Helper.hasColumn(rs, "product_id")) m.setProductId(Helper.nullLongHandler(rs, "product_id"));
+    if (Helper.hasColumn(rs, "product_id")) m.setProductId(rs.getLong("product_id"));
     if (Helper.hasColumn(rs, "company_id")) m.setCompanyId(rs.getLong("company_id"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 
@@ -45,6 +47,7 @@ public class LinkMapper implements RowMapper<Link> {
 
     //transients
     if (Helper.hasColumn(rs, "platform")) m.setPlatform(rs.getString("platform"));
+    if (Helper.hasColumn(rs, "product_price")) m.setProductPrice(rs.getBigDecimal("product_price"));
 
     return m;
   }

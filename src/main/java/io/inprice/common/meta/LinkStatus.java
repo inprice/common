@@ -9,11 +9,12 @@ public enum LinkStatus {
 
   /*------------------------------------------------------------------------
     ACTIVE GROUP
-    In this group, links are continuously and periodically fetched from db 
+    In this group, links are periodically fetched from db 
    ------------------------------------------------------------------------*/
 
   /**
    * The initial state.
+   * After this, RESOLVED comes
    */
   TOBE_CLASSIFIED(LinkStatus.ACTIVE_GROUP),
 
@@ -23,12 +24,7 @@ public enum LinkStatus {
   AVAILABLE(LinkStatus.ACTIVE_GROUP),
 
   /**
-   * Used for paused links to resume.
-   */
-  RESUMED(LinkStatus.ACTIVE_GROUP),
-
-  /**
-   * Used for the links in TOBE_IMPLEMENTED orfINTERNAL_ERROR status
+   * Used for the links after TOBE_IMPLEMENTED and INTERNAL_ERROR status
    */
   RESOLVED(LinkStatus.ACTIVE_GROUP),
 
@@ -53,6 +49,11 @@ public enum LinkStatus {
    PASSIVE GROUP
    Links in this group will never be handled automatically
    ------------------------------------------------------------------------*/
+
+  /**
+   * Used for paused links to resume.
+   */
+  RESUMED(LinkStatus.PASSIVE_GROUP),
 
   /**
    * For the links whose websites have not been implemented yet. 
