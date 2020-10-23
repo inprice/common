@@ -137,7 +137,7 @@ public class CommonRepository {
 
       if (position != pl.getPosition().intValue()) {
         commonDao.setLinkPosition(pl.getId(), position);
-        if (priceChangingLinkId != null && priceChangingLinkId.equals(pl.getId())) {
+        if (priceChangingLinkId != null && priceChangingLinkId.equals(pl.getId())) { // this info comes from StatusChangeConsumer
           commonDao.insertLinkPrice(pl.getId(), pl.getPrice(), position, pl.getProductId(), pl.getCompanyId());
         }
       }
