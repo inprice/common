@@ -22,13 +22,24 @@ public class Product implements Serializable {
   private String name;
   private BigDecimal price;
   private Integer position;
+  private Integer ranking;
+  private Integer rankingWith = 0; //the number of other links having the same price
+  private String minPlatform;
+  private String minSeller;
+  private BigDecimal minPrice = BigDecimal.ZERO;
+  private BigDecimal minDiff = BigDecimal.ZERO;
+  private BigDecimal avgPrice = BigDecimal.ZERO;
+  private BigDecimal avgDiff = BigDecimal.ZERO;
+  private String maxPlatform;
+  private String maxSeller;
+  private BigDecimal maxPrice = BigDecimal.ZERO;
+  private BigDecimal maxDiff = BigDecimal.ZERO;
+  private BigDecimal suggestedPrice = BigDecimal.ZERO;
   private Long companyId;
-  private Long lastPriceId;
   private Date updatedAt;
   private Date createdAt;
 
   //transients
-  private ProductPrice priceDetails;
   private List<String> tags;
 
 }

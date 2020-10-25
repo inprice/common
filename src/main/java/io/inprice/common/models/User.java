@@ -14,10 +14,9 @@ public class User implements Serializable {
 
   private Long id;
   private String email;
+  private String password;
   private String name;
   private String timezone;
-  private String passwordHash;
-  private String passwordSalt;
   private String stripeCustId;
   private Date createdAt;
 

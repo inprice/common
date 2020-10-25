@@ -5,14 +5,13 @@ import java.util.List;
 
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
-import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 import org.jdbi.v3.sqlobject.statement.UseRowMapper;
 
 import io.inprice.common.info.ProductLink;
 import io.inprice.common.mappers.ProductLinkMapper;
-import io.inprice.common.models.ProductPrice;
+import io.inprice.common.models.Product;
 
 public interface CommonDao {
   
@@ -20,7 +19,7 @@ public interface CommonDao {
     "select l.id, s.domain as platform, seller, price, position, product_id, company_id, dense_rank() over (order by price) as ranking from link as l " +
     "inner join site as s on s.id = site_id " +
     "where price > 0 " +
-    "  and status = :status " +
+    "  and l.status = :status " +
     "  and product_id = :productId " +
     "order by price"
   )
@@ -29,21 +28,14 @@ public interface CommonDao {
 
   @SqlUpdate(
     "update product " +
-    "set position=:position, last_price_id=:lastPriceId, updated_at=now() " +
-    "where id=:id "
+    "set price=:sample.price, updated_at=now(), " +
+    " min_platform=:sample.minPlatform, min_seller=:sample.minSeller, min_price=:sample.minPrice, min_diff=:sample.minDiff, " +
+    " avg_price=:sample.avgPrice, avg_diff=:sample.avgDiff, " +
+    " max_platform=:sample.maxPlatform, max_seller=:sample.maxSeller, max_price=:sample.maxPrice, max_diff=:sample.maxDiff, " +
+    " position=:sample.position, ranking=:sample.ranking, ranking_with=:sample.rankingWith, suggested_price=:sample.suggestedPrice, company_id=:sample.companyId " + 
+    "where id=:sample.id "
   )
-  boolean setProductPosition(@Bind("id") long id, @Bind("position") int position, @Bind("lastPriceId") long lastPriceId);
-
-  @SqlUpdate(
-    "insert into product_price " +
-    "(product_id, price, min_platform, min_seller, min_price, min_diff, avg_price, avg_diff, " +
-      "max_platform, max_seller, max_price, max_diff, links, position, ranking, ranking_with, suggested_price, company_id) " + 
-    "values "+
-    "(pp:productId, pp:price, pp:minPlatform, pp:minSeller, pp:minPrice, pp:minDiff, pp:avgPrice, pp:avgDiff, " +
-     "pp:maxPlatform, pp:maxSeller, pp:maxPrice, pp:maxDiff, pp:links, pp:position, pp:ranking, pp:rankingWith, pp:suggestedPrice, pp:companyId)"
-  )
-  @GetGeneratedKeys("id")
-  long insertProductPrice(@BindBean("pp") ProductPrice productPrice);
+  boolean udpateProductPrice(@BindBean("sample") Product sample);
 
   @SqlUpdate("update product set position=3, last_price_id=null, updated_at=now() where id:id")
   boolean zeroizeProductPrice(@Bind("id") Long id);

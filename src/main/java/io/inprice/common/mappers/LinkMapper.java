@@ -27,9 +27,9 @@ public class LinkMapper implements RowMapper<Link> {
     if (Helper.hasColumn(rs, "price")) m.setPrice(rs.getBigDecimal("price"));
     if (Helper.hasColumn(rs, "last_check")) m.setLastCheck(rs.getTimestamp("last_check"));
     if (Helper.hasColumn(rs, "last_update")) m.setLastUpdate(rs.getTimestamp("last_update"));
-    if (Helper.hasColumn(rs, "problem")) m.setProblem(rs.getString("problem"));
     if (Helper.hasColumn(rs, "retry")) m.setRetry(Helper.nullIntegerHandler(rs, "retry"));
     if (Helper.hasColumn(rs, "http_status")) m.setHttpStatus(Helper.nullIntegerHandler(rs, "http_status"));
+    if (Helper.hasColumn(rs, "problem")) m.setProblem(rs.getString("problem"));
     if (Helper.hasColumn(rs, "website_class_name")) m.setWebsiteClassName(rs.getString("website_class_name"));
     if (Helper.hasColumn(rs, "site_id")) m.setSiteId(Helper.nullLongHandler(rs, "site_id"));
     if (Helper.hasColumn(rs, "product_id")) m.setProductId(rs.getLong("product_id"));

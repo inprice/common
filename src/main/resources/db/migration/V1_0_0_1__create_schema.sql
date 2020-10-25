@@ -17,10 +17,9 @@ create table site (
 create table user (
   id                        bigint auto_increment not null,
   email                     varchar(100) not null,
+  password                  varchar(88) not null,
   name                      varchar(70) not null,
   timezone                  varchar(30),
-  password_hash             varchar(255) not null,
-  password_salt             varchar(255) not null,
   stripe_cust_id            varchar(255),
   created_at                timestamp not null default current_timestamp,
   primary key (id),
@@ -110,20 +109,8 @@ create table product (
   name                      varchar(500) not null,
   price                     decimal(9,2) default 0,
   position                  smallint default 3,
-  last_price_id             bigint,
-  company_id                bigint not null,
-  updated_at                datetime,
-  created_at                timestamp not null default current_timestamp,
-  primary key (id),
-  unique key ix1 (company_id, code),
-  key ix2 (company_id, name)
-) engine=innodb;
-alter table product add foreign key (company_id) references company (id);
-
-create table product_price (
-  id                        bigint auto_increment not null,
-  product_id                bigint not null,
-  price                     decimal(9,2) default 0,
+  ranking                   smallint default 0,
+  ranking_with              smallint default 0,
   min_platform              varchar(50),
   min_seller                varchar(50),
   min_price                 decimal(9,2) default 0,
@@ -134,17 +121,15 @@ create table product_price (
   max_seller                varchar(50),
   max_price                 decimal(9,2) default 0,
   max_diff                  decimal(6,2) default 0,
-  links                     smallint default 0,
-  position                  smallint default 3,
-  ranking                   smallint default 0,
-  ranking_with              smallint default 0,
   suggested_price           decimal(9,2) default 0,
   company_id                bigint not null,
+  updated_at                datetime,
   created_at                timestamp not null default current_timestamp,
   primary key (id),
-  key ix1 (created_at)
+  unique key ix1 (company_id, code),
+  key ix2 (company_id, name)
 ) engine=innodb;
-alter table product_price add foreign key (product_id) references product (id);
+alter table product add foreign key (company_id) references company (id);
 
 create table product_tag (
   id                        bigint auto_increment not null,
