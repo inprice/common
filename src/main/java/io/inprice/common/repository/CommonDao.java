@@ -14,14 +14,16 @@ import io.inprice.common.mappers.ProductLinkMapper;
 import io.inprice.common.models.Product;
 
 public interface CommonDao {
-  
+
   @SqlQuery(
-    "select l.id, s.domain as platform, seller, price, position, product_id, company_id, dense_rank() over (order by price) as ranking from link as l " +
-    "inner join site as s on s.id = site_id " +
-    "where price > 0 " +
+    "select l.id, s.domain as platform, l.seller, l.price, l.position, p.price as product_price, " +
+    "l.product_id, l.company_id, dense_rank() over (order by l.price) as ranking from link as l " +
+    "inner join product as p on p.id = l.product_id " +
+    "inner join site as s on s.id = l.site_id " +
+    "where l.price > 0 " +
     "  and l.status = :status " +
-    "  and product_id = :productId " +
-    "order by price"
+    "  and l.product_id = :productId " +
+    "order by l.price"
   )
   @UseRowMapper(ProductLinkMapper.class)
   List<ProductLink> findProductLinkList(@Bind("productId") Long productId, @Bind("status") String status);
@@ -37,7 +39,14 @@ public interface CommonDao {
   )
   boolean udpateProductPrice(@BindBean("sample") Product sample);
 
-  @SqlUpdate("update product set position=3, last_price_id=null, updated_at=now() where id:id")
+  @SqlUpdate(
+    "update product " +
+    "set position=3, ranking=0, ranking_with=0, suggested_price=price, updated_at=now(), " +
+    " min_platform=null, min_seller=null, min_price=0, min_diff=0, " +
+    " avg_price=0, avg_diff=0, " +
+    " max_platform=null, max_seller=null, max_price=0, max_diff=0 " +
+    "where id=:id "
+  )
   boolean zeroizeProductPrice(@Bind("id") Long id);
 
   @SqlUpdate("update link set position=:position where id=:id")

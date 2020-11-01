@@ -13,6 +13,7 @@ public class ProductLink {
   private String platform;
   private String seller;
   private BigDecimal price;
+  private BigDecimal productPrice;
   private Integer position;
   private Integer ranking;
   private Long productId;
