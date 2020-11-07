@@ -17,10 +17,9 @@ create table site (
 create table user (
   id                        bigint auto_increment not null,
   email                     varchar(100) not null,
+  password                  varchar(88) not null,
   name                      varchar(70) not null,
   timezone                  varchar(30),
-  password_hash             varchar(255) not null,
-  password_salt             varchar(255) not null,
   stripe_cust_id            varchar(255),
   created_at                timestamp not null default current_timestamp,
   primary key (id),
@@ -110,20 +109,8 @@ create table product (
   name                      varchar(500) not null,
   price                     decimal(9,2) default 0,
   position                  smallint default 3,
-  last_price_id             bigint,
-  company_id                bigint not null,
-  updated_at                datetime,
-  created_at                timestamp not null default current_timestamp,
-  primary key (id),
-  unique key ix1 (company_id, code),
-  key ix2 (company_id, name)
-) engine=innodb;
-alter table product add foreign key (company_id) references company (id);
-
-create table product_price (
-  id                        bigint auto_increment not null,
-  product_id                bigint not null,
-  price                     decimal(9,2) default 0,
+  ranking                   smallint default 0,
+  ranking_with              smallint default 0,
   min_platform              varchar(50),
   min_seller                varchar(50),
   min_price                 decimal(9,2) default 0,
@@ -134,17 +121,15 @@ create table product_price (
   max_seller                varchar(50),
   max_price                 decimal(9,2) default 0,
   max_diff                  decimal(6,2) default 0,
-  links                     smallint default 0,
-  position                  smallint default 3,
-  ranking                   smallint default 0,
-  ranking_with              smallint default 0,
   suggested_price           decimal(9,2) default 0,
   company_id                bigint not null,
+  updated_at                datetime,
   created_at                timestamp not null default current_timestamp,
   primary key (id),
-  key ix1 (created_at)
+  unique key ix1 (company_id, code),
+  key ix2 (company_id, name)
 ) engine=innodb;
-alter table product_price add foreign key (product_id) references product (id);
+alter table product add foreign key (company_id) references company (id);
 
 create table product_tag (
   id                        bigint auto_increment not null,
@@ -159,6 +144,7 @@ alter table product_tag add foreign key (company_id) references company (id);
 
 create table link (
   id                        bigint auto_increment not null,
+  active                    boolean default true,
   url                       varchar(1024) not null,
   url_hash                  varchar(32) not null,
   sku                       varchar(70),
@@ -170,14 +156,15 @@ create table link (
   position                  smallint default 3,
   last_check                datetime,
   last_update               datetime,
-  pre_status                varchar(25) not null default 'TOBE_CLASSIFIED',
   status                    varchar(25) not null default 'TOBE_CLASSIFIED',
+  pre_status                varchar(25) not null default 'TOBE_CLASSIFIED',
+  problem                   varchar(250),
   retry                     smallint default 0,
   http_status               smallint default 0,
   website_class_name        varchar(100),
   site_id                   bigint,
-  product_id                bigint,
-  company_id                bigint,
+  product_id                bigint not null,
+  company_id                bigint not null,
   created_at                timestamp not null default current_timestamp,
   primary key (id),
   key ix1 (url_hash),
@@ -189,6 +176,17 @@ create table link (
 alter table link add foreign key (product_id) references product (id);
 alter table link add foreign key (site_id) references site (id);
 alter table link add foreign key (company_id) references company (id);
+
+create table link_spec (
+  id                        bigint auto_increment not null,
+  link_id                   bigint not null,
+  _key                      varchar(100),
+  _value                    varchar(500),
+  product_id                bigint not null,
+  company_id                bigint not null,
+  primary key (id)
+) engine=innodb;
+alter table link_spec add foreign key (link_id) references link (id);
 
 create table link_price (
   id                        bigint auto_increment not null,
@@ -203,22 +201,12 @@ create table link_price (
 ) engine=innodb;
 alter table link_price add foreign key (link_id) references link (id);
 
-create table link_spec (
-  id                        bigint auto_increment not null,
-  link_id                   bigint not null,
-  _key                      varchar(100),
-  _value                    varchar(500),
-  product_id                bigint not null,
-  company_id                bigint not null,
-  primary key (id)
-) engine=innodb;
-alter table link_spec add foreign key (link_id) references link (id);
-
 create table link_history (
   id                        bigint auto_increment not null,
   link_id                   bigint not null,
   status                    varchar(25) not null,
   http_status               smallint default 0,
+  problem                   varchar(250),
   product_id                bigint not null,
   company_id                bigint not null,
   created_at                timestamp not null default current_timestamp,

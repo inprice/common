@@ -18,7 +18,7 @@ public class SysProps {
   }
 
   public static boolean APP_SHOW_QUERIES() {
-    return "true".equals(System.getenv().getOrDefault("APP_SHOW_QUERIES", "true").toLowerCase());
+    return "false".equals(System.getenv().getOrDefault("APP_SHOW_QUERIES", "false").toLowerCase());
   }
 
   public static int HTTP_CONNECTION_TIMEOUT() {
@@ -73,24 +73,12 @@ public class SysProps {
     return System.getenv().getOrDefault("REDIS_PASSWORD", null);
   }
 
-  public static String TOPIC_TOBE_CLASSIFIED_LINKS() {
-    return System.getenv().getOrDefault("TOPIC_TOBE_CLASSIFIED_LINKS", "tobe-classified-links");
+  public static String REDIS_ACTIVE_LINKS_TOPIC() {
+    return System.getenv().getOrDefault("REDIS_ACTIVE_LINKS_TOPIC", "active-links");
   }
 
-  public static String TOPIC_TOBE_AVAILABLE_LINKS() {
-    return System.getenv().getOrDefault("TOPIC_TOBE_AVAILABLE_LINKS", "tobe-available-links");
-  }
-
-  public static String TOPIC_AVALIABLE_LINKS() {
-    return System.getenv().getOrDefault("TOPIC_AVALIABLE_LINKS", "available-links");
-  }
-
-  public static String TOPIC_FAILED_LINKS() {
-    return System.getenv().getOrDefault("TOPIC_FAILED_LINKS", "failed-links");
-  }
-
-  public static String TOPIC_BLOCKED_LINKS() {
-    return System.getenv().getOrDefault("TOPIC_BLOCKED_LINKS", "blocked-links");
+  public static String REDIS_STATUS_CHANGE_TOPIC() {
+    return System.getenv().getOrDefault("REDIS_STATUS_CHANGE_TOPIC", "status-change");
   }
 
 }

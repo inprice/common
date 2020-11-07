@@ -2,6 +2,11 @@ package io.inprice.common.info;
 
 import java.util.concurrent.TimeUnit;
 
+import lombok.Getter;
+import lombok.ToString;
+
+@Getter
+@ToString
 public class TimePeriod {
 
   private int interval;
@@ -12,11 +17,4 @@ public class TimePeriod {
     this.timeUnit = timeUnit;
   }
 
-  public int getInterval() {
-    return interval;
-  }
-
-  public TimeUnit getTimeUnit() {
-    return timeUnit;
-  }
 }

@@ -1,6 +1,7 @@
 package io.inprice.common.info;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import io.inprice.common.meta.LinkStatus;
 import io.inprice.common.models.Link;
@@ -24,10 +25,12 @@ public class StatusChange implements Serializable {
 
   private Link link;
   private LinkStatus oldStatus;
+  private BigDecimal oldPrice;
 
-  public StatusChange(Link link, LinkStatus oldStatus) {
+  public StatusChange(Link link, LinkStatus oldStatus, BigDecimal oldPrice) {
     this.link = link;
     this.oldStatus = oldStatus;
+    this.oldPrice = oldPrice;
   }
 
 }
