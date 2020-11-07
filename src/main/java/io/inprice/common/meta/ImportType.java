@@ -7,6 +7,6 @@ package io.inprice.common.meta;
  */
 public enum ImportType {
 
-  CSV, EBAY_SKU, AMAZON_ASIN, URL;
+  CSV, URL, EBAY, AMAZON;
 
 }

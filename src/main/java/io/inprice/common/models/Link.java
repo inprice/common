@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import io.inprice.common.meta.ImportType;
 import io.inprice.common.meta.LinkStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,6 +40,8 @@ public class Link implements Serializable {
   private Integer httpStatus;
   private String websiteClassName;
   private Long siteId;
+  private Long importId;
+  private ImportType importType;
   private Long productId;
   private Long companyId;
   private Date createdAt;

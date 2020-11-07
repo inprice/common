@@ -86,7 +86,17 @@ public enum LinkStatus {
   /**
    * Duplicate links
    */
-  DUPLICATE(LinkStatus.PASSIVE_GROUP);
+  DUPLICATE(LinkStatus.PASSIVE_GROUP),
+
+  /**
+   * For imported products
+   */
+  IMPORTED(LinkStatus.PASSIVE_GROUP),
+
+  /**
+   * For imported products
+   */
+  LIMIT_EXCEEDED(LinkStatus.PASSIVE_GROUP);
 
   private String group;
 

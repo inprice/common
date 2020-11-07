@@ -142,6 +142,17 @@ create table product_tag (
 alter table product_tag add foreign key (product_id) references product (id);
 alter table product_tag add foreign key (company_id) references company (id);
 
+-- used for storing import headers (details are kept in link table)
+create table imbort (
+  id                        bigint auto_increment not null,
+  type                      enum('CSV', 'URL', 'AMAZON', 'EBAY') not null default 'CSV',
+  row_count                 smallint default 0,
+  company_id                bigint not null,
+  created_at                timestamp not null default current_timestamp,
+  primary key (id),
+) engine=innodb;
+alter table imbort add foreign key (company_id) references company (id);
+
 create table link (
   id                        bigint auto_increment not null,
   active                    boolean default true,
@@ -163,18 +174,20 @@ create table link (
   http_status               smallint default 0,
   website_class_name        varchar(100),
   site_id                   bigint,
+  imbort_id                 bigint,
+  imbort_type               varchar(12),
   product_id                bigint not null,
   company_id                bigint not null,
   created_at                timestamp not null default current_timestamp,
   primary key (id),
   key ix1 (url_hash),
   key ix2 (status),
-  key ix3 (name),
+  key ix3 (last_check)
   key ix4 (last_update),
-  key ix5 (last_check)
 ) engine=innodb;
-alter table link add foreign key (product_id) references product (id);
 alter table link add foreign key (site_id) references site (id);
+alter table link add foreign key (imbort_id) references imbort (id);
+alter table link add foreign key (product_id) references product (id);
 alter table link add foreign key (company_id) references company (id);
 
 create table link_spec (
