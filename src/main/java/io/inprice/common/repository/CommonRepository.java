@@ -5,16 +5,12 @@ import java.math.RoundingMode;
 import java.util.List;
 
 import org.jdbi.v3.core.Handle;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import io.inprice.common.info.ProductLink;
 import io.inprice.common.meta.LinkStatus;
 import io.inprice.common.models.Product;
 
 public class CommonRepository {
-
-  private static final Logger logger = LoggerFactory.getLogger(CommonRepository.class);
 
   /**
    * Adjusts product and its links' positions and rankings.
@@ -34,12 +30,8 @@ public class CommonRepository {
     // links are fetched in price order (lowest comes first)
     List<ProductLink> activeLinks = commonDao.findProductLinkList(productId, LinkStatus.AVAILABLE.name());
 
-    logger.info("Step 1");
-
     Product sample = null;
     if (activeLinks.size() > 0) {
-
-      logger.info("Step 2");
 
       ProductLink plFirst = activeLinks.get(0);
       ProductLink plLast = activeLinks.get(activeLinks.size() - 1);
@@ -108,22 +100,16 @@ public class CommonRepository {
         sample.setMaxDiff(BigDecimal.ZERO);
       }
 
-      logger.info("Step 3");
     } 
     
-    logger.info("Step 4");
-
     //updating product for new position and price_id
     boolean isOK = false;
     if (sample != null) {
-      logger.info("Step 5");
       isOK = commonDao.udpateProductPrice(sample);
       if (isOK) { //updating each link for new position
-        logger.info("Step 6");
         adjustLinksPrices(commonDao, sample, activeLinks, priceChangingLinkId);
       }
     } else { // has no active link
-      logger.info("Step 7");
       isOK = commonDao.zeroizeProductPrice(productId);
     }
 
@@ -132,7 +118,6 @@ public class CommonRepository {
 
   private static void adjustLinksPrices(CommonDao commonDao, Product sample, List<ProductLink> activeLinks, Long priceChangingLinkId) {
     for (ProductLink pl: activeLinks) {
-      logger.info("Step 6.1");
       int position = pl.getPosition();
       if (pl.getPrice().compareTo(sample.getMinPrice()) <= 0) {
         position = 1;
@@ -146,18 +131,18 @@ public class CommonRepository {
         position = 5;
       }
 
-      logger.info("Step 6.2");
+      boolean isPositionChanged = (position != pl.getPosition().intValue());
 
-      if (position != pl.getPosition().intValue()) {
-        logger.info("Step 6.3");
+      if (isPositionChanged) {
         commonDao.setLinkPosition(pl.getId(), position);
+        commonDao.deleteLastLinkPriceRow(pl.getId()); // the most recent one must be deleted so that a new one replace it correctly
       }
 
-      if (priceChangingLinkId != null && priceChangingLinkId.equals(pl.getId())) { // this info comes from StatusChangeConsumer
-        logger.info("Step 6.4");
+      // this info comes from StatusChangingLinksConsumer in Manager
+      if (isPositionChanged || (priceChangingLinkId != null && priceChangingLinkId.equals(pl.getId()))) {
         commonDao.insertLinkPrice(pl.getId(), pl.getPrice(), position, pl.getProductId(), pl.getCompanyId());
       }
-  }
+    }
   }
 
   private static BigDecimal findDiff(BigDecimal first, BigDecimal second) {

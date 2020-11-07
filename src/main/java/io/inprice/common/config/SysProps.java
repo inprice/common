@@ -18,7 +18,7 @@ public class SysProps {
   }
 
   public static boolean APP_SHOW_QUERIES() {
-    return "true".equals(System.getenv().getOrDefault("APP_SHOW_QUERIES", "true").toLowerCase());
+    return "false".equals(System.getenv().getOrDefault("APP_SHOW_QUERIES", "false").toLowerCase());
   }
 
   public static int HTTP_CONNECTION_TIMEOUT() {

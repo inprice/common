@@ -59,4 +59,7 @@ public interface CommonDao {
   boolean insertLinkPrice(@Bind("linkId") long linkId, @Bind("price") BigDecimal price, 
     @Bind("position") int position, @Bind("productId") long productId, @Bind("companyId") long companyId);
 
+  @SqlUpdate("delete from link_price where id in (select lpid from (select MAX(id) as lpid from link_price where link_id=:linkId) as sq)")
+  boolean deleteLastLinkPriceRow(@Bind("linkId") long linkId);
+
 }

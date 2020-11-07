@@ -1,11 +1,15 @@
 package io.inprice.common.helpers;
 
+import java.time.temporal.ChronoUnit;
+
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 import org.flywaydb.core.Flyway;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
+import org.jdbi.v3.core.statement.SqlLogger;
+import org.jdbi.v3.core.statement.StatementContext;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -93,9 +97,21 @@ public class Database {
       //hConf.addDataSourceProperty("elideSetAutoCommits", "true");
       hConf.addDataSourceProperty("maintainTimeStats", "false");
 
+      SqlLogger sqlLogger = new SqlLogger() {
+        @Override
+        public void logAfterExecution(StatementContext context) {
+          if (SysProps.APP_SHOW_QUERIES()) {
+            log.info(" -- Time: {}ms, Query: {}, Parameters: {}", 
+              context.getElapsedTime(ChronoUnit.MILLIS), context.getRenderedSql(), context.getBinding().toString());
+          }
+        }
+      };
+
       dataSource = new HikariDataSource(hConf);
-      jdbi = Jdbi.create(dataSource);
-      jdbi.installPlugin(new SqlObjectPlugin());
+      jdbi = 
+        Jdbi.create(dataSource)
+          .setSqlLogger(sqlLogger)
+          .installPlugin(new SqlObjectPlugin());
     } catch (Exception e) {
       log.error("Unable to connect to db", e);
     }
