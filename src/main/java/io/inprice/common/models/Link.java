@@ -38,8 +38,8 @@ public class Link implements Serializable {
   private String problem;
   private Integer retry;
   private Integer httpStatus;
-  private String websiteClassName;
-  private Long siteId;
+  private String className;
+  private String platform;
   private Long importId;
   private ImportType importType;
   private Long productId;
@@ -47,7 +47,6 @@ public class Link implements Serializable {
   private Date createdAt;
 
   //transients
-  private String platform;
   private BigDecimal productPrice;
 
   private List<LinkPrice> priceList;

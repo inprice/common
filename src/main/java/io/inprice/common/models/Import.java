@@ -19,7 +19,6 @@ public class Import implements Serializable {
 
   private Long id;
   private ImportType type;
-  private Integer rowCount;
   private Long companyId;
   private Date createdAt = new Date();
 

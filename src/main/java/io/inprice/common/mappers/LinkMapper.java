@@ -32,8 +32,8 @@ public class LinkMapper implements RowMapper<Link> {
     if (Helper.hasColumn(rs, "retry")) m.setRetry(Helper.nullIntegerHandler(rs, "retry"));
     if (Helper.hasColumn(rs, "http_status")) m.setHttpStatus(Helper.nullIntegerHandler(rs, "http_status"));
     if (Helper.hasColumn(rs, "problem")) m.setProblem(rs.getString("problem"));
-    if (Helper.hasColumn(rs, "website_class_name")) m.setWebsiteClassName(rs.getString("website_class_name"));
-    if (Helper.hasColumn(rs, "site_id")) m.setSiteId(Helper.nullLongHandler(rs, "site_id"));
+    if (Helper.hasColumn(rs, "class_name")) m.setClassName(rs.getString("class_name"));
+    if (Helper.hasColumn(rs, "platform")) m.setPlatform(rs.getString("platform"));
     if (Helper.hasColumn(rs, "imbort_id")) m.setImportId(Helper.nullLongHandler(rs, "imbort_id"));
     if (Helper.hasColumn(rs, "product_id")) m.setProductId(rs.getLong("product_id"));
     if (Helper.hasColumn(rs, "company_id")) m.setCompanyId(rs.getLong("company_id"));
@@ -53,7 +53,6 @@ public class LinkMapper implements RowMapper<Link> {
     }
 
     //transients
-    if (Helper.hasColumn(rs, "platform")) m.setPlatform(rs.getString("platform"));
     if (Helper.hasColumn(rs, "product_price")) m.setProductPrice(rs.getBigDecimal("product_price"));
 
     return m;
