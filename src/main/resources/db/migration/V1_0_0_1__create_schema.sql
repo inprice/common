@@ -128,15 +128,28 @@ create table product_tag (
 alter table product_tag add foreign key (product_id) references product (id);
 alter table product_tag add foreign key (company_id) references company (id);
 
--- used for storing import headers (details are kept in link table)
-create table imbort (
+-- used for storing import headers
+create table import_ (
   id                        bigint auto_increment not null,
   type                      enum('CSV', 'URL', 'AMAZON', 'EBAY') not null default 'CSV',
   company_id                bigint not null,
   created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb;
-alter table imbort add foreign key (company_id) references company (id);
+alter table import_ add foreign key (company_id) references company (id);
+
+create table import_detail (
+  id                        bigint auto_increment not null,
+  data                      varchar(1024) not null,
+  eligible                  boolean default true,
+  imported                  boolean default false,
+  problem                   varchar(250),
+  last_check                timestamp default current_timestamp,
+  import_id                 bigint not null,
+  company_id                bigint not null,
+  primary key (id)
+) engine=innodb;
+alter table import_detail add foreign key (company_id) references import_detail (id);
 
 create table link (
   id                        bigint auto_increment not null,
@@ -159,8 +172,7 @@ create table link (
   http_status               smallint default 0,
   class_name                varchar(100),
   platform                  varchar(50),
-  imbort_id                 bigint,
-  imbort_type               varchar(12),
+  import_detail_id          bigint,
   product_id                bigint,
   company_id                bigint not null,
   created_at                timestamp not null default current_timestamp,
@@ -170,9 +182,9 @@ create table link (
   key ix3 (last_check),
   key ix4 (last_update)
 ) engine=innodb;
-alter table link add foreign key (imbort_id) references imbort (id);
 alter table link add foreign key (product_id) references product (id);
 alter table link add foreign key (company_id) references company (id);
+alter table link add foreign key (import_detail_id) references import_detail (id);
 
 create table link_spec (
   id                        bigint auto_increment not null,

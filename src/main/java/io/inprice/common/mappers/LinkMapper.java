@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
-import io.inprice.common.meta.ImportType;
 import io.inprice.common.meta.LinkStatus;
 import io.inprice.common.models.Link;
 
@@ -34,7 +33,7 @@ public class LinkMapper implements RowMapper<Link> {
     if (Helper.hasColumn(rs, "problem")) m.setProblem(rs.getString("problem"));
     if (Helper.hasColumn(rs, "class_name")) m.setClassName(rs.getString("class_name"));
     if (Helper.hasColumn(rs, "platform")) m.setPlatform(rs.getString("platform"));
-    if (Helper.hasColumn(rs, "imbort_id")) m.setImportId(Helper.nullLongHandler(rs, "imbort_id"));
+    if (Helper.hasColumn(rs, "import_detail_id")) m.setImportDetailId(Helper.nullLongHandler(rs, "import_detail_id"));
     if (Helper.hasColumn(rs, "product_id")) m.setProductId(rs.getLong("product_id"));
     if (Helper.hasColumn(rs, "company_id")) m.setCompanyId(rs.getLong("company_id"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
@@ -46,10 +45,6 @@ public class LinkMapper implements RowMapper<Link> {
     if (Helper.hasColumn(rs, "pre_status")) {
       String preStatus = rs.getString("pre_status");
       if (preStatus != null) m.setPreStatus(LinkStatus.valueOf(preStatus));
-    }
-    if (Helper.hasColumn(rs, "imbort_type")) {
-      String importType = rs.getString("imbort_type");
-      if (importType != null) m.setImportType(ImportType.valueOf(importType));
     }
 
     //transients

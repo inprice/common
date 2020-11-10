@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import io.inprice.common.info.ImportRow;
 import io.inprice.common.meta.ImportType;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +22,6 @@ public class Import implements Serializable {
   private Date createdAt = new Date();
 
   //transients
-  private List<ImportRow> list;
+  private List<ImportDetail> details;
 
 }
