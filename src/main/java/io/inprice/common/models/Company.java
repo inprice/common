@@ -3,6 +3,8 @@ package io.inprice.common.models;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.inprice.common.meta.SubsStatus;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,17 +15,24 @@ public class Company implements Serializable {
 
   private static final long serialVersionUID = 1818360516258349831L;
 
+  @JsonIgnore
   private Long id;
   private String name;
   private String currencyCode;
   private String currencyFormat;
   private Integer productLimit = 0;
   private Integer productCount = 0;
+
+  @JsonIgnore
   private Long adminId;
   private Integer planId;
+
+  @JsonIgnore
   private String subsId;
   private SubsStatus subsStatus;
   private Date subsRenewalAt;
+
+  @JsonIgnore
   private String subsCustomerId;
   private String title;
   private String address1;

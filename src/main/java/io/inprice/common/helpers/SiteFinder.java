@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.inprice.common.models.Site;
+import io.inprice.common.info.Site;
 import io.inprice.common.utils.URLUtils;
 
 public class SiteFinder {

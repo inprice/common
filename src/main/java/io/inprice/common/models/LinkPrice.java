@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,8 +22,10 @@ public class LinkPrice implements Serializable {
   private BigDecimal price;
   private Integer position;
   private Long productId;
-  private Long companyId;
   private Date createdAt;
+  
+  @JsonIgnore
+  private Long companyId;
 
   public LinkPrice(Long linkId, BigDecimal price) {
     this.linkId = linkId;

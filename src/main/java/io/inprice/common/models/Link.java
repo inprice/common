@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.inprice.common.meta.LinkStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +24,6 @@ public class Link implements Serializable {
   private Long id;
   private Boolean active;
   private String url;
-  private String urlHash;
   private String sku;
   private String name;
   private String brand;
@@ -41,8 +42,13 @@ public class Link implements Serializable {
   private String platform;
   private Long importDetailId;
   private Long productId;
-  private Long companyId;
   private Date createdAt;
+  
+  @JsonIgnore
+  private String urlHash;
+
+  @JsonIgnore
+  private Long companyId;
 
   //transients
   private BigDecimal productPrice;

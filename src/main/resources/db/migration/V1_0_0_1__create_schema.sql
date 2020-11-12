@@ -132,6 +132,8 @@ alter table product_tag add foreign key (company_id) references company (id);
 create table import_ (
   id                        bigint auto_increment not null,
   type                      enum('CSV', 'URL', 'AMAZON', 'EBAY') not null default 'CSV',
+  success_count             smallint default 0,
+  problem_count             smallint default 0,
   company_id                bigint not null,
   created_at                timestamp not null default current_timestamp,
   primary key (id)

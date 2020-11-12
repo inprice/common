@@ -3,6 +3,8 @@ package io.inprice.common.models;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.inprice.common.meta.LinkStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,8 +23,10 @@ public class LinkHistory implements Serializable {
   private String problem;
   private Integer httpStatus;
   private Long productId;
-  private Long companyId;
   private Date createdAt;
+  
+  @JsonIgnore
+  private Long companyId;
 
   public LinkHistory(LinkStatus status) {
     this.status = status;

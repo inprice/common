@@ -16,6 +16,8 @@ public class ImportMapper implements RowMapper<Import> {
     Import m = new Import();
 
     if (Helper.hasColumn(rs, "id")) m.setId(rs.getLong("id"));
+    if (Helper.hasColumn(rs, "success_count")) m.setSuccessCount(rs.getInt("success_count"));
+    if (Helper.hasColumn(rs, "problem_count")) m.setProblemCount(rs.getInt("problem_count"));
     if (Helper.hasColumn(rs, "company_id")) m.setCompanyId(rs.getLong("company_id"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 

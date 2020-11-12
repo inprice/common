@@ -1,4 +1,4 @@
-package io.inprice.common.models;
+package io.inprice.common.info;
 
 import java.io.Serializable;
 
