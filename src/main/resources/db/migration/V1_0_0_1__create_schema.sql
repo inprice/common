@@ -1,19 +1,5 @@
 -- @author mdpinar
 
-create table site (
-  id                        bigint auto_increment not null,
-  active                    boolean default true,
-  name                      varchar(50) not null,
-  domain                    varchar(100) not null,
-  country                   varchar(50) not null,
-  class_name                varchar(100) not null,
-  status                    varchar(25),
-  logo_url                  varchar(255),
-  created_at                timestamp not null default current_timestamp,
-  primary key (id),
-  unique key ix1 (name)
-) engine=innodb;
-
 create table user (
   id                        bigint auto_increment not null,
   email                     varchar(100) not null,
@@ -142,6 +128,32 @@ create table product_tag (
 alter table product_tag add foreign key (product_id) references product (id);
 alter table product_tag add foreign key (company_id) references company (id);
 
+-- used for storing import headers
+create table import_ (
+  id                        bigint auto_increment not null,
+  type                      enum('CSV', 'URL', 'AMAZON', 'EBAY') not null default 'CSV',
+  is_file                   boolean default true,
+  success_count             smallint default 0,
+  problem_count             smallint default 0,
+  company_id                bigint not null,
+  created_at                timestamp not null default current_timestamp,
+  primary key (id)
+) engine=innodb;
+alter table import_ add foreign key (company_id) references company (id);
+
+create table import_detail (
+  id                        bigint auto_increment not null,
+  data                      varchar(1024) not null,
+  eligible                  boolean default true,
+  imported                  boolean default false,
+  problem                   varchar(250),
+  last_check                timestamp default current_timestamp,
+  import_id                 bigint not null,
+  company_id                bigint not null,
+  primary key (id)
+) engine=innodb;
+alter table import_detail add foreign key (company_id) references company (id);
+
 create table link (
   id                        bigint auto_increment not null,
   active                    boolean default true,
@@ -161,20 +173,19 @@ create table link (
   problem                   varchar(250),
   retry                     smallint default 0,
   http_status               smallint default 0,
-  website_class_name        varchar(100),
-  site_id                   bigint,
-  product_id                bigint not null,
+  class_name                varchar(100),
+  platform                  varchar(50),
+  import_detail_id          bigint,
+  product_id                bigint,
   company_id                bigint not null,
   created_at                timestamp not null default current_timestamp,
   primary key (id),
   key ix1 (url_hash),
   key ix2 (status),
-  key ix3 (name),
-  key ix4 (last_update),
-  key ix5 (last_check)
+  key ix3 (last_check),
+  key ix4 (last_update)
 ) engine=innodb;
 alter table link add foreign key (product_id) references product (id);
-alter table link add foreign key (site_id) references site (id);
 alter table link add foreign key (company_id) references company (id);
 
 create table link_spec (

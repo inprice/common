@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -35,9 +37,11 @@ public class Product implements Serializable {
   private BigDecimal maxPrice = BigDecimal.ZERO;
   private BigDecimal maxDiff = BigDecimal.ZERO;
   private BigDecimal suggestedPrice = BigDecimal.ZERO;
-  private Long companyId;
   private Date updatedAt;
   private Date createdAt;
+
+  @JsonIgnore
+  private Long companyId;
 
   //transients
   private List<String> tags;

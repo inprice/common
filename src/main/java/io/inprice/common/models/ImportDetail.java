@@ -1,6 +1,6 @@
 package io.inprice.common.models;
 
-import java.io.Serializable;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -9,13 +9,15 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ProductTag implements Serializable {
-
-  private static final long serialVersionUID = 6886045588196107119L;
-
+public class ImportDetail {
+  
   private Long id;
-  private String name;
-  private Long productId;
+  private String data;
+  private Boolean eligible;
+  private Boolean imported;
+  private String problem;
+  private Date lastCheck;
+  private Long importId;
 
   @JsonIgnore
   private Long companyId;

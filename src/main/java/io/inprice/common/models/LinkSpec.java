@@ -2,6 +2,8 @@ package io.inprice.common.models;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.inprice.common.utils.StringUtils;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +21,8 @@ public class LinkSpec implements Serializable {
    private String key;
    private String value;
    private Long productId;
+
+   @JsonIgnore
    private Long companyId;
 
    public LinkSpec(String key, String value) {

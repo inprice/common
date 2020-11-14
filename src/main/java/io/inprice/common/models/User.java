@@ -3,6 +3,8 @@ package io.inprice.common.models;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,10 +16,14 @@ public class User implements Serializable {
 
   private Long id;
   private String email;
-  private String password;
   private String name;
   private String timezone;
-  private String stripeCustId;
   private Date createdAt;
+  
+  @JsonIgnore
+  private String password;
+
+  @JsonIgnore
+  private String stripeCustId;
 
 }
