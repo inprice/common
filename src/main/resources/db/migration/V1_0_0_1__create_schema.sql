@@ -132,6 +132,7 @@ alter table product_tag add foreign key (company_id) references company (id);
 create table import_ (
   id                        bigint auto_increment not null,
   type                      enum('CSV', 'URL', 'AMAZON', 'EBAY') not null default 'CSV',
+  is_file                   boolean default true,
   success_count             smallint default 0,
   problem_count             smallint default 0,
   company_id                bigint not null,
@@ -151,7 +152,7 @@ create table import_detail (
   company_id                bigint not null,
   primary key (id)
 ) engine=innodb;
-alter table import_detail add foreign key (company_id) references import_detail (id);
+alter table import_detail add foreign key (company_id) references company (id);
 
 create table link (
   id                        bigint auto_increment not null,
@@ -186,7 +187,6 @@ create table link (
 ) engine=innodb;
 alter table link add foreign key (product_id) references product (id);
 alter table link add foreign key (company_id) references company (id);
-alter table link add foreign key (import_detail_id) references import_detail (id);
 
 create table link_spec (
   id                        bigint auto_increment not null,

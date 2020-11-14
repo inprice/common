@@ -20,6 +20,7 @@ public class Import implements Serializable {
 
   private Long id;
   private ImportType type;
+  private Boolean isFile;
   private Integer successCount;
   private Integer problemCount;
   private Date createdAt = new Date();
