@@ -19,7 +19,7 @@ public class Coupon implements Serializable {
   private Integer days;
   private Long issuedCompanyId;
   private Date issuedAt;
-  private Integer planId;
+  private String planName;
   private Date createdAt = new Date();
 
 }

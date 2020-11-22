@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
-import io.inprice.common.meta.SubsStatus;
 import io.inprice.common.meta.UserRole;
 import io.inprice.common.meta.UserStatus;
 import io.inprice.common.models.Member;
@@ -30,13 +29,12 @@ public class MemberMapper implements RowMapper<Member> {
 
     //transients
     if (Helper.hasColumn(rs, "company_name")) m.setCompanyName(rs.getString("company_name"));
+    if (Helper.hasColumn(rs, "free_usage")) m.setFreeUsage(rs.getBoolean("free_usage")); else m.setFreeUsage(false);
+    if (Helper.hasColumn(rs, "plan_name")) m.setPlanName(rs.getString("plan_name"));
+    if (Helper.hasColumn(rs, "subs_status")) m.setSubsStatus(rs.getString("subs_status"));
+    if (Helper.hasColumn(rs, "subs_renewal_at")) m.setSubsRenewalAt(rs.getDate("subs_renewal_at"));
     if (Helper.hasColumn(rs, "currency_format")) m.setCurrencyFormat(rs.getString("currency_format"));
-    if (Helper.hasColumn(rs, "plan_id")) m.setPlanId(Helper.nullIntegerHandler(rs, "plan_id"));
-    if (Helper.hasColumn(rs, "subs_renewal_at")) m.setSubsRenewalAt(rs.getTimestamp("subs_renewal_at"));
-    if (Helper.hasColumn(rs, "subs_status")) {
-      String subsStatus = rs.getString("subs_status");
-      if (subsStatus != null) m.setSubsStatus(SubsStatus.valueOf(subsStatus));
-    }
+    if (Helper.hasColumn(rs, "product_count")) m.setProductCount(rs.getInt("product_count"));
 
     return m;
   }

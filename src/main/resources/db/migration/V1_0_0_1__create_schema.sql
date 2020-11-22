@@ -20,9 +20,10 @@ create table company (
   product_limit             smallint default 0,
   product_count             smallint default 0,
   admin_id                  bigint not null,
-  plan_id                   smallint,
+  plan_name                 varchar(20),
+  free_usage                boolean default false,
   subs_id                   varchar(255),
-  subs_status               enum('NOT_SET', 'ACTIVE', 'COUPONED', 'STOPPED', 'CANCELLED') not null default 'NOT_SET',
+  subs_status               enum('NOT_SET', 'FREE', 'COUPONED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'NOT_SET',
   subs_renewal_at           timestamp,
   subs_customer_id          varchar(255),
   title                     varchar(255),
@@ -232,7 +233,7 @@ create table coupon (
   days                      smallint default 14,
   issued_company_id         bigint,
   issued_at                 timestamp,
-  plan_id                   smallint not null,
+  plan_name                 varchar(20) not null,
   created_at                timestamp not null default current_timestamp,
   primary key (code)
 ) engine=innodb;

@@ -81,4 +81,20 @@ public class SysProps {
     return System.getenv().getOrDefault("REDIS_STATUS_CHANGE_TOPIC", "status-change");
   }
 
+  public static String PLAN_PAYMENT_ID_BASIC() {
+    return System.getenv().get("PLAN_PAYMENT_ID_BASIC");
+  }
+
+  public static String PLAN_PAYMENT_ID_STANDARD() {
+    return System.getenv().get("PLAN_PAYMENT_ID_STANDARD");
+  }
+
+  public static String PLAN_PAYMENT_ID_PRO() {
+    return System.getenv().get("PLAN_PAYMENT_ID_PRO");
+  }
+
+  public static String PLAN_PAYMENT_ID_PREMIUM() {
+    return System.getenv().get("PLAN_PAYMENT_ID_PREMIUM");
+  }
+
 }

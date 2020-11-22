@@ -5,6 +5,7 @@ import java.util.Map;
 
 public enum SubsEvent {
 
+  FREE_USE("freeuse.start"),
   SUBSCRIPTION_STARTED("subscription.start"),
   SUBSCRIPTION_RENEWAL("subscription.renewal"),
   SUBSCRIPTION_CANCELLED("subscription.cancel"),

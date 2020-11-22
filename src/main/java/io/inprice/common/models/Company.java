@@ -25,12 +25,13 @@ public class Company implements Serializable {
 
   @JsonIgnore
   private Long adminId;
-  private Integer planId;
+  private String planName;
 
   @JsonIgnore
   private String subsId;
   private SubsStatus subsStatus;
   private Date subsRenewalAt;
+  private Boolean freeUsage;
 
   @JsonIgnore
   private String subsCustomerId;

@@ -5,7 +5,6 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.inprice.common.meta.SubsStatus;
 import io.inprice.common.meta.UserRole;
 import io.inprice.common.meta.UserStatus;
 import lombok.Getter;
@@ -34,9 +33,11 @@ public class Member implements Serializable {
 
   // transient
   private String companyName;
-  private String currencyFormat;
-  private Integer planId;
-  private SubsStatus subsStatus;
+  private Boolean freeUsage;
+  private String planName;
+  private String subsStatus;
   private Date subsRenewalAt;
+  private String currencyFormat;
+  private Integer productCount;
 
 }
