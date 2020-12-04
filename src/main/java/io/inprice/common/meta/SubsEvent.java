@@ -5,12 +5,12 @@ import java.util.Map;
 
 public enum SubsEvent {
 
-  FREE_USE("freeuse.start"),
-  SUBSCRIPTION_STARTED("subscription.start"),
-  SUBSCRIPTION_RENEWAL("subscription.renewal"),
-  SUBSCRIPTION_CANCELLED("subscription.cancel"),
-  COUPON_USED("coupon.used"),
-  PAYMENT_FAILED("payment.failed");
+  FREE_USE("Free use started"),
+  SUBSCRIPTION_STARTED("Subscription started"),
+  SUBSCRIPTION_RENEWAL("Subscription renewed"),
+  SUBSCRIPTION_CANCELLED("Subscription cancelled"),
+  COUPON_USED("Coupon used"),
+  PAYMENT_FAILED("Payment failed");
 
   private String event;
   private static Map<String, SubsEvent> lookup;

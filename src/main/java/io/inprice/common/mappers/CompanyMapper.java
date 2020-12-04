@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
-import io.inprice.common.meta.SubsStatus;
+import io.inprice.common.meta.CompanyStatus;
 import io.inprice.common.models.Company;
 
 public class CompanyMapper implements RowMapper<Company> {
@@ -31,14 +31,14 @@ public class CompanyMapper implements RowMapper<Company> {
     if (Helper.hasColumn(rs, "state")) m.setState(rs.getString("state"));
     if (Helper.hasColumn(rs, "country")) m.setCountry(rs.getString("country"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
-    if (Helper.hasColumn(rs, "free_usage")) m.setFreeUsage(rs.getBoolean("free_usage"));
+    if (Helper.hasColumn(rs, "last_status_update")) m.setLastStatusUpdate(rs.getTimestamp("last_status_update"));
     if (Helper.hasColumn(rs, "subs_id")) m.setSubsId(rs.getString("subs_id"));
     if (Helper.hasColumn(rs, "subs_customer_id")) m.setSubsCustomerId(rs.getString("subs_customer_id"));
     if (Helper.hasColumn(rs, "subs_renewal_at")) m.setSubsRenewalAt(rs.getTimestamp("subs_renewal_at"));
 
-    if (Helper.hasColumn(rs, "subs_status")) {
-      String subsStatus = rs.getString("subs_status");
-      if (subsStatus != null) m.setSubsStatus(SubsStatus.valueOf(subsStatus));
+    if (Helper.hasColumn(rs, "status")) {
+      String status = rs.getString("status");
+      if (status != null) m.setStatus(CompanyStatus.valueOf(status));
     }
 
     return m;

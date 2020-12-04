@@ -8,6 +8,7 @@ import org.jdbi.v3.core.Handle;
 
 import io.inprice.common.info.ProductLink;
 import io.inprice.common.meta.LinkStatus;
+import io.inprice.common.models.LinkPrice;
 import io.inprice.common.models.Product;
 
 public class CommonRepository {
@@ -131,17 +132,29 @@ public class CommonRepository {
         position = 5;
       }
 
-      boolean isPositionChanged = (position != pl.getPosition().intValue());
-
-      if (isPositionChanged) {
+      if (position != pl.getPosition().intValue()) {
         commonDao.setLinkPosition(pl.getId(), position);
-        commonDao.deleteLastLinkPriceRow(pl.getId()); // the most recent one must be deleted so that a new one replace it correctly
       }
 
-      // this info comes from StatusChangingLinksConsumer in Manager
-      if (isPositionChanged || (priceChangingLinkId != null && priceChangingLinkId.equals(pl.getId()))) {
-        commonDao.insertLinkPrice(pl.getId(), pl.getPrice(), position, pl.getProductId(), pl.getCompanyId());
+      // priceChangingLinkId comes from StatusChangingLinksConsumer which can be found in Manager
+      if (priceChangingLinkId != null && priceChangingLinkId.equals(pl.getId())) {
+
+        BigDecimal diffAmount = BigDecimal.ZERO;
+        BigDecimal diffRate = BigDecimal.ZERO;
+  
+        // in order to find the difference old and new prices, we need to find the last trans in db
+        LinkPrice lastPriceTrans = commonDao.findLastPriceTransOfLink(pl.getId());
+        if (lastPriceTrans != null) {
+          BigDecimal lastPrice = lastPriceTrans.getPrice();
+          if (lastPrice.compareTo(pl.getPrice()) != 0) {
+            diffAmount = lastPrice.subtract(pl.getPrice());
+            diffRate = findDiff(lastPrice, pl.getPrice());
+          }
+        }
+
+        commonDao.insertLinkPrice(pl.getId(), pl.getPrice(), position, diffAmount, diffRate, pl.getProductId(), pl.getCompanyId());
       }
+
     }
   }
 

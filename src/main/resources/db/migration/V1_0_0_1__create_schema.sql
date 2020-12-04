@@ -20,10 +20,10 @@ create table company (
   product_limit             smallint default 0,
   product_count             smallint default 0,
   admin_id                  bigint not null,
+  status                    enum('NOT_SET', 'FREE', 'COUPONED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'NOT_SET',
+  last_status_update        timestamp not null default current_timestamp,
   plan_name                 varchar(20),
-  free_usage                boolean default false,
   subs_id                   varchar(255),
-  subs_status               enum('NOT_SET', 'FREE', 'COUPONED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'NOT_SET',
   subs_renewal_at           timestamp,
   subs_customer_id          varchar(255),
   title                     varchar(255),
@@ -41,10 +41,18 @@ create table company (
 ) engine=innodb;
 alter table company add foreign key (admin_id) references user (id);
 
-create table subs_trans (
+create table company_history (
   id                        bigint auto_increment not null,
   company_id                bigint not null,
-  event_source              enum('SUBSCRIPTION', 'COUPON') not null default 'SUBSCRIPTION',
+  status                    enum('NOT_SET', 'FREE', 'COUPONED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'NOT_SET',
+  created_at                timestamp not null default current_timestamp,
+  primary key (id),
+) engine=innodb;
+alter table company_history add foreign key (company_id) references company (id);
+
+create table company_trans (
+  id                        bigint auto_increment not null,
+  company_id                bigint not null,
   event_id                  varchar(255),
   event                     varchar(255) not null,
   successful                boolean default false,
@@ -55,7 +63,7 @@ create table subs_trans (
   primary key (id),
   key ix1 (created_at)
 ) engine=innodb;
-alter table subs_trans add foreign key (company_id) references company (id);
+alter table company_trans add foreign key (company_id) references company (id);
 
 create table member (
   id                        bigint auto_increment not null,
@@ -73,21 +81,6 @@ create table member (
 ) engine=innodb;
 alter table member add foreign key (user_id) references user (id);
 alter table member add foreign key (company_id) references company (id);
-
-create table user_session (
-  _hash                     varchar(32) not null,
-  user_id                   bigint not null,
-  company_id                bigint not null,
-  ip                        varchar(255),
-  os                        varchar(30),
-  browser                   varchar(100),
-  user_agent                varchar(500),
-  accessed_at               timestamp not null default current_timestamp,
-  primary key (_hash),
-  key ix1 (accessed_at)
-) engine=innodb;
-alter table user_session add foreign key (user_id) references user (id);
-alter table user_session add foreign key (company_id) references company (id);
 
 create table product (
   id                        bigint auto_increment not null,
@@ -205,6 +198,8 @@ create table link_price (
   link_id                   bigint not null,
   price                     decimal(9,2) default 0,
   position                  smallint default 3,
+  diff_amount               decimal(6,2) default 0,
+  diff_rate                 decimal(6,2) default 0,
   product_id                bigint not null,
   company_id                bigint not null,
   created_at                timestamp not null default current_timestamp,
@@ -237,3 +232,25 @@ create table coupon (
   created_at                timestamp not null default current_timestamp,
   primary key (code)
 ) engine=innodb;
+
+create table user_banned (
+  email                     varchar(100) not null,
+  reason                    varchar(255),
+  banned_at                 timestamp not null default current_timestamp,
+  primary key (email),
+) engine=innodb;
+
+create table user_session (
+  _hash                     varchar(32) not null,
+  user_id                   bigint not null,
+  company_id                bigint not null,
+  ip                        varchar(255),
+  os                        varchar(30),
+  browser                   varchar(100),
+  user_agent                varchar(500),
+  accessed_at               timestamp not null default current_timestamp,
+  primary key (_hash),
+  key ix1 (accessed_at)
+) engine=innodb;
+alter table user_session add foreign key (user_id) references user (id);
+alter table user_session add foreign key (company_id) references company (id);

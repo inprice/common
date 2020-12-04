@@ -5,7 +5,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.inprice.common.meta.SubsStatus;
+import io.inprice.common.meta.CompanyStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,14 +27,15 @@ public class Company implements Serializable {
   private Long adminId;
   private String planName;
 
-  @JsonIgnore
-  private String subsId;
-  private SubsStatus subsStatus;
-  private Date subsRenewalAt;
-  private Boolean freeUsage;
+  private CompanyStatus status;
+  private Date lastStatusUpdate = new Date();
 
   @JsonIgnore
+  private String subsId;
+  @JsonIgnore
   private String subsCustomerId;
+  private Date subsRenewalAt;
+
   private String title;
   private String address1;
   private String address2;

@@ -13,6 +13,11 @@ public class Plans {
   private static final Map<Integer, Plan> idMap;
   private static final Map<String, Plan> nameMap;
 
+  private static final String PRODUCT_LIMIT_TEMPLATE = "Up to %d products.";
+  private static final String UNLIMITED_COMPETITORS = "Unlimited competitors.";
+  private static final String UPDATE_NUMBER = "Update prices 4 times a day.";
+  private static final String FREE_API = "Free API access (coming soon).";
+
   public static Plan findById(Integer planId) {
     return idMap.get(planId);
   }
@@ -25,46 +30,77 @@ public class Plans {
     return plans;
   }
 
-  //private static final String RENEWAL_MESSAGE = "Subscription renews every 30 days.";
-  private static final String PRODUCT_LIMIT_TEMPLATE = "Up to %d products with unlimited competitors.";
-
   static {
+    int i = 0;
     plans = new Plan[] {
-      new Plan(1,
+      new Plan(i++,
         "Basic Plan",
+        25,
+        new BigDecimal(15),
+        Arrays.asList(
+          String.format(PRODUCT_LIMIT_TEMPLATE, 25),
+          UNLIMITED_COMPETITORS,
+          UPDATE_NUMBER
+        ),
+        "price_1HsPmfBiHTcqawyM6l9e38eF"
+      ),
+      new Plan(i++,
+        "Starter Plan",
         50,
         new BigDecimal(30),
         Arrays.asList(
-          String.format(PRODUCT_LIMIT_TEMPLATE, 50)
+          String.format(PRODUCT_LIMIT_TEMPLATE, 50),
+          UNLIMITED_COMPETITORS,
+          UPDATE_NUMBER
         ),
-        SysProps.PLAN_PAYMENT_ID_BASIC()
+        "price_1HsPnMBiHTcqawyMBiFZh437"
       ),
-      new Plan(2,
+      new Plan(i++,
         "Standard Plan",
         100,
         new BigDecimal(50),
         Arrays.asList(
-          String.format(PRODUCT_LIMIT_TEMPLATE, 100)
+          String.format(PRODUCT_LIMIT_TEMPLATE, 100),
+          UNLIMITED_COMPETITORS,
+          UPDATE_NUMBER
         ),
-        SysProps.PLAN_PAYMENT_ID_STANDARD()
+        "price_1HsPnkBiHTcqawyMWpAcIGiM"
       ),
-      new Plan(3,
+      new Plan(i++,
         "Pro Plan",
         250,
-        new BigDecimal(80),
+        new BigDecimal(70),
         Arrays.asList(
-          String.format(PRODUCT_LIMIT_TEMPLATE, 250)
+          String.format(PRODUCT_LIMIT_TEMPLATE, 250),
+          UNLIMITED_COMPETITORS,
+          UPDATE_NUMBER,
+          FREE_API
         ),
-        SysProps.PLAN_PAYMENT_ID_PRO()
+        "price_1HsPo9BiHTcqawyMkrYojUEh"
       ),
-      new Plan(4,
+      new Plan(i++,
         "Premium Plan",
         500,
-        new BigDecimal(110),
+        new BigDecimal(100),
         Arrays.asList(
-          String.format(PRODUCT_LIMIT_TEMPLATE, 500)
+          String.format(PRODUCT_LIMIT_TEMPLATE, 500),
+          UNLIMITED_COMPETITORS,
+          UPDATE_NUMBER,
+          FREE_API
         ),
-        SysProps.PLAN_PAYMENT_ID_PREMIUM()
+        "price_1HsPoYBiHTcqawyMppp1waDG"
+      ),
+      new Plan(i++,
+        "Enterprise Plan",
+        1000,
+        new BigDecimal(130),
+        Arrays.asList(
+          String.format(PRODUCT_LIMIT_TEMPLATE, 1000),
+          UNLIMITED_COMPETITORS,
+          UPDATE_NUMBER,
+          FREE_API
+        ),
+        "price_1HsPowBiHTcqawyM8e1wer70"
       )
     };
 
