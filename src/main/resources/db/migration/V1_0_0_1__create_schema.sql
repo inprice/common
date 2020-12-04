@@ -84,7 +84,6 @@ alter table member add foreign key (company_id) references company (id);
 
 create table product (
   id                        bigint auto_increment not null,
-  active                    boolean default true,
   code                      varchar(50) not null,
   name                      varchar(500) not null,
   price                     decimal(9,2) default 0,
@@ -150,7 +149,6 @@ alter table import_detail add foreign key (company_id) references company (id);
 
 create table link (
   id                        bigint auto_increment not null,
-  active                    boolean default true,
   url                       varchar(1024) not null,
   url_hash                  varchar(32) not null,
   sku                       varchar(70),
