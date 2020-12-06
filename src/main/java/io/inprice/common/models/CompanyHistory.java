@@ -18,6 +18,9 @@ public class CompanyHistory implements Serializable {
   @JsonIgnore
   private Long id;
   private CompanyStatus status;
+  private String planName;
+  private String subsId;
+  private String subsCustomerId;
   private Date createdAt = new Date();
 
 }

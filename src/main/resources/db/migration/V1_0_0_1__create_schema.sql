@@ -6,7 +6,6 @@ create table user (
   password                  varchar(88) not null,
   name                      varchar(70) not null,
   timezone                  varchar(30),
-  stripe_cust_id            varchar(255),
   created_at                timestamp not null default current_timestamp,
   primary key (id),
   unique key ix1 (email)
@@ -45,6 +44,8 @@ create table company_history (
   id                        bigint auto_increment not null,
   company_id                bigint not null,
   status                    enum('NOT_SET', 'FREE', 'COUPONED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'NOT_SET',
+  subs_id                   varchar(255),
+  subs_customer_id          varchar(255),
   created_at                timestamp not null default current_timestamp,
   primary key (id),
 ) engine=innodb;
