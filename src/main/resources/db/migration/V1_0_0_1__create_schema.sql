@@ -44,10 +44,11 @@ create table company_history (
   id                        bigint auto_increment not null,
   company_id                bigint not null,
   status                    enum('NOT_SET', 'FREE', 'COUPONED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'NOT_SET',
+  plan_name                 varchar(20),
   subs_id                   varchar(255),
   subs_customer_id          varchar(255),
   created_at                timestamp not null default current_timestamp,
-  primary key (id),
+  primary key (id)
 ) engine=innodb;
 alter table company_history add foreign key (company_id) references company (id);
 
@@ -236,7 +237,7 @@ create table user_banned (
   email                     varchar(100) not null,
   reason                    varchar(255),
   banned_at                 timestamp not null default current_timestamp,
-  primary key (email),
+  primary key (email)
 ) engine=innodb;
 
 create table user_session (
