@@ -34,7 +34,9 @@ public class Member implements Serializable {
 
   // transient
   private String companyName;
+  private Boolean everSubscribed = Boolean.FALSE;
   private CompanyStatus companyStatus = CompanyStatus.NOT_SET;
+  private Date lastStatusUpdate; //for company
   private String planName;
   private Date subsRenewalAt;
   private String currencyFormat;

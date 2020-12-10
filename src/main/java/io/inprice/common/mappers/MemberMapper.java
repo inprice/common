@@ -3,6 +3,7 @@ package io.inprice.common.mappers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
@@ -34,6 +35,11 @@ public class MemberMapper implements RowMapper<Member> {
     if (Helper.hasColumn(rs, "subs_renewal_at")) m.setSubsRenewalAt(rs.getDate("subs_renewal_at"));
     if (Helper.hasColumn(rs, "currency_format")) m.setCurrencyFormat(rs.getString("currency_format"));
     if (Helper.hasColumn(rs, "product_count")) m.setProductCount(rs.getInt("product_count"));
+    if (Helper.hasColumn(rs, "last_status_update")) m.setLastStatusUpdate(rs.getTimestamp("last_status_update")); //for company
+
+    if (Helper.hasColumn(rs, "subs_customer_id")) {
+      m.setEverSubscribed(StringUtils.isNotBlank(rs.getString("subs_customer_id")));
+    }
 
     if (Helper.hasColumn(rs, "company_status")) {
       String status = rs.getString("company_status");
