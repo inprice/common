@@ -180,4 +180,9 @@ public class DateUtils {
     return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
   }
 
+  public static long findHourDiff(Date earlierTime, Date laterTime) {
+    long diff = laterTime.getTime() - earlierTime.getTime();
+    return TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS);
+  }
+
 }

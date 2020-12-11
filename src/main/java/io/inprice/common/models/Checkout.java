@@ -18,15 +18,17 @@ public class Checkout implements Serializable {
   private static final long serialVersionUID = -2323544177591811430L;
 
   @JsonIgnore
-  private String hash;
+  private String hash; //id
 
   @JsonIgnore
   private String sessionId; //from stripe
 
   @JsonIgnore
   private Long companyId;
-  private Integer planId;
+
+  private String planName;
   private CheckoutStatus status;
+  private String description;
   private Date updatedAt;
   private Date createdAt;
 
