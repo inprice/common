@@ -254,3 +254,15 @@ create table user_session (
 ) engine=innodb;
 alter table user_session add foreign key (user_id) references user (id);
 alter table user_session add foreign key (company_id) references company (id);
+
+create table checkout (
+  _hash                     varchar(32) not null,
+  session_id                varchar(255),
+  status                    enum('PENDING', 'SUCCESSFUL', 'EXPIRED', 'CANCELLED', 'FAILED', 'ERROR') not null default 'PENDING',
+  company_id                bigint not null,
+  plan_id                   smallint not null,
+  updated_at                timestamp,
+  created_at                timestamp not null default current_timestamp,
+  primary key (_hash),
+  key ix1 (created_at)
+) engine=innodb;
