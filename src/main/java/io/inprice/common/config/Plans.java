@@ -12,6 +12,7 @@ public class Plans {
   private static final Plan[] plans;
   private static final Map<Integer, Plan> idMap;
   private static final Map<String, Plan> nameMap;
+  private static final Map<String, Plan> priceIdMap;
 
   private static final String PRODUCT_LIMIT_TEMPLATE = "Up to %d products.";
   private static final String UNLIMITED_COMPETITORS = "Unlimited competitors.";
@@ -24,6 +25,10 @@ public class Plans {
 
   public static Plan findByName(String name) {
     return nameMap.get(name);
+  }
+
+  public static Plan findByPriceId(String priceId) {
+    return priceIdMap.get(priceId);
   }
 
   public static Plan[] getPlans() {
@@ -106,9 +111,11 @@ public class Plans {
 
     idMap = new HashMap<>(plans.length);
     nameMap = new HashMap<>(plans.length);
+    priceIdMap = new HashMap<>(plans.length);
     for (Plan p: plans) {
       idMap.put(p.getId(), p);
       nameMap.put(p.getName(), p);
+      priceIdMap.put(p.getStripePriceId(), p);
     }
   }
 

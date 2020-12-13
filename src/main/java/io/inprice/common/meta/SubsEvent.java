@@ -15,6 +15,7 @@ public enum SubsEvent {
 
   SUBSCRIPTION_STARTED("Subscription started"),
   SUBSCRIPTION_RENEWED("Subscription renewed"),
+  SUBSCRIPTION_CHANGED("Subscription changed"),
   SUBSCRIPTION_STOPPED("Subscription stopped"),
   SUBSCRIPTION_CANCELLED("Subscription cancelled"),
 
