@@ -19,7 +19,6 @@ public class Product implements Serializable {
   private static final long serialVersionUID = 2010109845985968128L;
 
   private Long id;
-  private Boolean active = Boolean.TRUE;
   private String code;
   private String name;
   private BigDecimal price;

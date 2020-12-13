@@ -175,9 +175,14 @@ public class DateUtils {
     return val;
   }
 
-  public static long findDayDiff(Date olderDate, Date newerDate) {
-    long diff = newerDate.getTime() - olderDate.getTime();
+  public static long findDayDiff(Date earlierDate, Date laterDate) {
+    long diff = laterDate.getTime() - earlierDate.getTime();
     return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+  }
+
+  public static long findHourDiff(Date earlierTime, Date laterTime) {
+    long diff = laterTime.getTime() - earlierTime.getTime();
+    return TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS);
   }
 
 }

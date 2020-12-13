@@ -16,7 +16,6 @@ public class LinkMapper implements RowMapper<Link> {
     Link m = new Link();
 
     if (Helper.hasColumn(rs, "id")) m.setId(rs.getLong("id"));
-    if (Helper.hasColumn(rs, "active")) m.setActive(rs.getBoolean("active"));
     if (Helper.hasColumn(rs, "url")) m.setUrl(rs.getString("url"));
     if (Helper.hasColumn(rs, "url_hash")) m.setUrlHash(rs.getString("url_hash"));
     if (Helper.hasColumn(rs, "sku")) m.setSku(rs.getString("sku"));

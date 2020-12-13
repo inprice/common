@@ -1,15 +1,15 @@
 package io.inprice.common;
 
-import io.inprice.common.helpers.SiteFinder;
+import io.inprice.common.config.Plans;
+import io.inprice.common.models.Plan;
 
 public class Test {
   
   public static void main(String[] args) {
-    System.out.println(SiteFinder.findSiteByUrl("www.hepsiburada.com"));
-    System.out.println(SiteFinder.findSiteByUrl("http://gittigidiyor.com"));
-    System.out.println(SiteFinder.findSiteByUrl("https://amazon.com.tr"));
-    System.out.println(SiteFinder.findSiteByUrl("http://sanal.com"));
-    System.out.println(SiteFinder.findSiteByUrl("https://zooogle.com"));
+    Plan[] plans = Plans.getPlans();
+    for (Plan plan : plans) {
+      System.out.println(plan);
+    }
   }
 
 }

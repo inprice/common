@@ -10,7 +10,9 @@ import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 import org.jdbi.v3.sqlobject.statement.UseRowMapper;
 
 import io.inprice.common.info.ProductLink;
+import io.inprice.common.mappers.LinkPriceMapper;
 import io.inprice.common.mappers.ProductLinkMapper;
+import io.inprice.common.models.LinkPrice;
 import io.inprice.common.models.Product;
 
 public interface CommonDao {
@@ -51,14 +53,23 @@ public interface CommonDao {
   @SqlUpdate("update link set position=:position where id=:id")
   boolean setLinkPosition(@Bind("id") long id, @Bind("position") int position);
 
+  @SqlQuery(
+    "select * from link_price " +
+    "where link_id = :linkId " +
+    "  and price > 0 " +
+    "order by id desc " +
+    "limit 1"
+  )
+  @UseRowMapper(LinkPriceMapper.class)
+  LinkPrice findLastPriceTransOfLink(@Bind("linkId") Long linkId);
+
   @SqlUpdate(
     "insert into link_price " +
-    "(link_id, price, position, product_id, company_id) values (:linkId, :price, :position, :productId, :companyId)"
+    "(link_id, price, position, diff_amount, diff_rate, product_id, company_id) "+
+    "values (:linkId, :price, :position, :diffAmount, :diffRate, :productId, :companyId)"
   )
   boolean insertLinkPrice(@Bind("linkId") long linkId, @Bind("price") BigDecimal price, 
-    @Bind("position") int position, @Bind("productId") long productId, @Bind("companyId") long companyId);
-
-  @SqlUpdate("delete from link_price where id in (select lpid from (select MAX(id) as lpid from link_price where link_id=:linkId) as sq)")
-  boolean deleteLastLinkPriceRow(@Bind("linkId") long linkId);
+    @Bind("position") int position, @Bind("diffAmount") BigDecimal diffAmount, @Bind("diffRate") BigDecimal diffRate,
+    @Bind("productId") long productId, @Bind("companyId") long companyId);
 
 }

@@ -15,7 +15,6 @@ public class ProductMapper implements RowMapper<Product> {
     Product m = new Product();
 
     if (Helper.hasColumn(rs, "id")) m.setId(rs.getLong("id"));
-    if (Helper.hasColumn(rs, "active")) m.setActive(rs.getBoolean("active"));
     if (Helper.hasColumn(rs, "code")) m.setCode(rs.getString("code"));
     if (Helper.hasColumn(rs, "name")) m.setName(rs.getString("name"));
     if (Helper.hasColumn(rs, "price")) m.setPrice(rs.getBigDecimal("price"));

@@ -22,7 +22,6 @@ public class Link implements Serializable {
   private static final long serialVersionUID = 2206190984817621818L;
 
   private Long id;
-  private Boolean active;
   private String url;
   private String sku;
   private String name;
