@@ -2,7 +2,7 @@ package io.inprice.common.meta;
 
 public enum CompanyStatus {
   
-  NOT_SET(false, true, true, true, false),
+  CREATED(false, true, true, true, false),
   FREE(true, false, true, true, true),
   COUPONED(true, false, false, true, true),
   SUBSCRIBED(true, false, false, false, true),

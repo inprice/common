@@ -19,12 +19,13 @@ create table company (
   product_limit             smallint default 0,
   product_count             smallint default 0,
   admin_id                  bigint not null,
-  status                    enum('NOT_SET', 'FREE', 'COUPONED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'NOT_SET',
+  status                    enum('CREATED', 'FREE', 'COUPONED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'CREATED',
   last_status_update        timestamp not null default current_timestamp,
   plan_name                 varchar(20),
+  cust_id                   varchar(255),
   subs_id                   varchar(255),
-  subs_renewal_at           timestamp,
-  subs_customer_id          varchar(255),
+  subs_started_at           timestamp,
+  renewal_at                timestamp,
   title                     varchar(255),
   address_1                 varchar(255),
   address_2                 varchar(255),
@@ -34,19 +35,19 @@ create table company (
   country                   varchar(2),
   created_at                timestamp not null default current_timestamp,
   primary key (id),
-  key ix1 (subs_renewal_at),
+  key ix1 (renewal_at),
   key ix2 (name),
-  key ix3 (subs_customer_id)
+  key ix3 (cust_id)
 ) engine=innodb;
 alter table company add foreign key (admin_id) references user (id);
 
 create table company_history (
   id                        bigint auto_increment not null,
   company_id                bigint not null,
-  status                    enum('NOT_SET', 'FREE', 'COUPONED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'NOT_SET',
+  status                    enum('CREATED', 'FREE', 'COUPONED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'CREATED',
   plan_name                 varchar(20),
+  cust_id                   varchar(255),
   subs_id                   varchar(255),
-  subs_customer_id          varchar(255),
   created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb;
@@ -224,11 +225,11 @@ alter table link_history add foreign key (link_id) references link (id);
 
 create table coupon (
   code                      char(8) not null,
-  description               varchar(50),
-  days                      smallint default 14,
+  plan_name                 varchar(20) not null,
+  days                      smallint not null,
+  description               varchar(128),
   issued_company_id         bigint,
   issued_at                 timestamp,
-  plan_name                 varchar(20) not null,
   created_at                timestamp not null default current_timestamp,
   primary key (code)
 ) engine=innodb;

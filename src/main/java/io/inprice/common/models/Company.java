@@ -25,16 +25,17 @@ public class Company implements Serializable {
 
   @JsonIgnore
   private Long adminId;
-  private String planName;
 
   private CompanyStatus status;
   private Date lastStatusUpdate = new Date();
+  private String planName;
 
   @JsonIgnore
-  private String subsId;
+  private String custId;
   @JsonIgnore
-  private String subsCustomerId;
-  private Date subsRenewalAt;
+  private String subsId;
+  private Date subsStartedAt;
+  private Date renewalAt;
 
   private String title;
   private String address1;

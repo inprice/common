@@ -17,10 +17,11 @@ public class CompanyHistory implements Serializable {
 
   @JsonIgnore
   private Long id;
+  private Long companyId;
   private CompanyStatus status;
   private String planName;
+  private String custId;
   private String subsId;
-  private String subsCustomerId;
   private Date createdAt = new Date();
 
 }
