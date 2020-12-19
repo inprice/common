@@ -24,7 +24,7 @@ public class Checkout implements Serializable {
   private String sessionId; //from stripe
 
   @JsonIgnore
-  private Long companyId;
+  private Long accountId;
 
   private String planName;
   private CheckoutStatus status;

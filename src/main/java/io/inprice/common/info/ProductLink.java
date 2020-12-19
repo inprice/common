@@ -21,6 +21,6 @@ public class ProductLink {
   private Long productId;
 
   @JsonIgnore
-  private Long companyId;
+  private Long accountId;
 
 }

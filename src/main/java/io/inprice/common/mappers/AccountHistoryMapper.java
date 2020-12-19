@@ -6,17 +6,17 @@ import java.sql.SQLException;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
-import io.inprice.common.meta.CompanyStatus;
-import io.inprice.common.models.CompanyHistory;
+import io.inprice.common.meta.AccountStatus;
+import io.inprice.common.models.AccountHistory;
 
-public class CompanyHistoryMapper implements RowMapper<CompanyHistory> {
+public class AccountHistoryMapper implements RowMapper<AccountHistory> {
 
   @Override
-  public CompanyHistory map(ResultSet rs, StatementContext ctx) throws SQLException {
-    CompanyHistory m = new CompanyHistory();
+  public AccountHistory map(ResultSet rs, StatementContext ctx) throws SQLException {
+    AccountHistory m = new AccountHistory();
 
     if (Helper.hasColumn(rs, "id")) m.setId(rs.getLong("id"));
-    if (Helper.hasColumn(rs, "company_id")) m.setCompanyId(rs.getLong("company_id"));
+    if (Helper.hasColumn(rs, "account_id")) m.setAccountId(rs.getLong("account_id"));
     if (Helper.hasColumn(rs, "cust_id")) m.setCustId(rs.getString("cust_id"));
     if (Helper.hasColumn(rs, "subs_id")) m.setSubsId(rs.getString("subs_id"));
     if (Helper.hasColumn(rs, "plan_name")) m.setPlanName(rs.getString("plan_name"));
@@ -24,7 +24,7 @@ public class CompanyHistoryMapper implements RowMapper<CompanyHistory> {
 
     if (Helper.hasColumn(rs, "status")) {
       String status = rs.getString("status");
-      if (status != null) m.setStatus(CompanyStatus.valueOf(status));
+      if (status != null) m.setStatus(AccountStatus.valueOf(status));
     }
 
     return m;

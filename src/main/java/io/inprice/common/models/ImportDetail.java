@@ -20,6 +20,6 @@ public class ImportDetail {
   private Long importId;
 
   @JsonIgnore
-  private Long companyId;
+  private Long accountId;
 
 }

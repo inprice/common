@@ -32,7 +32,7 @@ public class ProductMapper implements RowMapper<Product> {
     if (Helper.hasColumn(rs, "max_price")) m.setMaxPrice(rs.getBigDecimal("max_price"));
     if (Helper.hasColumn(rs, "max_diff")) m.setMaxDiff(rs.getBigDecimal("max_diff"));
     if (Helper.hasColumn(rs, "suggested_price")) m.setSuggestedPrice(rs.getBigDecimal("suggested_price"));
-    if (Helper.hasColumn(rs, "company_id")) m.setCompanyId(Helper.nullLongHandler(rs, "company_id"));
+    if (Helper.hasColumn(rs, "account_id")) m.setAccountId(Helper.nullLongHandler(rs, "account_id"));
     if (Helper.hasColumn(rs, "updated_at")) m.setUpdatedAt(rs.getTimestamp("updated_at"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 

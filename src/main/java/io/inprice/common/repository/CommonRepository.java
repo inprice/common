@@ -41,7 +41,7 @@ public class CommonRepository {
       sample = new Product();
       sample.setId(productId);
       sample.setPrice(productPrice);
-      sample.setCompanyId(plFirst.getCompanyId());
+      sample.setAccountId(plFirst.getAccountId());
       sample.setMinPlatform(plFirst.getPlatform());
       sample.setMinSeller(plFirst.getSeller());
       sample.setMinPrice(plFirst.getPrice());
@@ -152,7 +152,7 @@ public class CommonRepository {
           }
         }
 
-        commonDao.insertLinkPrice(pl.getId(), pl.getPrice(), position, diffAmount, diffRate, pl.getProductId(), pl.getCompanyId());
+        commonDao.insertLinkPrice(pl.getId(), pl.getPrice(), position, diffAmount, diffRate, pl.getProductId(), pl.getAccountId());
       }
 
     }

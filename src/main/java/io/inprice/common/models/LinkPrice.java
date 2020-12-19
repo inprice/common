@@ -27,7 +27,7 @@ public class LinkPrice implements Serializable {
   private Date createdAt;
   
   @JsonIgnore
-  private Long companyId;
+  private Long accountId;
 
   public LinkPrice(Long linkId, BigDecimal price) {
     this.linkId = linkId;

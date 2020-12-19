@@ -26,7 +26,7 @@ public class Import implements Serializable {
   private Date createdAt = new Date();
   
   @JsonIgnore
-  private Long companyId;
+  private Long accountId;
 
   //transients
   private List<ImportDetail> details;

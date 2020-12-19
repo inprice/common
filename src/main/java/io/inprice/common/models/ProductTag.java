@@ -18,6 +18,6 @@ public class ProductTag implements Serializable {
   private Long productId;
 
   @JsonIgnore
-  private Long companyId;
+  private Long accountId;
 
 }

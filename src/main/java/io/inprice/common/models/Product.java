@@ -40,7 +40,7 @@ public class Product implements Serializable {
   private Date createdAt;
 
   @JsonIgnore
-  private Long companyId;
+  private Long accountId;
 
   //transients
   private List<String> tags;

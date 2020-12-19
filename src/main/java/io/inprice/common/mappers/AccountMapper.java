@@ -6,14 +6,14 @@ import java.sql.SQLException;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
-import io.inprice.common.meta.CompanyStatus;
-import io.inprice.common.models.Company;
+import io.inprice.common.meta.AccountStatus;
+import io.inprice.common.models.Account;
 
-public class CompanyMapper implements RowMapper<Company> {
+public class AccountMapper implements RowMapper<Account> {
 
   @Override
-  public Company map(ResultSet rs, StatementContext ctx) throws SQLException {
-    Company m = new Company();
+  public Account map(ResultSet rs, StatementContext ctx) throws SQLException {
+    Account m = new Account();
 
     if (Helper.hasColumn(rs, "id")) m.setId(rs.getLong("id"));
     if (Helper.hasColumn(rs, "name")) m.setName(rs.getString("name"));
@@ -39,7 +39,7 @@ public class CompanyMapper implements RowMapper<Company> {
 
     if (Helper.hasColumn(rs, "status")) {
       String status = rs.getString("status");
-      if (status != null) m.setStatus(CompanyStatus.valueOf(status));
+      if (status != null) m.setStatus(AccountStatus.valueOf(status));
     }
 
     return m;

@@ -1,6 +1,6 @@
 package io.inprice.common.meta;
 
-public enum CompanyStatus {
+public enum AccountStatus {
   
   CREATED(false, true, true, true, false),
   FREE(true, false, true, true, true),
@@ -16,7 +16,7 @@ public enum CompanyStatus {
   private boolean okForSubscription;
   private boolean okForCancel;
 
-  private CompanyStatus(boolean active, boolean okForFreeUse, boolean okForCoupon, boolean okForSubscription, boolean okForCancel) {
+  private AccountStatus(boolean active, boolean okForFreeUse, boolean okForCoupon, boolean okForSubscription, boolean okForCancel) {
     this.active = active;
     this.okForFreeUse = okForFreeUse;
     this.okForCoupon = okForCoupon;
