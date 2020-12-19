@@ -5,7 +5,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.inprice.common.meta.CompanyStatus;
+import io.inprice.common.meta.AccountStatus;
 import io.inprice.common.meta.UserRole;
 import io.inprice.common.meta.UserStatus;
 import lombok.Getter;
@@ -30,15 +30,15 @@ public class Member implements Serializable {
   private Date createdAt = new Date();
 
   @JsonIgnore
-  private Long companyId;
+  private Long accountId;
 
   // transient
-  private String companyName;
-  private Boolean everSubscribed = Boolean.FALSE;
-  private CompanyStatus companyStatus = CompanyStatus.NOT_SET;
-  private Date lastStatusUpdate; //for company
+  private String accountName;
+  private AccountStatus accountStatus = AccountStatus.CREATED;
+  private Date lastStatusUpdate; //for account
   private String planName;
-  private Date subsRenewalAt;
+  private Date renewalAt;
+  private Date subsStartedAt;
   private String currencyFormat;
   private Integer productCount;
 

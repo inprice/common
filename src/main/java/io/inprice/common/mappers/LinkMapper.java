@@ -34,7 +34,7 @@ public class LinkMapper implements RowMapper<Link> {
     if (Helper.hasColumn(rs, "platform")) m.setPlatform(rs.getString("platform"));
     if (Helper.hasColumn(rs, "import_detail_id")) m.setImportDetailId(Helper.nullLongHandler(rs, "import_detail_id"));
     if (Helper.hasColumn(rs, "product_id")) m.setProductId(rs.getLong("product_id"));
-    if (Helper.hasColumn(rs, "company_id")) m.setCompanyId(rs.getLong("company_id"));
+    if (Helper.hasColumn(rs, "account_id")) m.setAccountId(rs.getLong("account_id"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 
     if (Helper.hasColumn(rs, "status")) {

@@ -19,7 +19,7 @@ public interface CommonDao {
 
   @SqlQuery(
     "select l.id, l.platform, l.seller, l.price, l.position, p.price as product_price, " +
-    "l.product_id, l.company_id, dense_rank() over (order by l.price) as ranking from link as l " +
+    "l.product_id, l.account_id, dense_rank() over (order by l.price) as ranking from link as l " +
     "inner join product as p on p.id = l.product_id " +
     "where l.price > 0 " +
     "  and l.status = :status " +
@@ -35,7 +35,7 @@ public interface CommonDao {
     " min_platform=:sample.minPlatform, min_seller=:sample.minSeller, min_price=:sample.minPrice, min_diff=:sample.minDiff, " +
     " avg_price=:sample.avgPrice, avg_diff=:sample.avgDiff, " +
     " max_platform=:sample.maxPlatform, max_seller=:sample.maxSeller, max_price=:sample.maxPrice, max_diff=:sample.maxDiff, " +
-    " position=:sample.position, ranking=:sample.ranking, ranking_with=:sample.rankingWith, suggested_price=:sample.suggestedPrice, company_id=:sample.companyId " + 
+    " position=:sample.position, ranking=:sample.ranking, ranking_with=:sample.rankingWith, suggested_price=:sample.suggestedPrice, account_id=:sample.accountId " + 
     "where id=:sample.id "
   )
   boolean udpateProductPrice(@BindBean("sample") Product sample);
@@ -65,11 +65,11 @@ public interface CommonDao {
 
   @SqlUpdate(
     "insert into link_price " +
-    "(link_id, price, position, diff_amount, diff_rate, product_id, company_id) "+
-    "values (:linkId, :price, :position, :diffAmount, :diffRate, :productId, :companyId)"
+    "(link_id, price, position, diff_amount, diff_rate, product_id, account_id) "+
+    "values (:linkId, :price, :position, :diffAmount, :diffRate, :productId, :accountId)"
   )
   boolean insertLinkPrice(@Bind("linkId") long linkId, @Bind("price") BigDecimal price, 
     @Bind("position") int position, @Bind("diffAmount") BigDecimal diffAmount, @Bind("diffRate") BigDecimal diffRate,
-    @Bind("productId") long productId, @Bind("companyId") long companyId);
+    @Bind("productId") long productId, @Bind("accountId") long accountId);
 
 }

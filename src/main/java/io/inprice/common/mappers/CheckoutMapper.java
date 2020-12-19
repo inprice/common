@@ -17,7 +17,7 @@ public class CheckoutMapper implements RowMapper<Checkout> {
 
     if (Helper.hasColumn(rs, "_hash")) m.setHash(rs.getString("_hash"));
     if (Helper.hasColumn(rs, "session_id")) m.setSessionId(rs.getString("session_id"));
-    if (Helper.hasColumn(rs, "company_id")) m.setCompanyId(rs.getLong("company_id"));
+    if (Helper.hasColumn(rs, "account_id")) m.setAccountId(rs.getLong("account_id"));
     if (Helper.hasColumn(rs, "plan_name")) m.setPlanName(rs.getString("plan_name"));
     if (Helper.hasColumn(rs, "description")) m.setDescription(rs.getString("description"));
     if (Helper.hasColumn(rs, "updated_at")) m.setUpdatedAt(rs.getTimestamp("updated_at"));

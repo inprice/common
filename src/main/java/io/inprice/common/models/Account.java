@@ -5,13 +5,13 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.inprice.common.meta.CompanyStatus;
+import io.inprice.common.meta.AccountStatus;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Company implements Serializable {
+public class Account implements Serializable {
 
   private static final long serialVersionUID = 1818360516258349831L;
 
@@ -25,16 +25,17 @@ public class Company implements Serializable {
 
   @JsonIgnore
   private Long adminId;
+
+  private AccountStatus status;
+  private Date lastStatusUpdate = new Date();
   private String planName;
 
-  private CompanyStatus status;
-  private Date lastStatusUpdate = new Date();
-
+  @JsonIgnore
+  private String custId;
   @JsonIgnore
   private String subsId;
-  @JsonIgnore
-  private String subsCustomerId;
-  private Date subsRenewalAt;
+  private Date subsStartedAt;
+  private Date renewalAt;
 
   private String title;
   private String address1;

@@ -3,11 +3,10 @@ package io.inprice.common.mappers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.commons.lang3.StringUtils;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
-import io.inprice.common.meta.CompanyStatus;
+import io.inprice.common.meta.AccountStatus;
 import io.inprice.common.meta.UserRole;
 import io.inprice.common.meta.UserStatus;
 import io.inprice.common.models.Member;
@@ -26,24 +25,21 @@ public class MemberMapper implements RowMapper<Member> {
     if (Helper.hasColumn(rs, "pre_status")) m.setPreStatus(UserStatus.valueOf(rs.getString("pre_status")));
     if (Helper.hasColumn(rs, "retry")) m.setRetry(Helper.nullIntegerHandler(rs, "retry"));
     if (Helper.hasColumn(rs, "updated_at")) m.setUpdatedAt(rs.getTimestamp("updated_at"));
-    if (Helper.hasColumn(rs, "company_id")) m.setCompanyId(rs.getLong("company_id"));
+    if (Helper.hasColumn(rs, "account_id")) m.setAccountId(rs.getLong("account_id"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 
     //transients
-    if (Helper.hasColumn(rs, "company_name")) m.setCompanyName(rs.getString("company_name"));
+    if (Helper.hasColumn(rs, "account_name")) m.setAccountName(rs.getString("account_name"));
     if (Helper.hasColumn(rs, "plan_name")) m.setPlanName(rs.getString("plan_name"));
-    if (Helper.hasColumn(rs, "subs_renewal_at")) m.setSubsRenewalAt(rs.getDate("subs_renewal_at"));
+    if (Helper.hasColumn(rs, "renewal_at")) m.setRenewalAt(rs.getDate("renewal_at"));
     if (Helper.hasColumn(rs, "currency_format")) m.setCurrencyFormat(rs.getString("currency_format"));
     if (Helper.hasColumn(rs, "product_count")) m.setProductCount(rs.getInt("product_count"));
-    if (Helper.hasColumn(rs, "last_status_update")) m.setLastStatusUpdate(rs.getTimestamp("last_status_update")); //for company
+    if (Helper.hasColumn(rs, "subs_started_at")) m.setSubsStartedAt(rs.getTimestamp("subs_started_at"));
+    if (Helper.hasColumn(rs, "last_status_update")) m.setLastStatusUpdate(rs.getTimestamp("last_status_update")); //for account
 
-    if (Helper.hasColumn(rs, "subs_customer_id")) {
-      m.setEverSubscribed(StringUtils.isNotBlank(rs.getString("subs_customer_id")));
-    }
-
-    if (Helper.hasColumn(rs, "company_status")) {
-      String status = rs.getString("company_status");
-      if (status != null) m.setCompanyStatus(CompanyStatus.valueOf(status));
+    if (Helper.hasColumn(rs, "account_status")) {
+      String status = rs.getString("account_status");
+      if (status != null) m.setAccountStatus(AccountStatus.valueOf(status));
     }
 
     return m;

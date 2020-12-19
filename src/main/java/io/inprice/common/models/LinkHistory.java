@@ -26,7 +26,7 @@ public class LinkHistory implements Serializable {
   private Date createdAt;
   
   @JsonIgnore
-  private Long companyId;
+  private Long accountId;
 
   public LinkHistory(LinkStatus status) {
     this.status = status;

@@ -47,7 +47,7 @@ public class Link implements Serializable {
   private String urlHash;
 
   @JsonIgnore
-  private Long companyId;
+  private Long accountId;
 
   //transients
   private BigDecimal productPrice;

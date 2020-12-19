@@ -15,11 +15,11 @@ public class Coupon implements Serializable {
   private static final long serialVersionUID = 5125346359199270016L;
 
   private String code;
-  private String description;
-  private Integer days;
-  private Long issuedCompanyId;
-  private Date issuedAt;
   private String planName;
+  private Integer days;
+  private String description;
+  private Long issuedAccountId;
+  private Date issuedAt;
   private Date createdAt = new Date();
 
 }

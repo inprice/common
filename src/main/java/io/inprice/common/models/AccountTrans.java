@@ -11,7 +11,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CompanyTrans implements Serializable {
+public class AccountTrans implements Serializable {
 
   private static final long serialVersionUID = -4787008755878198572L;
 
@@ -25,6 +25,6 @@ public class CompanyTrans implements Serializable {
   private Date createdAt;
 
   @JsonIgnore
-  private Long companyId;  // 1
+  private Long accountId;  // 1
 
 }

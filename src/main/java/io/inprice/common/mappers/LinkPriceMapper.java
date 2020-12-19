@@ -21,7 +21,7 @@ public class LinkPriceMapper implements RowMapper<LinkPrice> {
     if (Helper.hasColumn(rs, "diff_amount")) m.setDiffAmount(rs.getBigDecimal("diff_amount"));
     if (Helper.hasColumn(rs, "diff_rate")) m.setDiffRate(rs.getBigDecimal("diff_rate"));
     if (Helper.hasColumn(rs, "product_id")) m.setProductId(rs.getLong("product_id"));
-    if (Helper.hasColumn(rs, "company_id")) m.setCompanyId(rs.getLong("company_id"));
+    if (Helper.hasColumn(rs, "account_id")) m.setAccountId(rs.getLong("account_id"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 
     return m;
