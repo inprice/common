@@ -15,7 +15,7 @@ create table account (
   id                        bigint auto_increment not null,
   name                      varchar(70) not null,
   currency_code             char(3),
-  currency_format           varchar(16),
+  currency_format           varchar(30),
   product_limit             smallint default 0,
   product_count             smallint default 0,
   admin_id                  bigint not null,
@@ -228,7 +228,8 @@ create table coupon (
   plan_name                 varchar(20) not null,
   days                      smallint not null,
   description               varchar(128),
-  issued_account_id         bigint,
+  issuer_id                 bigint,
+  issued_id                 bigint,
   issued_at                 timestamp,
   created_at                timestamp not null default current_timestamp,
   primary key (code)
