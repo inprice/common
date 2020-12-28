@@ -50,22 +50,19 @@ public class CommonRepository {
       sample.setMaxSeller(plLast.getSeller());
       sample.setMaxPrice(plLast.getPrice());
       sample.setSuggestedPrice(productPrice);
+      sample.setLinkCount(activeLinks.size());
 
       //finding total, ranking and rankingWith
-      int ranking = 0;
+      int ranking = 1;
       int rankingWith = 0;
       BigDecimal total = BigDecimal.ZERO;
       for (ProductLink pl: activeLinks) {
         total = total.add(pl.getPrice());
-        if (ranking == 0 && productPrice.compareTo(pl.getPrice()) <= 0) {
-          ranking = pl.getRanking();
-        }
-        if (productPrice.compareTo(pl.getPrice()) == 0) {
+        if (productPrice.compareTo(pl.getPrice()) > 0) {
+          ranking++;
+        } else if (productPrice.compareTo(pl.getPrice()) == 0) {
           rankingWith++;
         }
-      }
-      if (ranking == 0) {
-        ranking = plLast.getRanking() + 1;
       }
       sample.setRanking(ranking);
       sample.setRankingWith(rankingWith);
@@ -136,7 +133,7 @@ public class CommonRepository {
         commonDao.setLinkPosition(pl.getId(), position);
       }
 
-      // priceChangingLinkId comes from StatusChangingLinksConsumer which can be found in Manager
+       // priceChangingLinkId comes from StatusChangingLinksConsumer which can be found in Manager
       if (priceChangingLinkId != null && priceChangingLinkId.equals(pl.getId())) {
 
         BigDecimal diffAmount = BigDecimal.ZERO;

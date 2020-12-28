@@ -23,7 +23,8 @@ public class Product implements Serializable {
   private String name;
   private BigDecimal price;
   private Integer position;
-  private Integer ranking;
+  private Integer linkCount = 0;
+  private Integer ranking = 0;
   private Integer rankingWith = 0; //the number of other links having the same price
   private String minPlatform;
   private String minSeller;

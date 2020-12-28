@@ -19,6 +19,7 @@ public class ProductMapper implements RowMapper<Product> {
     if (Helper.hasColumn(rs, "name")) m.setName(rs.getString("name"));
     if (Helper.hasColumn(rs, "price")) m.setPrice(rs.getBigDecimal("price"));
     if (Helper.hasColumn(rs, "position")) m.setPosition(rs.getInt("position"));
+    if (Helper.hasColumn(rs, "link_count")) m.setLinkCount(rs.getInt("link_count"));
     if (Helper.hasColumn(rs, "ranking")) m.setRanking(rs.getInt("ranking"));
     if (Helper.hasColumn(rs, "ranking_with")) m.setRankingWith(rs.getInt("ranking_with"));
     if (Helper.hasColumn(rs, "min_platform")) m.setMinPlatform(rs.getString("min_platform"));

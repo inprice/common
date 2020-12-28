@@ -91,6 +91,7 @@ create table product (
   name                      varchar(500) not null,
   price                     decimal(9,2) default 0,
   position                  smallint default 3,
+  link_count                smallint default 0,
   ranking                   smallint default 0,
   ranking_with              smallint default 0,
   min_platform              varchar(50),

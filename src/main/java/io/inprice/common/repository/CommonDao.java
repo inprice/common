@@ -35,14 +35,15 @@ public interface CommonDao {
     " min_platform=:sample.minPlatform, min_seller=:sample.minSeller, min_price=:sample.minPrice, min_diff=:sample.minDiff, " +
     " avg_price=:sample.avgPrice, avg_diff=:sample.avgDiff, " +
     " max_platform=:sample.maxPlatform, max_seller=:sample.maxSeller, max_price=:sample.maxPrice, max_diff=:sample.maxDiff, " +
-    " position=:sample.position, ranking=:sample.ranking, ranking_with=:sample.rankingWith, suggested_price=:sample.suggestedPrice, account_id=:sample.accountId " + 
+    " position=:sample.position, link_count=:sample.linkCount, ranking=:sample.ranking, ranking_with=:sample.rankingWith, " +
+    " suggested_price=:sample.suggestedPrice, account_id=:sample.accountId " + 
     "where id=:sample.id "
   )
   boolean udpateProductPrice(@BindBean("sample") Product sample);
 
   @SqlUpdate(
     "update product " +
-    "set position=3, ranking=0, ranking_with=0, suggested_price=price, updated_at=now(), " +
+    "set position=3, link_count=0, ranking=0, ranking_with=0, suggested_price=price, updated_at=now(), " +
     " min_platform=null, min_seller=null, min_price=0, min_diff=0, " +
     " avg_price=0, avg_diff=0, " +
     " max_platform=null, max_seller=null, max_price=0, max_diff=0 " +
