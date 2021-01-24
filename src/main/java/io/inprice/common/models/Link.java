@@ -30,15 +30,15 @@ public class Link implements Serializable {
   private String shipment;
   private BigDecimal price = BigDecimal.ZERO;
   private Integer position;
+  private LinkStatus preStatus = LinkStatus.TOBE_CLASSIFIED;
+  private LinkStatus status = LinkStatus.TOBE_CLASSIFIED;
   private Date lastUpdate;
   private Date lastCheck;
-  private LinkStatus status = LinkStatus.TOBE_CLASSIFIED;
-  private LinkStatus preStatus = LinkStatus.TOBE_CLASSIFIED;
-  private String problem;
-  private Integer retry;
-  private Integer httpStatus;
-  private String className;
-  private String platform;
+  private LinkStatus lastStatus = LinkStatus.TOBE_CLASSIFIED;
+  private String lastProblem;
+  private Integer lastRetry;
+  private Integer lastHttpStatus;
+  private Long platformId;
   private Long importDetailId;
   private Long productId;
   private Date createdAt;
@@ -55,6 +55,9 @@ public class Link implements Serializable {
   private List<LinkPrice> priceList;
   private List<LinkSpec> specList;
   private List<LinkHistory> historyList;
+  
+  @JsonIgnore
+  private Platform platform;
 
   public Link(String url) {
     this.url = url;

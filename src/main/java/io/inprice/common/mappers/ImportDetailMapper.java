@@ -18,7 +18,7 @@ public class ImportDetailMapper implements RowMapper<ImportDetail> {
     if (Helper.hasColumn(rs, "data")) m.setData(rs.getString("data"));
     if (Helper.hasColumn(rs, "eligible")) m.setEligible(rs.getBoolean("eligible"));
     if (Helper.hasColumn(rs, "imported")) m.setImported(rs.getBoolean("imported"));
-    if (Helper.hasColumn(rs, "problem")) m.setProblem(rs.getString("problem"));
+    if (Helper.hasColumn(rs, "status")) m.setStatus(rs.getString("status"));
     if (Helper.hasColumn(rs, "last_check")) m.setLastCheck(rs.getTimestamp("last_check"));
     if (Helper.hasColumn(rs, "import_id")) m.setImportId(rs.getLong("import_id"));
     if (Helper.hasColumn(rs, "account_id")) m.setAccountId(rs.getLong("account_id"));

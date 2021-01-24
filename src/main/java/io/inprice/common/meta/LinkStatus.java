@@ -14,7 +14,6 @@ public enum LinkStatus {
 
   /**
    * The initial state.
-   * After this, RESOLVED comes
    */
   TOBE_CLASSIFIED(LinkStatus.ACTIVE_GROUP),
 
