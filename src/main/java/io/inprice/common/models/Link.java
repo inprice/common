@@ -34,10 +34,9 @@ public class Link implements Serializable {
   private LinkStatus status = LinkStatus.TOBE_CLASSIFIED;
   private Date lastUpdate;
   private Date lastCheck;
-  private LinkStatus lastStatus = LinkStatus.TOBE_CLASSIFIED;
-  private String lastProblem;
-  private Integer lastRetry;
-  private Integer lastHttpStatus;
+  private String problem;
+  private Integer retry;
+  private Integer httpStatus;
   private Long platformId;
   private Long importDetailId;
   private Long productId;

@@ -1,5 +1,8 @@
 package io.inprice.common.meta;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * This class consists of several statuses that are used to manage links's
  * positions.
@@ -37,6 +40,11 @@ public enum LinkStatus {
    * For the links have no sufficient stock
    */
   NOT_AVAILABLE(LinkStatus.FAILED_GROUP),
+
+  /**
+   * Used for indicating links whose data is missing
+   */
+  NO_DATA(LinkStatus.FAILED_GROUP),
 
   /**
    * Used for links returning http error codes greater than 399.
@@ -78,9 +86,9 @@ public enum LinkStatus {
   IMPROPER(LinkStatus.PASSIVE_GROUP),
 
   /**
-   * Used for indicating links whose data is missing
+   * Used for indicating links whose data is invalid
    */
-  NO_DATA(LinkStatus.PASSIVE_GROUP),
+  INVALID_DATA(LinkStatus.PASSIVE_GROUP),
 
   /**
    * Duplicate links
@@ -107,6 +115,9 @@ public enum LinkStatus {
 
   //For the linls in this group, data never be collected.
   public static final String PASSIVE_GROUP = "passive";
+
+  public static final List<LinkStatus> ACTIVE_STATUSES = Arrays.asList( TOBE_CLASSIFIED, AVAILABLE, RESOLVED );
+  public static final List<LinkStatus> FAILED_STATUSES = Arrays.asList( NOT_AVAILABLE, NETWORK_ERROR );
 
   LinkStatus(String group) {
     this.group = group;

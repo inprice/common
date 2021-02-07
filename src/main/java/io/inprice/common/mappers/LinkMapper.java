@@ -28,9 +28,9 @@ public class LinkMapper implements RowMapper<Link> {
     if (Helper.hasColumn(rs, "position")) m.setPosition(Helper.nullIntegerHandler(rs, "position"));
     if (Helper.hasColumn(rs, "last_check")) m.setLastCheck(rs.getTimestamp("last_check"));
     if (Helper.hasColumn(rs, "last_update")) m.setLastUpdate(rs.getTimestamp("last_update"));
-    if (Helper.hasColumn(rs, "last_retry")) m.setLastRetry(Helper.nullIntegerHandler(rs, "last_retry"));
-    if (Helper.hasColumn(rs, "last_http_status")) m.setLastHttpStatus(Helper.nullIntegerHandler(rs, "last_http_status"));
-    if (Helper.hasColumn(rs, "last_problem")) m.setLastProblem(rs.getString("problem"));
+    if (Helper.hasColumn(rs, "retry")) m.setRetry(Helper.nullIntegerHandler(rs, "retry"));
+    if (Helper.hasColumn(rs, "http_status")) m.setHttpStatus(Helper.nullIntegerHandler(rs, "http_status"));
+    if (Helper.hasColumn(rs, "problem")) m.setProblem(rs.getString("problem"));
     if (Helper.hasColumn(rs, "import_detail_id")) m.setImportDetailId(Helper.nullLongHandler(rs, "import_detail_id"));
     if (Helper.hasColumn(rs, "product_id")) m.setProductId(rs.getLong("product_id"));
     if (Helper.hasColumn(rs, "account_id")) m.setAccountId(rs.getLong("account_id"));
@@ -43,10 +43,6 @@ public class LinkMapper implements RowMapper<Link> {
     if (Helper.hasColumn(rs, "status")) {
       String status = rs.getString("status");
       if (status != null) m.setStatus(LinkStatus.valueOf(status));
-    }
-    if (Helper.hasColumn(rs, "last_status")) {
-      String status = rs.getString("last_status");
-      if (status != null) m.setLastStatus(LinkStatus.valueOf(status));
     }
 
     //transients
