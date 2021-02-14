@@ -15,7 +15,7 @@ public class ImportDetail {
   private String data;
   private Boolean eligible;
   private Boolean imported;
-  private String problem;
+  private String status;
   private Date lastCheck;
   private Long importId;
 

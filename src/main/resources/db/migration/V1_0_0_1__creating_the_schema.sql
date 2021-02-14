@@ -142,14 +142,26 @@ create table import_detail (
   id                        bigint auto_increment not null,
   data                      varchar(1024) not null,
   eligible                  boolean default true,
-  imported                  boolean default false,
-  problem                   varchar(250),
+  imported                  boolean default true,
+  status                    varchar(250),
   last_check                timestamp default current_timestamp,
   import_id                 bigint not null,
   account_id                bigint not null,
   primary key (id)
 ) engine=innodb;
 alter table import_detail add foreign key (account_id) references account (id);
+
+create table platform (
+  id                        bigint auto_increment not null,
+  name                      varchar(50) not null,
+  domain                    varchar(70) not null,
+  country                   varchar(100) not null,
+  class_name                varchar(100) not null,
+  status                    varchar(25),
+  problem                   varchar(250),
+  primary key (id),
+  key ix1 (domain)
+) engine=innodb;
 
 create table link (
   id                        bigint auto_increment not null,
@@ -162,15 +174,14 @@ create table link (
   shipment                  varchar(150),
   price                     decimal(9,2) default 0,
   position                  smallint default 3,
+  pre_status                varchar(25) not null default 'TOBE_CLASSIFIED',
+  status                    varchar(25) not null default 'TOBE_CLASSIFIED',
   last_check                datetime,
   last_update               datetime,
-  status                    varchar(25) not null default 'TOBE_CLASSIFIED',
-  pre_status                varchar(25) not null default 'TOBE_CLASSIFIED',
   problem                   varchar(250),
-  retry                     smallint default 0,
   http_status               smallint default 0,
-  class_name                varchar(100),
-  platform                  varchar(50),
+  retry                     smallint default 0,
+  platform_id               bigint,
   import_detail_id          bigint,
   product_id                bigint,
   account_id                bigint not null,
@@ -181,6 +192,7 @@ create table link (
   key ix3 (last_check),
   key ix4 (last_update)
 ) engine=innodb;
+alter table link add foreign key (platform_id) references platform (id);
 alter table link add foreign key (product_id) references product (id);
 alter table link add foreign key (account_id) references account (id);
 

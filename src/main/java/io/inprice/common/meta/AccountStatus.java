@@ -1,5 +1,8 @@
 package io.inprice.common.meta;
 
+import java.util.Arrays;
+import java.util.List;
+
 public enum AccountStatus {
   
   CREATED(false, true, true, true, false),
@@ -15,6 +18,8 @@ public enum AccountStatus {
   private boolean okForCoupon;
   private boolean okForSubscription;
   private boolean okForCancel;
+
+  public static final List<AccountStatus> ACTIVE_STATUSES = Arrays.asList( FREE, COUPONED, SUBSCRIBED );
 
   private AccountStatus(boolean active, boolean okForFreeUse, boolean okForCoupon, boolean okForSubscription, boolean okForCancel) {
     this.active = active;

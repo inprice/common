@@ -18,9 +18,10 @@ import io.inprice.common.models.Product;
 public interface CommonDao {
 
   @SqlQuery(
-    "select l.id, l.platform, l.seller, l.price, l.position, p.price as product_price, " +
+    "select l.id, plt.domain as platform, l.seller, l.price, l.position, p.price as product_price, " +
     "l.product_id, l.account_id, dense_rank() over (order by l.price) as ranking from link as l " +
     "inner join product as p on p.id = l.product_id " +
+    "left join platform as plt on plt.id = l.platform_id " + 
     "where l.price > 0 " +
     "  and l.status = :status " +
     "  and l.product_id = :productId " +
