@@ -42,11 +42,6 @@ public enum LinkStatus {
   NOT_AVAILABLE(LinkStatus.FAILED_GROUP),
 
   /**
-   * Used for indicating links whose data is missing
-   */
-  NO_DATA(LinkStatus.FAILED_GROUP),
-
-  /**
    * Used for links returning http error codes greater than 399.
    */
   NETWORK_ERROR(LinkStatus.FAILED_GROUP),
@@ -67,6 +62,11 @@ public enum LinkStatus {
    * Data will be collected after implemented by us
    */
   TOBE_IMPLEMENTED(LinkStatus.PASSIVE_GROUP),
+
+  /**
+   * Used for indicating links whose data is missing
+   */
+  NO_DATA(LinkStatus.PASSIVE_GROUP),
 
   /**
    * Used for internal error like 500.
