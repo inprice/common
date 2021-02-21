@@ -40,11 +40,13 @@ public enum LinkStatus {
    * For the links have no sufficient stock
    */
   NOT_AVAILABLE(LinkStatus.FAILED_GROUP),
-
+  
   /**
    * Used for links returning http error codes greater than 399.
    */
   NETWORK_ERROR(LinkStatus.FAILED_GROUP),
+
+  TIMED_OUT(LinkStatus.FAILED_GROUP),
 
 
   /*------------------------------------------------------------------------

@@ -92,9 +92,10 @@ insert into platform (name, domain, country, class_name) values
   ('Currys UK', 'currys.co.uk', 'United Kingdom', 'uk.Currys'),
   ('Debenhams UK', 'debenhams.com', 'United Kingdom', 'uk.Debenhams'),
   ('NewLook UK', 'newlook.com', 'United Kingdom', 'uk.NewLook'),
-  ('Zavvi UK', 'zavvi.com', 'United Kingdom', 'uk.Zavvi')
+  ('Zavvi UK', 'zavvi.com', 'United Kingdom', 'uk.Zavvi'),
+  ('Harvey Norman AU', 'harveynorman.com.au', 'Australia', 'au.HarveyNorman')
   ;
 
 -- problematic implementations
-insert into platform (name, domain, country, class_name, status, problem) values
-  ('Harvey Norman AU', 'harveynorman.com.au', 'Australia', 'au.HarveyNorman', 'IMPROPER', 'Data access problem!');
+-- insert into platform (name, domain, country, class_name, status, problem) values
+--  ('Harvey Norman AU', 'harveynorman.com.au', 'Australia', 'au.HarveyNorman', 'IMPROPER', 'Data access problem!');

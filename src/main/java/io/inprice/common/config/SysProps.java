@@ -22,7 +22,7 @@ public class SysProps {
   }
 
   public static int HTTP_CONNECTION_TIMEOUT() {
-    return NumberUtils.toInteger(System.getenv().getOrDefault("HTTP_CONNECTION_TIMEOUT", "30")); //seconds
+    return NumberUtils.toInteger(System.getenv().getOrDefault("HTTP_CONNECTION_TIMEOUT", "10")); //seconds
   }
 
   public static String DB_DRIVER() {

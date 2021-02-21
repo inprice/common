@@ -22,6 +22,10 @@ public class PlatformMapper implements RowMapper<Platform> {
     if (Helper.hasColumn(rs, "class_name")) m.setClassName(rs.getString("class_name"));
     if (Helper.hasColumn(rs, "problem")) m.setProblem(rs.getString("problem"));
 
+    if (Helper.hasColumn(rs, "browser_possibility")) m.setBrowserPossibility(rs.getInt("browser_possibility"));
+    if (Helper.hasColumn(rs, "loading_main_page_first")) m.setLoadingMainPageFirst(rs.getBoolean("loading_main_page_first"));
+    if (Helper.hasColumn(rs, "extra_timeout")) m.setExtraTimeout(rs.getInt("extra_timeout"));
+
     if (Helper.hasColumn(rs, "status")) {
       String status = rs.getString("status");
       if (status != null) m.setStatus(LinkStatus.valueOf(status));

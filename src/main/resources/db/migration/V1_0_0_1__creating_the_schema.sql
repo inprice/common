@@ -159,6 +159,9 @@ create table platform (
   class_name                varchar(100) not null,
   status                    varchar(25),
   problem                   varchar(250),
+  browser_possibility       smallint default 0,
+  extra_timeout             smallint default 0,
+  loading_main_page_first   boolean default false,
   primary key (id),
   key ix1 (domain)
 ) engine=innodb;
