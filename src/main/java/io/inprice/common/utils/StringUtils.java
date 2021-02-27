@@ -3,9 +3,16 @@ package io.inprice.common.utils;
 import io.inprice.common.helpers.SqlHelper;
 
 public class StringUtils {
+	
+	private static final String QUOTELESS_CHARS = "((?<=(\\{|\\[|\\,|:))\\s*')|('\\s*(?=(\\}|(\\])|(\\,|:))))";
+	private static final String EMOJILESS_CHARS = "[^\\p{L}\\p{M}\\p{N}\\p{P}\\p{Z}\\p{Cf}\\p{Cs}\\s]";
+	
+	public static String fixQuotes(String raw) {
+		return raw.replaceAll(QUOTELESS_CHARS, "\"");
+	}
 
-  public static String fixQuotes(String raw) {
-    return raw.replaceAll("((?<=(\\{|\\[|\\,|:))\\s*')|('\\s*(?=(\\}|(\\])|(\\,|:))))", "\"");
+  public static String clearEmojies(String raw) {
+    return fixQuotes(raw.replaceAll(EMOJILESS_CHARS, "")).trim();
   }
 
   public static String clearErrorMessage(String message) {

@@ -48,8 +48,8 @@ public class PlatformRepository {
   }
 
   public static void main(String[] args) {
-    String url = "www.unfab.kasımpaşa-urun.n11.com/lastik-zinciri/matte-kar-corabi-superx-series-P454282185";
-    findByUrl(null, url);
+    String url = "https://www.apple.com/us-hed/shop/buy-mac/macbook-air/space-gray-apple-m1-chip-with-8%E2%80%91core-cpu-and-7%E2%80%91core-gpu-256gb";
+    System.out.println(findByUrl(null, url));
   }
 
 }

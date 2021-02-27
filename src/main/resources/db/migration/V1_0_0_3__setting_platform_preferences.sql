@@ -1,4 +1,5 @@
 -- @author mdpinar
+-- 2021-02-21
 
 update platform set browser_possibility=60 where domain like 'ebay%';
 update platform set browser_possibility=60 where name like 'mediamarkt%';
