@@ -23,7 +23,9 @@ public class Platform implements Serializable {
   private String problem;
 
   private int browserPossibility;
-  private boolean loadingMainPageFirst;
+  private boolean htmlUnitRendering;
   private int extraTimeout;
+  private String loadUrlFirst;
+  private boolean jsRenderedBody;
 
 }
