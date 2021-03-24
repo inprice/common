@@ -47,14 +47,6 @@ public class Database {
     dataSource.close();
   }
 
-// TODO Remove unused code found by UCDetector
-//   public static void reset() {
-//     if (SysProps.APP_ENV().equals(AppEnv.TEST)) {
-//       shutdown();
-//       connect();
-//     }
-//   }
-
   private static void doMigrations() {
     try {
       Flyway flyway = 
