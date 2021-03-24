@@ -19,7 +19,7 @@ public class Platform implements Serializable {
   private String domain;
   private String country;
   private String className;
-  private LinkStatus status; //if it is not null then every link link pointing this site will be having the same status here!
+  private LinkStatus status; //if it is not null then every link pointing this site will be having the same status here!
   private String problem;
 
 }

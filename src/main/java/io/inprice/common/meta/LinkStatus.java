@@ -40,17 +40,18 @@ public enum LinkStatus {
    * For the links have no sufficient stock
    */
   NOT_AVAILABLE(LinkStatus.FAILED_GROUP),
-
-  /**
-   * Used for indicating links whose data is missing
-   */
-  NO_DATA(LinkStatus.FAILED_GROUP),
-
+  
   /**
    * Used for links returning http error codes greater than 399.
    */
   NETWORK_ERROR(LinkStatus.FAILED_GROUP),
 
+  TIMED_OUT(LinkStatus.FAILED_GROUP),
+
+  /**
+   * Used for links blocked by the website's protection system.
+   */
+  BLOCKED(LinkStatus.FAILED_GROUP),
 
   /*------------------------------------------------------------------------
    PASSIVE GROUP
@@ -67,6 +68,16 @@ public enum LinkStatus {
    * Data will be collected after implemented by us
    */
   TOBE_IMPLEMENTED(LinkStatus.PASSIVE_GROUP),
+  
+  /**
+   * Used for indicating links whose data is missing
+   */
+  NO_DATA(LinkStatus.PASSIVE_GROUP),
+
+  /**
+   * Used for missing links
+   */
+  NOT_FOUND(LinkStatus.PASSIVE_GROUP),
 
   /**
    * Used for internal error like 500.

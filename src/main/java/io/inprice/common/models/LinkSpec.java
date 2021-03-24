@@ -8,10 +8,12 @@ import io.inprice.common.utils.StringUtils;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class LinkSpec implements Serializable {
 
    private static final long serialVersionUID = -7641858030475659639L;
