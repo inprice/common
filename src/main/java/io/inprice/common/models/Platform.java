@@ -22,10 +22,4 @@ public class Platform implements Serializable {
   private LinkStatus status; //if it is not null then every link pointing this site will be having the same status here!
   private String problem;
 
-  private int browserPossibility;
-  private boolean htmlUnitRendering;
-  private int extraTimeout;
-  private String loadUrlFirst;
-  private boolean jsRenderedBody;
-
 }

@@ -159,11 +159,6 @@ create table platform (
   class_name                varchar(100) not null,
   status                    varchar(25),
   problem                   varchar(250),
-  browser_possibility       smallint default 0,
-  htmlunit_rendering        boolean default false,
-  extra_timeout             smallint default 0,
-  load_url_first            varchar(128),
-  js_rendered_body          boolean default false,
   primary key (id),
   key ix1 (domain)
 ) engine=innodb;

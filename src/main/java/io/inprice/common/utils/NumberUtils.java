@@ -1,5 +1,7 @@
 package io.inprice.common.utils;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class NumberUtils {
 
   public static String extractPrice(String numString) {
@@ -38,27 +40,41 @@ public class NumberUtils {
         return pure;
     }
   }
-
+  
   public static Integer toInteger(String val) {
-    if (val != null && !val.trim().isEmpty()) {
+    if (StringUtils.isNotBlank(val)) {
       try {
-        return Integer.parseInt(val);
-      } catch (Exception e) {
-        //
-      }
+        return Integer.parseInt(val.trim());
+      } catch (Exception e) { }
     }
-    return null;
+  	return null;
+  }
+
+  public static int toInteger(String val, int defauld) {
+    if (StringUtils.isNotBlank(val)) {
+      try {
+        return Integer.parseInt(val.trim());
+      } catch (Exception e) { }
+    }
+    return defauld;
   }
 
   public static Long toLong(String val) {
-    if (val != null && !val.trim().isEmpty()) {
+    if (StringUtils.isNotBlank(val)) {
+  		try {
+  			return Long.parseLong(val.trim());
+  		} catch (Exception e) { }
+  	}
+  	return null;
+  }
+  
+  public static long toLong(String val, long defauld) {
+    if (StringUtils.isNotBlank(val)) {
       try {
-        return Long.parseLong(val);
-      } catch (Exception e) {
-        //
-      }
+        return Long.parseLong(val.trim());
+      } catch (Exception e) { }
     }
-    return null;
+    return defauld;
   }
 
 }
