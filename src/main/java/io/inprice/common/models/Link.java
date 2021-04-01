@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.inprice.common.meta.Level;
 import io.inprice.common.meta.LinkStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,7 +30,8 @@ public class Link implements Serializable {
   private String seller;
   private String shipment;
   private BigDecimal price = BigDecimal.ZERO;
-  private Integer position;
+  private Integer ranking = 0;
+  private Level level = Level.UNSPECIFIED;
   private LinkStatus preStatus = LinkStatus.TOBE_CLASSIFIED;
   private LinkStatus status = LinkStatus.TOBE_CLASSIFIED;
   private Date lastUpdate;
@@ -38,8 +40,7 @@ public class Link implements Serializable {
   private Integer retry;
   private Integer httpStatus;
   private Long platformId;
-  private Long importDetailId;
-  private Long productId;
+  private Long groupId;
   private Date createdAt;
   
   @JsonIgnore
@@ -49,7 +50,7 @@ public class Link implements Serializable {
   private Long accountId;
 
   //transients
-  private BigDecimal productPrice;
+  private BigDecimal groupPrice;
 
   private List<LinkPrice> priceList;
   private List<LinkSpec> specList;

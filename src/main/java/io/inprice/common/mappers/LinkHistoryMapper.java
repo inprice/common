@@ -19,7 +19,7 @@ public class LinkHistoryMapper implements RowMapper<LinkHistory> {
     if (Helper.hasColumn(rs, "link_id")) m.setLinkId(rs.getLong("link_id"));
     if (Helper.hasColumn(rs, "http_status")) m.setHttpStatus(Helper.nullIntegerHandler(rs, "http_status"));
     if (Helper.hasColumn(rs, "problem")) m.setProblem(rs.getString("problem"));
-    if (Helper.hasColumn(rs, "product_id")) m.setProductId(rs.getLong("product_id"));
+    if (Helper.hasColumn(rs, "group_id")) m.setGroupId(rs.getLong("group_id"));
     if (Helper.hasColumn(rs, "account_id")) m.setAccountId(rs.getLong("account_id"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 

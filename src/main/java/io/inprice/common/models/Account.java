@@ -20,8 +20,8 @@ public class Account implements Serializable {
   private String name;
   private String currencyCode;
   private String currencyFormat;
-  private Integer productLimit = 0;
-  private Integer productCount = 0;
+  private Integer linkLimit = 0;
+  private Integer linkCount = 0;
 
   @JsonIgnore
   private Long adminId;

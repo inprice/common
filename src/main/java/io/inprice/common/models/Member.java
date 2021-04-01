@@ -40,6 +40,6 @@ public class Member implements Serializable {
   private Date renewalAt;
   private Date subsStartedAt;
   private String currencyFormat;
-  private Integer productCount;
+  private Integer linkCount;
 
 }

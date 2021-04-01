@@ -16,8 +16,8 @@ create table account (
   name                      varchar(70) not null,
   currency_code             char(3),
   currency_format           varchar(30),
-  product_limit             smallint default 0,
-  product_count             smallint default 0,
+  link_limit                smallint default 0,
+  link_count                smallint default 0,
   admin_id                  bigint not null,
   status                    enum('CREATED', 'FREE', 'COUPONED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'CREATED',
   last_status_update        timestamp not null default current_timestamp,
@@ -85,72 +85,6 @@ create table member (
 alter table member add foreign key (user_id) references user (id);
 alter table member add foreign key (account_id) references account (id);
 
-create table product (
-  id                        bigint auto_increment not null,
-  code                      varchar(50) not null,
-  name                      varchar(500) not null,
-  price                     decimal(9,2) default 0,
-  position                  smallint default 3,
-  link_count                smallint default 0,
-  ranking                   smallint default 0,
-  ranking_with              smallint default 0,
-  min_platform              varchar(50),
-  min_seller                varchar(50),
-  min_price                 decimal(9,2) default 0,
-  min_diff                  decimal(6,2) default 0,
-  avg_price                 decimal(9,2) default 0,
-  avg_diff                  decimal(6,2) default 0,
-  max_platform              varchar(50),
-  max_seller                varchar(50),
-  max_price                 decimal(9,2) default 0,
-  max_diff                  decimal(6,2) default 0,
-  suggested_price           decimal(9,2) default 0,
-  account_id                bigint not null,
-  updated_at                datetime,
-  created_at                timestamp not null default current_timestamp,
-  primary key (id),
-  unique key ix1 (account_id, code),
-  key ix2 (account_id, name)
-) engine=innodb;
-alter table product add foreign key (account_id) references account (id);
-
-create table product_tag (
-  id                        bigint auto_increment not null,
-  name                      varchar(30) not null,
-  product_id                bigint not null,
-  account_id                bigint not null,
-  primary key (id),
-  key ix1 (name)
-) engine=innodb;
-alter table product_tag add foreign key (product_id) references product (id);
-alter table product_tag add foreign key (account_id) references account (id);
-
--- used for storing import headers
-create table import_ (
-  id                        bigint auto_increment not null,
-  type                      enum('CSV', 'URL', 'AMAZON', 'EBAY') not null default 'CSV',
-  is_file                   boolean default true,
-  success_count             smallint default 0,
-  problem_count             smallint default 0,
-  account_id                bigint not null,
-  created_at                timestamp not null default current_timestamp,
-  primary key (id)
-) engine=innodb;
-alter table import_ add foreign key (account_id) references account (id);
-
-create table import_detail (
-  id                        bigint auto_increment not null,
-  data                      varchar(1024) not null,
-  eligible                  boolean default true,
-  imported                  boolean default true,
-  status                    varchar(250),
-  last_check                timestamp default current_timestamp,
-  import_id                 bigint not null,
-  account_id                bigint not null,
-  primary key (id)
-) engine=innodb;
-alter table import_detail add foreign key (account_id) references account (id);
-
 create table platform (
   id                        bigint auto_increment not null,
   name                      varchar(50) not null,
@@ -163,6 +97,36 @@ create table platform (
   key ix1 (domain)
 ) engine=innodb;
 
+create table link_group (
+  id                        bigint auto_increment not null,
+  name                      varchar(125) not null,
+  defauld                   boolean default false,
+  actives                   smallint default 0,
+  waitings                  smallint default 0,
+  tryings                   smallint default 0,
+  problems                  smallint default 0,
+  total                     decimal(9,2) default 0,
+  price                     decimal(9,2) default 0,
+  ranking                   smallint default 0,
+  level                     enum('UNSPECIFIED', 'LOWEST', 'LOWER', 'AVERAGE', 'HIGHER', 'HIGHEST') not null default 'UNSPECIFIED',
+  diff_min                  decimal(6,2) default 0,
+  diff_avg                  decimal(6,2) default 0,
+  diff_max                  decimal(6,2) default 0,
+  min_platform              varchar(50),
+  min_seller                varchar(50),
+  min_price                 decimal(9,2) default 0,
+  avg_price                 decimal(9,2) default 0,
+  max_platform              varchar(50),
+  max_seller                varchar(50),
+  max_price                 decimal(9,2) default 0,
+  account_id                bigint not null,
+  updated_at                timestamp,
+  created_at                timestamp not null default current_timestamp,
+  primary key (id),
+  key ix1 (name)
+) engine=innodb;
+alter table link_group add foreign key (account_id) references account (id);
+
 create table link (
   id                        bigint auto_increment not null,
   url                       varchar(1024) not null,
@@ -173,27 +137,28 @@ create table link (
   seller                    varchar(150),
   shipment                  varchar(150),
   price                     decimal(9,2) default 0,
-  position                  smallint default 3,
+  ranking                   smallint default 0,
+  level                     enum('UNSPECIFIED', 'LOWEST', 'LOWER', 'AVERAGE', 'HIGHER', 'HIGHEST') not null default 'UNSPECIFIED',
   pre_status                varchar(25) not null default 'TOBE_CLASSIFIED',
   status                    varchar(25) not null default 'TOBE_CLASSIFIED',
+  status_group              enum('WAITING', 'ACTIVE', 'TRYING', 'PROBLEM') not null default 'WAITING',
   last_check                datetime,
   last_update               datetime,
   problem                   varchar(250),
   http_status               smallint default 0,
   retry                     smallint default 0,
   platform_id               bigint,
-  import_detail_id          bigint,
-  product_id                bigint,
+  group_id                  bigint,
   account_id                bigint not null,
   created_at                timestamp not null default current_timestamp,
   primary key (id),
   key ix1 (url_hash),
   key ix2 (status),
   key ix3 (last_check),
-  key ix4 (last_update)
+  key ix4 (status_group)
 ) engine=innodb;
 alter table link add foreign key (platform_id) references platform (id);
-alter table link add foreign key (product_id) references product (id);
+alter table link add foreign key (group_id) references link_group (id);
 alter table link add foreign key (account_id) references account (id);
 
 create table link_spec (
@@ -201,7 +166,7 @@ create table link_spec (
   link_id                   bigint not null,
   _key                      varchar(100),
   _value                    varchar(500),
-  product_id                bigint not null,
+  group_id                  bigint not null,
   account_id                bigint not null,
   primary key (id)
 ) engine=innodb;
@@ -211,10 +176,10 @@ create table link_price (
   id                        bigint auto_increment not null,
   link_id                   bigint not null,
   price                     decimal(9,2) default 0,
-  position                  smallint default 3,
+  level                     enum('UNSPECIFIED', 'LOWEST', 'LOWER', 'AVERAGE', 'HIGHER', 'HIGHEST') not null default 'UNSPECIFIED',
   diff_amount               decimal(6,2) default 0,
   diff_rate                 decimal(6,2) default 0,
-  product_id                bigint not null,
+  group_id                  bigint not null,
   account_id                bigint not null,
   created_at                timestamp not null default current_timestamp,
   primary key (id),
@@ -228,7 +193,7 @@ create table link_history (
   status                    varchar(25) not null,
   http_status               smallint default 0,
   problem                   varchar(250),
-  product_id                bigint not null,
+  group_id                  bigint not null,
   account_id                bigint not null,
   created_at                timestamp not null default current_timestamp,
   primary key (id),
@@ -251,7 +216,14 @@ create table coupon (
 create table user_banned (
   email                     varchar(100) not null,
   reason                    varchar(255),
-  banned_at                 timestamp not null default current_timestamp,
+  created_at                timestamp not null default current_timestamp,
+  primary key (email)
+) engine=innodb;
+
+create table user_used (
+  email                     varchar(100) not null,
+  perm_type                 enum('FREE_USE') not null default 'FREE_USE',
+  created_at                timestamp not null default current_timestamp,
   primary key (email)
 ) engine=innodb;
 

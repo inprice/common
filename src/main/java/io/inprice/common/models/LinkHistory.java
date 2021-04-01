@@ -22,7 +22,7 @@ public class LinkHistory implements Serializable {
   private LinkStatus status;
   private String problem;
   private Integer httpStatus;
-  private Long productId;
+  private Long groupId;
   private Date createdAt;
   
   @JsonIgnore

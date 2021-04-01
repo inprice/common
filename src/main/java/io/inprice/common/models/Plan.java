@@ -21,7 +21,7 @@ public class Plan implements Serializable {
 
   private Integer id;
   private String name;
-  private Integer productLimit;
+  private Integer linkLimit;
   private BigDecimal price;
   private List<String> features;
   private String stripePriceId;

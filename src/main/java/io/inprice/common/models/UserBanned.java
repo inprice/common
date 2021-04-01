@@ -14,6 +14,6 @@ public class UserBanned implements Serializable {
 
   private String email;
   private String reason;
-  private Date bannedAt;
+  private Date createdAt;
 
 }

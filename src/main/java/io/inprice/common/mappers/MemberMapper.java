@@ -33,7 +33,7 @@ public class MemberMapper implements RowMapper<Member> {
     if (Helper.hasColumn(rs, "plan_name")) m.setPlanName(rs.getString("plan_name"));
     if (Helper.hasColumn(rs, "renewal_at")) m.setRenewalAt(rs.getDate("renewal_at"));
     if (Helper.hasColumn(rs, "currency_format")) m.setCurrencyFormat(rs.getString("currency_format"));
-    if (Helper.hasColumn(rs, "product_count")) m.setProductCount(rs.getInt("product_count"));
+    if (Helper.hasColumn(rs, "link_count")) m.setLinkCount(rs.getInt("link_count"));
     if (Helper.hasColumn(rs, "subs_started_at")) m.setSubsStartedAt(rs.getTimestamp("subs_started_at"));
     if (Helper.hasColumn(rs, "last_status_update")) m.setLastStatusUpdate(rs.getTimestamp("last_status_update")); //for account
 

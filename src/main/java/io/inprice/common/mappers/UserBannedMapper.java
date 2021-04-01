@@ -16,7 +16,7 @@ public class UserBannedMapper implements RowMapper<UserBanned> {
 
     if (Helper.hasColumn(rs, "email")) m.setEmail(rs.getString("email"));
     if (Helper.hasColumn(rs, "reason")) m.setReason(rs.getString("reason"));
-    if (Helper.hasColumn(rs, "banned_at")) m.setBannedAt(rs.getTimestamp("banned_at"));
+    if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 
     return m;
   }
