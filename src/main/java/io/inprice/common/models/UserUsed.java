@@ -21,6 +21,7 @@ public class UserUsed implements Serializable {
 
 	private String email;
   private PermType permType;
+  private Boolean allowed = Boolean.FALSE;
   private Date createdAt;
 
 }

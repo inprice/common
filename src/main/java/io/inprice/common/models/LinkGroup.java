@@ -20,7 +20,7 @@ public class LinkGroup implements Serializable {
 
   private Long id;
   private String name;
-  private Boolean defauld = Boolean.FALSE;
+  private String code;
 
   private Integer actives = 0;
   private Integer waitings = 0;

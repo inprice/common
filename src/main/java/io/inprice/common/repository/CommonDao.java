@@ -30,11 +30,11 @@ public interface CommonDao {
 
   @SqlUpdate(
     "update link_group " +
-    "set price=:sample.price, level=:sample.level, ranking:sample.ranking, total=:grandTotal, updated_at=now(), " +
+    "set level=:sample.level, ranking=:sample.ranking, total=:grandTotal, updated_at=now(), " +
     " actives=:sample.actives, waitings=:sample.waitings, tryings=:sample.tryings, problems=:sample.problems, " +
     " min_platform=:sample.minPlatform, min_seller=:sample.minSeller, min_price=:sample.minPrice, diff_min=:sample.diffMin, " +
     " avg_price=:sample.avgPrice, diff_avg=:sample.diffAvg, " +
-    " max_platform=:sample.maxPlatform, max_seller=:sample.maxSeller, max_price=:sample.maxPrice, diff_max=:sample.diffMax, " +
+    " max_platform=:sample.maxPlatform, max_seller=:sample.maxSeller, max_price=:sample.maxPrice, diff_max=:sample.diffMax " +
     "where id=:sample.id "
   )
   boolean udpateGroup(@BindBean("sample") LinkGroup sample, @Bind("grandTotal") BigDecimal grandTotal);

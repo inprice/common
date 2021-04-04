@@ -41,6 +41,12 @@ public class CommonRepository {
 
     LinkGroup sample = new LinkGroup();
     sample.setId(groupId);
+    sample.setActives(actives);
+    sample.setWaitings(waitings);
+    sample.setTryings(tryings);
+    sample.setProblems(problems);
+    sample.setRanking(0);
+    sample.setLevel(Level.UNSPECIFIED);
 
     if (links.size() > 0) {
     	LinkSummary first = null;
@@ -78,17 +84,8 @@ public class CommonRepository {
 
       if (actives > 0) {
       	BigDecimal groupPrice = first.getGroupPrice();
-      	
-        sample.setActives(actives);
-        sample.setWaitings(waitings);
-        sample.setTryings(tryings);
-        sample.setProblems(problems);
-        sample.setRanking(0);
-        sample.setLevel(Level.UNSPECIFIED);
-        sample.setPrice(groupPrice);
-        sample.setTotal(total);
-        sample.setAccountId(first.getAccountId());
-        sample.setMinPlatform(first.getPlatform());
+
+      	sample.setMinPlatform(first.getPlatform());
         sample.setMinSeller(first.getSeller());
         sample.setMinPrice(first.getPrice());
         sample.setAvgPrice(total.divide(BigDecimal.valueOf(actives), 2, BigDecimal.ROUND_HALF_UP));

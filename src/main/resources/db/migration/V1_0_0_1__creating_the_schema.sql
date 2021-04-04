@@ -33,6 +33,7 @@ create table account (
   city                      varchar(70),
   state                     varchar(70),
   country                   varchar(2),
+  demo                      boolean default false,
   created_at                timestamp not null default current_timestamp,
   primary key (id),
   key ix1 (renewal_at),
@@ -99,8 +100,8 @@ create table platform (
 
 create table link_group (
   id                        bigint auto_increment not null,
-  name                      varchar(125) not null,
-  defauld                   boolean default false,
+  name                      varchar(128) not null,
+  code                      varchar(32),
   actives                   smallint default 0,
   waitings                  smallint default 0,
   tryings                   smallint default 0,
@@ -222,6 +223,7 @@ create table user_banned (
 
 create table user_used (
   email                     varchar(100) not null,
+  allowed                   boolean default false,
   perm_type                 enum('FREE_USE') not null default 'FREE_USE',
   created_at                timestamp not null default current_timestamp,
   primary key (email)

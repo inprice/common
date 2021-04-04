@@ -17,6 +17,7 @@ public class UserUsedMapper implements RowMapper<UserUsed> {
     UserUsed m = new UserUsed();
 
     if (Helper.hasColumn(rs, "email")) m.setEmail(rs.getString("email"));
+    if (Helper.hasColumn(rs, "allowed")) m.setAllowed(rs.getBoolean("allowed"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 
     if (Helper.hasColumn(rs, "perm_type")) {

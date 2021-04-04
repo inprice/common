@@ -44,6 +44,7 @@ public class Account implements Serializable {
   private String city;
   private String state;
   private String country;
+  private Boolean demo = Boolean.FALSE;
   private Date createdAt = new Date();
 
 }

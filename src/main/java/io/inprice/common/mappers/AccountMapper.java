@@ -35,6 +35,7 @@ public class AccountMapper implements RowMapper<Account> {
     if (Helper.hasColumn(rs, "currency_code")) m.setCurrencyCode(rs.getString("currency_code"));
     if (Helper.hasColumn(rs, "currency_format")) m.setCurrencyFormat(rs.getString("currency_format"));
     if (Helper.hasColumn(rs, "admin_id")) m.setAdminId(rs.getLong("admin_id"));
+    if (Helper.hasColumn(rs, "demo")) m.setDemo(rs.getBoolean("demo"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 
     if (Helper.hasColumn(rs, "status")) {

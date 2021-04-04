@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.inprice.common.meta.Level;
 import io.inprice.common.meta.LinkStatus;
+import io.inprice.common.meta.LinkStatusGroup;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,13 +33,16 @@ public class Link implements Serializable {
   private BigDecimal price = BigDecimal.ZERO;
   private Integer ranking = 0;
   private Level level = Level.UNSPECIFIED;
+  @JsonIgnore
   private LinkStatus preStatus = LinkStatus.TOBE_CLASSIFIED;
   private LinkStatus status = LinkStatus.TOBE_CLASSIFIED;
   private Date lastUpdate;
   private Date lastCheck;
   private String problem;
   private Integer retry;
+  @JsonIgnore
   private Integer httpStatus;
+  @JsonIgnore
   private Long platformId;
   private Long groupId;
   private Date createdAt;
@@ -61,6 +65,15 @@ public class Link implements Serializable {
 
   public Link(String url) {
     this.url = url;
+  }
+  
+  public String getPlatformName() {
+  	if (platform != null) return platform.getName();
+  	return null;
+  }
+  
+  public LinkStatusGroup getStatusGroup() {
+  	return status.getGroup();
   }
 
 }
