@@ -39,14 +39,10 @@ public class CommonRepository {
   	int problems = 0;
   	BigDecimal grandTotal = BigDecimal.ZERO;
 
-    LinkGroup sample = new LinkGroup();
-    sample.setId(groupId);
-    sample.setActives(actives);
-    sample.setWaitings(waitings);
-    sample.setTryings(tryings);
-    sample.setProblems(problems);
-    sample.setRanking(0);
-    sample.setLevel(Level.UNSPECIFIED);
+    LinkGroup sampleGroup = new LinkGroup();
+    sampleGroup.setId(groupId);
+    sampleGroup.setRanking(0);
+    sampleGroup.setLevel(Level.UNSPECIFIED);
 
     if (links.size() > 0) {
     	LinkSummary first = null;
@@ -85,72 +81,76 @@ public class CommonRepository {
       if (actives > 0) {
       	BigDecimal groupPrice = first.getGroupPrice();
 
-      	sample.setMinPlatform(first.getPlatform());
-        sample.setMinSeller(first.getSeller());
-        sample.setMinPrice(first.getPrice());
-        sample.setAvgPrice(total.divide(BigDecimal.valueOf(actives), 2, BigDecimal.ROUND_HALF_UP));
-        sample.setMaxPlatform(last.getPlatform());
-        sample.setMaxSeller(last.getSeller());
-        sample.setMaxPrice(last.getPrice());
+      	sampleGroup.setMinPlatform(first.getPlatform());
+        sampleGroup.setMinSeller(first.getSeller());
+        sampleGroup.setMinPrice(first.getPrice());
+        sampleGroup.setAvgPrice(total.divide(BigDecimal.valueOf(actives), 2, BigDecimal.ROUND_HALF_UP));
+        sampleGroup.setMaxPlatform(last.getPlatform());
+        sampleGroup.setMaxSeller(last.getSeller());
+        sampleGroup.setMaxPrice(last.getPrice());
 
         if (groupPrice.compareTo(BigDecimal.ZERO) > 0) {
-          sample.setDiffMin(findDiff(first.getPrice(), groupPrice));
-          sample.setDiffAvg(findDiff(sample.getAvgPrice(), groupPrice));
-          sample.setDiffMax(findDiff(last.getPrice(), groupPrice));
+          sampleGroup.setMinDiff(findDiff(groupPrice, first.getPrice()));
+          sampleGroup.setAvgDiff(findDiff(groupPrice, sampleGroup.getAvgPrice()));
+          sampleGroup.setMaxDiff(findDiff(groupPrice, last.getPrice()));
 
-          if (groupPrice.compareTo(sample.getMinPrice()) <= 0) {
-            sample.setMinPlatform("Yours");
-            sample.setMinSeller("You");
-            sample.setMinPrice(groupPrice);
-            sample.setDiffMin(BigDecimal.ZERO);
-            sample.setRanking(1);
-            sample.setLevel(Level.LOWEST);
-          } else if (groupPrice.compareTo(sample.getAvgPrice()) < 0) {
-          	sample.setLevel(Level.LOWER);
-          } else if (groupPrice.compareTo(sample.getAvgPrice()) == 0) {
-          	sample.setLevel(Level.AVERAGE);
-          } else if (groupPrice.compareTo(sample.getMaxPrice()) < 0) {
-          	sample.setLevel(Level.HIGHER);
-          } else if (groupPrice.compareTo(sample.getMaxPrice()) >= 0) {
-            sample.setMaxPlatform("Yours");
-            sample.setMaxSeller("You");
-            sample.setMaxPrice(groupPrice);
-            sample.setDiffMax(BigDecimal.ZERO);
-            sample.setRanking(actives+1);
-            sample.setLevel(Level.HIGHEST);
+          if (groupPrice.compareTo(sampleGroup.getMinPrice()) <= 0) {
+            sampleGroup.setMinPlatform("Yours");
+            sampleGroup.setMinSeller("You");
+            sampleGroup.setMinPrice(groupPrice);
+            sampleGroup.setMinDiff(BigDecimal.ZERO);
+            sampleGroup.setRanking(1);
+            sampleGroup.setLevel(Level.LOWEST);
+          } else if (groupPrice.compareTo(sampleGroup.getAvgPrice()) < 0) {
+          	sampleGroup.setLevel(Level.LOWER);
+          } else if (groupPrice.compareTo(sampleGroup.getAvgPrice()) == 0) {
+          	sampleGroup.setLevel(Level.AVERAGE);
+          } else if (groupPrice.compareTo(sampleGroup.getMaxPrice()) < 0) {
+          	sampleGroup.setLevel(Level.HIGHER);
+          } else if (groupPrice.compareTo(sampleGroup.getMaxPrice()) >= 0) {
+            sampleGroup.setMaxPlatform("Yours");
+            sampleGroup.setMaxSeller("You");
+            sampleGroup.setMaxPrice(groupPrice);
+            sampleGroup.setMaxDiff(BigDecimal.ZERO);
+            sampleGroup.setRanking(actives+1);
+            sampleGroup.setLevel(Level.HIGHEST);
           }
 
         	//finding ranking (activeLinks are in price order)
-          if (sample.getRanking().intValue() == 0) { //which means not set!
+          if (sampleGroup.getRanking().intValue() == 0) { //which means not set!
           	for (int i = 0; i < activeLinks.size(); i++) {
   						LinkSummary link = activeLinks.get(i);
-  						if (groupPrice.compareTo(link.getPrice()) >= 0) sample.setRanking(i+1);
+  						if (groupPrice.compareTo(link.getPrice()) >= 0) sampleGroup.setRanking(i+1);
           	}
           }
         }
       }
     }
+    sampleGroup.setActives(actives);
+    sampleGroup.setWaitings(waitings);
+    sampleGroup.setTryings(tryings);
+    sampleGroup.setProblems(problems);
 
-    boolean isOK = commonDao.udpateGroup(sample, grandTotal);
+    boolean isOK = commonDao.udpateGroup(sampleGroup, grandTotal);
     if (isOK && actives > 0) {
-      isOK = refreshLinks(commonDao, sample, activeLinks, priceChangingLinkId);
+      isOK = refreshLinks(commonDao, sampleGroup, activeLinks, priceChangingLinkId);
     }
 
     return isOK;
   }
 
-  private static boolean refreshLinks(CommonDao commonDao, LinkGroup sample, List<LinkSummary> activeLinks, Long priceChangingLinkId) {
+  private static boolean refreshLinks(CommonDao commonDao, LinkGroup sampleGroup, List<LinkSummary> activeLinks, Long priceChangingLinkId) {
   	for (int ranking = 1; ranking <= activeLinks.size(); ranking++) {
   		LinkSummary link = activeLinks.get(ranking-1);
 
 			Level level = link.getLevel();
-      if (link.getPrice().compareTo(sample.getMinPrice()) <= 0) {
+      if (link.getPrice().compareTo(sampleGroup.getMinPrice()) <= 0) {
       	level = Level.LOWEST;
-      } else if (link.getPrice().compareTo(sample.getAvgPrice()) < 0) {
+      } else if (link.getPrice().compareTo(sampleGroup.getAvgPrice()) < 0) {
       	level = Level.LOWER;
-      } else if (link.getPrice().compareTo(sample.getAvgPrice()) == 0) {
+      } else if (link.getPrice().compareTo(sampleGroup.getAvgPrice()) == 0) {
       	level = Level.AVERAGE;
-      } else if (link.getPrice().compareTo(sample.getMaxPrice()) < 0) {
+      } else if (link.getPrice().compareTo(sampleGroup.getMaxPrice()) < 0) {
       	level = Level.HIGHER;
       } else {
       	level = Level.HIGHEST;
@@ -176,7 +176,7 @@ public class CommonRepository {
           }
         }
 
-        commonDao.insertLinkPrice(link.getId(), link.getPrice(), level, diffAmount, diffRate, sample.getId(), sample.getAccountId());
+        commonDao.insertLinkPrice(link.getId(), link.getPrice(), level, diffAmount, diffRate, sampleGroup.getId(), link.getAccountId());
       }
 
     }

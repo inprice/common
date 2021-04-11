@@ -36,8 +36,7 @@ public class Link implements Serializable {
   @JsonIgnore
   private LinkStatus preStatus = LinkStatus.TOBE_CLASSIFIED;
   private LinkStatus status = LinkStatus.TOBE_CLASSIFIED;
-  private Date lastUpdate;
-  private Date lastCheck;
+  @JsonIgnore
   private String problem;
   private Integer retry;
   @JsonIgnore
@@ -45,6 +44,9 @@ public class Link implements Serializable {
   @JsonIgnore
   private Long platformId;
   private Long groupId;
+
+  private Date updatedAt;
+  private Date checkedAt;
   private Date createdAt;
   
   @JsonIgnore
@@ -71,9 +73,13 @@ public class Link implements Serializable {
   	if (platform != null) return platform.getName();
   	return null;
   }
-  
+
   public LinkStatusGroup getStatusGroup() {
   	return status.getGroup();
+  }
+  
+  public String getStatusDescription() {
+  	return status.getDescription();
   }
 
 }

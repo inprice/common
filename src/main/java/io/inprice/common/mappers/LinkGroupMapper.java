@@ -27,9 +27,9 @@ public class LinkGroupMapper implements RowMapper<LinkGroup> {
 
     if (Helper.hasColumn(rs, "ranking")) m.setRanking(rs.getInt("ranking"));
     if (Helper.hasColumn(rs, "price")) m.setPrice(rs.getBigDecimal("price"));
-    if (Helper.hasColumn(rs, "diff_min")) m.setDiffMin(rs.getBigDecimal("diff_min"));
-    if (Helper.hasColumn(rs, "diff_avg")) m.setDiffAvg(rs.getBigDecimal("diff_avg"));
-    if (Helper.hasColumn(rs, "diff_max")) m.setDiffMax(rs.getBigDecimal("diff_max"));
+    if (Helper.hasColumn(rs, "min_diff")) m.setMinDiff(rs.getBigDecimal("min_diff"));
+    if (Helper.hasColumn(rs, "avg_diff")) m.setAvgDiff(rs.getBigDecimal("avg_diff"));
+    if (Helper.hasColumn(rs, "max_diff")) m.setMaxDiff(rs.getBigDecimal("max_diff"));
 
     if (Helper.hasColumn(rs, "min_platform")) m.setMinPlatform(rs.getString("min_platform"));
     if (Helper.hasColumn(rs, "min_seller")) m.setMinSeller(rs.getString("min_seller"));

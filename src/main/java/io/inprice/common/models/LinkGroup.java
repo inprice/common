@@ -31,17 +31,19 @@ public class LinkGroup implements Serializable {
   private BigDecimal price = BigDecimal.ZERO; //if greater than zero then competitiveness starts!
   private Integer ranking = 0;
   private Level level = Level.UNSPECIFIED;
-  private BigDecimal diffMin= BigDecimal.ZERO;
-  private BigDecimal diffAvg = BigDecimal.ZERO;
-  private BigDecimal diffMax = BigDecimal.ZERO;
-
+  
   private String minPlatform;
   private String minSeller;
+  private BigDecimal minDiff= BigDecimal.ZERO;
+
   private BigDecimal minPrice = BigDecimal.ZERO;
   private BigDecimal avgPrice = BigDecimal.ZERO;
+  private BigDecimal avgDiff = BigDecimal.ZERO;
+  
   private String maxPlatform;
   private String maxSeller;
   private BigDecimal maxPrice = BigDecimal.ZERO;
+  private BigDecimal maxDiff = BigDecimal.ZERO;
 
   @JsonIgnore
   private Long accountId;

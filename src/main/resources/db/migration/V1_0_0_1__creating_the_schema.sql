@@ -110,16 +110,16 @@ create table link_group (
   price                     decimal(9,2) default 0,
   ranking                   smallint default 0,
   level                     enum('UNSPECIFIED', 'LOWEST', 'LOWER', 'AVERAGE', 'HIGHER', 'HIGHEST') not null default 'UNSPECIFIED',
-  diff_min                  decimal(6,2) default 0,
-  diff_avg                  decimal(6,2) default 0,
-  diff_max                  decimal(6,2) default 0,
   min_platform              varchar(50),
   min_seller                varchar(50),
   min_price                 decimal(9,2) default 0,
+  min_diff                  decimal(6,2) default 0,
   avg_price                 decimal(9,2) default 0,
+  avg_diff                  decimal(6,2) default 0,
   max_platform              varchar(50),
   max_seller                varchar(50),
   max_price                 decimal(9,2) default 0,
+  max_diff                  decimal(6,2) default 0,
   account_id                bigint not null,
   updated_at                timestamp,
   created_at                timestamp not null default current_timestamp,
@@ -143,19 +143,19 @@ create table link (
   pre_status                varchar(25) not null default 'TOBE_CLASSIFIED',
   status                    varchar(25) not null default 'TOBE_CLASSIFIED',
   status_group              enum('WAITING', 'ACTIVE', 'TRYING', 'PROBLEM') not null default 'WAITING',
-  last_check                datetime,
-  last_update               datetime,
   problem                   varchar(250),
   http_status               smallint default 0,
   retry                     smallint default 0,
   platform_id               bigint,
   group_id                  bigint,
   account_id                bigint not null,
+  checked_at                datetime,
+  updated_at                datetime,
   created_at                timestamp not null default current_timestamp,
   primary key (id),
   key ix1 (url_hash),
   key ix2 (status),
-  key ix3 (last_check),
+  key ix3 (checked_at),
   key ix4 (status_group)
 ) engine=innodb;
 alter table link add foreign key (platform_id) references platform (id);
@@ -215,18 +215,23 @@ create table coupon (
 ) engine=innodb;
 
 create table user_banned (
+  id                        bigint auto_increment not null,
   email                     varchar(100) not null,
   reason                    varchar(255),
+  voided                    boolean default false,
   created_at                timestamp not null default current_timestamp,
-  primary key (email)
+  primary key (id),
+  key ix1 (email, voided)
 ) engine=innodb;
 
 create table user_used (
+  id                        bigint auto_increment not null,
   email                     varchar(100) not null,
-  allowed                   boolean default false,
+  whitelisted               boolean default false,
   perm_type                 enum('FREE_USE') not null default 'FREE_USE',
   created_at                timestamp not null default current_timestamp,
-  primary key (email)
+  primary key (id),
+  unique key ix1 (email, perm_type)
 ) engine=innodb;
 
 create table user_session (

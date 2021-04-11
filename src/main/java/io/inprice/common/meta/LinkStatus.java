@@ -13,7 +13,7 @@ public enum LinkStatus {
   /**
    * Everything is ok.
    */
-  AVAILABLE(LinkStatusGroup.ACTIVE),
+  AVAILABLE(LinkStatusGroup.ACTIVE, "Everything is fine."),
 
   
   /*------------------------------------------------------------------------
@@ -23,29 +23,29 @@ public enum LinkStatus {
   /**
    * The initial state.
    */
-  TOBE_CLASSIFIED(LinkStatusGroup.WAITING),
+  TOBE_CLASSIFIED(LinkStatusGroup.WAITING, "Just added, waiting to be handled soon."),
 
   /**
    * Used for the links after TOBE_IMPLEMENTED and INTERNAL_ERROR status
    */
-  RESOLVED(LinkStatusGroup.WAITING),
+  RESOLVED(LinkStatusGroup.WAITING, "Just handled, will be updated soon."),
 
   /**
    * Used for links paused by users.
    * Data will be collected again after RESUMED by the user him/her self
    */
-  PAUSED(LinkStatusGroup.WAITING),
+  PAUSED(LinkStatusGroup.WAITING, "Manually paused."),
 
   /**
    * Used for paused links to resume.
    */
-  RESUMED(LinkStatusGroup.WAITING),
+  RESUMED(LinkStatusGroup.WAITING, "Activated again, will be updated soon."),
 
   /**
    * For the links whose websites have not been implemented yet. 
    * Data will be collected after implemented by us
    */
-  TOBE_IMPLEMENTED(LinkStatusGroup.WAITING),
+  TOBE_IMPLEMENTED(LinkStatusGroup.WAITING, "A new platform, we are working on this."),
 
 
   /*------------------------------------------------------------------------
@@ -55,19 +55,19 @@ public enum LinkStatus {
   /**
    * For the links have no sufficient stock
    */
-  NOT_AVAILABLE(LinkStatusGroup.TRYING),
+  NOT_AVAILABLE(LinkStatusGroup.TRYING, "Has no sufficient stock."),
   
   /**
    * Used for links returning http error codes greater than 399.
    */
-  NETWORK_ERROR(LinkStatusGroup.TRYING),
+  NETWORK_ERROR(LinkStatusGroup.TRYING, "Network problem."),
 
   /**
    * Used for links blocked by the website's protection system.
    */
-  BLOCKED(LinkStatusGroup.TRYING),
+  BLOCKED(LinkStatusGroup.TRYING, "Blocked by the platform."),
 
-  TIMED_OUT(LinkStatusGroup.TRYING),
+  TIMED_OUT(LinkStatusGroup.TRYING, "Access problem."),
 
   
   /*------------------------------------------------------------------------
@@ -77,42 +77,33 @@ public enum LinkStatus {
   /**
    * Used for indicating links whose data is missing
    */
-  NO_DATA(LinkStatusGroup.PROBLEM),
+  NO_DATA(LinkStatusGroup.PROBLEM, "Has no price or name."),
 
   /**
    * Used for missing links
    */
-  NOT_FOUND(LinkStatusGroup.PROBLEM),
+  NOT_FOUND(LinkStatusGroup.PROBLEM, "Page not found."),
 
   /**
    * Used for internal error like 500.
    * Data will be collected after implemented by us
    */
-  INTERNAL_ERROR(LinkStatusGroup.PROBLEM),
-
-  /**
-   * Links that will never be implemented
-   */
-  IMPROPER(LinkStatusGroup.PROBLEM),
-
-  /**
-   * Used for indicating links whose data is invalid
-   */
-  INVALID_DATA(LinkStatusGroup.PROBLEM),
-
-  /**
-   * Duplicate links
-   */
-  DUPLICATE(LinkStatusGroup.PROBLEM);
+  INTERNAL_ERROR(LinkStatusGroup.PROBLEM, "Facing a technical problem, we are working on this.");
 
   private LinkStatusGroup group;
+  private String description;
 
-  LinkStatus(LinkStatusGroup group) {
+  LinkStatus(LinkStatusGroup group, String description) {
     this.group = group;
+    this.description = description;
   }
 
   public LinkStatusGroup getGroup() {
     return group;
   }
+
+  public String getDescription() {
+		return description;
+	}
 
 }

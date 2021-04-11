@@ -14,8 +14,10 @@ public class UserBannedMapper implements RowMapper<UserBanned> {
   public UserBanned map(ResultSet rs, StatementContext ctx) throws SQLException {
     UserBanned m = new UserBanned();
 
+    if (Helper.hasColumn(rs, "id")) m.setId(rs.getLong("id"));
     if (Helper.hasColumn(rs, "email")) m.setEmail(rs.getString("email"));
     if (Helper.hasColumn(rs, "reason")) m.setReason(rs.getString("reason"));
+    if (Helper.hasColumn(rs, "voided")) m.setVoided(rs.getBoolean("voided"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 
     return m;
