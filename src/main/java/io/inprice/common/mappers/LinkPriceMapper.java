@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
-import io.inprice.common.meta.Level;
 import io.inprice.common.models.LinkPrice;
 
 public class LinkPriceMapper implements RowMapper<LinkPrice> {
@@ -24,11 +23,6 @@ public class LinkPriceMapper implements RowMapper<LinkPrice> {
 
     if (Helper.hasColumn(rs, "account_id")) m.setAccountId(rs.getLong("account_id"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
-
-    if (Helper.hasColumn(rs, "level")) {
-      String val = rs.getString("level");
-      if (val != null) m.setLevel(Level.valueOf(val));
-    }
 
     return m;
   }

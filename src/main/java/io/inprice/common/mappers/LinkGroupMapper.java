@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
-import io.inprice.common.meta.Level;
+import io.inprice.common.meta.GroupLevel;
 import io.inprice.common.models.LinkGroup;
 
 public class LinkGroupMapper implements RowMapper<LinkGroup> {
@@ -25,7 +25,6 @@ public class LinkGroupMapper implements RowMapper<LinkGroup> {
     if (Helper.hasColumn(rs, "tryings")) m.setTryings(rs.getInt("tryings"));
     if (Helper.hasColumn(rs, "problems")) m.setProblems(rs.getInt("problems"));
 
-    if (Helper.hasColumn(rs, "ranking")) m.setRanking(rs.getInt("ranking"));
     if (Helper.hasColumn(rs, "price")) m.setPrice(rs.getBigDecimal("price"));
     if (Helper.hasColumn(rs, "min_diff")) m.setMinDiff(rs.getBigDecimal("min_diff"));
     if (Helper.hasColumn(rs, "avg_diff")) m.setAvgDiff(rs.getBigDecimal("avg_diff"));
@@ -46,7 +45,7 @@ public class LinkGroupMapper implements RowMapper<LinkGroup> {
 
     if (Helper.hasColumn(rs, "level")) {
       String val = rs.getString("level");
-      if (val != null) m.setLevel(Level.valueOf(val));
+      if (val != null) m.setLevel(GroupLevel.valueOf(val));
     }
 
     return m;

@@ -6,7 +6,6 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.inprice.common.meta.Level;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,7 +20,6 @@ public class LinkPrice implements Serializable {
   private Long id;
   private Long linkId;
   private BigDecimal price;
-  private Level level = Level.UNSPECIFIED;
   private BigDecimal diffAmount;
   private BigDecimal diffRate;
   private Long groupId;

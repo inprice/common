@@ -1,12 +1,12 @@
 package io.inprice.common.meta;
 
 /**
- * Groups and Links levels
+ * Group levels
  * 
  * @author mdpinar
  *
  */
-public enum Level {
+public enum GroupLevel {
   
 	UNSPECIFIED,
   LOWEST,

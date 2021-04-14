@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.inprice.common.meta.Level;
+import io.inprice.common.meta.LinkLevel;
 import io.inprice.common.meta.LinkStatus;
 import io.inprice.common.meta.LinkStatusGroup;
 import lombok.Getter;
@@ -31,8 +31,7 @@ public class Link implements Serializable {
   private String seller;
   private String shipment;
   private BigDecimal price = BigDecimal.ZERO;
-  private Integer ranking = 0;
-  private Level level = Level.UNSPECIFIED;
+  private LinkLevel level = LinkLevel.NA;
   @JsonIgnore
   private LinkStatus preStatus = LinkStatus.TOBE_CLASSIFIED;
   private LinkStatus status = LinkStatus.TOBE_CLASSIFIED;
