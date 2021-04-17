@@ -19,7 +19,7 @@ begin
     @problems := sum(case when status_group = 'PROBLEM' then 1 else 0 end)
   from link where group_id = in_group_id;
 
-  set @level       := 'UNSPECIFIED';
+  set @level       := 'NA';
   set @minSeller   := null;
   set @minPlatform := null;
   set @maxSeller   := null;

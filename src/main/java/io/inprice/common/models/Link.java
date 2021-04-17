@@ -55,6 +55,7 @@ public class Link implements Serializable {
   private Long accountId;
 
   //transients
+  private String platformName;
   private BigDecimal groupPrice;
 
   private List<LinkPrice> priceList;
@@ -66,11 +67,6 @@ public class Link implements Serializable {
 
   public Link(String url) {
     this.url = url;
-  }
-  
-  public String getPlatformName() {
-  	if (platform != null) return platform.getName();
-  	return null;
   }
 
   public LinkStatusGroup getStatusGroup() {

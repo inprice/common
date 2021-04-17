@@ -8,11 +8,11 @@ package io.inprice.common.meta;
  */
 public enum GroupLevel {
   
-	UNSPECIFIED,
   LOWEST,
   LOWER,
   AVERAGE,
   HIGHER,
-  HIGHEST;
+  HIGHEST,
+  NA;
 
 }

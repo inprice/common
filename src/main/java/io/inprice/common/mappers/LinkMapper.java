@@ -52,12 +52,14 @@ public class LinkMapper implements RowMapper<Link> {
     //transients
     if (Helper.hasColumn(rs, "group_price")) m.setGroupPrice(rs.getBigDecimal("group_price"));
 
-    if (Helper.hasColumn(rs, "platform_id") || Helper.hasColumn(rs, "class_name")) {
+    if (Helper.hasColumn(rs, "platform_id") || Helper.hasColumn(rs, "platform_name") || Helper.hasColumn(rs, "class_name")) {
     	Platform p = new Platform();
     	if (Helper.hasColumn(rs, "platform_id")) p.setId(rs.getLong("platform_id"));
+    	if (Helper.hasColumn(rs, "platform_name")) p.setName(rs.getString("platform_name"));
     	if (Helper.hasColumn(rs, "class_name")) p.setClassName(rs.getString("class_name"));
 
     	m.setPlatformId(p.getId());
+    	m.setPlatformName(p.getName());
     	m.setPlatform(p);
     }
     

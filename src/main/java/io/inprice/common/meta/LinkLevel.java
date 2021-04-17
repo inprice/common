@@ -9,8 +9,8 @@ package io.inprice.common.meta;
 public enum LinkLevel {
   
   MIN,
-  AVG,
   MAX,
+  AVG,
 	NA;
 
 }

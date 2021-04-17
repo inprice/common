@@ -29,7 +29,7 @@ public class LinkGroup implements Serializable {
   private BigDecimal total = BigDecimal.ZERO;
   
   private BigDecimal price = BigDecimal.ZERO; //if greater than zero then competitiveness starts!
-  private GroupLevel level = GroupLevel.UNSPECIFIED;
+  private GroupLevel level = GroupLevel.NA;
   
   private String minPlatform;
   private String minSeller;
