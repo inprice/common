@@ -17,7 +17,7 @@ public class URLUtils {
   public static final String URL_CHECK_REGEX = "^https?://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
 
   public static boolean isAValidURL(String url) {
-    if (StringUtils.isBlank(url) || url.trim().length() < 20 || url.trim().length() > 1024)
+    if (StringUtils.isBlank(url) || url.trim().length() < 15 || url.trim().length() > 1024)
       return false;
     return url.matches(URL_CHECK_REGEX);
   }

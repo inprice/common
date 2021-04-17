@@ -19,6 +19,8 @@ public class PlatformMapper implements RowMapper<Platform> {
     if (Helper.hasColumn(rs, "name")) m.setName(rs.getString("name"));
     if (Helper.hasColumn(rs, "domain")) m.setDomain(rs.getString("domain"));
     if (Helper.hasColumn(rs, "country")) m.setCountry(rs.getString("country"));
+    if (Helper.hasColumn(rs, "currency_code")) m.setCurrencyCode(rs.getString("currency_code"));
+    if (Helper.hasColumn(rs, "currency_format")) m.setCurrencyFormat(rs.getString("currency_format"));
     if (Helper.hasColumn(rs, "class_name")) m.setClassName(rs.getString("class_name"));
     if (Helper.hasColumn(rs, "problem")) m.setProblem(rs.getString("problem"));
 

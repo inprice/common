@@ -14,7 +14,7 @@ public class Plans {
   private static final Map<String, Plan> nameMap;
   private static final Map<String, Plan> priceIdMap;
 
-  private static final String PRODUCT_LIMIT_TEMPLATE = "Up to %d products.";
+  private static final String LINK_LIMIT_TEMPLATE = "Up to %d links.";
   private static final String UNLIMITED_COMPETITORS = "Unlimited competitors.";
   private static final String UPDATE_NUMBER = "Update prices 4 times a day.";
   private static final String FREE_API = "Free API access (coming soon).";
@@ -43,7 +43,7 @@ public class Plans {
         25,
         new BigDecimal(15),
         Arrays.asList(
-          String.format(PRODUCT_LIMIT_TEMPLATE, 25),
+          String.format(LINK_LIMIT_TEMPLATE, 25),
           UNLIMITED_COMPETITORS,
           UPDATE_NUMBER
         ),
@@ -54,7 +54,7 @@ public class Plans {
         50,
         new BigDecimal(30),
         Arrays.asList(
-          String.format(PRODUCT_LIMIT_TEMPLATE, 50),
+          String.format(LINK_LIMIT_TEMPLATE, 50),
           UNLIMITED_COMPETITORS,
           UPDATE_NUMBER
         ),
@@ -65,7 +65,7 @@ public class Plans {
         100,
         new BigDecimal(50),
         Arrays.asList(
-          String.format(PRODUCT_LIMIT_TEMPLATE, 100),
+          String.format(LINK_LIMIT_TEMPLATE, 100),
           UNLIMITED_COMPETITORS,
           UPDATE_NUMBER
         ),
@@ -76,7 +76,7 @@ public class Plans {
         250,
         new BigDecimal(70),
         Arrays.asList(
-          String.format(PRODUCT_LIMIT_TEMPLATE, 250),
+          String.format(LINK_LIMIT_TEMPLATE, 250),
           UNLIMITED_COMPETITORS,
           UPDATE_NUMBER,
           FREE_API
@@ -88,7 +88,7 @@ public class Plans {
         500,
         new BigDecimal(100),
         Arrays.asList(
-          String.format(PRODUCT_LIMIT_TEMPLATE, 500),
+          String.format(LINK_LIMIT_TEMPLATE, 500),
           UNLIMITED_COMPETITORS,
           UPDATE_NUMBER,
           FREE_API
@@ -100,7 +100,7 @@ public class Plans {
         1000,
         new BigDecimal(130),
         Arrays.asList(
-          String.format(PRODUCT_LIMIT_TEMPLATE, 1000),
+          String.format(LINK_LIMIT_TEMPLATE, 1000),
           UNLIMITED_COMPETITORS,
           UPDATE_NUMBER,
           FREE_API

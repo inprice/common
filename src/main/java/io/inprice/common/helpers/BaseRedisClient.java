@@ -24,7 +24,7 @@ public class BaseRedisClient {
     config
       .useSingleServer()
       .setAddress(String.format("redis://%s:%d", SysProps.REDIS_HOST(), SysProps.REDIS_PORT()))
-      .setPassword(!StringUtils.isBlank(redisPass) ? redisPass : null)
+      .setPassword(StringUtils.isNotBlank(redisPass) ? redisPass : null)
       .setConnectionPoolSize(10)
       .setConnectionMinimumIdleSize(1)
       .setIdleConnectionTimeout(5000)

@@ -18,8 +18,8 @@ public class AccountMapper implements RowMapper<Account> {
     if (Helper.hasColumn(rs, "id")) m.setId(rs.getLong("id"));
     if (Helper.hasColumn(rs, "name")) m.setName(rs.getString("name"));
     if (Helper.hasColumn(rs, "plan_name")) m.setPlanName(rs.getString("plan_name"));
-    if (Helper.hasColumn(rs, "product_limit")) m.setProductLimit(Helper.nullIntegerHandler(rs, "product_limit"));
-    if (Helper.hasColumn(rs, "product_count")) m.setProductCount(Helper.nullIntegerHandler(rs, "product_count"));
+    if (Helper.hasColumn(rs, "link_limit")) m.setLinkLimit(Helper.nullIntegerHandler(rs, "link_limit"));
+    if (Helper.hasColumn(rs, "link_count")) m.setLinkCount(Helper.nullIntegerHandler(rs, "link_count"));
     if (Helper.hasColumn(rs, "last_status_update")) m.setLastStatusUpdate(rs.getTimestamp("last_status_update"));
     if (Helper.hasColumn(rs, "cust_id")) m.setCustId(rs.getString("cust_id"));
     if (Helper.hasColumn(rs, "subs_id")) m.setSubsId(rs.getString("subs_id"));
@@ -35,6 +35,7 @@ public class AccountMapper implements RowMapper<Account> {
     if (Helper.hasColumn(rs, "currency_code")) m.setCurrencyCode(rs.getString("currency_code"));
     if (Helper.hasColumn(rs, "currency_format")) m.setCurrencyFormat(rs.getString("currency_format"));
     if (Helper.hasColumn(rs, "admin_id")) m.setAdminId(rs.getLong("admin_id"));
+    if (Helper.hasColumn(rs, "demo")) m.setDemo(rs.getBoolean("demo"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 
     if (Helper.hasColumn(rs, "status")) {

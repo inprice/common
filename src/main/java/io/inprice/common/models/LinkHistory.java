@@ -6,6 +6,7 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.inprice.common.meta.LinkStatus;
+import io.inprice.common.meta.LinkStatusGroup;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,10 +20,12 @@ public class LinkHistory implements Serializable {
 
   private Long id;
   private Long linkId;
+  @JsonIgnore
   private LinkStatus status;
+  @JsonIgnore
   private String problem;
   private Integer httpStatus;
-  private Long productId;
+  private Long groupId;
   private Date createdAt;
   
   @JsonIgnore
@@ -35,6 +38,14 @@ public class LinkHistory implements Serializable {
   public LinkHistory(Long linkId, LinkStatus status) {
     this.linkId = linkId;
     this.status = status;
+  }
+
+  public LinkStatusGroup getStatusGroup() {
+  	return status.getGroup();
+  }
+  
+  public String getStatusDescription() {
+  	return status.getDescription();
   }
 
 }

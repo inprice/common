@@ -20,10 +20,9 @@ public class LinkPrice implements Serializable {
   private Long id;
   private Long linkId;
   private BigDecimal price;
-  private Integer position;
   private BigDecimal diffAmount;
   private BigDecimal diffRate;
-  private Long productId;
+  private Long groupId;
   private Date createdAt;
   
   @JsonIgnore

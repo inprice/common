@@ -22,7 +22,7 @@ public class LinkSpec implements Serializable {
    private Long linkId;
    private String key;
    private String value;
-   private Long productId;
+   private Long groupId;
 
    @JsonIgnore
    private Long accountId;
