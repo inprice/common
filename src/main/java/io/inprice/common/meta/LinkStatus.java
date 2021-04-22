@@ -23,12 +23,12 @@ public enum LinkStatus {
   /**
    * The initial state.
    */
-  TOBE_CLASSIFIED(LinkStatusGroup.WAITING, "Just added, waiting to be handled soon."),
+  TOBE_CLASSIFIED(LinkStatusGroup.WAITING, "Added."),
 
   /**
    * Used for the links after TOBE_IMPLEMENTED and INTERNAL_ERROR status
    */
-  RESOLVED(LinkStatusGroup.WAITING, "Just handled, will be updated soon."),
+  RESOLVED(LinkStatusGroup.WAITING, "Resolved and be updated."),
 
   /**
    * Used for links paused by users.
@@ -39,13 +39,13 @@ public enum LinkStatus {
   /**
    * Used for paused links to resume.
    */
-  RESUMED(LinkStatusGroup.WAITING, "Activated again, will be updated soon."),
+  RESUMED(LinkStatusGroup.WAITING, "Activated again and be updated."),
 
   /**
    * For the links whose websites have not been implemented yet. 
    * Data will be collected after implemented by us
    */
-  TOBE_IMPLEMENTED(LinkStatusGroup.WAITING, "A new platform, we are working on this."),
+  TOBE_IMPLEMENTED(LinkStatusGroup.WAITING, "New platform, we work on this."),
 
 
   /*------------------------------------------------------------------------
@@ -55,7 +55,7 @@ public enum LinkStatus {
   /**
    * For the links have no sufficient stock
    */
-  NOT_AVAILABLE(LinkStatusGroup.TRYING, "Has no sufficient stock."),
+  NOT_AVAILABLE(LinkStatusGroup.TRYING, "Insufficient stock number."),
   
   /**
    * Used for links returning http error codes greater than 399.

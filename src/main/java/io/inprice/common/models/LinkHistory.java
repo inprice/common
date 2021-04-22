@@ -10,10 +10,12 @@ import io.inprice.common.meta.LinkStatusGroup;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class LinkHistory implements Serializable {
 
   private static final long serialVersionUID = 885057701505049080L;
@@ -22,8 +24,6 @@ public class LinkHistory implements Serializable {
   private Long linkId;
   @JsonIgnore
   private LinkStatus status;
-  @JsonIgnore
-  private String problem;
   private Integer httpStatus;
   private Long groupId;
   private Date createdAt;

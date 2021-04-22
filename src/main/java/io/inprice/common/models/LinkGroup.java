@@ -6,7 +6,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.inprice.common.meta.GroupLevel;
+import io.inprice.common.meta.Level;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,16 +20,15 @@ public class LinkGroup implements Serializable {
 
   private Long id;
   private String name;
-  private String code;
 
   private Integer actives = 0;
   private Integer waitings = 0;
   private Integer tryings = 0;
   private Integer problems = 0;
-  private BigDecimal total = BigDecimal.ZERO;
   
   private BigDecimal price = BigDecimal.ZERO; //if greater than zero then competitiveness starts!
-  private GroupLevel level = GroupLevel.NA;
+  private Level level = Level.NA;
+  private BigDecimal total = BigDecimal.ZERO;
   
   private String minPlatform;
   private String minSeller;

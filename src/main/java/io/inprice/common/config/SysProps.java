@@ -81,4 +81,8 @@ public class SysProps {
     return System.getenv().getOrDefault("REDIS_STATUS_CHANGE_TOPIC", "status-change");
   }
 
+	public static int TPOOL_LINK_CONSUMER_CAPACITY() {
+		return new Integer(System.getenv().getOrDefault("TPOOL_LINK_CONSUMER_CAPACITY", "3"));
+	}
+
 }

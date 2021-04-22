@@ -2,7 +2,14 @@
 -- @since 2021-13-03
 DELIMITER $$
 
-create procedure sp_refresh_group(in in_group_id bigint)
+create procedure sp_refresh_group (
+    in in_group_id bigint,
+    out minPrice decimal(9,2),
+    out avgPrice decimal(9,2),
+    out maxPrice decimal(9,2),
+    out total decimal(9,2),
+    out level varchar(10)
+  )
 begin
   start transaction;
 
@@ -20,10 +27,10 @@ begin
   from link where group_id = in_group_id;
 
   set @level       := 'NA';
-  set @minSeller   := null;
-  set @minPlatform := null;
-  set @maxSeller   := null;
-  set @maxPlatform := null;
+  set @minSeller   := 'NA';
+  set @minPlatform := 'NA';
+  set @maxSeller   := 'NA';
+  set @maxPlatform := 'NA';
 
   set @minDiff := 0;
   set @avgDiff := 0;
@@ -42,19 +49,25 @@ begin
     update link set level='NA' where group_id=in_group_id;
       
     if @actives > 1 then
-      select @minSeller := seller, @minPlatform:= p.name from link as l inner join platform as p on p.id = l.platform_id where price = @minPrice;
-      select @maxSeller := seller, @maxPlatform:= p.name from link as l inner join platform as p on p.id = l.platform_id where price = @maxPrice;
-  
-      if @groupPrice > 0 then
+
+      if @minPrice != @maxPrice then
+        select @minSeller := seller, @minPlatform:= p.name from link as l inner join platform as p on p.id = l.platform_id where price = @minPrice;
+        select @maxSeller := seller, @maxPlatform:= p.name from link as l inner join platform as p on p.id = l.platform_id where price = @maxPrice;
+      else
+        set @level := 'EQUAL';
+        set @avgPrice := @minPrice;
+      end if;
+
+      if @groupPrice > 0 and @minPrice != @maxPrice then
         set @minDiff := ROUND(((@minPrice / @groupPrice)-1) * 100, 2);
         set @avgDiff := ROUND(((@avgPrice / @groupPrice)-1) * 100, 2);
         set @maxDiff := ROUND(((@maxPrice / @groupPrice)-1) * 100, 2);
-          
+
         if @groupPrice <= @minPrice then 
+          set @level := 'LOWEST';
           set @minSeller := 'You';
           set @minPlatform := 'Yours';
           set @minPrice := @groupPrice;
-          set @level := 'LOWEST';
         elseif @groupPrice < @avgPrice then 
           set @level := 'LOWER';
         elseif @groupPrice = @avgPrice then 
@@ -62,22 +75,30 @@ begin
         elseif @groupPrice < @maxPrice then 
           set @level := 'HIGHER';
         elseif @groupPrice >= @maxPrice then 
-          set @minSeller := 'You';
-          set @minPlatform := 'Yours';
-          set @maxPrice := @groupPrice;
           set @level := 'HIGHEST';
+          set @maxSeller := 'You';
+          set @maxPlatform := 'Yours';
+          set @maxPrice := @groupPrice;
         end if;
       end if;
-  
-      update link set level='MIN' where group_id=in_group_id and status_group='ACTIVE' and price<=@minPrice;
-      update link set level='AVG' where group_id=in_group_id and status_group='ACTIVE' and price>@minPrice and price<@maxPrice;
-      update link set level='MAX' where group_id=in_group_id and status_group='ACTIVE' and price>=@maxPrice;
-  
+
+      if @minPrice != @maxPrice then
+        update link set level = 
+        (case
+            when price <= @minPrice then 'LOWEST'
+            when price > @minPrice and price < @avgPrice then 'LOWER'
+            when price = @avgPrice then 'AVERAGE'
+            when price > @avgPrice and price < @maxPrice then 'HIGHER'
+            when price >= @maxPrice then 'HIGHEST'
+          end)
+        where group_id=in_group_id and status_group='ACTIVE';
+      else
+        update link set level = 'EQUAL' where group_id=in_group_id and status_group='ACTIVE';
+      end if;
+
     end if;
 
   end if;
-  
-  -- select @minSeller, @minPlatform, @minPrice, @minDiff, @avgPrice, @avgDiff, @maxSeller, @maxPlatform, @maxPrice, @maxDiff, @actives, @tryings, @waitings, @problems, @level, @groupPrice, @total;
 
   update link_group set
     min_seller = @minSeller, min_platform = @minPlatform, min_price = @minPrice, min_diff = @minDiff,
@@ -86,8 +107,11 @@ begin
     actives = @actives, tryings = @tryings, waitings = @waitings, problems = @problems, 
     level = @level, total = @total, updated_at = now()
   where id = in_group_id;
-    
+  
   commit;
+
+  select @minPrice, @avgPrice, @maxPrice, @total, @level into minPrice, avgPrice, maxPrice, total, level;
+
 end$$
 
 DELIMITER ;

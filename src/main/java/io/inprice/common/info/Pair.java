@@ -1,5 +1,6 @@
 package io.inprice.common.info;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,16 +9,11 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
-public class Pair<K, V> {
+public class Pair<Key, Value> {
 
-  private K key;
-  private V value;
-
-  public Pair(K key, V value) {
-    this.key = key;
-    this.value = value;
-  }
-  
+  private Key key;
+  private Value value;
   
 }

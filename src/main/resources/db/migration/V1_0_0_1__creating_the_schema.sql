@@ -103,14 +103,13 @@ create table platform (
 create table link_group (
   id                        bigint auto_increment not null,
   name                      varchar(128) not null,
-  code                      varchar(32),
   actives                   smallint default 0,
   waitings                  smallint default 0,
   tryings                   smallint default 0,
   problems                  smallint default 0,
-  total                     decimal(9,2) default 0,
   price                     decimal(9,2) default 0,
-  level                     enum('LOWEST', 'LOWER', 'AVERAGE', 'HIGHER', 'HIGHEST', 'NA') not null default 'NA',
+  level                     enum('LOWEST', 'HIGHEST', 'LOWER', 'AVERAGE', 'HIGHER', 'EQUAL', 'NA') not null default 'NA',
+  total                     decimal(9,2) default 0,
   min_platform              varchar(50),
   min_seller                varchar(50),
   min_price                 decimal(9,2) default 0,
@@ -121,6 +120,7 @@ create table link_group (
   max_seller                varchar(50),
   max_price                 decimal(9,2) default 0,
   max_diff                  decimal(6,2) default 0,
+  alarm_id                  bigint,
   account_id                bigint not null,
   updated_at                timestamp,
   created_at                timestamp not null default current_timestamp,
@@ -139,7 +139,7 @@ create table link (
   seller                    varchar(150),
   shipment                  varchar(150),
   price                     decimal(9,2) default 0,
-  level                     enum('MIN', 'MAX', 'AVG', 'NA') not null default 'NA',
+  level                     enum('LOWEST', 'HIGHEST', 'LOWER', 'AVERAGE', 'HIGHER', 'EQUAL', 'NA') not null default 'NA',
   pre_status                varchar(25) not null default 'TOBE_CLASSIFIED',
   status                    varchar(25) not null default 'TOBE_CLASSIFIED',
   status_group              enum('ACTIVE', 'TRYING', 'WAITING', 'PROBLEM') not null default 'WAITING',
@@ -149,6 +149,7 @@ create table link (
   platform_id               bigint,
   group_id                  bigint,
   account_id                bigint not null,
+  alarm_id                  bigint,
   checked_at                datetime,
   updated_at                datetime,
   created_at                timestamp not null default current_timestamp,
@@ -192,7 +193,6 @@ create table link_history (
   link_id                   bigint not null,
   status                    varchar(25) not null,
   http_status               smallint default 0,
-  problem                   varchar(250),
   group_id                  bigint not null,
   account_id                bigint not null,
   created_at                timestamp not null default current_timestamp,
@@ -212,6 +212,30 @@ create table coupon (
   created_at                timestamp not null default current_timestamp,
   primary key (code)
 ) engine=innodb;
+
+create table notice (
+  id                        bigint auto_increment not null,
+  title                     varchar(100) not null,
+  content                   varchar(1024) not null,
+  level                     enum('USER', 'ACCOUNT', 'APPLICATION') not null default 'USER',
+  email                     varchar(100),
+  account_id                bigint,
+  lasted_at                 timestamp not null,
+  created_at                timestamp not null default current_timestamp,
+  primary key (id),
+  key ix1 (lasted_at)
+) engine=innodb;
+
+create table user_notice (
+  id                        bigint auto_increment not null,
+  email                     varchar(100) not null,
+  account_id                bigint,
+  notice_id                 bigint,
+  created_at                timestamp not null default current_timestamp,
+  primary key (id),
+  key ix1 (email)
+) engine=innodb;
+alter table user_notice add foreign key (notice_id) references notice (id);
 
 create table user_banned (
   id                        bigint auto_increment not null,
@@ -261,3 +285,42 @@ create table checkout (
   key ix1 (created_at)
 ) engine=innodb;
 alter table checkout add foreign key (account_id) references account (id);
+
+create table alarm (
+  id                        bigint auto_increment not null,
+  subject                   enum('LINK', 'GROUP') not null default 'LINK',
+  topic                     enum('PRICE', 'MINIMUM', 'AVERAGE', 'MAXIMUM', 'TOTAL', 'STATUS') not null default 'STATUS',
+  status_change             enum('ANY', 'CERTAIN') not null default 'ANY',
+  price_change              enum('ANY', 'INCREASED', 'DECREASED', 'OUT_OF_LIMITS') not null default 'ANY',
+  certain_status            varchar(10) not null,
+  price_lower_limit         decimal(9,2) default 0,
+  price_upper_limit         decimal(9,2) default 0,
+  last_status               varchar(10) not null,
+  last_price                decimal(9,2) default 0,
+  to_emails                 varchar(512) not null,
+  link_id                   bigint,
+  group_id                  bigint,
+  account_id                bigint not null,
+  triggered_at              timestamp,
+  created_at                timestamp not null default current_timestamp,
+  primary key (id)
+) engine=innodb;
+alter table alarm add foreign key (link_id) references link (id);
+alter table alarm add foreign key (group_id) references link_group (id);
+alter table alarm add foreign key (account_id) references account (id);
+
+create table ticket (
+  id                        bigint auto_increment not null,
+  subject                   enum('OTHER', 'LINK', 'GROUP', 'ACCOUNT') not null default 'OTHER',
+  type                      enum('REQUEST', 'FEEDBACK', 'SUPPORT', 'COMPLAINT') not null default 'REQUEST',
+  status                    enum('WAITING', 'ANSWERED', 'CLOSED') not null default 'WAITING',
+  description               varchar(1024) not null,
+  parent_id                 bigint,
+  link_id                   bigint,
+  group_id                  bigint,
+  account_id                bigint not null,
+  answered_at               timestamp,
+  created_at                timestamp not null default current_timestamp,
+  primary key (id)
+) engine=innodb;
+alter table ticket add foreign key (account_id) references account (id);

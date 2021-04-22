@@ -6,13 +6,14 @@ package io.inprice.common.meta;
  * @author mdpinar
  *
  */
-public enum GroupLevel {
-  
+public enum Level {
+
   LOWEST,
-  LOWER,
-  AVERAGE,
-  HIGHER,
   HIGHEST,
+  LOWER,
+  HIGHER,
+  AVERAGE,
+  EQUAL,
   NA;
 
 }

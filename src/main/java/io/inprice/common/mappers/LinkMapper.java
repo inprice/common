@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
-import io.inprice.common.meta.LinkLevel;
+import io.inprice.common.meta.Level;
 import io.inprice.common.meta.LinkStatus;
 import io.inprice.common.models.Link;
 import io.inprice.common.models.Platform;
@@ -38,7 +38,7 @@ public class LinkMapper implements RowMapper<Link> {
 
     if (Helper.hasColumn(rs, "level")) {
     	String val = rs.getString("level");
-    	if (val != null) m.setLevel(LinkLevel.valueOf(val));
+    	if (val != null) m.setLevel(Level.valueOf(val));
     }
     if (Helper.hasColumn(rs, "pre_status")) {
     	String val = rs.getString("pre_status");
@@ -52,16 +52,15 @@ public class LinkMapper implements RowMapper<Link> {
     //transients
     if (Helper.hasColumn(rs, "group_price")) m.setGroupPrice(rs.getBigDecimal("group_price"));
 
-    if (Helper.hasColumn(rs, "platform_id") || Helper.hasColumn(rs, "platform_name") || Helper.hasColumn(rs, "class_name")) {
-    	Platform p = new Platform();
-    	if (Helper.hasColumn(rs, "platform_id")) p.setId(rs.getLong("platform_id"));
-    	if (Helper.hasColumn(rs, "platform_name")) p.setName(rs.getString("platform_name"));
-    	if (Helper.hasColumn(rs, "class_name")) p.setClassName(rs.getString("class_name"));
-
-    	m.setPlatformId(p.getId());
-    	m.setPlatformName(p.getName());
-    	m.setPlatform(p);
-    }
+  	Platform p = new Platform();
+  	if (Helper.hasColumn(rs, "platform_id")) p.setId(rs.getLong("platform_id"));
+  	if (Helper.hasColumn(rs, "platform_name")) p.setName(rs.getString("platform_name"));
+  	if (Helper.hasColumn(rs, "currency_code")) p.setCurrencyCode(rs.getString("currency_code"));
+  	if (Helper.hasColumn(rs, "currency_format")) p.setCurrencyFormat(rs.getString("currency_format"));
+  	if (Helper.hasColumn(rs, "class_name")) p.setClassName(rs.getString("class_name"));
+  	
+  	m.setPlatformId(p.getId());
+  	m.setPlatform(p);
     
     return m;
   }

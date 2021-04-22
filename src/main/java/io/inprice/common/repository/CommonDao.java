@@ -1,8 +1,11 @@
 package io.inprice.common.repository;
 
 import java.math.BigDecimal;
+import java.sql.Types;
 
+import org.jdbi.v3.core.statement.OutParameters;
 import org.jdbi.v3.sqlobject.customizer.Bind;
+import org.jdbi.v3.sqlobject.customizer.OutParameter;
 import org.jdbi.v3.sqlobject.statement.SqlCall;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
@@ -32,7 +35,12 @@ public interface CommonDao {
     @Bind("diffAmount") BigDecimal diffAmount, @Bind("diffRate") BigDecimal diffRate,
     @Bind("groupId") long groupId, @Bind("accountId") long accountId);
 
-  @SqlCall("call sp_refresh_group(:groupId)")
-  void refreshGroup(@Bind("groupId") Long groupId);
+  @SqlCall("call sp_refresh_group(:groupId, :minPrice, :avgPrice, :maxPrice, :total, :level)")
+  @OutParameter(name="minPrice", sqlType=Types.DOUBLE)
+  @OutParameter(name="avgPrice", sqlType=Types.DOUBLE)
+  @OutParameter(name="maxPrice", sqlType=Types.DOUBLE)
+  @OutParameter(name="total", sqlType=Types.DOUBLE)
+  @OutParameter(name="level", sqlType=Types.VARCHAR)
+  OutParameters refreshGroup(@Bind("groupId") Long groupId);
 
 }
