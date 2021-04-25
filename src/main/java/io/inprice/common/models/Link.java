@@ -60,8 +60,6 @@ public class Link implements Serializable {
   private List<LinkPrice> priceList;
   private List<LinkSpec> specList;
   private List<LinkHistory> historyList;
-  
-  @JsonIgnore
   private Platform platform;
 
   public Link(String url) {
