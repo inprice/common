@@ -55,6 +55,7 @@ public class Link implements Serializable {
   private Long accountId;
 
   //transients
+  private String groupName;
   private BigDecimal groupPrice;
 
   private List<LinkPrice> priceList;
