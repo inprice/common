@@ -50,14 +50,14 @@ public class LinkMapper implements RowMapper<Link> {
     }
 
     //transients
+    if (Helper.hasColumn(rs, "group_name")) m.setGroupName(rs.getString("group_name"));
     if (Helper.hasColumn(rs, "group_price")) m.setGroupPrice(rs.getBigDecimal("group_price"));
 
   	Platform p = new Platform();
-  	if (Helper.hasColumn(rs, "platform_id")) p.setId(rs.getLong("platform_id"));
   	if (Helper.hasColumn(rs, "platform_name")) p.setName(rs.getString("platform_name"));
   	if (Helper.hasColumn(rs, "currency_code")) p.setCurrencyCode(rs.getString("currency_code"));
   	if (Helper.hasColumn(rs, "currency_format")) p.setCurrencyFormat(rs.getString("currency_format"));
-  	if (Helper.hasColumn(rs, "class_name")) p.setClassName(rs.getString("class_name"));
+  	if (Helper.hasColumn(rs, "country")) p.setCountry(rs.getString("country"));
   	
   	m.setPlatformId(p.getId());
   	m.setPlatform(p);

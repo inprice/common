@@ -55,7 +55,7 @@ public enum LinkStatus {
   /**
    * For the links have no sufficient stock
    */
-  NOT_AVAILABLE(LinkStatusGroup.TRYING, "Insufficient stock number."),
+  NOT_AVAILABLE(LinkStatusGroup.TRYING, "Insufficient stock."),
   
   /**
    * Used for links returning http error codes greater than 399.

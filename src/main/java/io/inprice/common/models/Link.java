@@ -55,13 +55,12 @@ public class Link implements Serializable {
   private Long accountId;
 
   //transients
+  private String groupName;
   private BigDecimal groupPrice;
 
   private List<LinkPrice> priceList;
   private List<LinkSpec> specList;
   private List<LinkHistory> historyList;
-  
-  @JsonIgnore
   private Platform platform;
 
   public Link(String url) {
