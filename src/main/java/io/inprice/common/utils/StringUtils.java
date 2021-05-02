@@ -1,5 +1,7 @@
 package io.inprice.common.utils;
 
+import java.util.Collection;
+
 import io.inprice.common.helpers.SqlHelper;
 
 public class StringUtils {
@@ -30,6 +32,20 @@ public class StringUtils {
 
   	}
   	return problem != null ? SqlHelper.clear(problem) : problem;
+  }
+  
+  public static <O> String join(String separator, Collection<O> coll) {
+    if (coll == null || coll.size() < 1) return null;
+
+    StringBuilder sb = new StringBuilder();
+    for (O o: coll) {
+    	sb.append(separator);
+      sb.append(o.toString());
+      sb.append(separator);
+      sb.append(",");
+    }
+
+    return sb.toString().substring(0, sb.length()-1);
   }
   
 }
