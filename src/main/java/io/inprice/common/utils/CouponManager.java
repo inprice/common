@@ -85,9 +85,9 @@ public class CouponManager {
    */
   public static void main(String[] args) {
     System.err.println("Generated coupon:");
-    for (int i = 0; i < 50; i++) {
+    //for (int i = 0; i < 50; i++) {
       System.err.println(generate());
-    }
+    //}
   }
 
 }

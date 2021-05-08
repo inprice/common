@@ -36,11 +36,14 @@ public class Member implements Serializable {
   private String accountName;
   private AccountStatus accountStatus = AccountStatus.CREATED;
   private Date lastStatusUpdate; //for account
+  private Integer planId;
   private String planName;
-  private Date renewalAt;
+  private Date subsRenewalAt;
   private Date subsStartedAt;
-  private String currencyFormat;
   private Integer linkLimit;
   private Integer linkCount;
+  private Integer alarmLimit;
+  private Integer alarmCount;
+  private String currencyFormat;
 
 }

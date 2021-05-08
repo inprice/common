@@ -17,9 +17,7 @@ public class AccountHistoryMapper implements RowMapper<AccountHistory> {
 
     if (Helper.hasColumn(rs, "id")) m.setId(rs.getLong("id"));
     if (Helper.hasColumn(rs, "account_id")) m.setAccountId(rs.getLong("account_id"));
-    if (Helper.hasColumn(rs, "cust_id")) m.setCustId(rs.getString("cust_id"));
-    if (Helper.hasColumn(rs, "subs_id")) m.setSubsId(rs.getString("subs_id"));
-    if (Helper.hasColumn(rs, "plan_name")) m.setPlanName(rs.getString("plan_name"));
+    if (Helper.hasColumn(rs, "plan_id")) m.setPlanId(rs.getInt("plan_id"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 
     if (Helper.hasColumn(rs, "status")) {

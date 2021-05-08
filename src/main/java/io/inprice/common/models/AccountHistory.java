@@ -19,9 +19,7 @@ public class AccountHistory implements Serializable {
   private Long id;
   private Long accountId;
   private AccountStatus status;
-  private String planName;
-  private String custId;
-  private String subsId;
+  private Integer planId;
   private Date createdAt = new Date();
 
 }

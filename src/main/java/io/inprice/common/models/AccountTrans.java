@@ -20,8 +20,8 @@ public class AccountTrans implements Serializable {
   private SubsEvent event;    // invoice.payment_succeeded
   private Boolean successful = Boolean.FALSE;
   private String reason;   // subscription_create
-  private String description; // 1 × Micro Plan (at €5.00 / month)
-  private String fileUrl;  // "hosted_invoice_url": "https://pay.stripe.com/invoice/acct_1H0m4UBiHTcqawyM/invst_HkuoYwDhzPwLGBLKwUEWUhOH9tTx31S"
+  private String description; // 1 × Basic Plan (at $10.00 / month)
+  private String fileUrl;
   private Date createdAt;
 
   @JsonIgnore

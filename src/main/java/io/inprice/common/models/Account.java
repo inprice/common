@@ -18,25 +18,6 @@ public class Account implements Serializable {
   @JsonIgnore
   private Long id;
   private String name;
-  private String currencyCode;
-  private String currencyFormat;
-  private Integer linkLimit = 0;
-  private Integer linkCount = 0;
-
-  @JsonIgnore
-  private Long adminId;
-
-  private AccountStatus status;
-  private Date lastStatusUpdate = new Date();
-  private String planName;
-
-  @JsonIgnore
-  private String custId;
-  @JsonIgnore
-  private String subsId;
-  private Date subsStartedAt;
-  private Date renewalAt;
-
   private String title;
   private String address1;
   private String address2;
@@ -44,7 +25,27 @@ public class Account implements Serializable {
   private String city;
   private String state;
   private String country;
+
+  private AccountStatus status;
+  private Date lastStatusUpdate = new Date();
+
+  private Integer planId;
+  private Integer linkCount = 0;
+  private Integer alarmCount = 0;
+
+  private Date subsStartedAt;
+  private Date subsRenewalAt;
+
+  private String currencyCode;
+  private String currencyFormat;
   private Boolean demo = Boolean.FALSE;
+
+  @JsonIgnore
+  private Long adminId;
+
   private Date createdAt = new Date();
+
+  //transients
+  private Plan plan;
 
 }

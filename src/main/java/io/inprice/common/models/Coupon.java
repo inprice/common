@@ -15,7 +15,7 @@ public class Coupon implements Serializable {
   private static final long serialVersionUID = 5125346359199270016L;
 
   private String code;
-  private String planName;
+  private Integer planId;
   private Integer days;
   private String description;
   private Long issuerId;

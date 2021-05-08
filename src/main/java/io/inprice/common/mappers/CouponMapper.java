@@ -15,7 +15,7 @@ public class CouponMapper implements RowMapper<Coupon> {
     Coupon m = new Coupon();
 
     if (Helper.hasColumn(rs, "code")) m.setCode(rs.getString("code"));
-    if (Helper.hasColumn(rs, "plan_name")) m.setPlanName(rs.getString("plan_name"));
+    if (Helper.hasColumn(rs, "plan_id")) m.setPlanId(rs.getInt("plan_id"));
     if (Helper.hasColumn(rs, "days")) m.setDays(rs.getInt("days"));
     if (Helper.hasColumn(rs, "description")) m.setDescription(rs.getString("description"));
     if (Helper.hasColumn(rs, "issuer_id")) m.setIssuerId(Helper.nullLongHandler(rs, "issuer_id"));

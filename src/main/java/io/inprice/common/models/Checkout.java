@@ -21,12 +21,12 @@ public class Checkout implements Serializable {
   private String hash; //id
 
   @JsonIgnore
-  private String sessionId; //from stripe
+  private String sessionId; //from payment gw
 
   @JsonIgnore
   private Long accountId;
 
-  private String planName;
+  private Integer planId;
   private CheckoutStatus status;
   private String description;
   private Date updatedAt;

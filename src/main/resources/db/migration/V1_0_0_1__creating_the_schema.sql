@@ -11,21 +11,22 @@ create table user (
   unique key ix1 (email)
 ) engine=innodb;
 
+create table plan (
+  id                        int auto_increment not null,
+  is_standard               boolean default true,
+  name                      varchar(15) not null,
+  description               varchar(50),
+  price                     decimal(6,2) default 0,
+  features                  varchar(512) not null,
+  link_limit                smallint default 0,
+  alarm_limit               smallint default 0,
+  created_at                timestamp not null default current_timestamp,
+  primary key (id)
+) engine=innodb;
+
 create table account (
   id                        bigint auto_increment not null,
   name                      varchar(70) not null,
-  currency_code             char(3),
-  currency_format           varchar(30),
-  link_limit                smallint default 0,
-  link_count                smallint default 0,
-  admin_id                  bigint not null,
-  status                    enum('CREATED', 'FREE', 'COUPONED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'CREATED',
-  last_status_update        timestamp not null default current_timestamp,
-  plan_name                 varchar(20),
-  cust_id                   varchar(255),
-  subs_id                   varchar(255),
-  subs_started_at           timestamp,
-  renewal_at                timestamp,
   title                     varchar(255),
   address_1                 varchar(255),
   address_2                 varchar(255),
@@ -33,22 +34,30 @@ create table account (
   city                      varchar(70),
   state                     varchar(70),
   country                   varchar(2),
-  demo                      boolean default false,
+  status                    enum('CREATED', 'FREE', 'COUPONED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'CREATED',
+  last_status_update        timestamp not null default current_timestamp,
+  plan_id                   int,
+  link_count                smallint default 0,
+  alarm_count               smallint default 0,
+  subs_started_at           timestamp,
+  subs_renewal_at           timestamp,
+  admin_id                  bigint not null,
+  currency_code             char(3),
+  currency_format           varchar(30),
   created_at                timestamp not null default current_timestamp,
+  demo                      boolean default false,
   primary key (id),
-  key ix1 (renewal_at),
-  key ix2 (name),
-  key ix3 (cust_id)
+  key ix1 (name),
+  key ix2 (subs_renewal_at)
 ) engine=innodb;
 alter table account add foreign key (admin_id) references user (id);
+alter table account add foreign key (plan_id) references plan (id);
 
 create table account_history (
   id                        bigint auto_increment not null,
   account_id                bigint not null,
   status                    enum('CREATED', 'FREE', 'COUPONED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'CREATED',
-  plan_name                 varchar(20),
-  cust_id                   varchar(255),
-  subs_id                   varchar(255),
+  plan_id                   int,
   created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb;
@@ -203,7 +212,7 @@ alter table link_history add foreign key (link_id) references link (id);
 
 create table coupon (
   code                      char(8) not null,
-  plan_name                 varchar(20) not null,
+  plan_id                   int not null,
   days                      smallint not null,
   description               varchar(128),
   issuer_id                 bigint,
@@ -212,30 +221,7 @@ create table coupon (
   created_at                timestamp not null default current_timestamp,
   primary key (code)
 ) engine=innodb;
-
-create table notice (
-  id                        bigint auto_increment not null,
-  title                     varchar(100) not null,
-  content                   varchar(1024) not null,
-  level                     enum('USER', 'ACCOUNT', 'APPLICATION') not null default 'USER',
-  email                     varchar(100),
-  account_id                bigint,
-  lasted_at                 timestamp not null,
-  created_at                timestamp not null default current_timestamp,
-  primary key (id),
-  key ix1 (lasted_at)
-) engine=innodb;
-
-create table user_notice (
-  id                        bigint auto_increment not null,
-  email                     varchar(100) not null,
-  account_id                bigint,
-  notice_id                 bigint,
-  created_at                timestamp not null default current_timestamp,
-  primary key (id),
-  key ix1 (email)
-) engine=innodb;
-alter table user_notice add foreign key (notice_id) references notice (id);
+alter table coupon add foreign key (plan_id) references plan (id);
 
 create table user_banned (
   id                        bigint auto_increment not null,
@@ -277,7 +263,7 @@ create table checkout (
   session_id                varchar(255),
   status                    enum('PENDING', 'SUCCESSFUL', 'EXPIRED', 'CANCELLED', 'FAILED') not null default 'PENDING',
   account_id                bigint not null,
-  plan_name                 varchar(20) not null,
+  plan_id                   int not null,
   description               varchar(255),
   updated_at                timestamp,
   created_at                timestamp not null default current_timestamp,
@@ -311,11 +297,10 @@ alter table alarm add foreign key (account_id) references account (id);
 
 create table ticket (
   id                        bigint auto_increment not null,
-  subject                   enum('OTHER', 'LINK', 'GROUP', 'ACCOUNT') not null default 'OTHER',
-  type                      enum('REQUEST', 'FEEDBACK', 'SUPPORT', 'COMPLAINT') not null default 'REQUEST',
-  status                    enum('WAITING', 'ANSWERED', 'CLOSED') not null default 'WAITING',
-  description               varchar(1024) not null,
-  parent_id                 bigint,
+  subject                   enum('LINK', 'GROUP', 'ACCOUNT', 'OTHER') not null default 'OTHER',
+  type                      enum('FEEDBACK', 'SUPPORT', 'COMPLAINT') not null default 'FEEDBACK',
+  question                  varchar(1024) not null,
+  answer                    varchar(1024) not null,
   link_id                   bigint,
   group_id                  bigint,
   account_id                bigint not null,
@@ -324,3 +309,27 @@ create table ticket (
   primary key (id)
 ) engine=innodb;
 alter table ticket add foreign key (account_id) references account (id);
+
+create table announcement (
+  id                        bigint auto_increment not null,
+  title                     varchar(100) not null,
+  content                   varchar(1024) not null,
+  level                     enum('USER', 'ACCOUNT', 'APPLICATION') not null default 'USER',
+  email                     varchar(100),
+  account_id                bigint,
+  lasted_at                 timestamp not null,
+  created_at                timestamp not null default current_timestamp,
+  primary key (id),
+  key ix1 (lasted_at)
+) engine=innodb;
+
+create table announcement_log (
+  id                        bigint auto_increment not null,
+  email                     varchar(100) not null,
+  account_id                bigint,
+  announcement_id           bigint,
+  created_at                timestamp not null default current_timestamp,
+  primary key (id),
+  key ix1 (email)
+) engine=innodb;
+alter table announcement_log add foreign key (announcement_id) references announcement (id);
