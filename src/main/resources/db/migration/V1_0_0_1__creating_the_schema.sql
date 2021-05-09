@@ -275,7 +275,7 @@ alter table checkout add foreign key (account_id) references account (id);
 create table alarm (
   id                        bigint auto_increment not null,
   subject                   enum('LINK', 'GROUP') not null default 'LINK',
-  topic                     enum('PRICE', 'MINIMUM', 'AVERAGE', 'MAXIMUM', 'TOTAL', 'STATUS') not null default 'STATUS',
+  topic                     enum('PRICE', 'TOTAL', 'STATUS', 'MINIMUM', 'AVERAGE', 'MAXIMUM') not null default 'STATUS',
   status_change             enum('ANY', 'CERTAIN') not null default 'ANY',
   price_change              enum('ANY', 'INCREASED', 'DECREASED', 'OUT_OF_LIMITS') not null default 'ANY',
   certain_status            varchar(10) not null,
@@ -297,14 +297,19 @@ alter table alarm add foreign key (account_id) references account (id);
 
 create table ticket (
   id                        bigint auto_increment not null,
-  subject                   enum('LINK', 'GROUP', 'ACCOUNT', 'OTHER') not null default 'OTHER',
-  type                      enum('FEEDBACK', 'SUPPORT', 'COMPLAINT') not null default 'FEEDBACK',
-  question                  varchar(1024) not null,
-  answer                    varchar(1024) not null,
+  type                      enum('FEEDBACK', 'SUPPORT', 'INFO', 'PROBLEM') not null default 'FEEDBACK',
+  subject                   enum('SUBSCRIPTION', 'PAYMENT', 'LINK', 'GROUP', 'ACCOUNT', 'COUPON', 'OTHER') not null default 'SUBSCRIPTION',
+  query                     varchar(1024) not null,
+  reply                     varchar(1024) not null,
   link_id                   bigint,
   group_id                  bigint,
   account_id                bigint not null,
-  answered_at               timestamp,
+  is_read                   boolean default false,
+  user_id                   bigint not null,
+  csat_level                enum('HIGH', 'GOOD', 'ENOUGH', 'NEUTRAL', 'BAD'),
+  csat_reason               varchar(255),
+  csated_at                 timestamp,
+  replied_at                timestamp,
   created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb;
@@ -314,7 +319,7 @@ create table announcement (
   id                        bigint auto_increment not null,
   title                     varchar(100) not null,
   content                   varchar(1024) not null,
-  level                     enum('USER', 'ACCOUNT', 'APPLICATION') not null default 'USER',
+  level                     enum('USER', 'ACCOUNT', 'SYSTEM') not null default 'USER',
   email                     varchar(100),
   account_id                bigint,
   lasted_at                 timestamp not null,

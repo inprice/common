@@ -25,6 +25,6 @@ public class AccountTrans implements Serializable {
   private Date createdAt;
 
   @JsonIgnore
-  private Long accountId;  // 1
+  private Long accountId;
 
 }

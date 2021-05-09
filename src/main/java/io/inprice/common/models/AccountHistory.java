@@ -17,6 +17,7 @@ public class AccountHistory implements Serializable {
 
   @JsonIgnore
   private Long id;
+  @JsonIgnore
   private Long accountId;
   private AccountStatus status;
   private Integer planId;
