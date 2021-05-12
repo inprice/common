@@ -12,17 +12,34 @@ create table user (
 ) engine=innodb;
 
 create table plan (
-  id                        int auto_increment not null,
-  is_standard               boolean default true,
+  id                        int not null,
+  type                      enum('PUBLIC', 'PRIVATE') not null default 'PUBLIC',
   name                      varchar(15) not null,
   description               varchar(50),
   price                     decimal(6,2) default 0,
-  features                  varchar(512) not null,
+  user_limit                smallint default 0,
   link_limit                smallint default 0,
   alarm_limit               smallint default 0,
   created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb;
+
+create table feature (
+  id                        int not null,
+  description               varchar(50),
+  allowed                   boolean default true,
+  order_no                  int not null default 0,
+  primary key (id)
+) engine=innodb;
+
+create table plan_feature (
+  id                        int auto_increment not null,
+  plan_id                   int not null,
+  feature_id                int not null,
+  primary key (id)
+) engine=innodb;
+alter table plan_feature add foreign key (plan_id) references plan (id);
+alter table plan_feature add foreign key (feature_id) references feature (id);
 
 create table account (
   id                        bigint auto_increment not null,
@@ -37,6 +54,7 @@ create table account (
   status                    enum('CREATED', 'FREE', 'COUPONED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'CREATED',
   last_status_update        timestamp not null default current_timestamp,
   plan_id                   int,
+  user_count                smallint default 1,
   link_count                smallint default 0,
   alarm_count               smallint default 0,
   subs_started_at           timestamp,
@@ -83,7 +101,7 @@ create table member (
   email                     varchar(100) not null,
   user_id                   bigint,
   account_id                bigint not null,
-  role                      enum('VIEWER', 'EDITOR', 'ADMIN') not null default 'EDITOR',
+  role                      enum('VIEWER', 'EDITOR', 'ADMIN', 'SUPER') not null default 'EDITOR',
   pre_status                enum('PENDING', 'JOINED', 'PAUSED', 'LEFT', 'DELETED') not null default 'PENDING',
   status                    enum('PENDING', 'JOINED', 'PAUSED', 'LEFT', 'DELETED') not null default 'PENDING',
   retry                     smallint default 1,
@@ -299,12 +317,11 @@ create table ticket (
   id                        bigint auto_increment not null,
   type                      enum('FEEDBACK', 'SUPPORT', 'INFO', 'PROBLEM') not null default 'FEEDBACK',
   subject                   enum('SUBSCRIPTION', 'PAYMENT', 'LINK', 'GROUP', 'ACCOUNT', 'COUPON', 'OTHER') not null default 'SUBSCRIPTION',
-  query                     varchar(1024) not null,
-  reply                     varchar(1024) not null,
+  query                     varchar(512) not null,
+  reply                     varchar(1024),
   link_id                   bigint,
   group_id                  bigint,
   account_id                bigint not null,
-  is_read                   boolean default false,
   user_id                   bigint not null,
   csat_level                enum('HIGH', 'GOOD', 'ENOUGH', 'NEUTRAL', 'BAD'),
   csat_reason               varchar(255),

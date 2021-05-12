@@ -32,6 +32,8 @@ public class MemberMapper implements RowMapper<Member> {
     if (Helper.hasColumn(rs, "account_name")) m.setAccountName(rs.getString("account_name"));
     if (Helper.hasColumn(rs, "plan_id")) m.setPlanId(rs.getInt("plan_id"));
     if (Helper.hasColumn(rs, "plan_name")) m.setPlanName(rs.getString("plan_name"));
+    if (Helper.hasColumn(rs, "user_limit")) m.setUserLimit(rs.getInt("user_limit"));
+    if (Helper.hasColumn(rs, "user_count")) m.setUserCount(rs.getInt("user_count"));
     if (Helper.hasColumn(rs, "link_limit")) m.setLinkLimit(rs.getInt("link_limit"));
     if (Helper.hasColumn(rs, "link_count")) m.setLinkCount(rs.getInt("link_count"));
     if (Helper.hasColumn(rs, "alarm_limit")) m.setAlarmLimit(rs.getInt("alarm_limit"));
@@ -42,8 +44,8 @@ public class MemberMapper implements RowMapper<Member> {
     if (Helper.hasColumn(rs, "last_status_update")) m.setLastStatusUpdate(rs.getTimestamp("last_status_update")); //for account
 
     if (Helper.hasColumn(rs, "account_status")) {
-      String status = rs.getString("account_status");
-      if (status != null) m.setAccountStatus(AccountStatus.valueOf(status));
+      String val = rs.getString("account_status");
+      if (val != null) m.setAccountStatus(AccountStatus.valueOf(val));
     }
 
     return m;

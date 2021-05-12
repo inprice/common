@@ -26,12 +26,14 @@ public class Ticket implements Serializable {
   private String reply;
   private Long linkId;
   private Long groupId;
-  private Long userId;
   private TicketCSatLevel csatLevel;
   private String csatReason; //for ENOUGH, NEUTRAL and BAD levels only!
   private Date csatedAt;
   private Date repliedAt;
   private Date createdAt = new Date();
+
+  @JsonIgnore
+  private Long userId;
 
   @JsonIgnore
   private Long accountId;

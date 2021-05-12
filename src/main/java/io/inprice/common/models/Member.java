@@ -40,6 +40,8 @@ public class Member implements Serializable {
   private String planName;
   private Date subsRenewalAt;
   private Date subsStartedAt;
+  private Integer userLimit;
+  private Integer userCount;
   private Integer linkLimit;
   private Integer linkCount;
   private Integer alarmLimit;
