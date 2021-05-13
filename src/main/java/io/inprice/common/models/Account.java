@@ -30,6 +30,8 @@ public class Account implements Serializable {
   private Date lastStatusUpdate = new Date();
 
   private Integer planId;
+
+  private Integer userCount = 1;
   private Integer linkCount = 0;
   private Integer alarmCount = 0;
 

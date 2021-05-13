@@ -26,8 +26,9 @@ public class AccountMapper implements RowMapper<Account> {
     if (Helper.hasColumn(rs, "state")) m.setState(rs.getString("state"));
     if (Helper.hasColumn(rs, "country")) m.setCountry(rs.getString("country"));
 
+    if (Helper.hasColumn(rs, "user_count")) m.setUserCount(Helper.nullIntegerHandler(rs, "user_count"));
     if (Helper.hasColumn(rs, "link_count")) m.setLinkCount(Helper.nullIntegerHandler(rs, "link_count"));
-    if (Helper.hasColumn(rs, "alarm_count")) m.setLinkCount(Helper.nullIntegerHandler(rs, "alarm_count"));
+    if (Helper.hasColumn(rs, "alarm_count")) m.setAlarmCount(Helper.nullIntegerHandler(rs, "alarm_count"));
 
     if (Helper.hasColumn(rs, "subs_started_at")) m.setSubsStartedAt(rs.getTimestamp("subs_started_at"));
     if (Helper.hasColumn(rs, "subs_renewal_at")) m.setSubsRenewalAt(rs.getTimestamp("subs_renewal_at"));
