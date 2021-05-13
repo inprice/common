@@ -27,7 +27,7 @@ public class Ticket implements Serializable {
   private Long linkId;
   private Long groupId;
   private TicketCSatLevel csatLevel;
-  private String csatReason; //for ENOUGH, NEUTRAL and BAD levels only!
+  private String csatAssessment; //is mandatory for ENOUGH, NEUTRAL and BAD levels!
   private Date csatedAt;
   private Date repliedAt;
   private Date createdAt = new Date();

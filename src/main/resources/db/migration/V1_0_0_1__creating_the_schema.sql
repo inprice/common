@@ -315,7 +315,7 @@ alter table alarm add foreign key (account_id) references account (id);
 
 create table ticket (
   id                        bigint auto_increment not null,
-  type                      enum('FEEDBACK', 'SUPPORT', 'INFO', 'PROBLEM') not null default 'FEEDBACK',
+  type                      enum('FEEDBACK', 'SUPPORT', 'PROBLEM') not null default 'FEEDBACK',
   subject                   enum('SUBSCRIPTION', 'PAYMENT', 'LINK', 'GROUP', 'ACCOUNT', 'COUPON', 'OTHER') not null default 'SUBSCRIPTION',
   query                     varchar(512) not null,
   reply                     varchar(1024),
@@ -324,7 +324,7 @@ create table ticket (
   account_id                bigint not null,
   user_id                   bigint not null,
   csat_level                enum('HIGH', 'GOOD', 'ENOUGH', 'NEUTRAL', 'BAD'),
-  csat_reason               varchar(255),
+  csat_assessment           varchar(255),
   csated_at                 timestamp,
   replied_at                timestamp,
   created_at                timestamp not null default current_timestamp,

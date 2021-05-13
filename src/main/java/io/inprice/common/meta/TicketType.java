@@ -4,7 +4,6 @@ public enum TicketType {
   
 	FEEDBACK,
 	SUPPORT,
-	INFO,
 	PROBLEM;
 
 }

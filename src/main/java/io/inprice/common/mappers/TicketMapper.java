@@ -38,11 +38,11 @@ public class TicketMapper implements RowMapper<Ticket> {
       if (val != null) m.setSubject(TicketSubject.valueOf(val));
     }
     
-    if (Helper.hasColumn(rs, "csat_reason")) m.setCsatReason(rs.getString("csat_reason"));
     if (Helper.hasColumn(rs, "csat_level")) {
     	String val = rs.getString("csat_level");
     	if (val != null) m.setCsatLevel(TicketCSatLevel.valueOf(val));
     }
+    if (Helper.hasColumn(rs, "csat_assessment")) m.setCsatAssessment(rs.getString("csat_assessment"));
 
     return m;
   }
