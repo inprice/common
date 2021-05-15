@@ -18,9 +18,12 @@ public class User implements Serializable {
   private String email;
   private String name;
   private String timezone;
+  private boolean privileged;
   private Date createdAt;
-  
+
   @JsonIgnore
   private String password;
+
+  private Long accountId; //set only when super user switches account!
 
 }

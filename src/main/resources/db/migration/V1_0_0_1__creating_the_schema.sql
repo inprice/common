@@ -6,6 +6,7 @@ create table user (
   password                  varchar(88) not null,
   name                      varchar(70) not null,
   timezone                  varchar(30),
+  privileged                boolean default false,
   created_at                timestamp not null default current_timestamp,
   primary key (id),
   unique key ix1 (email)

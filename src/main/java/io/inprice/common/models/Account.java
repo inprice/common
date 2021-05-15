@@ -49,5 +49,7 @@ public class Account implements Serializable {
 
   //transients
   private Plan plan;
+  private String email;
+  private Long xid; //id for super user! 
 
 }

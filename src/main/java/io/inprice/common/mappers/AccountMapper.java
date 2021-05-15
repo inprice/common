@@ -45,6 +45,7 @@ public class AccountMapper implements RowMapper<Account> {
       if (status != null) m.setStatus(AccountStatus.valueOf(status));
     }
 
+    //transients
     if (Helper.hasColumn(rs, "plan_id")) {
       Plan plan = new Plan();
     	plan.setId(rs.getInt("plan_id"));
@@ -54,6 +55,9 @@ public class AccountMapper implements RowMapper<Account> {
     	m.setPlanId(rs.getInt("plan_id"));
       m.setPlan(plan);
     }
+
+    if (Helper.hasColumn(rs, "xid")) m.setXid(rs.getLong("xid"));
+    if (Helper.hasColumn(rs, "email")) m.setEmail(rs.getString("email"));
 
     return m;
   }
