@@ -23,9 +23,9 @@ public class Plan implements Serializable {
   private String name;
   private String description;
   private BigDecimal price;
-  private Integer userLimit;
-  private Integer linkLimit;
-  private Integer alarmLimit;
+  private Integer userLimit = 1;
+  private Integer linkLimit = 0;
+  private Integer alarmLimit = 0;
   private Date createdAt = new Date();
 
   //transients

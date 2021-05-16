@@ -7,6 +7,9 @@ create table user (
   name                      varchar(70) not null,
   timezone                  varchar(30),
   privileged                boolean default false,
+  banned                    boolean default false,
+  banned_at                 timestamp,
+  ban_reason                varchar(128),
   created_at                timestamp not null default current_timestamp,
   primary key (id),
   unique key ix1 (email)
@@ -241,16 +244,6 @@ create table coupon (
   primary key (code)
 ) engine=innodb;
 alter table coupon add foreign key (plan_id) references plan (id);
-
-create table user_banned (
-  id                        bigint auto_increment not null,
-  email                     varchar(100) not null,
-  reason                    varchar(255),
-  voided                    boolean default false,
-  created_at                timestamp not null default current_timestamp,
-  primary key (id),
-  key ix1 (email, voided)
-) engine=innodb;
 
 create table user_used (
   id                        bigint auto_increment not null,

@@ -19,6 +19,9 @@ public class User implements Serializable {
   private String name;
   private String timezone;
   private boolean privileged;
+  private boolean banned;
+  private Date bannedAt;
+  private String banReason;
   private Date createdAt;
 
   @JsonIgnore

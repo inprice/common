@@ -20,6 +20,9 @@ public class UserMapper implements RowMapper<User> {
     if (Helper.hasColumn(rs, "name")) m.setName(rs.getString("name"));
     if (Helper.hasColumn(rs, "timezone")) m.setTimezone(rs.getString("timezone"));
     if (Helper.hasColumn(rs, "privileged")) m.setPrivileged(rs.getBoolean("privileged"));
+    if (Helper.hasColumn(rs, "banned")) m.setBanned(rs.getBoolean("banned"));
+    if (Helper.hasColumn(rs, "ban_reason")) m.setBanReason(rs.getString("ban_reason"));
+    if (Helper.hasColumn(rs, "banned_at")) m.setBannedAt(rs.getTimestamp("banned_at"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 
     return m;
