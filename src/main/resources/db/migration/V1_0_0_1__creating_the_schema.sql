@@ -349,3 +349,22 @@ create table announcement_log (
   key ix1 (email)
 ) engine=innodb;
 alter table announcement_log add foreign key (announcement_id) references announcement (id);
+
+create table user_log (
+  id                        bigint auto_increment not null,
+  user_id                   bigint,
+  user_email                varchar(100),
+  user_role                 varchar(8),
+  account_id                bigint,
+  account_name              varchar(70),
+  ip                        varchar(128),
+  path                      varchar(128) not null,
+  path_ext                  varchar(70),
+  method                    varchar(6) not null,
+  req_body                  text,
+  res_code                  int default 200,
+  res_body                  text not null,
+  elapsed                   int default 0,
+  created_at                timestamp not null,
+  primary key (id)
+) engine=innodb;
