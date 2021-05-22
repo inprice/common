@@ -29,6 +29,7 @@ public class AccessLog implements Serializable {
   private Integer status = 200;
   private String resBody;
   private Integer elapsed; //in milliseconds
+  private Boolean isSlow = Boolean.FALSE;
 
   private Date createdAt;
 

@@ -26,12 +26,13 @@ public class Account implements Serializable {
   private String state;
   private String country;
 
+  private String preStatus; //used for returning BANNED status!
   private AccountStatus status;
   private Date lastStatusUpdate = new Date();
 
   private Integer planId;
 
-  private Integer userCount = 1;
+  private Integer userCount = 0;
   private Integer linkCount = 0;
   private Integer alarmCount = 0;
 

@@ -2,12 +2,12 @@
 -- 2021-05-10
 
 insert into plan (id, name, user_limit, alarm_limit, link_limit, price) values
-  (10, 'Basic Plan', 1, 5, 25, 20.00),
-  (15, 'Starter Plan', 2, 10, 50, 40.00),
-  (20, 'Standard Plan', 3, 20, 100, 60.00),
-  (25, 'Pro Plan', 4, 50, 250, 80.00),
-  (30, 'Premium Plan', 5, 100, 500, 150.00),
-  (35, 'Enterprise Plan', 6, 250, 1000, 220.00)
+  (10, 'Basic Plan', 0, 5, 25, 20.00),
+  (15, 'Starter Plan', 1, 10, 50, 40.00),
+  (20, 'Standard Plan', 2, 20, 100, 60.00),
+  (25, 'Pro Plan', 3, 50, 250, 80.00),
+  (30, 'Premium Plan', 4, 100, 500, 150.00),
+  (35, 'Enterprise Plan', 5, 250, 1000, 220.00)
   ;
 
 insert into feature (id, description, allowed, order_no) values

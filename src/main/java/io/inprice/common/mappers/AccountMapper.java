@@ -39,6 +39,8 @@ public class AccountMapper implements RowMapper<Account> {
     if (Helper.hasColumn(rs, "admin_id")) m.setAdminId(rs.getLong("admin_id"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 
+    if (Helper.hasColumn(rs, "pre_status")) m.setPreStatus(rs.getString("pre_status"));
+
     if (Helper.hasColumn(rs, "last_status_update")) m.setLastStatusUpdate(rs.getTimestamp("last_status_update"));
     if (Helper.hasColumn(rs, "status")) {
       String status = rs.getString("status");
@@ -50,6 +52,7 @@ public class AccountMapper implements RowMapper<Account> {
       Plan plan = new Plan();
     	plan.setId(rs.getInt("plan_id"));
     	if (Helper.hasColumn(rs, "plan_name")) plan.setName(rs.getString("plan_name"));
+    	if (Helper.hasColumn(rs, "user_limit")) plan.setUserLimit(rs.getInt("user_limit"));
     	if (Helper.hasColumn(rs, "link_limit")) plan.setLinkLimit(rs.getInt("link_limit"));
     	if (Helper.hasColumn(rs, "alarm_limit")) plan.setAlarmLimit(rs.getInt("alarm_limit"));
     	m.setPlanId(rs.getInt("plan_id"));

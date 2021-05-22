@@ -55,7 +55,8 @@ create table account (
   city                      varchar(70),
   state                     varchar(70),
   country                   varchar(2),
-  status                    enum('CREATED', 'FREE', 'COUPONED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'CREATED',
+  status                    enum('CREATED', 'FREE', 'COUPONED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED', 'BANNED') not null default 'CREATED',
+  pre_status                varchar(10) not null default 'CREATED',
   last_status_update        timestamp not null default current_timestamp,
   plan_id                   int,
   user_count                smallint default 1,
@@ -365,6 +366,7 @@ create table analytics_access_log (
   status                    int default 200,
   res_body                  varchar(1024),
   elapsed                   int default 0,
+  is_slow                   boolean default false,
   created_at                timestamp not null,
   primary key (id)
 ) engine=innodb;

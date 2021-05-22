@@ -29,6 +29,7 @@ public class AccessLogMapper implements RowMapper<AccessLog> {
     if (Helper.hasColumn(rs, "res_body")) m.setReqBody(rs.getString("res_body"));
     if (Helper.hasColumn(rs, "status")) m.setStatus(rs.getInt("status"));
     if (Helper.hasColumn(rs, "elapsed")) m.setElapsed(rs.getInt("elapsed"));
+    if (Helper.hasColumn(rs, "is_slow")) m.setIsSlow(rs.getBoolean("is_slow"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
     
     return m;
