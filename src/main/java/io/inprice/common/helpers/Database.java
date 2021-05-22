@@ -28,11 +28,11 @@ public class Database {
   static {
     conString = 
       String.format("jdbc:%s:%s:%d/%s%s", 
-        SysProps.DB_DRIVER(), 
-        SysProps.DB_HOST(), 
-        SysProps.DB_PORT(),
-        SysProps.DB_DATABASE(), 
-        SysProps.DB_ADDITIONS()
+        SysProps.DB_DRIVER, 
+        SysProps.DB_HOST, 
+        SysProps.DB_PORT,
+        SysProps.DB_DATABASE, 
+        SysProps.DB_ADDITIONS
       );
     log.info("Connection string: " + conString);
     connect();
@@ -52,14 +52,14 @@ public class Database {
       Flyway flyway = 
         Flyway
           .configure()
-          .dataSource(conString, SysProps.DB_USERNAME(), SysProps.DB_PASSWORD())
+          .dataSource(conString, SysProps.DB_USERNAME, SysProps.DB_PASSWORD)
           .load();
       flyway.migrate();
     } catch (Exception e) {
       log.warn("Connection: "+ conString);
-      if (! SysProps.APP_ENV().equals(AppEnv.PROD)) {
-        log.warn("username: "+ SysProps.DB_USERNAME());
-        log.warn("password: "+ SysProps.DB_PASSWORD());
+      if (! SysProps.APP_ENV.equals(AppEnv.PROD)) {
+        log.warn("username: "+ SysProps.DB_USERNAME);
+        log.warn("password: "+ SysProps.DB_PASSWORD);
       }
       log.error("Unable to init migrations", e);
     }
@@ -71,10 +71,10 @@ public class Database {
     try {
       HikariConfig hConf = new HikariConfig();
       hConf.setJdbcUrl(conString);
-      hConf.setUsername(SysProps.DB_USERNAME());
-      hConf.setPassword(SysProps.DB_PASSWORD());
+      hConf.setUsername(SysProps.DB_USERNAME);
+      hConf.setPassword(SysProps.DB_PASSWORD);
 
-      if (SysProps.APP_ENV().equals(AppEnv.TEST))
+      if (SysProps.APP_ENV.equals(AppEnv.TEST))
         hConf.setConnectionTimeout(3 * 1000); // three seconds
       else
         hConf.setConnectionTimeout(10 * 1000); // ten seconds
@@ -93,7 +93,7 @@ public class Database {
       SqlLogger sqlLogger = new SqlLogger() {
         @Override
         public void logAfterExecution(StatementContext context) {
-          if (SysProps.APP_SHOW_QUERIES()) {
+          if (SysProps.APP_SHOW_QUERIES) {
             log.info(" -- Time: {}ms, Query: {}, Parameters: {}", 
               context.getElapsedTime(ChronoUnit.MILLIS), context.getRenderedSql(), context.getBinding().toString());
           }

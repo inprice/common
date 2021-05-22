@@ -1,4 +1,4 @@
-package io.inprice.common.models;
+package io.inprice.common.models.analytics;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,7 +12,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class UserLog implements Serializable {
+public class AccessLog implements Serializable {
 
   private static final long serialVersionUID = 1753526228909974777L;
 
@@ -26,7 +26,7 @@ public class UserLog implements Serializable {
   private String pathExt;
   private String method;
   private String reqBody;
-  private Integer resCode = 200;
+  private Integer status = 200;
   private String resBody;
   private Integer elapsed; //in milliseconds
 
