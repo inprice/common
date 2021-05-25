@@ -21,7 +21,6 @@ public class AccessLog implements Serializable {
   private String userEmail;
   private String userRole;
   private String accountName;
-  private String ip;
   private String path;
   private String pathExt;
   private String method;
@@ -30,6 +29,8 @@ public class AccessLog implements Serializable {
   private String resBody;
   private Integer elapsed; //in milliseconds
   private Boolean isSlow = Boolean.FALSE;
+  private String ip;
+  private String agent;
 
   private Date createdAt;
 

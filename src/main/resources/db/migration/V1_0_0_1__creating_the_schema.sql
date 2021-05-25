@@ -263,7 +263,7 @@ create table user_session (
   ip                        varchar(255),
   os                        varchar(30),
   browser                   varchar(100),
-  user_agent                varchar(500),
+  user_agent                varchar(1024),
   accessed_at               timestamp not null default current_timestamp,
   primary key (_hash),
   key ix1 (accessed_at)
@@ -351,14 +351,13 @@ create table announcement_log (
 ) engine=innodb;
 alter table announcement_log add foreign key (announcement_id) references announcement (id);
 
-create table analytics_access_log (
+create table access_log (
   id                        bigint auto_increment not null,
   user_id                   bigint,
   user_email                varchar(100),
   user_role                 varchar(8),
   account_id                bigint,
   account_name              varchar(70),
-  ip                        varchar(128),
   method                    varchar(6) not null,
   path                      varchar(128) not null,
   path_ext                  varchar(70),
@@ -367,6 +366,8 @@ create table analytics_access_log (
   res_body                  varchar(1024),
   elapsed                   int default 0,
   is_slow                   boolean default false,
+  ip                        varchar(128),
+  agent                     varchar(1024),
   created_at                timestamp not null,
   primary key (id)
 ) engine=innodb;
