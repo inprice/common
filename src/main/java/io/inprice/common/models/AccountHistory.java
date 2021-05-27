@@ -22,5 +22,8 @@ public class AccountHistory implements Serializable {
   private AccountStatus status;
   private Integer planId;
   private Date createdAt = new Date();
+  
+  //transients
+  private String planName;
 
 }
