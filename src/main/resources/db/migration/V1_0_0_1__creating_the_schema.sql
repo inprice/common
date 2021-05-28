@@ -11,6 +11,8 @@ create table user (
   banned_at                 timestamp,
   ban_reason                varchar(128),
   created_at                timestamp not null default current_timestamp,
+  created_year              smallint not null default (year(curdate())),
+  created_month             char(8) not null default (date_format(curdate(), '%Y-%M')),
   primary key (id),
   unique key ix1 (email)
 ) engine=innodb;
@@ -68,6 +70,8 @@ create table account (
   currency_code             char(3),
   currency_format           varchar(30),
   created_at                timestamp not null default current_timestamp,
+  created_year              smallint not null default (year(curdate())),
+  created_month             char(8) not null default (date_format(curdate(), '%Y-%M')),
   demo                      boolean default false,
   primary key (id),
   key ix1 (name),
@@ -82,6 +86,8 @@ create table account_history (
   status                    enum('CREATED', 'FREE', 'COUPONED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'CREATED',
   plan_id                   int,
   created_at                timestamp not null default current_timestamp,
+  created_year              smallint not null default (year(curdate())),
+  created_month             char(8) not null default (date_format(curdate(), '%Y-%M')),
   primary key (id)
 ) engine=innodb;
 alter table account_history add foreign key (account_id) references account (id);
@@ -96,6 +102,8 @@ create table account_trans (
   description               varchar(255),
   file_url                  varchar(255),
   created_at                timestamp not null default current_timestamp,
+  created_year              smallint not null default (year(curdate())),
+  created_month             char(8) not null default (date_format(curdate(), '%Y-%M')),
   primary key (id),
   key ix1 (created_at)
 ) engine=innodb;
@@ -112,6 +120,8 @@ create table member (
   retry                     smallint default 1,
   updated_at                timestamp,
   created_at                timestamp not null default current_timestamp,
+  created_year              smallint not null default (year(curdate())),
+  created_month             char(8) not null default (date_format(curdate(), '%Y-%M')),
   primary key (id),
   key ix1 (email)
 ) engine=innodb;
@@ -156,6 +166,8 @@ create table link_group (
   account_id                bigint not null,
   updated_at                timestamp,
   created_at                timestamp not null default current_timestamp,
+  created_year              smallint not null default (year(curdate())),
+  created_month             char(8) not null default (date_format(curdate(), '%Y-%M')),
   primary key (id),
   key ix1 (name)
 ) engine=innodb;
@@ -185,6 +197,8 @@ create table link (
   checked_at                datetime,
   updated_at                datetime,
   created_at                timestamp not null default current_timestamp,
+  created_year              smallint not null default (year(curdate())),
+  created_month             char(8) not null default (date_format(curdate(), '%Y-%M')),
   primary key (id),
   key ix1 (url_hash),
   key ix2 (status),
@@ -215,6 +229,8 @@ create table link_price (
   group_id                  bigint not null,
   account_id                bigint not null,
   created_at                timestamp not null default current_timestamp,
+  created_year              smallint not null default (year(curdate())),
+  created_month             char(8) not null default (date_format(curdate(), '%Y-%M')),
   primary key (id),
   key ix1 (created_at)
 ) engine=innodb;
@@ -228,6 +244,8 @@ create table link_history (
   group_id                  bigint not null,
   account_id                bigint not null,
   created_at                timestamp not null default current_timestamp,
+  created_year              smallint not null default (year(curdate())),
+  created_month             char(8) not null default (date_format(curdate(), '%Y-%M')),
   primary key (id),
   key ix1 (created_at)
 ) engine=innodb;
@@ -242,6 +260,8 @@ create table coupon (
   issued_id                 bigint,
   issued_at                 timestamp,
   created_at                timestamp not null default current_timestamp,
+  created_year              smallint not null default (year(curdate())),
+  created_month             char(8) not null default (date_format(curdate(), '%Y-%M')),
   primary key (code)
 ) engine=innodb;
 alter table coupon add foreign key (plan_id) references plan (id);
@@ -252,6 +272,8 @@ create table user_used (
   whitelisted               boolean default false,
   perm_type                 enum('FREE_USE') not null default 'FREE_USE',
   created_at                timestamp not null default current_timestamp,
+  created_year              smallint not null default (year(curdate())),
+  created_month             char(8) not null default (date_format(curdate(), '%Y-%M')),
   primary key (id),
   unique key ix1 (email, perm_type)
 ) engine=innodb;
@@ -280,6 +302,8 @@ create table checkout (
   description               varchar(255),
   updated_at                timestamp,
   created_at                timestamp not null default current_timestamp,
+  created_year              smallint not null default (year(curdate())),
+  created_month             char(8) not null default (date_format(curdate(), '%Y-%M')),
   primary key (_hash),
   key ix1 (created_at)
 ) engine=innodb;
@@ -302,6 +326,8 @@ create table alarm (
   account_id                bigint not null,
   triggered_at              timestamp,
   created_at                timestamp not null default current_timestamp,
+  created_year              smallint not null default (year(curdate())),
+  created_month             char(8) not null default (date_format(curdate(), '%Y-%M')),
   primary key (id)
 ) engine=innodb;
 alter table alarm add foreign key (link_id) references link (id);
@@ -323,6 +349,8 @@ create table ticket (
   csated_at                 timestamp,
   replied_at                timestamp,
   created_at                timestamp not null default current_timestamp,
+  created_year              smallint not null default (year(curdate())),
+  created_month             char(8) not null default (date_format(curdate(), '%Y-%M')),
   primary key (id)
 ) engine=innodb;
 alter table ticket add foreign key (account_id) references account (id);
@@ -336,6 +364,8 @@ create table announcement (
   account_id                bigint,
   lasted_at                 timestamp not null,
   created_at                timestamp not null default current_timestamp,
+  created_year              smallint not null default (year(curdate())),
+  created_month             char(8) not null default (date_format(curdate(), '%Y-%M')),
   primary key (id),
   key ix1 (lasted_at)
 ) engine=innodb;
@@ -369,5 +399,7 @@ create table access_log (
   ip                        varchar(128),
   agent                     varchar(1024),
   created_at                timestamp not null,
+  created_year              smallint not null default (year(curdate())),
+  created_month             char(8) not null default (date_format(curdate(), '%Y-%M')),
   primary key (id)
 ) engine=innodb;

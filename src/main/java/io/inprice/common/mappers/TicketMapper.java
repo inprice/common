@@ -16,17 +16,15 @@ public class TicketMapper implements RowMapper<Ticket> {
   @Override
   public Ticket map(ResultSet rs, StatementContext ctx) throws SQLException {
     Ticket m = new Ticket();
+    Helper.mapBaseFields(m, rs);
 
-    if (Helper.hasColumn(rs, "id")) m.setId(rs.getInt("id"));
     if (Helper.hasColumn(rs, "query")) m.setQuery(rs.getString("query"));
     if (Helper.hasColumn(rs, "reply")) m.setReply(rs.getString("reply"));
     if (Helper.hasColumn(rs, "link_id")) m.setLinkId(rs.getLong("link_id"));
     if (Helper.hasColumn(rs, "group_id")) m.setGroupId(rs.getLong("group_id"));
-    if (Helper.hasColumn(rs, "account_id")) m.setAccountId(rs.getLong("account_id"));
     if (Helper.hasColumn(rs, "user_id")) m.setUserId(rs.getLong("user_id"));
     if (Helper.hasColumn(rs, "csated_at")) m.setCsatedAt(rs.getTimestamp("csated_at"));
     if (Helper.hasColumn(rs, "replied_at")) m.setRepliedAt(rs.getTimestamp("replied_at"));
-    if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
     
     if (Helper.hasColumn(rs, "type")) {
     	String val = rs.getString("type");

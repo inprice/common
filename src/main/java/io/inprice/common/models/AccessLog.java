@@ -1,9 +1,4 @@
-package io.inprice.common.models.analytics;
-
-import java.io.Serializable;
-import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package io.inprice.common.models;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,11 +7,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class AccessLog implements Serializable {
+public class AccessLog extends BaseModel {
 
   private static final long serialVersionUID = 1753526228909974777L;
 
-  private Long id;
   private Long userId;
   private String userEmail;
   private String userRole;
@@ -32,8 +26,4 @@ public class AccessLog implements Serializable {
   private String ip;
   private String agent;
 
-  private Date createdAt;
-
-  @JsonIgnore
-  private Long accountId;
 }

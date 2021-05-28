@@ -14,14 +14,13 @@ public class AccountTransMapper implements RowMapper<AccountTrans> {
   @Override
   public AccountTrans map(ResultSet rs, StatementContext ctx) throws SQLException {
     AccountTrans m = new AccountTrans();
+    Helper.mapBaseFields(m, rs);
 
-    if (Helper.hasColumn(rs, "id")) m.setId(rs.getLong("id"));
     if (Helper.hasColumn(rs, "event_id")) m.setEventId(rs.getString("event_id"));
     if (Helper.hasColumn(rs, "successful")) m.setSuccessful(rs.getBoolean("successful"));
     if (Helper.hasColumn(rs, "reason")) m.setReason(rs.getString("reason"));
     if (Helper.hasColumn(rs, "description")) m.setDescription(rs.getString("description"));
     if (Helper.hasColumn(rs, "file_url")) m.setFileUrl(rs.getString("file_url"));
-    if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 
     if (Helper.hasColumn(rs, "event")) {
       String event = rs.getString("event");

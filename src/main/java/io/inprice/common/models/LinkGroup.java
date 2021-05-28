@@ -1,10 +1,7 @@
 package io.inprice.common.models;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.inprice.common.meta.Level;
 import lombok.Getter;
@@ -14,11 +11,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class LinkGroup implements Serializable {
+public class LinkGroup extends BaseModel {
 
   private static final long serialVersionUID = 2010109845985968128L;
 
-  private Long id;
   private String name;
 
   private Integer actives = 0;
@@ -42,12 +38,8 @@ public class LinkGroup implements Serializable {
   private String maxSeller;
   private BigDecimal maxPrice = BigDecimal.ZERO;
   private BigDecimal maxDiff = BigDecimal.ZERO;
-
-  @JsonIgnore
-  private Long accountId;
   
   private Date updatedAt;
-  private Date createdAt;
 
   public int getLinkCount() {
   	return actives+waitings+tryings+problems;

@@ -13,13 +13,12 @@ public class LinkSpecMapper implements RowMapper<LinkSpec> {
   @Override
   public LinkSpec map(ResultSet rs, StatementContext ctx) throws SQLException {
     LinkSpec m = new LinkSpec();
+    Helper.mapBaseFields(m, rs);
 
-    if (Helper.hasColumn(rs, "id")) m.setId(rs.getLong("id"));
     if (Helper.hasColumn(rs, "link_id")) m.setLinkId(rs.getLong("link_id"));
     if (Helper.hasColumn(rs, "_key")) m.setKey(rs.getString("_key"));
     if (Helper.hasColumn(rs, "_value")) m.setValue(rs.getString("_value"));
     if (Helper.hasColumn(rs, "group_id")) m.setGroupId(rs.getLong("group_id"));
-    if (Helper.hasColumn(rs, "account_id")) m.setAccountId(rs.getLong("account_id"));
 
     return m;
   }

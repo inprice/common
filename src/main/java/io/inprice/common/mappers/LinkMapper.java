@@ -16,8 +16,8 @@ public class LinkMapper implements RowMapper<Link> {
   @Override
   public Link map(ResultSet rs, StatementContext ctx) throws SQLException {
     Link m = new Link();
+    Helper.mapBaseFields(m, rs);
 
-    if (Helper.hasColumn(rs, "id")) m.setId(rs.getLong("id"));
     if (Helper.hasColumn(rs, "url")) m.setUrl(rs.getString("url"));
     if (Helper.hasColumn(rs, "url_hash")) m.setUrlHash(rs.getString("url_hash"));
     if (Helper.hasColumn(rs, "sku")) m.setSku(rs.getString("sku"));
@@ -30,11 +30,9 @@ public class LinkMapper implements RowMapper<Link> {
     if (Helper.hasColumn(rs, "http_status")) m.setHttpStatus(Helper.nullIntegerHandler(rs, "http_status"));
     if (Helper.hasColumn(rs, "problem")) m.setProblem(rs.getString("problem"));
     if (Helper.hasColumn(rs, "group_id")) m.setGroupId(rs.getLong("group_id"));
-    if (Helper.hasColumn(rs, "account_id")) m.setAccountId(rs.getLong("account_id"));
 
     if (Helper.hasColumn(rs, "checked_at")) m.setCheckedAt(rs.getTimestamp("checked_at"));
     if (Helper.hasColumn(rs, "updated_at")) m.setUpdatedAt(rs.getTimestamp("updated_at"));
-    if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 
     if (Helper.hasColumn(rs, "level")) {
     	String val = rs.getString("level");

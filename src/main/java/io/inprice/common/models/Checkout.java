@@ -1,6 +1,5 @@
 package io.inprice.common.models;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,7 +12,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Checkout implements Serializable {
+public class Checkout extends BaseModel {
 
   private static final long serialVersionUID = -2323544177591811430L;
 
@@ -23,13 +22,19 @@ public class Checkout implements Serializable {
   @JsonIgnore
   private String sessionId; //from payment gw
 
-  @JsonIgnore
-  private Long accountId;
-
   private Integer planId;
   private CheckoutStatus status;
   private String description;
   private Date updatedAt;
-  private Date createdAt;
+
+  @Override
+  public final Long getId() {
+  	return null;
+  }
+  
+  @Override
+  public void setId(Long id) {
+  	;
+  }
 
 }
