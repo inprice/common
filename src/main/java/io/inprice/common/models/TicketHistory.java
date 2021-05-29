@@ -1,7 +1,5 @@
 package io.inprice.common.models;
 
-import java.util.List;
-
 import io.inprice.common.meta.TicketPriority;
 import io.inprice.common.meta.TicketStatus;
 import io.inprice.common.meta.TicketSubject;
@@ -13,18 +11,15 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Ticket extends BaseModel {
+public class TicketHistory extends BaseModel {
 
 	private static final long serialVersionUID = -5309599393907112703L;
 
+	private Long ticketId;
 	private TicketStatus status;
 	private TicketPriority priority;
 	private TicketType type;
 	private TicketSubject subject;
-  private String issue;
   private Long userId;
-
-  //transients
-  List<TicketReply> replyList;
 
 }

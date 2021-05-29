@@ -22,7 +22,7 @@ public class AccessLog extends BaseModel {
   private Integer status = 200;
   private String resBody;
   private Integer elapsed; //in milliseconds
-  private Boolean isSlow = Boolean.FALSE;
+  private Boolean slow = Boolean.FALSE;
   private String ip;
   private String agent;
 
