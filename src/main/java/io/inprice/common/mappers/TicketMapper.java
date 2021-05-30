@@ -19,7 +19,9 @@ public class TicketMapper implements RowMapper<Ticket> {
     Ticket m = new Ticket();
     Helper.mapBaseFields(m, rs);
 
+    if (Helper.hasColumn(rs, "email")) m.setEmail(rs.getString("email"));
     if (Helper.hasColumn(rs, "issue")) m.setIssue(rs.getString("issue"));
+    if (Helper.hasColumn(rs, "progressed_at")) m.setProgressedAt(rs.getTimestamp("progressed_at"));
     if (Helper.hasColumn(rs, "user_id")) m.setUserId(rs.getLong("user_id"));
     
     if (Helper.hasColumn(rs, "status")) {

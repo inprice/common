@@ -1,5 +1,6 @@
 package io.inprice.common.models;
 
+import java.util.Date;
 import java.util.List;
 
 import io.inprice.common.meta.TicketPriority;
@@ -22,9 +23,11 @@ public class Ticket extends BaseModel {
 	private TicketType type;
 	private TicketSubject subject;
   private String issue;
+  private Date progressedAt;
   private Long userId;
 
   //transients
-  List<TicketReply> replyList;
+  private String email;
+  private List<TicketComment> commentList;
 
 }

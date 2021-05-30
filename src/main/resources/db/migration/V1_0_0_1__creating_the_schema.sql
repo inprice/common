@@ -332,23 +332,24 @@ alter table alarm add foreign key (account_id) references account (id);
 
 create table ticket (
   id                        bigint unsigned auto_increment not null,
-  status                    enum('OPENED', 'IN_PROGRESS', 'WAITING_FOR_USER', 'WAITING_FOR_VERSION', 'CLOSED', 'RE_OPENED') not null default 'OPENED',
+  status                    enum('OPENED', 'IN_PROGRESS', 'WAITING_FOR_USER', 'WAITING_FOR_VERSION', 'CLOSED') not null default 'OPENED',
   priority                  enum('LOW', 'NORMAL', 'HIGH', 'CRITICAL') not null default 'NORMAL',
   type                      enum('SUPPORT', 'FEEDBACK', 'PROBLEM') not null default 'SUPPORT',
   subject                   enum('SUBSCRIPTION', 'PAYMENT', 'LINK', 'GROUP', 'ACCOUNT', 'COUPON', 'OTHER') not null default 'OTHER',
   issue                     varchar(512),
   user_id                   bigint unsigned not null,
   account_id                bigint unsigned not null,
+  progressed_at             timestamp default current_timestamp,
   created_year              smallint not null default (year(curdate())),
   created_month             char(7) not null default (date_format(curdate(), '%Y-%m')),
   created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb;
 
-create table ticket_reply (
+create table ticket_comment (
   id                        bigint unsigned auto_increment not null,
   ticket_id                 bigint unsigned not null,
-  reply                     varchar(1024),
+  content                   varchar(1024),
   editable                  boolean default true,
   from_user                 boolean default true,
   user_id                   bigint unsigned,
@@ -356,7 +357,7 @@ create table ticket_reply (
   created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb;
-alter table ticket_reply add foreign key (ticket_id) references ticket (id);
+alter table ticket_comment add foreign key (ticket_id) references ticket (id);
 
 create table ticket_history (
   id                        bigint unsigned auto_increment not null,
