@@ -23,6 +23,9 @@ public class Ticket extends BaseModel {
 	private TicketType type;
 	private TicketSubject subject;
   private String issue;
+  private Boolean seenByUser;
+  private Boolean seenBySuper;
+  private Integer commentCount;
   private Date progressedAt;
   private Long userId;
 

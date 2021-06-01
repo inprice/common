@@ -21,6 +21,9 @@ public class TicketMapper implements RowMapper<Ticket> {
 
     if (Helper.hasColumn(rs, "email")) m.setEmail(rs.getString("email"));
     if (Helper.hasColumn(rs, "issue")) m.setIssue(rs.getString("issue"));
+    if (Helper.hasColumn(rs, "seen_by_user")) m.setSeenByUser(rs.getBoolean("seen_by_user"));
+    if (Helper.hasColumn(rs, "seen_by_super")) m.setSeenBySuper(rs.getBoolean("seen_by_super"));
+    if (Helper.hasColumn(rs, "comment_count")) m.setCommentCount(rs.getInt("comment_count"));
     if (Helper.hasColumn(rs, "progressed_at")) m.setProgressedAt(rs.getTimestamp("progressed_at"));
     if (Helper.hasColumn(rs, "user_id")) m.setUserId(rs.getLong("user_id"));
     

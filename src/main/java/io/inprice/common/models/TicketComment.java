@@ -13,10 +13,10 @@ public class TicketComment extends BaseModel {
 
   private Long ticketId;
   private Boolean editable = Boolean.FALSE;
+  private Boolean addedByUser = Boolean.TRUE;
   private String content;
-  private Boolean fromUser;
   private Long userId;
-  
+
   //transients
   private String email;
 
