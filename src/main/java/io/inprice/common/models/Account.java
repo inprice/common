@@ -1,9 +1,8 @@
 package io.inprice.common.models;
 
-import java.io.Serializable;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import io.inprice.common.meta.AccountStatus;
 import lombok.Getter;
@@ -11,12 +10,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Account implements Serializable {
+@JsonIgnoreProperties({ "id", "adminId" })
+public class Account extends BaseModel {
 
   private static final long serialVersionUID = 1818360516258349831L;
 
-  @JsonIgnore
-  private Long id;
   private String name;
   private String title;
   private String address1;
@@ -26,12 +24,13 @@ public class Account implements Serializable {
   private String state;
   private String country;
 
+  private String preStatus; //used for returning BANNED status!
   private AccountStatus status;
   private Date lastStatusUpdate = new Date();
 
   private Integer planId;
 
-  private Integer userCount = 1;
+  private Integer userCount = 0;
   private Integer linkCount = 0;
   private Integer alarmCount = 0;
 
@@ -42,12 +41,21 @@ public class Account implements Serializable {
   private String currencyFormat;
   private Boolean demo = Boolean.FALSE;
 
-  @JsonIgnore
   private Long adminId;
-
-  private Date createdAt = new Date();
 
   //transients
   private Plan plan;
+  private String email;
+  private Long xid; //id for super user! 
+
+  @Override
+  public final Long getAccountId() {
+  	return null;
+  }
+  
+  @Override
+  public void setAccountId(Long accountId) {
+  	;
+  }
 
 }

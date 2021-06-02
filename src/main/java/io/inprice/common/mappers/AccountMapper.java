@@ -15,8 +15,8 @@ public class AccountMapper implements RowMapper<Account> {
   @Override
   public Account map(ResultSet rs, StatementContext ctx) throws SQLException {
     Account m = new Account();
+    Helper.mapBaseFields(m, rs);
 
-    if (Helper.hasColumn(rs, "id")) m.setId(rs.getLong("id"));
     if (Helper.hasColumn(rs, "name")) m.setName(rs.getString("name"));
     if (Helper.hasColumn(rs, "title")) m.setTitle(rs.getString("title"));
     if (Helper.hasColumn(rs, "address_1")) m.setAddress1(rs.getString("address_1"));
@@ -37,7 +37,8 @@ public class AccountMapper implements RowMapper<Account> {
     if (Helper.hasColumn(rs, "currency_format")) m.setCurrencyFormat(rs.getString("currency_format"));
     if (Helper.hasColumn(rs, "demo")) m.setDemo(rs.getBoolean("demo"));
     if (Helper.hasColumn(rs, "admin_id")) m.setAdminId(rs.getLong("admin_id"));
-    if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
+
+    if (Helper.hasColumn(rs, "pre_status")) m.setPreStatus(rs.getString("pre_status"));
 
     if (Helper.hasColumn(rs, "last_status_update")) m.setLastStatusUpdate(rs.getTimestamp("last_status_update"));
     if (Helper.hasColumn(rs, "status")) {
@@ -45,15 +46,20 @@ public class AccountMapper implements RowMapper<Account> {
       if (status != null) m.setStatus(AccountStatus.valueOf(status));
     }
 
+    //transients
     if (Helper.hasColumn(rs, "plan_id")) {
       Plan plan = new Plan();
     	plan.setId(rs.getInt("plan_id"));
     	if (Helper.hasColumn(rs, "plan_name")) plan.setName(rs.getString("plan_name"));
+    	if (Helper.hasColumn(rs, "user_limit")) plan.setUserLimit(rs.getInt("user_limit"));
     	if (Helper.hasColumn(rs, "link_limit")) plan.setLinkLimit(rs.getInt("link_limit"));
     	if (Helper.hasColumn(rs, "alarm_limit")) plan.setAlarmLimit(rs.getInt("alarm_limit"));
     	m.setPlanId(rs.getInt("plan_id"));
       m.setPlan(plan);
     }
+
+    if (Helper.hasColumn(rs, "xid")) m.setXid(rs.getLong("xid"));
+    if (Helper.hasColumn(rs, "email")) m.setEmail(rs.getString("email"));
 
     return m;
   }

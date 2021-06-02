@@ -14,8 +14,8 @@ public class LinkGroupMapper implements RowMapper<LinkGroup> {
   @Override
   public LinkGroup map(ResultSet rs, StatementContext ctx) throws SQLException {
     LinkGroup m = new LinkGroup();
+    Helper.mapBaseFields(m, rs);
 
-    if (Helper.hasColumn(rs, "id")) m.setId(rs.getLong("id"));
     if (Helper.hasColumn(rs, "name")) m.setName(rs.getString("name"));
     if (Helper.hasColumn(rs, "total")) m.setTotal(rs.getBigDecimal("total"));
 
@@ -37,10 +37,7 @@ public class LinkGroupMapper implements RowMapper<LinkGroup> {
     if (Helper.hasColumn(rs, "max_seller")) m.setMaxSeller(rs.getString("max_seller"));
     if (Helper.hasColumn(rs, "max_price")) m.setMaxPrice(rs.getBigDecimal("max_price"));
     
-    if (Helper.hasColumn(rs, "account_id")) m.setAccountId(Helper.nullLongHandler(rs, "account_id"));
-
     if (Helper.hasColumn(rs, "updated_at")) m.setUpdatedAt(rs.getTimestamp("updated_at"));
-    if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 
     if (Helper.hasColumn(rs, "level")) {
       String val = rs.getString("level");

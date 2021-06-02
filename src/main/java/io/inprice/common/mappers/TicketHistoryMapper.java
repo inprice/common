@@ -10,21 +10,16 @@ import io.inprice.common.meta.TicketPriority;
 import io.inprice.common.meta.TicketStatus;
 import io.inprice.common.meta.TicketSubject;
 import io.inprice.common.meta.TicketType;
-import io.inprice.common.models.Ticket;
+import io.inprice.common.models.TicketHistory;
 
-public class TicketMapper implements RowMapper<Ticket> {
+public class TicketHistoryMapper implements RowMapper<TicketHistory> {
 
   @Override
-  public Ticket map(ResultSet rs, StatementContext ctx) throws SQLException {
-    Ticket m = new Ticket();
+  public TicketHistory map(ResultSet rs, StatementContext ctx) throws SQLException {
+    TicketHistory m = new TicketHistory();
     Helper.mapBaseFields(m, rs);
 
-    if (Helper.hasColumn(rs, "email")) m.setEmail(rs.getString("email"));
-    if (Helper.hasColumn(rs, "issue")) m.setIssue(rs.getString("issue"));
-    if (Helper.hasColumn(rs, "seen_by_user")) m.setSeenByUser(rs.getBoolean("seen_by_user"));
-    if (Helper.hasColumn(rs, "seen_by_super")) m.setSeenBySuper(rs.getBoolean("seen_by_super"));
-    if (Helper.hasColumn(rs, "comment_count")) m.setCommentCount(rs.getInt("comment_count"));
-    if (Helper.hasColumn(rs, "progressed_at")) m.setProgressedAt(rs.getTimestamp("progressed_at"));
+    if (Helper.hasColumn(rs, "ticket_id")) m.setTicketId(rs.getLong("ticket_id"));
     if (Helper.hasColumn(rs, "user_id")) m.setUserId(rs.getLong("user_id"));
     
     if (Helper.hasColumn(rs, "status")) {

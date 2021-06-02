@@ -1,9 +1,6 @@
 package io.inprice.common.models;
 
-import java.io.Serializable;
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.inprice.common.meta.AccountStatus;
 import io.inprice.common.meta.UserRole;
@@ -15,11 +12,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Member implements Serializable {
+public class Member extends BaseModel {
 
   private static final long serialVersionUID = -7793356216234713734L;
 
-  private Long id;
   private String email;
   private Long userId;
   private UserRole role;
@@ -27,10 +23,6 @@ public class Member implements Serializable {
   private UserStatus preStatus = UserStatus.PENDING;
   private Integer retry = 1;
   private Date updatedAt;
-  private Date createdAt = new Date();
-
-  @JsonIgnore
-  private Long accountId;
 
   // transient
   private String accountName;

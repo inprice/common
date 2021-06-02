@@ -13,6 +13,7 @@ public class CouponMapper implements RowMapper<Coupon> {
   @Override
   public Coupon map(ResultSet rs, StatementContext ctx) throws SQLException {
     Coupon m = new Coupon();
+    Helper.mapBaseFields(m, rs);
 
     if (Helper.hasColumn(rs, "code")) m.setCode(rs.getString("code"));
     if (Helper.hasColumn(rs, "plan_id")) m.setPlanId(rs.getInt("plan_id"));
@@ -21,7 +22,6 @@ public class CouponMapper implements RowMapper<Coupon> {
     if (Helper.hasColumn(rs, "issuer_id")) m.setIssuerId(Helper.nullLongHandler(rs, "issuer_id"));
     if (Helper.hasColumn(rs, "issued_id")) m.setIssuedId(Helper.nullLongHandler(rs, "issued_id"));
     if (Helper.hasColumn(rs, "issued_at")) m.setIssuedAt(rs.getTimestamp("issued_at"));
-    if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 
     return m;
   }

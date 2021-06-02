@@ -16,8 +16,8 @@ public class MemberMapper implements RowMapper<Member> {
   @Override
   public Member map(ResultSet rs, StatementContext ctx) throws SQLException {
     Member m = new Member();
+    Helper.mapBaseFields(m, rs);
 
-    if (Helper.hasColumn(rs, "id")) m.setId(rs.getLong("id"));
     if (Helper.hasColumn(rs, "email")) m.setEmail(rs.getString("email"));
     if (Helper.hasColumn(rs, "user_id")) m.setUserId(Helper.nullLongHandler(rs, "user_id"));
     if (Helper.hasColumn(rs, "role")) m.setRole(UserRole.valueOf(rs.getString("role")));
@@ -25,8 +25,6 @@ public class MemberMapper implements RowMapper<Member> {
     if (Helper.hasColumn(rs, "pre_status")) m.setPreStatus(UserStatus.valueOf(rs.getString("pre_status")));
     if (Helper.hasColumn(rs, "retry")) m.setRetry(Helper.nullIntegerHandler(rs, "retry"));
     if (Helper.hasColumn(rs, "updated_at")) m.setUpdatedAt(rs.getTimestamp("updated_at"));
-    if (Helper.hasColumn(rs, "account_id")) m.setAccountId(rs.getLong("account_id"));
-    if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
 
     //transients
     if (Helper.hasColumn(rs, "account_name")) m.setAccountName(rs.getString("account_name"));

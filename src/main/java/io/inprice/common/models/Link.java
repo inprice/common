@@ -1,6 +1,5 @@
 package io.inprice.common.models;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -19,11 +18,10 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class Link implements Serializable {
+public class Link extends BaseModel {
 
   private static final long serialVersionUID = 2206190984817621818L;
 
-  private Long id;
   private String url;
   private String sku;
   private String name;
@@ -46,13 +44,9 @@ public class Link implements Serializable {
 
   private Date updatedAt;
   private Date checkedAt;
-  private Date createdAt;
   
   @JsonIgnore
   private String urlHash;
-
-  @JsonIgnore
-  private Long accountId;
 
   //transients
   private String groupName;

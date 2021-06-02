@@ -10,7 +10,8 @@ public enum AccountStatus {
   COUPONED(true, false, false, true, true),
   SUBSCRIBED(true, false, false, false, true),
   CANCELLED(false, false, true, true, false),  //user decission
-  STOPPED(false, false, true, true, false); //system decission
+  STOPPED(false, false, true, true, false), //system decission
+  BANNED(false, false, false, false, false);
 
   private boolean active;
 

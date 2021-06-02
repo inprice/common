@@ -1,13 +1,10 @@
 package io.inprice.common.helpers;
 
-import org.apache.commons.lang3.StringUtils;
-
 public class SqlHelper {
 
   // http://www.java2s.com/Code/Java/Database-SQL-JDBC/EscapeSQL.htm
   public static String clear(String val) {
-    if (StringUtils.isBlank(val))
-      return val;
+    if (val == null || val.trim().isEmpty()) return val;
 
     int length = val.length();
     int newLength = length;

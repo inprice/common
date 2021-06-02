@@ -1,26 +1,19 @@
 package io.inprice.common.models;
 
-import java.io.Serializable;
-import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import io.inprice.common.meta.AccountStatus;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class AccountHistory implements Serializable {
+public class AccountHistory extends BaseModel {
 
   private static final long serialVersionUID = -323250016123276994L;
 
-  @JsonIgnore
-  private Long id;
-  @JsonIgnore
-  private Long accountId;
   private AccountStatus status;
   private Integer planId;
-  private Date createdAt = new Date();
+  
+  //transients
+  private String planName;
 
 }

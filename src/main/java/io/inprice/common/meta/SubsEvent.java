@@ -18,6 +18,8 @@ public enum SubsEvent {
   SUBSCRIPTION_CHANGED("Subscription changed"),
   SUBSCRIPTION_STOPPED("Subscription stopped"),
   SUBSCRIPTION_CANCELLED("Subscription cancelled"),
+  
+  SUPERUSER_OFFER("System offer"),
 
   PAYMENT_FAILED("Payment failed");
 
