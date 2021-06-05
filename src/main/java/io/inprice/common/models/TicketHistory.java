@@ -21,5 +21,8 @@ public class TicketHistory extends BaseModel {
 	private TicketType type;
 	private TicketSubject subject;
   private Long userId;
+  
+  //transients
+  private String username;
 
 }

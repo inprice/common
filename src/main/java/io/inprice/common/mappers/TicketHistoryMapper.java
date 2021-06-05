@@ -41,7 +41,10 @@ public class TicketHistoryMapper implements RowMapper<TicketHistory> {
       String val = rs.getString("subject");
       if (val != null) m.setSubject(TicketSubject.valueOf(val));
     }
-    
+
+    //transients
+    if (Helper.hasColumn(rs, "username")) m.setUsername(rs.getString("username"));
+   
     return m;
   }
 
