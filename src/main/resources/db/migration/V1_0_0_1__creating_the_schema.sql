@@ -376,31 +376,34 @@ create table ticket_history (
 ) engine=innodb;
 alter table ticket_history add foreign key (ticket_id) references ticket (id);
 
-create table announcement (
+create table announce (
   id                        bigint unsigned auto_increment not null,
-  title                     varchar(100) not null,
-  content                   varchar(1024) not null,
+  type                      enum('INFO', 'WARNING') not null default 'INFO',
   level                     enum('USER', 'ACCOUNT', 'SYSTEM') not null default 'USER',
-  email                     varchar(100),
-  account_id                bigint unsigned,
+  title                     varchar(50) not null,
+  content                   varchar(1024) not null,
   lasted_at                 timestamp not null,
+  user_id                   bigint unsigned,
+  account_id                bigint unsigned,
   created_year              smallint not null default (year(curdate())),
   created_month             char(7) not null default (date_format(curdate(), '%Y-%m')),
   created_at                timestamp not null default current_timestamp,
   primary key (id),
   key ix1 (lasted_at)
+  key ix2 (user_id)
 ) engine=innodb;
 
-create table announcement_log (
+create table announce_log (
   id                        bigint unsigned auto_increment not null,
-  email                     varchar(100) not null,
+  announce_id               bigint unsigned not null,
+  user_id                   bigint unsigned not null,
   account_id                bigint unsigned,
-  announcement_id           bigint unsigned,
   created_at                timestamp not null default current_timestamp,
   primary key (id),
-  key ix1 (email)
+  key ix1 (user_id),
+  key ix2 (announce_id)
 ) engine=innodb;
-alter table announcement_log add foreign key (announcement_id) references announcement (id);
+alter table announce_log add foreign key (announce_id) references announce (id);
 
 create table access_log (
   id                        bigint unsigned auto_increment not null,
