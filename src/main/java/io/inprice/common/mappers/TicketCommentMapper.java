@@ -16,7 +16,7 @@ public class TicketCommentMapper implements RowMapper<TicketComment> {
     Helper.mapBaseFields(m, rs);
 
     if (Helper.hasColumn(rs, "ticket_id")) m.setTicketId(rs.getLong("ticket_id"));
-    if (Helper.hasColumn(rs, "content")) m.setContent(rs.getString("content"));
+    if (Helper.hasColumn(rs, "body")) m.setBody(rs.getString("body"));
     if (Helper.hasColumn(rs, "editable")) m.setEditable(rs.getBoolean("editable"));
     if (Helper.hasColumn(rs, "added_by_user")) m.setAddedByUser(rs.getBoolean("added_by_user"));
     if (Helper.hasColumn(rs, "user_id")) m.setUserId(rs.getLong("user_id"));

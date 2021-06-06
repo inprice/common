@@ -336,7 +336,7 @@ create table ticket (
   priority                  enum('LOW', 'NORMAL', 'HIGH', 'CRITICAL') not null default 'NORMAL',
   type                      enum('SUPPORT', 'FEEDBACK', 'PROBLEM') not null default 'SUPPORT',
   subject                   enum('SUBSCRIPTION', 'PAYMENT', 'LINK', 'GROUP', 'ACCOUNT', 'COUPON', 'OTHER') not null default 'OTHER',
-  issue                     varchar(512),
+  body                      text not null,
   seen_by_user              boolean default true,
   seen_by_super             boolean default false,
   comment_count             smallint not null default 0,
@@ -352,7 +352,7 @@ create table ticket (
 create table ticket_comment (
   id                        bigint unsigned auto_increment not null,
   ticket_id                 bigint unsigned not null,
-  content                   varchar(1024),
+  body                      text not null,
   editable                  boolean default true,
   added_by_user             boolean default true,
   user_id                   bigint unsigned,
@@ -378,30 +378,30 @@ alter table ticket_history add foreign key (ticket_id) references ticket (id);
 
 create table announce (
   id                        bigint unsigned auto_increment not null,
-  type                      enum('INFO', 'WARNING') not null default 'INFO',
-  level                     enum('USER', 'ACCOUNT', 'SYSTEM') not null default 'USER',
+  type                      enum('USER', 'ACCOUNT', 'SYSTEM') not null default 'USER',
+  level                     enum('INFO', 'WARNING') not null default 'INFO',
   title                     varchar(50) not null,
-  content                   varchar(1024) not null,
-  lasted_at                 timestamp not null,
+  body                      text,
+  link                      varchar(128),
+  active                    boolean default true,
+  starting_at               timestamp not null default current_timestamp,
+  ending_at                 timestamp not null,
   user_id                   bigint unsigned,
   account_id                bigint unsigned,
   created_year              smallint not null default (year(curdate())),
   created_month             char(7) not null default (date_format(curdate(), '%Y-%m')),
   created_at                timestamp not null default current_timestamp,
   primary key (id),
-  key ix1 (lasted_at)
-  key ix2 (user_id)
+  key ix1 (user_id)
 ) engine=innodb;
 
 create table announce_log (
   id                        bigint unsigned auto_increment not null,
   announce_id               bigint unsigned not null,
-  user_id                   bigint unsigned not null,
+  user_id                   bigint unsigned,
   account_id                bigint unsigned,
   created_at                timestamp not null default current_timestamp,
-  primary key (id),
-  key ix1 (user_id),
-  key ix2 (announce_id)
+  primary key (id)
 ) engine=innodb;
 alter table announce_log add foreign key (announce_id) references announce (id);
 

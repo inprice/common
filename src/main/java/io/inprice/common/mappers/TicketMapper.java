@@ -19,7 +19,7 @@ public class TicketMapper implements RowMapper<Ticket> {
     Ticket m = new Ticket();
     Helper.mapBaseFields(m, rs);
 
-    if (Helper.hasColumn(rs, "issue")) m.setIssue(rs.getString("issue"));
+    if (Helper.hasColumn(rs, "body")) m.setBody(rs.getString("body"));
     if (Helper.hasColumn(rs, "seen_by_user")) m.setSeenByUser(rs.getBoolean("seen_by_user"));
     if (Helper.hasColumn(rs, "seen_by_super")) m.setSeenBySuper(rs.getBoolean("seen_by_super"));
     if (Helper.hasColumn(rs, "comment_count")) m.setCommentCount(rs.getInt("comment_count"));

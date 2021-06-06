@@ -18,8 +18,11 @@ public class Announce extends BaseModel {
 	private AnnounceType type;
 	private AnnounceLevel level;
 	private String title;
-  private String content;
+	private String body;
+  private String link;
+  private Boolean active;
+  private Date startingAt;
+  private Date endingAt;
   private Long userId;
-  private Date lastedAt;
 
 }

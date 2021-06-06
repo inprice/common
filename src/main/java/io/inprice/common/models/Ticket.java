@@ -22,7 +22,7 @@ public class Ticket extends BaseModel {
 	private TicketPriority priority;
 	private TicketType type;
 	private TicketSubject subject;
-  private String issue;
+  private String body;
   private Boolean seenByUser;
   private Boolean seenBySuper;
   private Integer commentCount;
