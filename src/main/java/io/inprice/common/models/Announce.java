@@ -2,6 +2,8 @@ package io.inprice.common.models;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.inprice.common.meta.AnnounceLevel;
 import io.inprice.common.meta.AnnounceType;
 import lombok.Getter;
@@ -21,8 +23,13 @@ public class Announce extends BaseModel {
 	private String body;
   private String link;
   private Boolean active;
+  
+  @JsonFormat(pattern="yyyy-MM-dd")
   private Date startingAt;
+  
+  @JsonFormat(pattern="yyyy-MM-dd")
   private Date endingAt;
+
   private Long userId;
 
 }
