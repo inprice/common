@@ -383,7 +383,6 @@ create table announce (
   title                     varchar(50) not null,
   body                      text,
   link                      varchar(128),
-  active                    boolean default true,
   starting_at               date not null,
   ending_at                 date not null,
   user_id                   bigint unsigned,

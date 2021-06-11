@@ -22,7 +22,6 @@ public class Announce extends BaseModel {
 	private String title;
 	private String body;
   private String link;
-  private Boolean active;
   
   @JsonFormat(pattern="yyyy-MM-dd")
   private Date startingAt;

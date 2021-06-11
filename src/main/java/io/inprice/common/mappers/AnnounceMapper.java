@@ -20,7 +20,6 @@ public class AnnounceMapper implements RowMapper<Announce> {
     if (Helper.hasColumn(rs, "title")) m.setTitle(rs.getString("title"));
     if (Helper.hasColumn(rs, "body")) m.setBody(rs.getString("body"));
     if (Helper.hasColumn(rs, "link")) m.setLink(rs.getString("link"));
-    if (Helper.hasColumn(rs, "active")) m.setActive(rs.getBoolean("active"));
     if (Helper.hasColumn(rs, "starting_at")) m.setStartingAt(rs.getTimestamp("starting_at"));
     if (Helper.hasColumn(rs, "ending_at")) m.setEndingAt(rs.getTimestamp("ending_at"));
     if (Helper.hasColumn(rs, "user_id")) m.setUserId(rs.getLong("user_id"));
