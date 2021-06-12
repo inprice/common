@@ -23,10 +23,10 @@ public class Announce extends BaseModel {
 	private String body;
   private String link;
   
-  @JsonFormat(pattern="yyyy-MM-dd")
+  @JsonFormat(pattern="yyyy-MM-dd HH:mm")
   private Date startingAt;
   
-  @JsonFormat(pattern="yyyy-MM-dd")
+  @JsonFormat(pattern="yyyy-MM-dd HH:mm")
   private Date endingAt;
 
   private Long userId;
