@@ -2,13 +2,12 @@ package io.inprice.common.helpers;
 
 import java.text.SimpleDateFormat;
 
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JsonConverter {
 
@@ -27,7 +26,7 @@ public class JsonConverter {
   public static <T> T fromJson(String value, Class<T> clazz) {
     try {
       return mapper.readValue(value, clazz);
-    } catch (JsonProcessingException e) {
+    } catch (Exception e) {
       logger.error("Failed to parse a json", e);
     }
     return null;
@@ -36,7 +35,7 @@ public class JsonConverter {
   public static <T> String toJson(T value) {
     try {
       return mapper.writeValueAsString(value);
-    } catch (JsonProcessingException e) {
+    } catch (Exception e) {
       logger.error("Failed to convert a json to string", e);
     }
     return null;
