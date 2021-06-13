@@ -3,6 +3,9 @@ package io.inprice.common.mappers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import io.inprice.common.meta.AlarmSubject;
+import io.inprice.common.meta.AlarmSubjectWhen;
+import io.inprice.common.models.Alarm;
 import io.inprice.common.models.BaseModel;
 
 /**
@@ -49,6 +52,49 @@ public class Helper {
       return false;
     }
     return true;
+  }
+  
+  public static Alarm mapForAlarm(ResultSet rs) throws SQLException {
+  	return mapForAlarm(rs, null, null, null, null);
+  }
+
+  public static Alarm mapForAlarm(ResultSet rs, Long alarmId, Long linkId, Long groupId, Long accountId) throws SQLException {
+    Alarm m = new Alarm();
+    
+    String prefix = "";
+    
+    if (alarmId != null) {
+    	prefix = "al_";
+  		m.setId(alarmId);
+  		m.setLinkId(linkId);
+  		m.setAccountId(accountId);
+    } else {
+      if (Helper.hasColumn(rs, "group_id")) m.setGroupId(Helper.nullLongHandler(rs, "group_id"));
+      if (Helper.hasColumn(rs, "link_id")) m.setLinkId(Helper.nullLongHandler(rs, "link_id"));
+      if (Helper.hasColumn(rs, "account_id")) m.setAccountId(rs.getLong("account_id"));
+    }
+    
+		if (Helper.hasColumn(rs, prefix+"id")) m.setId(rs.getLong(prefix+"id"));
+    if (Helper.hasColumn(rs, "certain_status")) m.setCertainStatus(rs.getString("certain_status"));
+    if (Helper.hasColumn(rs, "price_lower_limit")) m.setPriceLowerLimit(rs.getBigDecimal("price_lower_limit"));
+    if (Helper.hasColumn(rs, "price_upper_limit")) m.setPriceUpperLimit(rs.getBigDecimal("price_upper_limit"));
+
+    if (Helper.hasColumn(rs, "last_status")) m.setLastStatus(rs.getString("last_status"));
+    if (Helper.hasColumn(rs, "last_price")) m.setLastPrice(rs.getBigDecimal("last_price"));
+
+    if (Helper.hasColumn(rs, prefix+"updated_at")) m.setUpdatedAt(rs.getTimestamp(prefix+"updated_at"));
+    if (Helper.hasColumn(rs, "triggered_at")) m.setTriggeredAt(rs.getTimestamp("triggered_at"));
+
+    if (Helper.hasColumn(rs, "subject")) {
+    	String val = rs.getString("subject");
+    	if (val != null) m.setSubject(AlarmSubject.valueOf(val));
+    }
+		if (Helper.hasColumn(rs, "subject_when")) {
+			String val = rs.getString("subject_when");
+			if (val != null) m.setSubjectWhen(AlarmSubjectWhen.valueOf(val));
+		}
+    
+    return m;
   }
 
 }

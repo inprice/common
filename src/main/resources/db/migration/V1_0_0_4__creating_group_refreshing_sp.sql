@@ -8,12 +8,13 @@ create procedure sp_refresh_group (
     out avgPrice decimal(9,2),
     out maxPrice decimal(9,2),
     out total decimal(9,2),
-    out level varchar(10)
+    out level varchar(10),
+    out alarmId bigint unsigned
   )
 begin
   start transaction;
 
-  select @groupPrice := price from link_group where id = in_group_id for update;
+  select price, alarm_id into @groupPrice, @alarmId from link_group where id = in_group_id for update;
 
   select
     @total    := sum(case when status_group = 'ACTIVE' then price else 0 end),
@@ -111,7 +112,7 @@ begin
 
   commit;
 
-  select @minPrice, @avgPrice, @maxPrice, @total, @level into minPrice, avgPrice, maxPrice, total, level;
+  select @minPrice, @avgPrice, @maxPrice, @total, @level, @alarmId into minPrice, avgPrice, maxPrice, total, level, alarmId;
 
 end$$
 

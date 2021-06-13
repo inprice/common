@@ -34,6 +34,9 @@ public class LinkMapper implements RowMapper<Link> {
     if (Helper.hasColumn(rs, "checked_at")) m.setCheckedAt(rs.getTimestamp("checked_at"));
     if (Helper.hasColumn(rs, "updated_at")) m.setUpdatedAt(rs.getTimestamp("updated_at"));
 
+    if (Helper.hasColumn(rs, "platform_id")) m.setPlatformId(Helper.nullLongHandler(rs, "platform_id"));
+    if (Helper.hasColumn(rs, "alarm_id")) m.setAlarmId(Helper.nullLongHandler(rs, "alarm_id"));
+
     if (Helper.hasColumn(rs, "level")) {
     	String val = rs.getString("level");
     	if (val != null) m.setLevel(Level.valueOf(val));
@@ -51,15 +54,20 @@ public class LinkMapper implements RowMapper<Link> {
     if (Helper.hasColumn(rs, "group_name")) m.setGroupName(rs.getString("group_name"));
     if (Helper.hasColumn(rs, "group_price")) m.setGroupPrice(rs.getBigDecimal("group_price"));
 
-  	Platform p = new Platform();
-  	if (Helper.hasColumn(rs, "platform_name")) p.setName(rs.getString("platform_name"));
-  	if (Helper.hasColumn(rs, "currency_code")) p.setCurrencyCode(rs.getString("currency_code"));
-  	if (Helper.hasColumn(rs, "currency_format")) p.setCurrencyFormat(rs.getString("currency_format"));
-  	if (Helper.hasColumn(rs, "country")) p.setCountry(rs.getString("country"));
-  	
-  	m.setPlatformId(p.getId());
-  	m.setPlatform(p);
-    
+  	if (m.getPlatformId() != null) {
+    	Platform platform = new Platform();
+    	platform.setId(m.getPlatformId());
+    	if (Helper.hasColumn(rs, "platform_name")) platform.setName(rs.getString("platform_name"));
+    	if (Helper.hasColumn(rs, "currency_code")) platform.setCurrencyCode(rs.getString("currency_code"));
+    	if (Helper.hasColumn(rs, "currency_format")) platform.setCurrencyFormat(rs.getString("currency_format"));
+    	if (Helper.hasColumn(rs, "country")) platform.setCountry(rs.getString("country"));
+    	m.setPlatform(platform);
+  	}
+
+  	if (m.getAlarmId() != null && (Helper.hasColumn(rs, "al_updated_at"))) {
+    	m.setAlarm(Helper.mapForAlarm(rs, m.getAlarmId(), m.getId(), null, m.getAccountId()));
+    }
+
     return m;
   }
 

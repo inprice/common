@@ -142,6 +142,24 @@ create table platform (
   key ix1 (domain)
 ) engine=innodb;
 
+create table alarm (
+  id                        bigint unsigned auto_increment not null,
+  group_id                  bigint unsigned,
+  link_id                   bigint unsigned,
+  subject                   enum('STATUS', 'PRICE', 'MINIMUM', 'AVERAGE', 'MAXIMUM', 'TOTAL') not null default 'STATUS',
+  subject_when              enum('CHANGED', 'EQUAL', 'NOT_EQUAL', 'INCREASED', 'DECREASED', 'OUT_OF_LIMITS') not null default 'CHANGED',
+  certain_status            varchar(10),
+  price_lower_limit         decimal(9,2) not null default 0,
+  price_upper_limit         decimal(9,2) not null default 0,
+  last_status               varchar(10),
+  last_price                decimal(9,2) default 0,
+  updated_at                timestamp not null default current_timestamp,
+  triggered_at              timestamp,
+  account_id                bigint unsigned not null,
+  primary key (id)
+) engine=innodb;
+alter table alarm add foreign key (account_id) references account (id);
+
 create table link_group (
   id                        bigint unsigned auto_increment not null,
   name                      varchar(128) not null,
@@ -171,6 +189,7 @@ create table link_group (
   primary key (id),
   key ix1 (name)
 ) engine=innodb;
+alter table link_group add foreign key (alarm_id) references alarm (id);
 alter table link_group add foreign key (account_id) references account (id);
 
 create table link (
@@ -190,10 +209,10 @@ create table link (
   problem                   varchar(250),
   http_status               smallint default 0,
   retry                     smallint default 0,
+  group_id                  bigint unsigned not null,
   platform_id               bigint unsigned,
-  group_id                  bigint unsigned,
-  account_id                bigint unsigned not null,
   alarm_id                  bigint unsigned,
+  account_id                bigint unsigned not null,
   checked_at                datetime,
   updated_at                datetime,
   created_year              smallint not null default (year(curdate())),
@@ -205,8 +224,9 @@ create table link (
   key ix3 (checked_at),
   key ix4 (status_group)
 ) engine=innodb;
-alter table link add foreign key (platform_id) references platform (id);
 alter table link add foreign key (group_id) references link_group (id);
+alter table link add foreign key (alarm_id) references alarm (id);
+alter table link add foreign key (platform_id) references platform (id);
 alter table link add foreign key (account_id) references account (id);
 
 create table link_spec (
@@ -305,31 +325,6 @@ create table checkout (
 ) engine=innodb;
 alter table checkout add foreign key (account_id) references account (id);
 
-create table alarm (
-  id                        bigint unsigned auto_increment not null,
-  subject                   enum('LINK', 'GROUP') not null default 'LINK',
-  topic                     enum('PRICE', 'TOTAL', 'STATUS', 'MINIMUM', 'AVERAGE', 'MAXIMUM') not null default 'STATUS',
-  status_change             enum('ANY', 'CERTAIN') not null default 'ANY',
-  price_change              enum('ANY', 'INCREASED', 'DECREASED', 'OUT_OF_LIMITS') not null default 'ANY',
-  certain_status            varchar(10) not null,
-  price_lower_limit         decimal(9,2) default 0,
-  price_upper_limit         decimal(9,2) default 0,
-  last_status               varchar(10) not null,
-  last_price                decimal(9,2) default 0,
-  to_emails                 varchar(512) not null,
-  link_id                   bigint unsigned,
-  group_id                  bigint unsigned,
-  account_id                bigint unsigned not null,
-  triggered_at              timestamp,
-  created_year              smallint not null default (year(curdate())),
-  created_month             char(7) not null default (date_format(curdate(), '%Y-%m')),
-  created_at                timestamp not null default current_timestamp,
-  primary key (id)
-) engine=innodb;
-alter table alarm add foreign key (link_id) references link (id);
-alter table alarm add foreign key (group_id) references link_group (id);
-alter table alarm add foreign key (account_id) references account (id);
-
 create table ticket (
   id                        bigint unsigned auto_increment not null,
   status                    enum('OPENED', 'IN_PROGRESS', 'WAITING_FOR_USER', 'WAITING_FOR_VERSION', 'CLOSED') not null default 'OPENED',
@@ -355,7 +350,7 @@ create table ticket_comment (
   body                      text not null,
   editable                  boolean default true,
   added_by_user             boolean default true,
-  user_id                   bigint unsigned,
+  user_id                   bigint unsigned not null,
   account_id                bigint unsigned not null,
   created_at                timestamp not null default current_timestamp,
   primary key (id)
@@ -369,7 +364,7 @@ create table ticket_history (
   priority                  varchar(8) not null,
   type                      varchar(8) not null,
   subject                   varchar(12) not null,
-  user_id                   bigint unsigned,
+  user_id                   bigint unsigned not null,
   account_id                bigint unsigned not null,
   created_at                timestamp not null default current_timestamp,
   primary key (id)

@@ -38,10 +38,16 @@ public class LinkGroupMapper implements RowMapper<LinkGroup> {
     if (Helper.hasColumn(rs, "max_price")) m.setMaxPrice(rs.getBigDecimal("max_price"));
     
     if (Helper.hasColumn(rs, "updated_at")) m.setUpdatedAt(rs.getTimestamp("updated_at"));
+    if (Helper.hasColumn(rs, "alarm_id")) m.setAlarmId(Helper.nullLongHandler(rs, "alarm_id"));
 
     if (Helper.hasColumn(rs, "level")) {
       String val = rs.getString("level");
       if (val != null) m.setLevel(Level.valueOf(val));
+    }
+
+    //transients
+    if (m.getAlarmId() != null && (Helper.hasColumn(rs, "al_updated_at"))) {
+    	m.setAlarm(Helper.mapForAlarm(rs, m.getAlarmId(), null, m.getId(), m.getAccountId()));
     }
 
     return m;
