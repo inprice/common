@@ -146,6 +146,7 @@ create table alarm (
   id                        bigint unsigned auto_increment not null,
   group_id                  bigint unsigned,
   link_id                   bigint unsigned,
+  topic                     enum('LINK', 'GROUP') not null default 'LINK',
   subject                   enum('STATUS', 'PRICE', 'MINIMUM', 'AVERAGE', 'MAXIMUM', 'TOTAL') not null default 'STATUS',
   subject_when              enum('CHANGED', 'EQUAL', 'NOT_EQUAL', 'INCREASED', 'DECREASED', 'OUT_OF_LIMITS') not null default 'CHANGED',
   certain_status            varchar(10),
@@ -153,9 +154,10 @@ create table alarm (
   price_upper_limit         decimal(9,2) not null default 0,
   last_status               varchar(10),
   last_price                decimal(9,2) default 0,
-  updated_at                timestamp not null default current_timestamp,
-  triggered_at              timestamp,
+  tobe_notified             boolean default false,
+  notified_at               timestamp,
   account_id                bigint unsigned not null,
+  created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb;
 alter table alarm add foreign key (account_id) references account (id);

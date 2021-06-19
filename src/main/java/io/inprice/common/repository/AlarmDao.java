@@ -10,8 +10,8 @@ import io.inprice.common.models.LinkGroup;
 public interface AlarmDao {
 
   final String FIELDS = 
-      ", al.subject, al.topic, al.when_status, al.certain_status, al.when_price, al.price_lower_limit " +
-      ", al.price_upper_limit, al.last_status, al.last_price, al.updated_at as al_updated_at, al.triggered_at ";
+      ", al.subject, al.subject_when, al.certain_status, al.price_lower_limit " +
+      ", al.price_upper_limit, al.last_status, al.last_price, al.tobe_notified, al.notified_at ";
 
 	@SqlQuery(
   	"select g.*" + FIELDS + " from link_group g " + 

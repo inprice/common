@@ -14,8 +14,8 @@ public class NameCountPairMapper implements RowMapper<Pair<String, Integer>> {
   public Pair<String, Integer> map(ResultSet rs, StatementContext ctx) throws SQLException {
     Pair<String, Integer> m = new Pair<>();
 
-    if (Helper.hasColumn(rs, "name")) m.setKey(rs.getString("name"));
-    if (Helper.hasColumn(rs, "_count")) m.setValue(rs.getInt("_count"));
+    if (Helper.hasColumn(rs, "name")) m.setLeft(rs.getString("name"));
+    if (Helper.hasColumn(rs, "_count")) m.setRight(rs.getInt("_count"));
 
     return m;
   }

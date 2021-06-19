@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import io.inprice.common.meta.AlarmSubject;
 import io.inprice.common.meta.AlarmSubjectWhen;
+import io.inprice.common.meta.AlarmTopic;
 import io.inprice.common.models.Alarm;
 import io.inprice.common.models.BaseModel;
 
@@ -67,10 +68,11 @@ public class Helper {
     	prefix = "al_";
   		m.setId(alarmId);
   		m.setLinkId(linkId);
+  		m.setLinkId(groupId);
   		m.setAccountId(accountId);
     } else {
-      if (Helper.hasColumn(rs, "group_id")) m.setGroupId(Helper.nullLongHandler(rs, "group_id"));
       if (Helper.hasColumn(rs, "link_id")) m.setLinkId(Helper.nullLongHandler(rs, "link_id"));
+      if (Helper.hasColumn(rs, "group_id")) m.setGroupId(Helper.nullLongHandler(rs, "group_id"));
       if (Helper.hasColumn(rs, "account_id")) m.setAccountId(rs.getLong("account_id"));
     }
     
@@ -82,8 +84,13 @@ public class Helper {
     if (Helper.hasColumn(rs, "last_status")) m.setLastStatus(rs.getString("last_status"));
     if (Helper.hasColumn(rs, "last_price")) m.setLastPrice(rs.getBigDecimal("last_price"));
 
-    if (Helper.hasColumn(rs, prefix+"updated_at")) m.setUpdatedAt(rs.getTimestamp(prefix+"updated_at"));
-    if (Helper.hasColumn(rs, "triggered_at")) m.setTriggeredAt(rs.getTimestamp("triggered_at"));
+    if (Helper.hasColumn(rs, "tobe_notified")) m.setTobeNotified(rs.getBoolean("tobe_notified"));
+    if (Helper.hasColumn(rs, "notified_at")) m.setNotifiedAt(rs.getTimestamp("notified_at"));
+    
+    if (Helper.hasColumn(rs, "topic")) {
+    	String val = rs.getString("topic");
+    	if (val != null) m.setTopic(AlarmTopic.valueOf(val));
+    }
 
     if (Helper.hasColumn(rs, "subject")) {
     	String val = rs.getString("subject");
@@ -93,7 +100,7 @@ public class Helper {
 			String val = rs.getString("subject_when");
 			if (val != null) m.setSubjectWhen(AlarmSubjectWhen.valueOf(val));
 		}
-    
+		
     return m;
   }
 

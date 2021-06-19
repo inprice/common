@@ -14,8 +14,8 @@ public class IdNamePairMapper implements RowMapper<Pair<Long, String>> {
   public Pair<Long, String> map(ResultSet rs, StatementContext ctx) throws SQLException {
     Pair<Long, String> m = new Pair<Long, String>();
 
-    if (Helper.hasColumn(rs, "id")) m.setKey(rs.getLong("id"));
-    if (Helper.hasColumn(rs, "name")) m.setValue(rs.getString("name"));
+    if (Helper.hasColumn(rs, "id")) m.setLeft(rs.getLong("id"));
+    if (Helper.hasColumn(rs, "name")) m.setRight(rs.getString("name"));
 
     return m;
   }

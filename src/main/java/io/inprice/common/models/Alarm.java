@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.inprice.common.meta.AlarmSubject;
 import io.inprice.common.meta.AlarmSubjectWhen;
+import io.inprice.common.meta.AlarmTopic;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -21,6 +22,7 @@ public class Alarm implements Serializable {
 
 	private Long id;
 	
+  private AlarmTopic topic;
 	private AlarmSubject subject;
 	private AlarmSubjectWhen subjectWhen;
 
@@ -31,13 +33,17 @@ public class Alarm implements Serializable {
 	private String lastStatus;
 	private BigDecimal lastPrice;
 	
-	private Date updatedAt;
-  private Date triggeredAt;
+	private Boolean tobeNotified;
+  private Date notifiedAt;
 	
   private Long linkId;
   private Long groupId;
 
   @JsonIgnore
   private Long accountId;
+  
+  //transients
+  private String name;
+  private String linkUrl;
 
 }

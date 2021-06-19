@@ -46,7 +46,7 @@ public class LinkGroupMapper implements RowMapper<LinkGroup> {
     }
 
     //transients
-    if (m.getAlarmId() != null && (Helper.hasColumn(rs, "al_updated_at"))) {
+    if (m.getAlarmId() != null && (Helper.hasColumn(rs, "tobe_notified"))) {
     	m.setAlarm(Helper.mapForAlarm(rs, m.getAlarmId(), null, m.getId(), m.getAccountId()));
     }
 
