@@ -413,7 +413,7 @@ create table access_log (
   path_ext                  varchar(70),
   req_body                  text,
   status                    int default 200,
-  res_body                  varchar(1024),
+  res_body                  text,
   elapsed                   int default 0,
   slow                      boolean default false,
   ip                        varchar(128),

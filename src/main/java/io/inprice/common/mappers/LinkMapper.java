@@ -64,7 +64,7 @@ public class LinkMapper implements RowMapper<Link> {
     	m.setPlatform(platform);
   	}
 
-  	if (m.getAlarmId() != null && (Helper.hasColumn(rs, "al_updated_at"))) {
+  	if (m.getAlarmId() != null && (Helper.hasColumn(rs, "tobe_notified"))) {
     	m.setAlarm(Helper.mapForAlarm(rs, m.getAlarmId(), m.getId(), null, m.getAccountId()));
     }
 

@@ -13,30 +13,11 @@ public class AlarmMapper implements RowMapper<Alarm> {
   @Override
   public Alarm map(ResultSet rs, StatementContext ctx) throws SQLException {
   	Alarm m = Helper.mapForAlarm(rs);
-  	
-  	//transients
-		switch (m.getTopic()) {
 
-			case LINK: {
-      	if (Helper.hasColumn(rs, "link_name")) {
-      		String val = rs.getString("link_name");
-      		if (val != null) m.setName(val);
-      	}
-      	if (m.getName() == null && Helper.hasColumn(rs, "link_url")) {
-      		String val = rs.getString("link_url");
-      		if (val != null) m.setName(val);
-      	}
-      	break;
-			}
-
-			case GROUP: {
-      	if (m.getName() == null && Helper.hasColumn(rs, "group_name")) {
-      		String val = rs.getString("group_name");
-      		if (val != null) m.setName(val);
-      	}
-      	break;
-    	}
-		}
+  	if (Helper.hasColumn(rs, "_name")) {
+  		String val = rs.getString("_name");
+  		if (val != null) m.setName(val);
+  	}
 
   	return m;
   }
