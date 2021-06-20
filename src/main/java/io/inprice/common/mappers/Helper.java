@@ -86,6 +86,12 @@ public class Helper {
 
     if (Helper.hasColumn(rs, "tobe_notified")) m.setTobeNotified(rs.getBoolean("tobe_notified"));
     if (Helper.hasColumn(rs, "notified_at")) m.setNotifiedAt(rs.getTimestamp("notified_at"));
+
+    if (Helper.hasColumn(rs, "updated_at")) {
+    	m.setUpdatedAt(rs.getTimestamp("updated_at"));
+    } else if (Helper.hasColumn(rs, "al_updated_at")) {
+    	m.setUpdatedAt(rs.getTimestamp("al_updated_at"));
+    }
     
     if (Helper.hasColumn(rs, "topic")) {
     	String val = rs.getString("topic");

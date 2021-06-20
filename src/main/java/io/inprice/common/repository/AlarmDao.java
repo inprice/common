@@ -11,7 +11,7 @@ public interface AlarmDao {
 
   final String FIELDS = 
       ", al.subject, al.subject_when, al.certain_status, al.price_lower_limit " +
-      ", al.price_upper_limit, al.last_status, al.last_price, al.tobe_notified, al.notified_at ";
+      ", al.price_upper_limit, al.last_status, al.last_price, al.tobe_notified, al.notified_at, al.updated_at as as_updated_at ";
 
 	@SqlQuery(
   	"select g.*" + FIELDS + " from link_group g " + 

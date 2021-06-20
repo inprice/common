@@ -34,7 +34,8 @@ public class Alarm implements Serializable {
 	private BigDecimal lastPrice;
 	
 	private Boolean tobeNotified;
-  private Date notifiedAt;
+	private Date notifiedAt;
+  private Date updatedAt;
 	
   private Long linkId;
   private Long groupId;

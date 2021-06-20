@@ -155,8 +155,9 @@ create table alarm (
   last_status               varchar(10),
   last_price                decimal(9,2) default 0,
   tobe_notified             boolean default false,
-  notified_at               timestamp,
   account_id                bigint unsigned not null,
+  notified_at               timestamp,
+  updated_at                timestamp,
   created_at                timestamp not null default current_timestamp,
   primary key (id)
 ) engine=innodb;
