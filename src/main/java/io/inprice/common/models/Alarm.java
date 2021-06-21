@@ -27,11 +27,11 @@ public class Alarm implements Serializable {
 	private AlarmSubjectWhen subjectWhen;
 
 	private String certainStatus;
-	private BigDecimal priceLowerLimit;
-	private BigDecimal priceUpperLimit;
+	private BigDecimal amountLowerLimit;
+	private BigDecimal amountUpperLimit;
 
 	private String lastStatus;
-	private BigDecimal lastPrice;
+	private BigDecimal lastAmount;
 	
 	private Boolean tobeNotified;
 	private Date notifiedAt;

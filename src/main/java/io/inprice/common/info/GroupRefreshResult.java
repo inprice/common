@@ -17,7 +17,6 @@ public class GroupRefreshResult {
 	private BigDecimal maxPrice = BigDecimal.ZERO;
 	private BigDecimal total = BigDecimal.ZERO;
 	private Level level = Level.NA;
-	
 	private Long alarmId;
 
 }

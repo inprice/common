@@ -78,11 +78,11 @@ public class Helper {
     
 		if (Helper.hasColumn(rs, prefix+"id")) m.setId(rs.getLong(prefix+"id"));
     if (Helper.hasColumn(rs, "certain_status")) m.setCertainStatus(rs.getString("certain_status"));
-    if (Helper.hasColumn(rs, "price_lower_limit")) m.setPriceLowerLimit(rs.getBigDecimal("price_lower_limit"));
-    if (Helper.hasColumn(rs, "price_upper_limit")) m.setPriceUpperLimit(rs.getBigDecimal("price_upper_limit"));
+    if (Helper.hasColumn(rs, "amount_lower_limit")) m.setAmountLowerLimit(rs.getBigDecimal("amount_lower_limit"));
+    if (Helper.hasColumn(rs, "amount_upper_limit")) m.setAmountUpperLimit(rs.getBigDecimal("amount_upper_limit"));
 
     if (Helper.hasColumn(rs, "last_status")) m.setLastStatus(rs.getString("last_status"));
-    if (Helper.hasColumn(rs, "last_price")) m.setLastPrice(rs.getBigDecimal("last_price"));
+    if (Helper.hasColumn(rs, "last_amount")) m.setLastAmount(rs.getBigDecimal("last_amount"));
 
     if (Helper.hasColumn(rs, "tobe_notified")) m.setTobeNotified(rs.getBoolean("tobe_notified"));
     if (Helper.hasColumn(rs, "notified_at")) m.setNotifiedAt(rs.getTimestamp("notified_at"));
