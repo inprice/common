@@ -24,6 +24,7 @@ public class DateUtils {
   private static final SimpleDateFormat sdfLongForDB = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
   private static final SimpleDateFormat sdfLongForLogging = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
   private static final SimpleDateFormat sdfStandart = new SimpleDateFormat("dd/MM/yyyy");
+  private static final SimpleDateFormat stfStandart = new SimpleDateFormat("HH:mm:ss");
 
   public static String formatDateForDB(Date date) {
     if (date != null)
@@ -49,6 +50,13 @@ public class DateUtils {
   public static String formatDateStandart(Date date) {
     if (date != null)
       return sdfStandart.format(date);
+    else
+      return "";
+  }
+
+  public static String formatTimeStandart(Date date) {
+    if (date != null)
+      return stfStandart.format(date);
     else
       return "";
   }
@@ -179,10 +187,15 @@ public class DateUtils {
     long diff = laterDate.getTime() - earlierDate.getTime();
     return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
   }
-
+  
   public static long findHourDiff(Date earlierTime, Date laterTime) {
+  	long diff = laterTime.getTime() - earlierTime.getTime();
+  	return TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS);
+  }
+
+  public static long findMinuteDiff(Date earlierTime, Date laterTime) {
     long diff = laterTime.getTime() - earlierTime.getTime();
-    return TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS);
+    return TimeUnit.MINUTES.convert(diff, TimeUnit.MILLISECONDS);
   }
 
 }

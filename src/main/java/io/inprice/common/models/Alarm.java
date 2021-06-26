@@ -47,4 +47,8 @@ public class Alarm implements Serializable {
   private String name;
   private String linkUrl;
 
+  private String email;
+  private String username;
+  private String currencyFormat;
+
 }

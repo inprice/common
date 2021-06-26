@@ -19,7 +19,7 @@ public enum EmailTemplate {
   PAYMENT_FAILED_LAST_TIME("payment-failed-last-time"),
 
   SUBSCRIPTION_STARTED("subscription-started"),
-  SUBSCRIPTION_RENEWAL("subscription-renewed"),
+  SUBSCRIPTION_RENEWAL("subscription-renewal"),
   SUBSCRIPTION_CANCELLED("subscription-cancelled"),
   SUBSCRIPTION_CANCELLED_COUPONED("subscription-cancelled-couponed"),
   SUBSCRIPTION_STOPPED("subscription-stopped"),
@@ -29,7 +29,11 @@ public enum EmailTemplate {
 
   FREE_ACCOUNT_REMINDER("free-account-reminder"),
   FREE_ACCOUNT_CANCELLED("free-account-cancelled"),
-  FREE_ACCOUNT_STOPPED("free-account-stopped");
+  FREE_ACCOUNT_STOPPED("free-account-stopped"),
+
+  ALARM_NOTIFICATION("alarm/body")
+  
+  ;
 
   private String fileName;
 
