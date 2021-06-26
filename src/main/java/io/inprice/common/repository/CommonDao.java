@@ -35,12 +35,13 @@ public interface CommonDao {
     @Bind("diffAmount") BigDecimal diffAmount, @Bind("diffRate") BigDecimal diffRate,
     @Bind("groupId") long groupId, @Bind("accountId") long accountId);
 
-  @SqlCall("call sp_refresh_group(:groupId, :minPrice, :avgPrice, :maxPrice, :total, :level)")
+  @SqlCall("call sp_refresh_group(:groupId, :minPrice, :avgPrice, :maxPrice, :total, :level, :alarmId)")
   @OutParameter(name="minPrice", sqlType=Types.DOUBLE)
   @OutParameter(name="avgPrice", sqlType=Types.DOUBLE)
   @OutParameter(name="maxPrice", sqlType=Types.DOUBLE)
   @OutParameter(name="total", sqlType=Types.DOUBLE)
   @OutParameter(name="level", sqlType=Types.VARCHAR)
+  @OutParameter(name="alarmId", sqlType=Types.BIGINT)
   OutParameters refreshGroup(@Bind("groupId") Long groupId);
 
 }

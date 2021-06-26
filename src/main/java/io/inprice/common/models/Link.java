@@ -48,6 +48,8 @@ public class Link extends BaseModel {
   @JsonIgnore
   private String urlHash;
 
+  private Long alarmId;
+
   //transients
   private String groupName;
   private BigDecimal groupPrice;
@@ -55,7 +57,9 @@ public class Link extends BaseModel {
   private List<LinkPrice> priceList;
   private List<LinkSpec> specList;
   private List<LinkHistory> historyList;
+
   private Platform platform;
+  private Alarm alarm;
 
   public Link(String url) {
     this.url = url;

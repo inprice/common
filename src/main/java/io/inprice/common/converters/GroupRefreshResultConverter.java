@@ -17,7 +17,8 @@ public class GroupRefreshResultConverter {
   	if (result.getObject("avgPrice") != null) m.setAvgPrice(new BigDecimal(result.getDouble("avgPrice")).setScale(2, RoundingMode.HALF_UP));
   	if (result.getObject("maxPrice") != null) m.setMaxPrice(new BigDecimal(result.getDouble("maxPrice")).setScale(2, RoundingMode.HALF_UP));
   	if (result.getObject("total") != null) m.setTotal(new BigDecimal(result.getDouble("total")).setScale(2, RoundingMode.HALF_UP));
-  	
+  	if (result.getObject("alarmId") != null) m.setAlarmId(result.getLong("alarmId"));
+
   	if (result.getObject("level") != null) { 
     	String val = result.getString("level");
     	if (val != null) m.setLevel(Level.valueOf(val));

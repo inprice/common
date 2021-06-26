@@ -11,7 +11,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * Info model class for status change notifications
+ * Info model class for oldStatus change notifications
  *
  * @author mdpinar
  */
@@ -19,7 +19,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class StatusChange implements Serializable {
+public class LinkStatusChange implements Serializable {
 
   private static final long serialVersionUID = -7240482576220187098L;
 
@@ -27,7 +27,7 @@ public class StatusChange implements Serializable {
   private LinkStatus oldStatus;
   private BigDecimal oldPrice;
 
-  public StatusChange(Link link, LinkStatus oldStatus, BigDecimal oldPrice) {
+  public LinkStatusChange(Link link, LinkStatus oldStatus, BigDecimal oldPrice) {
     this.link = link;
     this.oldStatus = oldStatus;
     this.oldPrice = oldPrice;

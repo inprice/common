@@ -13,9 +13,9 @@ public class AccessLogMapper implements RowMapper<AccessLog> {
   @Override
   public AccessLog map(ResultSet rs, StatementContext ctx) throws SQLException {
     AccessLog m = new AccessLog();
-    Helper.mapBaseFields(m, rs);
 
-    if (Helper.hasColumn(rs, "user_id")) m.setUserId(rs.getLong("user_id"));
+		if (Helper.hasColumn(rs, "id")) m.setId(rs.getLong("id"));
+    
     if (Helper.hasColumn(rs, "user_email")) m.setUserEmail(rs.getString("user_email"));
     if (Helper.hasColumn(rs, "user_role")) m.setUserRole(rs.getString("user_role"));
     if (Helper.hasColumn(rs, "account_name")) m.setAccountName(rs.getString("account_name"));
@@ -30,6 +30,13 @@ public class AccessLogMapper implements RowMapper<AccessLog> {
     if (Helper.hasColumn(rs, "ip")) m.setIp(rs.getString("ip"));
     if (Helper.hasColumn(rs, "agent")) m.setAgent(rs.getString("agent"));
 
+    if (Helper.hasColumn(rs, "user_id")) m.setUserId(Helper.nullLongHandler(rs, "user_id"));
+    if (Helper.hasColumn(rs, "account_id")) m.setAccountId(Helper.nullLongHandler(rs, "account_id"));
+
+    if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
+    if (Helper.hasColumn(rs, "created_year")) m.setCreatedYear(rs.getInt("created_year"));
+    if (Helper.hasColumn(rs, "created_month")) m.setCreatedMonth(rs.getString("created_month"));
+    
     return m;
   }
 

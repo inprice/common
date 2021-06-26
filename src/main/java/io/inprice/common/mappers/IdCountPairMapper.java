@@ -8,13 +8,13 @@ import org.jdbi.v3.core.statement.StatementContext;
 
 import io.inprice.common.info.Pair;
 
-public class NameCountPairMapper implements RowMapper<Pair<String, Integer>> {
+public class IdCountPairMapper implements RowMapper<Pair<Long, Integer>> {
 
   @Override
-  public Pair<String, Integer> map(ResultSet rs, StatementContext ctx) throws SQLException {
-    Pair<String, Integer> m = new Pair<>();
+  public Pair<Long, Integer> map(ResultSet rs, StatementContext ctx) throws SQLException {
+    Pair<Long, Integer> m = new Pair<>();
 
-    if (Helper.hasColumn(rs, "name")) m.setLeft(rs.getString("name"));
+    if (Helper.hasColumn(rs, "_id")) m.setLeft(rs.getLong("_id"));
     if (Helper.hasColumn(rs, "_count")) m.setRight(rs.getInt("_count"));
 
     return m;

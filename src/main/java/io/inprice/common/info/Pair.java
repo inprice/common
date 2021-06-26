@@ -11,9 +11,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Pair<Key, Value> {
+public class Pair<Left, Right> {
 
-  private Key key;
-  private Value value;
+  private Left left;
+  private Right right;
   
 }

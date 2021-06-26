@@ -38,8 +38,13 @@ public class LinkGroup extends BaseModel {
   private String maxSeller;
   private BigDecimal maxPrice = BigDecimal.ZERO;
   private BigDecimal maxDiff = BigDecimal.ZERO;
-  
+
   private Date updatedAt;
+
+  private Long alarmId;
+
+  //transients
+  private Alarm alarm;
 
   public int getLinkCount() {
   	return actives+waitings+tryings+problems;
