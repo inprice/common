@@ -1,6 +1,7 @@
 package io.inprice.common.helpers;
 
 import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,8 @@ public class JsonConverter {
       new ObjectMapper()
         .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
         .setSerializationInclusion(Include.NON_NULL)
-        .setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+        .setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"))
+        .setTimeZone(TimeZone.getDefault());
   }
 
   public static <T> T fromJson(String value, Class<T> clazz) {
