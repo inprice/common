@@ -31,15 +31,9 @@ public enum LinkStatus {
   RESOLVED(LinkStatusGroup.WAITING, "Resolved and be updated."),
 
   /**
-   * Used for links paused by users.
-   * Data will be collected again after RESUMED by the user him/her self
+   * Used for links paused by super user.
    */
   PAUSED(LinkStatusGroup.WAITING, "Manually paused."),
-
-  /**
-   * Used for paused links to resume.
-   */
-  RESUMED(LinkStatusGroup.WAITING, "Activated again and be updated."),
 
   /**
    * For the links whose websites have not been implemented yet. 
@@ -77,18 +71,23 @@ public enum LinkStatus {
   /**
    * Used for indicating links whose data is missing
    */
-  NO_DATA(LinkStatusGroup.PROBLEM, "Has no price or name."),
+  NO_DATA(LinkStatusGroup.PROBLEM, "Has no price or name!"),
 
   /**
    * Used for missing links
    */
-  NOT_FOUND(LinkStatusGroup.PROBLEM, "Page not found."),
+  NOT_FOUND(LinkStatusGroup.PROBLEM, "Page not found!"),
+
+  /**
+   * Used for not implemented links
+   */
+  NOT_SUITABLE(LinkStatusGroup.PROBLEM, "This url won't be handled since not proper!"),
 
   /**
    * Used for internal error like 500.
    * Data will be collected after implemented by us
    */
-  INTERNAL_ERROR(LinkStatusGroup.PROBLEM, "Facing a technical problem, we are working on this.");
+  INTERNAL_ERROR(LinkStatusGroup.PROBLEM, "Facing a technical problem, we are working on this!");
 
   private LinkStatusGroup group;
   private String description;
