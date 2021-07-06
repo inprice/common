@@ -1,6 +1,6 @@
 package io.inprice.common.models;
 
-import io.inprice.common.meta.PermType;
+import io.inprice.common.meta.UserMarkType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,12 +12,13 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class UserUsed extends BaseModel {
+public class UserMark extends BaseModel {
 
 	private static final long serialVersionUID = 4566418289281174593L;
 
 	private String email;
-  private PermType permType;
+  private UserMarkType type;
+  private String description;
   private Boolean whitelisted = Boolean.FALSE; //for allowing the same user to be able to use the same permission multiple times!
 
 }
