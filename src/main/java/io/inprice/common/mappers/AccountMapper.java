@@ -46,15 +46,16 @@ public class AccountMapper implements RowMapper<Account> {
       if (status != null) m.setStatus(AccountStatus.valueOf(status));
     }
 
+    if (Helper.hasColumn(rs, "plan_id")) m.setPlanId(Helper.nullIntegerHandler(rs, "plan_id"));
+
     //transients
-    if (Helper.hasColumn(rs, "plan_id")) {
+    if (m.getPlanId() != null) {
       Plan plan = new Plan();
-    	plan.setId(rs.getInt("plan_id"));
+    	plan.setId(m.getPlanId());
     	if (Helper.hasColumn(rs, "plan_name")) plan.setName(rs.getString("plan_name"));
     	if (Helper.hasColumn(rs, "user_limit")) plan.setUserLimit(rs.getInt("user_limit"));
     	if (Helper.hasColumn(rs, "link_limit")) plan.setLinkLimit(rs.getInt("link_limit"));
     	if (Helper.hasColumn(rs, "alarm_limit")) plan.setAlarmLimit(rs.getInt("alarm_limit"));
-    	m.setPlanId(rs.getInt("plan_id"));
       m.setPlan(plan);
     }
 

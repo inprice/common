@@ -2,9 +2,6 @@ package io.inprice.common.helpers;
 
 import java.time.temporal.ChronoUnit;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-
 import org.flywaydb.core.Flyway;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
@@ -13,6 +10,9 @@ import org.jdbi.v3.core.statement.StatementContext;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 import io.inprice.common.config.SysProps;
 import io.inprice.common.meta.AppEnv;
@@ -63,6 +63,17 @@ public class Database {
       }
       log.error("Unable to init migrations", e);
     }
+  }
+
+  public static void cleanDBForTests(String scripts) {
+  	if (! SysProps.APP_ENV.equals(AppEnv.TEST)) {
+  		log.warn("You are not allowed to clean tables since system profile is {}!", SysProps.APP_ENV);
+  		return;
+  	}
+  	jdbi.useTransaction(handle -> {
+  		handle.createScript(scripts).execute();
+      log.info("Test tables are cleaned!");
+  	});
   }
 
   private static void connect() {

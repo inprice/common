@@ -12,7 +12,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Member extends BaseModel {
+public class Membership extends BaseModel {
 
   private static final long serialVersionUID = -7793356216234713734L;
 

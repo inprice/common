@@ -9,13 +9,13 @@ import org.jdbi.v3.core.statement.StatementContext;
 import io.inprice.common.meta.AccountStatus;
 import io.inprice.common.meta.UserRole;
 import io.inprice.common.meta.UserStatus;
-import io.inprice.common.models.Member;
+import io.inprice.common.models.Membership;
 
-public class MemberMapper implements RowMapper<Member> {
+public class MembershipMapper implements RowMapper<Membership> {
 
   @Override
-  public Member map(ResultSet rs, StatementContext ctx) throws SQLException {
-    Member m = new Member();
+  public Membership map(ResultSet rs, StatementContext ctx) throws SQLException {
+    Membership m = new Membership();
     Helper.mapBaseFields(m, rs);
 
     if (Helper.hasColumn(rs, "email")) m.setEmail(rs.getString("email"));
