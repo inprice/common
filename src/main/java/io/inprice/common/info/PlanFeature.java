@@ -12,8 +12,9 @@ import lombok.ToString;
 public class PlanFeature {
 
 	@JsonIgnore
-	private Integer planId;
-  private String feature;
+	private Integer id;
+  private String description;
   private Boolean allowed;
+  private Integer orderNo;
 
 }

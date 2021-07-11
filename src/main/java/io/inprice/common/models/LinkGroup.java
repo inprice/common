@@ -16,6 +16,7 @@ public class LinkGroup extends BaseModel {
   private static final long serialVersionUID = 2010109845985968128L;
 
   private String name;
+  private String description;
 
   private Integer actives = 0;
   private Integer waitings = 0;

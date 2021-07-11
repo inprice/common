@@ -2,6 +2,7 @@ package io.inprice.common.models;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +30,6 @@ public class Plan implements Serializable {
   private Date createdAt = new Date();
 
   //transients
-  private List<PlanFeature> features;
-  
+  private List<PlanFeature> features = new ArrayList<>();
+
 }

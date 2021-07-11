@@ -39,9 +39,9 @@ public class CouponManager {
   }
 
   /**
-   * Generates random coupon in length of given parameter
+   * Generates random coupon code
    *
-   * @return generated coupon
+   * @return 8 chars coupon code
    */
   public static String generate() {
     int checkSum = 0;
@@ -85,7 +85,7 @@ public class CouponManager {
    */
   public static void main(String[] args) {
     System.err.println("Generated coupon:");
-    //for (int i = 0; i < 50; i++) {
+    //for (int i = 0; i < 5; i++) {
       System.err.println(generate());
     //}
   }

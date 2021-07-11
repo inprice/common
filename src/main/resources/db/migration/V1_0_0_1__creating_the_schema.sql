@@ -30,7 +30,7 @@ create table plan (
   primary key (id)
 ) engine=innodb;
 
-create table feature (
+create table plan_feature (
   id                        int not null,
   description               varchar(50),
   allowed                   boolean default true,
@@ -38,14 +38,15 @@ create table feature (
   primary key (id)
 ) engine=innodb;
 
-create table plan_feature (
+-- many-to-many relationship between plan and plan_feature
+create table plans_and_features (
   id                        int auto_increment not null,
   plan_id                   int not null,
   feature_id                int not null,
   primary key (id)
 ) engine=innodb;
-alter table plan_feature add foreign key (plan_id) references plan (id);
-alter table plan_feature add foreign key (feature_id) references feature (id);
+alter table plans_and_features add foreign key (plan_id) references plan (id);
+alter table plans_and_features add foreign key (feature_id) references plan_feature (id);
 
 create table account (
   id                        bigint unsigned auto_increment not null,
@@ -115,8 +116,8 @@ create table membership (
   user_id                   bigint unsigned,
   account_id                bigint unsigned not null,
   role                      enum('SUPER', 'ADMIN', 'EDITOR', 'VIEWER') not null default 'EDITOR',
-  pre_status                enum('PENDING', 'JOINED', 'PAUSED', 'LEFT', 'DELETED') not null default 'PENDING',
-  status                    enum('PENDING', 'JOINED', 'PAUSED', 'LEFT', 'DELETED') not null default 'PENDING',
+  pre_status                enum('PENDING', 'JOINED', 'REJECTED', 'LEFT', 'PAUSED', 'DELETED') not null default 'PENDING',
+  status                    enum('PENDING', 'JOINED', 'REJECTED', 'LEFT', 'PAUSED', 'DELETED') not null default 'PENDING',
   retry                     smallint default 1,
   updated_at                datetime,
   created_year              smallint not null default (year(curdate())),
@@ -165,7 +166,8 @@ alter table alarm add foreign key (account_id) references account (id);
 
 create table link_group (
   id                        bigint unsigned auto_increment not null,
-  name                      varchar(128) not null,
+  name                      varchar(50) not null,
+  description               varchar(128),
   actives                   smallint default 0,
   waitings                  smallint default 0,
   tryings                   smallint default 0,
@@ -271,7 +273,7 @@ create table link_history (
 alter table link_history add foreign key (link_id) references link (id);
 
 create table coupon (
-  code                      char(7) not null,
+  code                      char(8) not null,
   plan_id                   int not null,
   days                      smallint not null,
   description               varchar(128),

@@ -9,10 +9,13 @@ package io.inprice.common.meta;
  */
 public enum UserStatus {
 
-   PENDING,
-   JOINED,
-   PAUSED,
-   LEFT,
-   DELETED;
+   PENDING, //default status
+   JOINED, //member accepted
+
+   REJECTED, //member action without accepting invitation
+   LEFT, //member action after accepting invitation
+
+   PAUSED, //admin action
+   DELETED; //admin action. members remain in this status for more 3 hours before permanently deleted!
 
 }

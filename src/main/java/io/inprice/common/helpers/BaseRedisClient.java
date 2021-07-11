@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.inprice.common.config.SysProps;
+import io.inprice.common.meta.AppEnv;
 
 public class BaseRedisClient {
 
@@ -25,10 +26,10 @@ public class BaseRedisClient {
       .useSingleServer()
       .setAddress(String.format("redis://%s:%d", SysProps.REDIS_HOST, SysProps.REDIS_PORT))
       .setPassword(StringUtils.isNotBlank(redisPass) ? redisPass : null)
-      .setConnectionPoolSize(10)
+      .setConnectionPoolSize(SysProps.APP_ENV.equals(AppEnv.PROD) ? 10 : 1)
       .setConnectionMinimumIdleSize(1)
-      .setIdleConnectionTimeout(5000)
-      .setTimeout(5000);
+      .setIdleConnectionTimeout(SysProps.APP_ENV.equals(AppEnv.PROD) ? 5000 : 1000)
+      .setTimeout(SysProps.APP_ENV.equals(AppEnv.PROD) ? 5000 : 1000);
 
     while (!isHealthy && !isCancelled) {
       try {

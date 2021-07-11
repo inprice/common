@@ -17,6 +17,7 @@ public class LinkGroupMapper implements RowMapper<LinkGroup> {
     Helper.mapBaseFields(m, rs);
 
     if (Helper.hasColumn(rs, "name")) m.setName(rs.getString("name"));
+    if (Helper.hasColumn(rs, "description")) m.setDescription(rs.getString("description"));
     if (Helper.hasColumn(rs, "total")) m.setTotal(rs.getBigDecimal("total"));
 
     if (Helper.hasColumn(rs, "actives")) m.setActives(rs.getInt("actives"));
