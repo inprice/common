@@ -17,6 +17,7 @@ public class Account extends BaseModel {
 
   private String name;
   private String title;
+  private String contactName;
   private String address1;
   private String address2;
   private String postcode;
@@ -24,7 +25,7 @@ public class Account extends BaseModel {
   private String state;
   private String country;
 
-  private String preStatus; //used for returning BANNED status!
+  private String preStatus; //used when returning from BANNED status!
   private AccountStatus status;
   private Date lastStatusUpdate = new Date();
 

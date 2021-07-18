@@ -14,7 +14,6 @@ public enum AccountStatus {
   BANNED(false, false, false, false, false);
 
   private boolean active;
-
   private boolean okForFreeUse;
   private boolean okForCoupon;
   private boolean okForSubscription;
