@@ -16,8 +16,12 @@ public class Account extends BaseModel {
   private static final long serialVersionUID = 1818360516258349831L;
 
   private String name;
+
   private String title;
   private String contactName;
+  private String taxId;
+  private String taxOffice;
+
   private String address1;
   private String address2;
   private String postcode;

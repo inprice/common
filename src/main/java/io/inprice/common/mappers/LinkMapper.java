@@ -27,6 +27,8 @@ public class LinkMapper implements RowMapper<Link> {
     if (Helper.hasColumn(rs, "shipment")) m.setShipment(rs.getString("shipment"));
     if (Helper.hasColumn(rs, "price")) m.setPrice(rs.getBigDecimal("price"));
     if (Helper.hasColumn(rs, "retry")) m.setRetry(Helper.nullIntegerHandler(rs, "retry"));
+    if (Helper.hasColumn(rs, "watchlisted")) m.setWatchlisted(rs.getBoolean("watchlisted"));
+
     if (Helper.hasColumn(rs, "http_status")) m.setHttpStatus(Helper.nullIntegerHandler(rs, "http_status"));
     if (Helper.hasColumn(rs, "problem")) m.setProblem(rs.getString("problem"));
     if (Helper.hasColumn(rs, "group_id")) m.setGroupId(rs.getLong("group_id"));

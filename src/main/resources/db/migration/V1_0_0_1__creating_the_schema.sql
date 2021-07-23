@@ -53,6 +53,8 @@ create table account (
   name                      varchar(70) not null,
   title                     varchar(255),
   contact_name              varchar(50),
+  tax_id                    varchar(16),
+  tax_office                varchar(25),
   address_1                 varchar(255),
   address_2                 varchar(255),
   postcode                  varchar(8),
@@ -215,6 +217,7 @@ create table link (
   problem                   varchar(250),
   http_status               smallint default 0,
   retry                     smallint default 0,
+  watchlisted               boolean default false,
   group_id                  bigint unsigned not null,
   platform_id               bigint unsigned,
   alarm_id                  bigint unsigned,
@@ -227,8 +230,8 @@ create table link (
   primary key (id),
   key (url_hash),
   key (status),
-  key (checked_at),
-  key (status_group)
+  key (status_group),
+  key (checked_at)
 ) engine=innodb;
 alter table link add foreign key (group_id) references link_group (id);
 alter table link add foreign key (alarm_id) references alarm (id);

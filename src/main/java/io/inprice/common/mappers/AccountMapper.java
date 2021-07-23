@@ -20,6 +20,9 @@ public class AccountMapper implements RowMapper<Account> {
     if (Helper.hasColumn(rs, "name")) m.setName(rs.getString("name"));
     if (Helper.hasColumn(rs, "title")) m.setTitle(rs.getString("title"));
     if (Helper.hasColumn(rs, "contact_name")) m.setContactName(rs.getString("contact_name"));
+    if (Helper.hasColumn(rs, "tax_id")) m.setTaxId(rs.getString("tax_id"));
+    if (Helper.hasColumn(rs, "tax_office")) m.setTaxOffice(rs.getString("tax_office"));
+
     if (Helper.hasColumn(rs, "address_1")) m.setAddress1(rs.getString("address_1"));
     if (Helper.hasColumn(rs, "address_2")) m.setAddress2(rs.getString("address_2"));
     if (Helper.hasColumn(rs, "postcode")) m.setPostcode(rs.getString("postcode"));

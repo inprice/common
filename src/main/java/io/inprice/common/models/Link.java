@@ -30,14 +30,19 @@ public class Link extends BaseModel {
   private String shipment;
   private BigDecimal price = BigDecimal.ZERO;
   private Level level = Level.NA;
+
   @JsonIgnore
   private LinkStatus preStatus = LinkStatus.TOBE_CLASSIFIED;
   private LinkStatus status = LinkStatus.TOBE_CLASSIFIED;
+  
   @JsonIgnore
   private String problem;
   private Integer retry;
+  private Boolean watchlisted = Boolean.FALSE;
+  
   @JsonIgnore
   private Integer httpStatus;
+  
   @JsonIgnore
   private Long platformId;
   private Long groupId;

@@ -39,13 +39,17 @@ public class StringUtils {
 
     StringBuilder sb = new StringBuilder();
     for (O o: coll) {
+    	if (o == null) continue;
     	sb.append(separator);
       sb.append(o.toString());
       sb.append(separator);
       sb.append(",");
     }
 
-    return sb.toString().substring(0, sb.length()-1);
+    if (sb.length() > 1)
+    	return sb.toString().substring(0, sb.length()-1);
+    else
+    	return "";
   }
   
 }
