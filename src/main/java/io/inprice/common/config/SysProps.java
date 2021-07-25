@@ -51,7 +51,9 @@ public class SysProps {
   	DB_DRIVER = System.getenv().getOrDefault("DB_DRIVER", "mysql");
   	DB_HOST = System.getenv().getOrDefault("DB_HOST", "//127.0.0.1");
   	DB_PORT = NumberUtils.toInteger(System.getenv().getOrDefault("DB_PORT", "3306"));
-  	DB_DATABASE = System.getenv().getOrDefault("DB_DATABASE", APP_ENV.equals(AppEnv.TEST) ? "test" : "inprice");
+  	//TODO: must be fixed!
+  	//DB_DATABASE = System.getenv().getOrDefault("DB_DATABASE", APP_ENV.equals(AppEnv.TEST) ? "test" : "inprice");
+  	DB_DATABASE = System.getenv().getOrDefault("DB_DATABASE", "test");
   	DB_USERNAME = System.getenv().getOrDefault("DB_USERNAME", "root");
   	DB_PASSWORD = System.getenv().getOrDefault("DB_PASSWORD", "1234");
   	DB_ADDITIONS = System.getenv().getOrDefault("DB_ADDITIONS", "?useSSL=false");

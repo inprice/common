@@ -19,7 +19,7 @@ public enum SubsEvent {
   SUBSCRIPTION_STOPPED("Subscription stopped"),
   SUBSCRIPTION_CANCELLED("Subscription cancelled"),
   
-  GIVEN_BY_SUPERUSER("Given by the platform"),
+  GIVEN_COUPON("Given coupon"),
 
   PAYMENT_FAILED("Payment failed");
 

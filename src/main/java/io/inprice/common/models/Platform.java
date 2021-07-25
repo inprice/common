@@ -27,7 +27,7 @@ public class Platform implements Serializable {
   private String currencyCode;
   private String currencyFormat;
   @JsonIgnore
-  private LinkStatus status; //if it is not null then every link pointing this site will be having the same status here!
+  private LinkStatus status; //when not null, every link pointing this platform will be having the same status!
   @JsonIgnore
   private String problem;
 
