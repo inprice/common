@@ -28,6 +28,7 @@ public class MembershipMapper implements RowMapper<Membership> {
 
     //transients
     if (Helper.hasColumn(rs, "account_name")) m.setAccountName(rs.getString("account_name"));
+    if (Helper.hasColumn(rs, "contact_name")) m.setContactName(rs.getString("contact_name"));
     if (Helper.hasColumn(rs, "plan_id")) m.setPlanId(rs.getInt("plan_id"));
     if (Helper.hasColumn(rs, "plan_name")) m.setPlanName(rs.getString("plan_name"));
     if (Helper.hasColumn(rs, "user_limit")) m.setUserLimit(rs.getInt("user_limit"));
