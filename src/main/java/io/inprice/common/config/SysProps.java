@@ -21,7 +21,7 @@ public class SysProps {
   public static final String REDIS_ACTIVE_LINKS_TOPIC;
   public static final String REDIS_STATUS_CHANGE_TOPIC;
   public static final String REDIS_ACCESS_LOG_QUEUE;
-	
+
 	public static final String DB_DRIVER;
   public static final String DB_HOST;
   public static final int DB_PORT;
@@ -29,13 +29,13 @@ public class SysProps {
   public static final String DB_USERNAME;
   public static final String DB_PASSWORD;
   public static final String DB_ADDITIONS;
-	
+
 	static {
   	APP_ENV = AppEnv.valueOf(System.getenv().get("APP_ENV") != null ? System.getenv().get("APP_ENV") : "DEV");
   	APP_SHOW_QUERIES = "true".equals(System.getenv().getOrDefault("APP_SHOW_QUERIES", "false").toLowerCase());
   	HTTP_CONNECTION_TIMEOUT = NumberUtils.toInteger(System.getenv().getOrDefault("HTTP_CONNECTION_TIMEOUT", "10")); //seconds
   	WAITING_TIME_FOR_TERMINATION = NumberUtils.toInteger(System.getenv().getOrDefault("WAITING_TIME_FOR_TERMINATION", "30"));
-  	
+
   	TPOOL_EMAIL_CONSUMER_CAPACITY =  NumberUtils.toInteger(System.getenv().getOrDefault("TPOOL_EMAIL_CONSUMER_CAPACITY", "3"));
   	TPOOL_LINK_CONSUMER_CAPACITY =  NumberUtils.toInteger(System.getenv().getOrDefault("TPOOL_LINK_CONSUMER_CAPACITY", "3"));
 

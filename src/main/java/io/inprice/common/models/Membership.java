@@ -26,6 +26,7 @@ public class Membership extends BaseModel {
 
   // transient
   private String accountName;
+  private String contactName;
   private AccountStatus accountStatus = AccountStatus.CREATED;
   private Date lastStatusUpdate; //for account
   private Integer planId;
