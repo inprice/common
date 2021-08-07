@@ -1,14 +1,15 @@
 package io.inprice.common.utils;
 
-import io.inprice.common.info.TimePeriod;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import io.inprice.common.info.TimePeriod;
 
 /**
  * Utility class to provide functionality for date formatting operations
@@ -25,6 +26,8 @@ public class DateUtils {
   private static final SimpleDateFormat sdfLongForLogging = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
   private static final SimpleDateFormat sdfStandart = new SimpleDateFormat("dd/MM/yyyy");
   private static final SimpleDateFormat stfStandart = new SimpleDateFormat("HH:mm:ss");
+
+  private static final SimpleDateFormat sdfForAOL = new SimpleDateFormat("yyyy-M-d");
 
   public static String formatDateForDB(Date date) {
     if (date != null)
@@ -75,6 +78,17 @@ public class DateUtils {
       return sdfForDB.format(date);
     else
       return "";
+  }
+
+  /**
+   * Date formatter for applianceonline site
+   * Formats yesterday's date like 2021-8-3 
+   * 
+   * @return
+   */
+  public static String formatAOLDate() {
+  	Date yesterday = org.apache.commons.lang3.time.DateUtils.addDays(new Date(), -1);
+    return sdfForAOL.format(yesterday);
   }
 
   public static String nowForLogging() {

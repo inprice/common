@@ -141,7 +141,7 @@ create table platform (
   currency_code             char(3) not null,
   currency_format           varchar(30) not null,
   status                    varchar(25),
-  problem                   varchar(250),
+  queue                     enum('DEF_MULTIPLE', 'DEF_SINGLE') not null default 'DEF_MULTIPLE',
   primary key (id),
   key (domain)
 ) engine=innodb;
