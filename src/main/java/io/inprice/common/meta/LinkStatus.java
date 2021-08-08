@@ -46,6 +46,11 @@ public enum LinkStatus {
    */
   REFRESHED(LinkStatusGroup.WAITING, "Will be refreshed in a short while."),
 
+  /**
+   * Used for links blocked by the website's protection system.
+   */
+  BLOCKED(LinkStatusGroup.WAITING, "Website seems not accessible for a while."),
+
 
   /*------------------------------------------------------------------------
     TRYING GROUP
@@ -60,11 +65,6 @@ public enum LinkStatus {
    * Used for links returning http error codes greater than 399.
    */
   NETWORK_ERROR(LinkStatusGroup.TRYING, "Network problem."),
-
-  /**
-   * Used for links blocked by the website's protection system.
-   */
-  BLOCKED(LinkStatusGroup.TRYING, "Blocked by the platform."),
 
   TIMED_OUT(LinkStatusGroup.TRYING, "Access problem."),
 

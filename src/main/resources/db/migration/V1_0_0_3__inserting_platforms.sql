@@ -4,9 +4,12 @@ insert into platform (name, domain, country, class_name, currency_code, currency
   ('Amazon US', 'amazon.com', 'United States', 'xx.Amazon', 'USD', '$#,##0.00'),
   ('Ebay US', 'ebay.com', 'United States', 'xx.Ebay', 'USD', '$#,##0.00'),
   ('Apple US', 'apple.com/us-hed', 'United States', 'xx.Apple', 'USD', '$#,##0.00'),
-  ('Lidl US', 'lidl.com', 'United States', 'us.Lidl', 'USD', '$#,##0.00'),
-  ('BestBuy US', 'bestbuy.com', 'United States', 'us.BestBuy', 'USD', '$#,##0.00'),
+  ('Lidl US', 'lidl.com', 'United States', 'us.LidlUS', 'USD', '$#,##0.00'),
+  ('BestBuy US', 'bestbuy.com', 'United States', 'us.BestBuyUS', 'USD', '$#,##0.00'),
+  ('Bonanza US', 'bonanza.com', 'United States', 'us.Bonanza', 'USD', '$#,##0.00'),
+  ('Etsy US', 'etsy.com', 'United States', 'us.Etsy', 'USD', '$#,##0.00'),
   ('VidaXL US', 'vidaxl.us', 'United States', 'xx.VidaXL', 'USD', '$#,##0.00'),
+  ('Walmart US', 'walmart.com', 'United States', 'us.WalmartUS', 'USD', '$#,##0.00'),
 
   ('Amazon UK', 'amazon.co.uk', 'United Kingdom', 'xx.Amazon', 'GBP', '£#,##0.00'),
   ('Ebay UK', 'ebay.co.uk', 'United Kingdom', 'xx.Ebay', 'GBP', '£#,##0.00'),
@@ -26,7 +29,7 @@ insert into platform (name, domain, country, class_name, currency_code, currency
   ('Amazon CA', 'amazon.ca', 'Canada', 'xx.Amazon', 'CAD', '$#,##0.00'),
   ('Ebay CA', 'ebay.ca', 'Canada', 'xx.Ebay', 'CAD', '$#,##0.00'),
   ('Apple CA', 'apple.com/ca', 'Canada', 'xx.Apple', 'CAD', '$#,##0.00'),
-  ('BestBuy CA', 'bestbuy.ca', 'Canada', 'ca.BestBuy', 'CAD', '$#,##0.00'),
+  ('BestBuy CA', 'bestbuy.ca', 'Canada', 'ca.BestBuyCA', 'CAD', '$#,##0.00'),
   ('Canadian Tire CA', 'canadiantire.ca', 'Canada', 'ca.CanadianTire', 'CAD', '$#,##0.00'),
 
   ('Amazon AU', 'amazon.com.au', 'Australia', 'xx.Amazon', 'AUD', '$#,##0.00'),
@@ -70,7 +73,6 @@ insert into platform (name, domain, country, class_name, currency_code, currency
   ('Bonprix FR', 'bonprix.fr', 'France', 'xx.Bonprix', 'EUR', '#,##0.00 €'),
   ('Auchan FR', 'auchan.fr', 'France', 'fr.Auchan', 'EUR', '#,##0.00 €'),
   ('CDiscount FR', 'cdiscount.com', 'France', 'fr.CDiscount', 'EUR', '#,##0.00 €'),
-  ('Fnac FR', 'fnac.com', 'France', 'fr.Fnac', 'EUR', '#,##0.00 €'),
   ('Laredoute FR', 'laredoute.fr', 'France', 'fr.Laredoute', 'EUR', '#,##0.00 €'),
 
   ('Amazon IT', 'amazon.it', 'Italy', 'xx.Amazon', 'EUR', '€ #,##0.00'),
@@ -79,9 +81,9 @@ insert into platform (name, domain, country, class_name, currency_code, currency
   ('Lidl IT', 'lidl.it', 'Italy', 'xx.Lidl', 'EUR', '€ #,##0.00'),
   ('Zalando IT', 'zalando.it', 'Italy', 'xx.Zalando', 'EUR', '€ #,##0.00'),
   ('Bonprix IT', 'bonprix.it', 'Italy', 'xx.Bonprix', 'EUR', '€ #,##0.00'),
-  ('EPrice IT', 'eprice.it', 'Italy', 'it.EPrice', 'EUR', '€ #,##0.00'),
   ('Euronics IT', 'euronics.it', 'Italy', 'it.EuronicsIT', 'EUR', '€ #,##0.00'),
   ('MediaWorld IT', 'mediaworld.it', 'Italy', 'it.MediaWorld', 'EUR', '€ #,##0.00'),
+  ('EPrice IT', 'eprice.it', 'Italy', 'it.EPrice', 'EUR', '€ #,##0.00'),
   ('VidaXL IT', 'vidaxl.it', 'Italy', 'xx.VidaXL', 'EUR', '€ #,##0.00'),
 
   ('Amazon ES', 'amazon.es', 'Spain', 'xx.Amazon', 'EUR', '€ #,##0.00'),
@@ -106,5 +108,10 @@ insert into platform (name, domain, country, class_name, currency_code, currency
   ;
 
 insert into platform (name, domain, country, class_name, currency_code, currency_format, queue) values
-  ('Walmart CA', 'walmart.ca', 'Canada', 'ca.Walmart', 'CAD', '$#,##0.00', 'DEF_SINGLE')
+  ('Walmart CA', 'walmart.ca', 'Canada', 'ca.WalmartCA', 'CAD', '$#,##0.00', 'DEF_SINGLE')
   ;
+
+insert into platform (name, domain, country, class_name, currency_code, currency_format, status) values
+  ('Fnac FR', 'fnac.com', 'France', 'fr.Fnac', 'EUR', '#,##0.00 €', 'BLOCKED')
+  ;
+  
