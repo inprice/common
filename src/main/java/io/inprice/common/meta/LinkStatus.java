@@ -47,6 +47,11 @@ public enum LinkStatus {
   REFRESHED(LinkStatusGroup.WAITING, "Will be refreshed in a short while."),
 
   /**
+   * Used for platforms which are under maintaining
+   */
+  PARKED(LinkStatusGroup.WAITING, "Website is under maintaining, it will be available soon."),
+
+  /**
    * Used for links blocked by the website's protection system.
    */
   BLOCKED(LinkStatusGroup.WAITING, "Website seems not accessible for a while."),
