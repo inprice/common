@@ -41,6 +41,21 @@ public enum LinkStatus {
    */
   TOBE_IMPLEMENTED(LinkStatusGroup.WAITING, "New platform, we work on this."),
 
+  /**
+   * To refresh and fetch the data one more time
+   */
+  REFRESHED(LinkStatusGroup.WAITING, "Will be refreshed in a short while."),
+
+  /**
+   * Used for platforms which are under maintaining
+   */
+  PARKED(LinkStatusGroup.WAITING, "Website is under maintaining, it will be available soon."),
+
+  /**
+   * Used for links blocked by the website's protection system.
+   */
+  BLOCKED(LinkStatusGroup.WAITING, "Website seems not accessible for a while."),
+
 
   /*------------------------------------------------------------------------
     TRYING GROUP
@@ -56,12 +71,12 @@ public enum LinkStatus {
    */
   NETWORK_ERROR(LinkStatusGroup.TRYING, "Network problem."),
 
-  /**
-   * Used for links blocked by the website's protection system.
-   */
-  BLOCKED(LinkStatusGroup.TRYING, "Blocked by the platform."),
-
   TIMED_OUT(LinkStatusGroup.TRYING, "Access problem."),
+
+  /**
+   * Website seems down
+   */
+  SITE_DOWN(LinkStatusGroup.TRYING, "Website is down."),
 
   
   /*------------------------------------------------------------------------
@@ -82,6 +97,11 @@ public enum LinkStatus {
    * Used for not implemented links
    */
   NOT_SUITABLE(LinkStatusGroup.PROBLEM, "This url won't be handled since not proper!"),
+
+  /**
+   * Used for blocked websites like walmart.ca
+   */
+  NOT_ALLOWED(LinkStatusGroup.PROBLEM, "Access problem, unable to read data."),
 
   /**
    * Used for internal error like 500.
