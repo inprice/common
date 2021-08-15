@@ -19,7 +19,7 @@ import io.inprice.common.meta.AppEnv;
 
 public class Database {
 
-  private static final Logger log = LoggerFactory.getLogger(Database.class);
+  private static final Logger logger = LoggerFactory.getLogger(Database.class);
 
   private static HikariDataSource dataSource;
   private static Jdbi jdbi;
@@ -34,7 +34,7 @@ public class Database {
         SysProps.DB_DATABASE, 
         SysProps.DB_ADDITIONS
       );
-    log.info("Connection string: " + conString);
+    logger.info("Connection string: " + conString);
     connect();
   }
 
@@ -56,23 +56,23 @@ public class Database {
           .load();
       flyway.migrate();
     } catch (Exception e) {
-      log.warn("Connection: "+ conString);
+      logger.warn("Connection: "+ conString);
       if (! SysProps.APP_ENV.equals(AppEnv.PROD)) {
-        log.warn("username: "+ SysProps.DB_USERNAME);
-        log.warn("password: "+ SysProps.DB_PASSWORD);
+        logger.warn("username: "+ SysProps.DB_USERNAME);
+        logger.warn("password: "+ SysProps.DB_PASSWORD);
       }
-      log.error("Unable to init migrations", e);
+      logger.error("Unable to init migrations", e);
     }
   }
 
   public static void cleanDBForTests(String scripts) {
   	if (! SysProps.APP_ENV.equals(AppEnv.TEST)) {
-  		log.warn("You are not allowed to clean tables since system profile is {}!", SysProps.APP_ENV);
+  		logger.warn("You are not allowed to clean tables since system profile is {}!", SysProps.APP_ENV);
   		return;
   	}
   	jdbi.useTransaction(handle -> {
   		handle.createScript(scripts).execute();
-      log.info("Test tables are cleaned!");
+      logger.info("Test tables are cleaned!");
   	});
   }
 
@@ -105,7 +105,7 @@ public class Database {
         @Override
         public void logAfterExecution(StatementContext context) {
           if (SysProps.APP_SHOW_QUERIES) {
-            log.info(" -- Time: {}ms, Query: {}, Parameters: {}", 
+            logger.info(" -- Time: {}ms, Query: {}, Parameters: {}", 
               context.getElapsedTime(ChronoUnit.MILLIS), context.getRenderedSql(), context.getBinding().toString());
           }
         }
@@ -117,7 +117,7 @@ public class Database {
           .setSqlLogger(sqlLogger)
           .installPlugin(new SqlObjectPlugin());
     } catch (Exception e) {
-      log.error("Unable to connect to db", e);
+      logger.error("Unable to connect to db", e);
     }
   }
 

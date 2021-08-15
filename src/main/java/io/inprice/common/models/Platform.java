@@ -5,7 +5,7 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.inprice.common.meta.LinkStatus;
-import io.inprice.common.meta.PlatformQueue;
+import io.inprice.common.meta.QueueName;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -32,7 +32,7 @@ public class Platform implements Serializable {
 
   //some websites must be handled than the others. to be able to do this, we manage them in a separated queue (singly queue)
   @JsonIgnore
-  private PlatformQueue queue;
+  private QueueName queue;
   
   @JsonIgnore
   private LinkStatus status; //if not null, every link pointing this platform will be having the same status!

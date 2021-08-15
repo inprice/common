@@ -7,7 +7,7 @@ import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
 import io.inprice.common.meta.LinkStatus;
-import io.inprice.common.meta.PlatformQueue;
+import io.inprice.common.meta.QueueName;
 import io.inprice.common.models.Platform;
 
 public class PlatformMapper implements RowMapper<Platform> {
@@ -26,7 +26,7 @@ public class PlatformMapper implements RowMapper<Platform> {
 
     if (Helper.hasColumn(rs, "queue")) {
       String val = rs.getString("queue");
-      if (val != null) m.setQueue(PlatformQueue.valueOf(val));
+      if (val != null) m.setQueue(QueueName.valueOf(val));
     }
 
     if (Helper.hasColumn(rs, "status")) {

@@ -11,64 +11,86 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- Versions -->
+    <jdk.version>1.8</jdk.version>
+    <maven-compiler.version>3.8.0</maven-compiler.version>
+
+    <mysql.version>8.0.26</mysql.version>
+    <hikaricp.version>5.0.0</hikaricp.version>
+    <flyway.version>7.13.0</flyway.version>
+    <slf4j.version>1.7.30</slf4j.version>
+    <lombok.version>1.18.20</lombok.version>
+    <commons.version>3.12.0</commons.version>
+    <jackson.version>2.12.4</jackson.version>
+    <jdbi.version>3.21.0</jdbi.version>
+    <rabbitmq.version>5.13.0</rabbitmq.version>
+    <jedis.version>3.6.3</jedis.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.21</version>
+      <version>${mysql.version}</version>
     </dependency>
     <dependency>
       <groupId>com.zaxxer</groupId>
       <artifactId>HikariCP</artifactId>
-      <version>3.4.5</version>
+      <version>${hikaricp.version}</version>
     </dependency>
     <dependency>
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-core</artifactId>
-      <version>6.5.6</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>1.7.30</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.12</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-      <version>3.11</version>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>2.11.2</version>
+      <version>${flyway.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.jdbi</groupId>
       <artifactId>jdbi3-core</artifactId>
-      <version>3.14.4</version>
+      <version>${jdbi.version}</version>
     </dependency>
     <dependency>
       <groupId>org.jdbi</groupId>
       <artifactId>jdbi3-sqlobject</artifactId>
-      <version>3.14.4</version>
+      <version>${jdbi.version}</version>
     </dependency>
 
     <dependency>
-      <groupId>org.redisson</groupId>
-      <artifactId>redisson</artifactId>
-      <version>3.13.4</version>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>${slf4j.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>${commons.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.rabbitmq</groupId>
+      <artifactId>amqp-client</artifactId>
+      <version>${rabbitmq.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>redis.clients</groupId>
+      <artifactId>jedis</artifactId>
+      <version>${jedis.version}</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -77,10 +99,10 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.0</version>
+          <version>${maven-compiler.version}</version>
           <configuration>
-            <source>8</source>
-            <target>8</target>
+            <source>${jdk.version}</source>
+            <target>${jdk.version}</target>
           </configuration>
         </plugin>
       </plugins>
