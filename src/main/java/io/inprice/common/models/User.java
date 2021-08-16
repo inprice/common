@@ -2,7 +2,7 @@ package io.inprice.common.models;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.inprice.common.framework.Exclude;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,7 +26,7 @@ public class User extends BaseModel {
   private Date bannedAt;
   private String banReason;
 
-  @JsonIgnore
+  @Exclude
   private String password;
 
   private Long accid; //for only super user!

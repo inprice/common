@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.inprice.common.framework.Exclude;
 
 import io.inprice.common.meta.AlarmSubject;
 import io.inprice.common.meta.AlarmSubjectWhen;
@@ -40,7 +40,7 @@ public class Alarm implements Serializable {
   private Long linkId;
   private Long groupId;
 
-  @JsonIgnore
+  @Exclude
   private Long accountId;
   
   //transients

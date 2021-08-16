@@ -2,15 +2,15 @@ package io.inprice.common.models;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+import io.inprice.common.framework.Excludes;
 import io.inprice.common.meta.AccountStatus;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@JsonIgnoreProperties({ "id", "adminId" })
+@Excludes(fields = { "id", "adminId" })
+//TODO: excludes dogru calisiyor mu diye kontrol edilmeli!!!
 public class Account extends BaseModel {
 
   private static final long serialVersionUID = 1818360516258349831L;
