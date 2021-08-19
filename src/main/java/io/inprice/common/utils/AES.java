@@ -7,8 +7,7 @@ import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
-import io.inprice.common.config.Secrets;
-import io.inprice.common.config.Secrets.Realm;
+import io.inprice.common.utils.Secrets.Realm;
 
 /**
  * 

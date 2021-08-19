@@ -1,4 +1,4 @@
-package io.inprice.common.config;
+package io.inprice.common.utils;
 
 import java.nio.charset.StandardCharsets;
 

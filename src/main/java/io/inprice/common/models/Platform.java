@@ -3,9 +3,7 @@ package io.inprice.common.models;
 import java.io.Serializable;
 
 import io.inprice.common.framework.Exclude;
-
 import io.inprice.common.meta.LinkStatus;
-import io.inprice.common.meta.QueueName;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -32,7 +30,7 @@ public class Platform implements Serializable {
 
   //some websites must be handled than the others. to be able to do this, we manage them in a separated queue (singly queue)
   @Exclude
-  private QueueName queue;
+  private String queue;
   
   @Exclude
   private LinkStatus status; //if not null, every link pointing this platform will be having the same status!
