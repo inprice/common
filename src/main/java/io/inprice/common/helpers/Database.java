@@ -69,7 +69,6 @@ public class Database {
   	}
   	jdbi.useTransaction(handle -> {
   		handle.createScript(scripts).execute();
-      logger.info("Test tables are cleaned!");
   	});
   }
 

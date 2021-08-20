@@ -13,7 +13,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <!-- Versions -->
-    <jdk.version>1.11</jdk.version>
+    <jdk.version>11</jdk.version>
     <maven-compiler.version>3.8.0</maven-compiler.version>
 
     <mysql.version>8.0.26</mysql.version>
@@ -39,6 +39,12 @@
       <groupId>com.zaxxer</groupId>
       <artifactId>HikariCP</artifactId>
       <version>${hikaricp.version}</version>
+			<exclusions>
+				<exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
     </dependency>
     <dependency>
       <groupId>org.flywaydb</groupId>
@@ -107,8 +113,7 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>${maven-compiler.version}</version>
           <configuration>
-            <source>${jdk.version}</source>
-            <target>${jdk.version}</target>
+						<release>${jdk.version}</release>
           </configuration>
         </plugin>
       </plugins>
