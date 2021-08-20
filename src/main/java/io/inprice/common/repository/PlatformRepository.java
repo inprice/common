@@ -21,7 +21,7 @@ public class PlatformRepository {
     String domain = URLUtils.extractDomain(url);
     if (domain != null) {
       try {
-        List<String> domainList = new ArrayList<>(1);
+        List<String> domainList = new ArrayList<>();
         domainList.add(domain);
 
         int segments = StringUtils.countMatches(domain, ".");

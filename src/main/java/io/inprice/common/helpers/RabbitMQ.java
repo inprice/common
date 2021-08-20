@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeoutException;
 
+import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,7 +75,7 @@ public class RabbitMQ {
    * Must be called during the application shutting down
    */
   public static synchronized void stop() {
-  	if (connectionsMap != null && connectionsMap.size() > 0) {
+    if (MapUtils.isNotEmpty(connectionsMap)) {
   		for (Entry<String, Connection> entry: connectionsMap.entrySet()) {
   			try {
 					entry.getValue().close();
