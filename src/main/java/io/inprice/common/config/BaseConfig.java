@@ -1,19 +1,19 @@
 package io.inprice.common.config;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class BaseConfig {
 
-	@SerializedName("env")
+	@JsonProperty("env")
 	public String ENV = "dev";
 
-	@SerializedName("mysql")
+	@JsonProperty("mysql")
 	public MysqlConf MYSQL_CONF;
 
-	@SerializedName("rabbit")
+	@JsonProperty("rabbit")
 	public RabbitConf RABBIT_CONF;
 
-	@SerializedName("redis")
+	@JsonProperty("redis")
 	public RedisConf REDIS_CONF;
 
 }

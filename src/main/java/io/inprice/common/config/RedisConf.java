@@ -1,19 +1,19 @@
 package io.inprice.common.config;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class RedisConf {
 
-	@SerializedName("host")
+	@JsonProperty("host")
 	public String HOST;
 
-	@SerializedName("port")
+	@JsonProperty("port")
 	public Integer PORT;
 
-	@SerializedName("username")
+	@JsonProperty("username")
 	public String USERNAME;
 
-	@SerializedName("password")
+	@JsonProperty("password")
 	public String PASSWORD;
 	
 }

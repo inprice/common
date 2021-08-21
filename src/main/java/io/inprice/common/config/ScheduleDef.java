@@ -2,23 +2,23 @@ package io.inprice.common.config;
 
 import java.util.Map;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ScheduleDef {
 
-	@SerializedName("active")
+	@JsonProperty("active")
 	public Boolean ACTIVE = Boolean.TRUE;
 
-	@SerializedName("every")
-	public int EVERY;
+	@JsonProperty("every")
+	public Integer EVERY;
 
-	@SerializedName("period")
+	@JsonProperty("period")
 	public String PERIOD;
 
-	@SerializedName("delay")
+	@JsonProperty("delay")
 	public Integer DELAY = 0;
 
-	@SerializedName("data")
+	@JsonProperty("data")
 	public Map<String, String> DATA;
 
 }

@@ -2,14 +2,15 @@ package io.inprice.common.models;
 
 import java.util.Date;
 
-import io.inprice.common.framework.Excludes;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import io.inprice.common.meta.AccountStatus;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Excludes(fields = { "id", "adminId" })
+@JsonIgnoreProperties({ "id", "adminId" })
 //TODO: excludes dogru calisiyor mu diye kontrol edilmeli!!!
 public class Account extends BaseModel {
 

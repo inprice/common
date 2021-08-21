@@ -1,28 +1,28 @@
 package io.inprice.common.config;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class MysqlConf {
 
-	@SerializedName("host")
+	@JsonProperty("host")
 	public String HOST;
 
-	@SerializedName("port")
+	@JsonProperty("port")
 	public Integer PORT;
 
-	@SerializedName("database")
+	@JsonProperty("database")
 	public String DATABASE;
 
-	@SerializedName("username")
+	@JsonProperty("username")
 	public String USERNAME;
 
-	@SerializedName("password")
+	@JsonProperty("password")
 	public String PASSWORD;
 
-	@SerializedName("additions")
+	@JsonProperty("additions")
 	public String ADDITIONS;
 
-	@SerializedName("showQueries")
+	@JsonProperty("showQueries")
 	public Boolean SHOW_QUERIES = Boolean.FALSE;
 
 }

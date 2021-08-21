@@ -1,6 +1,6 @@
 package io.inprice.common.models;
 
-import io.inprice.common.framework.Exclude;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.inprice.common.meta.LinkStatus;
 import io.inprice.common.meta.LinkStatusGroup;
@@ -18,7 +18,7 @@ public class LinkHistory extends BaseModel {
   private static final long serialVersionUID = 885057701505049080L;
 
   private Long linkId;
-  @Exclude
+  @JsonIgnore
   private LinkStatus status;
   private Integer httpStatus;
   private Long groupId;

@@ -1,10 +1,10 @@
 package io.inprice.common.config;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class BaseSystem {
 
-	@SerializedName("env")
+	@JsonProperty("env")
 	public String ENV;
 
 }

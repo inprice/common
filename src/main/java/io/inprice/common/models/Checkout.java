@@ -2,7 +2,7 @@ package io.inprice.common.models;
 
 import java.util.Date;
 
-import io.inprice.common.framework.Exclude;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.inprice.common.meta.CheckoutStatus;
 import lombok.Getter;
@@ -16,10 +16,10 @@ public class Checkout extends BaseModel {
 
   private static final long serialVersionUID = -2323544177591811430L;
 
-  @Exclude
+  @JsonIgnore
   private String hash; //id
 
-  @Exclude
+  @JsonIgnore
   private String sessionId; //from payment gw
 
   private Integer planId;

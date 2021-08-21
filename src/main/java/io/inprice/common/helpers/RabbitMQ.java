@@ -78,7 +78,7 @@ public class RabbitMQ {
     if (MapUtils.isNotEmpty(connectionsMap)) {
   		for (Entry<String, Connection> entry: connectionsMap.entrySet()) {
   			try {
-					entry.getValue().close();
+					if (entry.getValue().isOpen()) entry.getValue().close();
 	  			logger.info(" - Rabbit connection: " + entry.getKey() + " is closed.");
 				} catch (IOException e) {
 	  			logger.info(" - Failed to close rabbit connection: " + entry.getKey(), e);

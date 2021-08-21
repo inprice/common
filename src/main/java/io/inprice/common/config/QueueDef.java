@@ -1,16 +1,16 @@
 package io.inprice.common.config;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class QueueDef {
 
-	@SerializedName("active")
+	@JsonProperty("active")
 	public Boolean ACTIVE = Boolean.TRUE;
 
-	@SerializedName("name")
+	@JsonProperty("name")
 	public String NAME;
 
-	@SerializedName("capacity")
+	@JsonProperty("capacity")
 	public Integer CAPACITY;
 	
 }

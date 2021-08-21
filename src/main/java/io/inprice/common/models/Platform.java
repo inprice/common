@@ -2,7 +2,7 @@ package io.inprice.common.models;
 
 import java.io.Serializable;
 
-import io.inprice.common.framework.Exclude;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.inprice.common.meta.LinkStatus;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,24 +15,24 @@ public class Platform implements Serializable {
 
   private static final long serialVersionUID = -6827311486918410398L;
 
-  @Exclude
+  @JsonIgnore
   private Long id;
   private String name;
 
-  @Exclude
+  @JsonIgnore
   private String domain;
   private String country;
 
-  @Exclude
+  @JsonIgnore
   private String className;
   private String currencyCode;
   private String currencyFormat;
 
   //some websites must be handled than the others. to be able to do this, we manage them in a separated queue (singly queue)
-  @Exclude
+  @JsonIgnore
   private String queue;
   
-  @Exclude
+  @JsonIgnore
   private LinkStatus status; //if not null, every link pointing this platform will be having the same status!
 
 }
