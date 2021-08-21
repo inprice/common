@@ -7,7 +7,6 @@ import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
 import io.inprice.common.meta.LinkStatus;
-import io.inprice.common.meta.PlatformQueue;
 import io.inprice.common.models.Platform;
 
 public class PlatformMapper implements RowMapper<Platform> {
@@ -23,11 +22,7 @@ public class PlatformMapper implements RowMapper<Platform> {
     if (Helper.hasColumn(rs, "currency_code")) m.setCurrencyCode(rs.getString("currency_code"));
     if (Helper.hasColumn(rs, "currency_format")) m.setCurrencyFormat(rs.getString("currency_format"));
     if (Helper.hasColumn(rs, "class_name")) m.setClassName(rs.getString("class_name"));
-
-    if (Helper.hasColumn(rs, "queue")) {
-      String val = rs.getString("queue");
-      if (val != null) m.setQueue(PlatformQueue.valueOf(val));
-    }
+    if (Helper.hasColumn(rs, "queue")) m.setQueue(rs.getString("queue"));
 
     if (Helper.hasColumn(rs, "status")) {
       String val = rs.getString("status");

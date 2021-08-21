@@ -13,7 +13,7 @@ import io.inprice.common.utils.URLUtils;
 
 public class PlatformRepository {
 
-  private static final Logger log = LoggerFactory.getLogger(PlatformRepository.class);
+  private static final Logger logger = LoggerFactory.getLogger(PlatformRepository.class);
 
   public static Platform findByUrl(Handle handle, String url) {
     Platform found = null;
@@ -21,7 +21,7 @@ public class PlatformRepository {
     String domain = URLUtils.extractDomain(url);
     if (domain != null) {
       try {
-        List<String> domainList = new ArrayList<>(1);
+        List<String> domainList = new ArrayList<>();
         domainList.add(domain);
 
         int segments = StringUtils.countMatches(domain, ".");
@@ -39,10 +39,10 @@ public class PlatformRepository {
         PlatformDao platformDao = handle.attach(PlatformDao.class);
         found = platformDao.findByDomainList(domainList);
       } catch (Exception e) {
-        log.error("Failed to find platform", e);
+        logger.error("Failed to find platform", e);
       }
     } else {
-      log.warn("Domain not found for {}", (url.length() > 50 ? url.substring(0, 50) : url));
+      logger.warn("Domain not found for {}", (url.length() > 50 ? url.substring(0, 50) : url));
     }
     return found;
   }

@@ -1,6 +1,6 @@
 package io.inprice.common.info;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.inprice.common.framework.Exclude;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 public class PlanFeature {
 
-	@JsonIgnore
+	@Exclude
 	private Integer id;
   private String description;
   private Boolean allowed;

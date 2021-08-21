@@ -1,6 +1,11 @@
 package io.inprice.common;public class Test {
   
-  public static void main(String[] args) {
+	public static void main(String[] args) {
+		String word = "HOURS";
+		System.out.println(word.substring(0, word.length()-1));
+	}
+	
+  public static void main1(String[] args) {
   	String[] strs = {
 			"{\"status\":113,\"reason\":\"Invalid email or password!\",\"ok\":false}",
 			"{\"Status\":114,\"reason\":\"Invalid email or password!\",\"ok\":false}",

@@ -1,6 +1,5 @@
 package io.inprice.common.utils;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
@@ -10,8 +9,9 @@ public class URLUtils {
 	private static Set<String> domainsWithLang;
 	
 	static {
-		domainsWithLang = new HashSet<>(1);
-		domainsWithLang.add("apple.com");
+		domainsWithLang = Set.of(
+			"apple.com"
+		);
 	}
 
   public static final String URL_CHECK_REGEX = "^https?://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";

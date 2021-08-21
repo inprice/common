@@ -3,7 +3,7 @@ package io.inprice.common.models;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.inprice.common.framework.Exclude;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +18,7 @@ public class BaseModel implements Serializable {
 
 	private Long id;
 
-  @JsonIgnore
+  @Exclude
   private Long accountId;
 
   private Date createdAt;
