@@ -29,8 +29,7 @@ public class Database {
   public static void start(MysqlConf conf) {
   	Database.dbConf = conf;
     conString = 
-      String.format("jdbc:%s://%s:%d/%s%s", 
-    		conf.DRIVER, 
+      String.format("jdbc:mysql://%s:%d/%s%s", 
     		conf.HOST, 
     		conf.PORT,
     		conf.DATABASE, 

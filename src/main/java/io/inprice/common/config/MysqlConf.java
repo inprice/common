@@ -4,9 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class MysqlConf {
 
-	@SerializedName("driver")
-	public String DRIVER;
-
 	@SerializedName("host")
 	public String HOST;
 
