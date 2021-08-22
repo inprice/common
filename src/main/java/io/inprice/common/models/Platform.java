@@ -35,4 +35,6 @@ public class Platform implements Serializable {
   @JsonIgnore
   private LinkStatus status; //if not null, every link pointing this platform will be having the same status!
 
+  private Boolean parked = Boolean.FALSE; //if it is under maintenance, this value is set TRUE
+
 }

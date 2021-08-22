@@ -23,8 +23,8 @@ public class URLUtils {
   }
 
   public static String extractDomain(String url) {
-    final String newForm = url.replaceAll("^(https?)://|www.", "");
-    final String[] chunks = newForm.split("/");
+    String newForm = url.replaceAll("^(https?)://|www.", "");
+    String[] chunks = newForm.split("/");
 
     if (chunks.length > 0) {
     	if (domainsWithLang.contains(chunks[0])) {

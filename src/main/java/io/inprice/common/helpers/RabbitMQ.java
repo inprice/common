@@ -41,11 +41,11 @@ public class RabbitMQ {
     connectionsMap = new HashMap<>();
   }
 
-  public static synchronized Connection createConnection(String forWhom) {
+  public static Connection createConnection(String forWhom) {
   	return createConnection(forWhom, null);
   }
   
-  public static synchronized Connection createConnection(String forWhom, Integer capacity) {
+  public static Connection createConnection(String forWhom, Integer capacity) {
   	if (factory != null) {
   		if (StringUtils.isNotBlank(forWhom)) {
       	try {

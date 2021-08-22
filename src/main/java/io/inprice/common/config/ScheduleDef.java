@@ -19,6 +19,6 @@ public class ScheduleDef {
 	public Integer DELAY = 0;
 
 	@JsonProperty("data")
-	public Map<String, String> DATA;
+	public Map<String, Object> DATA;
 
 }

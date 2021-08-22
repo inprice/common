@@ -23,6 +23,7 @@ public class PlatformMapper implements RowMapper<Platform> {
     if (Helper.hasColumn(rs, "currency_format")) m.setCurrencyFormat(rs.getString("currency_format"));
     if (Helper.hasColumn(rs, "class_name")) m.setClassName(rs.getString("class_name"));
     if (Helper.hasColumn(rs, "queue")) m.setQueue(rs.getString("queue"));
+    if (Helper.hasColumn(rs, "parked")) m.setParked(rs.getBoolean("parked"));
 
     if (Helper.hasColumn(rs, "status")) {
       String val = rs.getString("status");
