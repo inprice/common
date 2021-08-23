@@ -3,7 +3,7 @@ package io.inprice.common.models;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.inprice.common.meta.LinkStatus;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -32,9 +32,7 @@ public class Platform implements Serializable {
   @JsonIgnore
   private String queue;
   
-  @JsonIgnore
-  private LinkStatus status; //if not null, every link pointing this platform will be having the same status!
-
   private Boolean parked = Boolean.FALSE; //if it is under maintenance, this value is set TRUE
+  private Boolean blocked = Boolean.FALSE; //if website doesn't allow us to scrape, this value is set TRUE
 
 }

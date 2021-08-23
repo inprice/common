@@ -36,12 +36,12 @@ public class Link extends BaseModel {
   private LinkStatus status = LinkStatus.TOBE_CLASSIFIED;
   
   @JsonIgnore
-  private String problem;
+  private Integer parseCode;
+  @JsonIgnore
+  private String parseProblem;
+
   private Integer retry;
   private Boolean watchlisted = Boolean.FALSE;
-  
-  @JsonIgnore
-  private Integer httpStatus;
   
   @JsonIgnore
   private Long platformId;

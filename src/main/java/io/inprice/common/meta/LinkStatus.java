@@ -46,11 +46,6 @@ public enum LinkStatus {
    */
   REFRESHED(LinkStatusGroup.WAITING, "Will be refreshed in a short while."),
 
-  /**
-   * Used for links blocked by the website's protection system.
-   */
-  BLOCKED(LinkStatusGroup.WAITING, "Website seems not accessible for a while."),
-
 
   /*------------------------------------------------------------------------
     TRYING GROUP
@@ -60,7 +55,7 @@ public enum LinkStatus {
    * For the links have no sufficient stock
    */
   NOT_AVAILABLE(LinkStatusGroup.TRYING, "Insufficient stock."),
-  
+
   /**
    * Used for links returning http error codes greater than 399.
    */
@@ -72,6 +67,12 @@ public enum LinkStatus {
    * Website seems down
    */
   SITE_DOWN(LinkStatusGroup.TRYING, "Website is down."),
+
+  /**
+   * Used for internal error like 500.
+   * Data will be collected after implemented by us
+   */
+  INTERNAL_ERROR(LinkStatusGroup.PROBLEM, "Facing a technical problem, we are working on this!"),
 
   
   /*------------------------------------------------------------------------
@@ -96,13 +97,7 @@ public enum LinkStatus {
   /**
    * Used for blocked websites like walmart.ca
    */
-  NOT_ALLOWED(LinkStatusGroup.PROBLEM, "Access problem, unable to read data."),
-
-  /**
-   * Used for internal error like 500.
-   * Data will be collected after implemented by us
-   */
-  INTERNAL_ERROR(LinkStatusGroup.PROBLEM, "Facing a technical problem, we are working on this!");
+  NOT_ALLOWED(LinkStatusGroup.PROBLEM, "Access problem, unable to read data.");
 
   private LinkStatusGroup group;
   private String description;

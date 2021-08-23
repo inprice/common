@@ -29,8 +29,8 @@ public class LinkMapper implements RowMapper<Link> {
     if (Helper.hasColumn(rs, "retry")) m.setRetry(Helper.nullIntegerHandler(rs, "retry"));
     if (Helper.hasColumn(rs, "watchlisted")) m.setWatchlisted(rs.getBoolean("watchlisted"));
 
-    if (Helper.hasColumn(rs, "http_status")) m.setHttpStatus(Helper.nullIntegerHandler(rs, "http_status"));
-    if (Helper.hasColumn(rs, "problem")) m.setProblem(rs.getString("problem"));
+    if (Helper.hasColumn(rs, "parse_code")) m.setParseCode(Helper.nullIntegerHandler(rs, "parse_code"));
+    if (Helper.hasColumn(rs, "parse_problem")) m.setParseProblem(rs.getString("parse_problem"));
     if (Helper.hasColumn(rs, "group_id")) m.setGroupId(rs.getLong("group_id"));
 
     if (Helper.hasColumn(rs, "checked_at")) m.setCheckedAt(rs.getTimestamp("checked_at"));
