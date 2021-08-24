@@ -19,17 +19,16 @@ public class StringUtils {
 
   public static String clearErrorMessage(String message) {
   	String problem = null;
-  	if (message != null && ! message.isEmpty()) {
+  	if (message != null && message.trim().isEmpty() == false) {
   		problem = SqlHelper.clear(message);
-  		if (problem.length() > 250) {
-  			problem = problem.substring(0, 250);
+  		if (problem.length() > 255) {
+  			problem = problem.substring(0, 255);
   		}
   
   		if (problem.indexOf("\n") > -1) {
   			String[] parts = problem.split("\n");
   			problem = parts[0];
   		}
-
   	}
   	return problem != null ? SqlHelper.clear(problem) : problem;
   }

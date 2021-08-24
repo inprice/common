@@ -15,6 +15,16 @@ public enum LinkStatus {
    */
   AVAILABLE(LinkStatusGroup.ACTIVE, "Everything is fine."),
 
+  /**
+   * Used for the links after TOBE_IMPLEMENTED and INTERNAL_ERROR status
+   */
+  RESOLVED(LinkStatusGroup.ACTIVE, "Resolved and be updated."),
+
+  /**
+   * To refresh and fetch the data one more time
+   */
+  REFRESHED(LinkStatusGroup.ACTIVE, "Will be refreshed in a short while."),
+
   
   /*------------------------------------------------------------------------
     WAITING GROUP
@@ -26,25 +36,15 @@ public enum LinkStatus {
   TOBE_CLASSIFIED(LinkStatusGroup.WAITING, "Added."),
 
   /**
-   * Used for the links after TOBE_IMPLEMENTED and INTERNAL_ERROR status
-   */
-  RESOLVED(LinkStatusGroup.WAITING, "Resolved and be updated."),
-
-  /**
-   * Used for links paused by super user.
-   */
-  PAUSED(LinkStatusGroup.WAITING, "Manually paused."),
-
-  /**
    * For the links whose websites have not been implemented yet. 
    * Data will be collected after implemented by us
    */
   TOBE_IMPLEMENTED(LinkStatusGroup.WAITING, "New platform, we work on this."),
 
   /**
-   * To refresh and fetch the data one more time
+   * Used for links paused by super user.
    */
-  REFRESHED(LinkStatusGroup.WAITING, "Will be refreshed in a short while."),
+  PAUSED(LinkStatusGroup.WAITING, "Manually paused."),
 
 
   /*------------------------------------------------------------------------
@@ -61,7 +61,7 @@ public enum LinkStatus {
    */
   NETWORK_ERROR(LinkStatusGroup.TRYING, "Network problem."),
 
-  TIMED_OUT(LinkStatusGroup.TRYING, "Access problem."),
+  TIMED_OUT(LinkStatusGroup.TRYING, "Temporarily access problem."),
 
   /**
    * Website seems down
@@ -72,7 +72,7 @@ public enum LinkStatus {
    * Used for internal error like 500.
    * Data will be collected after implemented by us
    */
-  INTERNAL_ERROR(LinkStatusGroup.PROBLEM, "Facing a technical problem, we are working on this!"),
+  INTERNAL_ERROR(LinkStatusGroup.TRYING, "Having technical problem, we are working on this!"),
 
   
   /*------------------------------------------------------------------------
