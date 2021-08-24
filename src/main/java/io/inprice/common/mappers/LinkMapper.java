@@ -63,6 +63,9 @@ public class LinkMapper implements RowMapper<Link> {
     	if (Helper.hasColumn(rs, "currency_code")) platform.setCurrencyCode(rs.getString("currency_code"));
     	if (Helper.hasColumn(rs, "currency_format")) platform.setCurrencyFormat(rs.getString("currency_format"));
     	if (Helper.hasColumn(rs, "country")) platform.setCountry(rs.getString("country"));
+    	if (Helper.hasColumn(rs, "queue")) platform.setQueue(rs.getString("queue"));
+    	if (Helper.hasColumn(rs, "parked")) platform.setParked(rs.getBoolean("parked"));
+    	if (Helper.hasColumn(rs, "blocked")) platform.setBlocked(rs.getBoolean("blocked"));
     	m.setPlatform(platform);
   	}
 
