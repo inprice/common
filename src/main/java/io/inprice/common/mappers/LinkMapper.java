@@ -29,7 +29,7 @@ public class LinkMapper implements RowMapper<Link> {
     if (Helper.hasColumn(rs, "retry")) m.setRetry(Helper.nullIntegerHandler(rs, "retry"));
     if (Helper.hasColumn(rs, "watchlisted")) m.setWatchlisted(rs.getBoolean("watchlisted"));
 
-    if (Helper.hasColumn(rs, "parse_code")) m.setParseCode(Helper.nullIntegerHandler(rs, "parse_code"));
+    if (Helper.hasColumn(rs, "parse_code")) m.setParseCode(rs.getString("parse_code"));
     if (Helper.hasColumn(rs, "parse_problem")) m.setParseProblem(rs.getString("parse_problem"));
     if (Helper.hasColumn(rs, "group_id")) m.setGroupId(rs.getLong("group_id"));
 
@@ -60,6 +60,7 @@ public class LinkMapper implements RowMapper<Link> {
     	Platform platform = new Platform();
     	platform.setId(m.getPlatformId());
     	if (Helper.hasColumn(rs, "platform_name")) platform.setName(rs.getString("platform_name"));
+    	if (Helper.hasColumn(rs, "class_name")) platform.setClassName(rs.getString("class_name"));
     	if (Helper.hasColumn(rs, "currency_code")) platform.setCurrencyCode(rs.getString("currency_code"));
     	if (Helper.hasColumn(rs, "currency_format")) platform.setCurrencyFormat(rs.getString("currency_format"));
     	if (Helper.hasColumn(rs, "country")) platform.setCountry(rs.getString("country"));

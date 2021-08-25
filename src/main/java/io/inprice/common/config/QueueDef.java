@@ -11,6 +11,6 @@ public class QueueDef {
 	public String NAME;
 
 	@JsonProperty("capacity")
-	public Integer CAPACITY;
+	public int CAPACITY = 0;
 	
 }

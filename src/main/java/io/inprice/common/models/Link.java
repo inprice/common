@@ -36,7 +36,7 @@ public class Link extends BaseModel {
   private LinkStatus status = LinkStatus.TOBE_CLASSIFIED;
   
   @JsonIgnore
-  private Integer parseCode;
+  private String parseCode;
   @JsonIgnore
   private String parseProblem;
 

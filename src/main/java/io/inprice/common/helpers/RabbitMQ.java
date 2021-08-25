@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeoutException;
 
 import org.apache.commons.collections4.MapUtils;
@@ -42,20 +41,12 @@ public class RabbitMQ {
   }
 
   public static Connection createConnection(String forWhom) {
-  	return createConnection(forWhom, null);
-  }
-  
-  public static Connection createConnection(String forWhom, Integer capacity) {
   	if (factory != null) {
   		if (StringUtils.isNotBlank(forWhom)) {
       	try {
       		Connection con = connectionsMap.get(forWhom);
       		if (con == null || con.isOpen() == false) {
-      	  	if (capacity != null && capacity > 0 && capacity < 20) {
-      	  		con = factory.newConnection(Executors.newFixedThreadPool(capacity), forWhom);
-      	  	} else {
-      	  		con = factory.newConnection(forWhom);
-      	  	}
+    	  		con = factory.newConnection(forWhom);
       			connectionsMap.put(forWhom, con);
       		}
   				return con;

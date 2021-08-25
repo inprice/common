@@ -87,7 +87,7 @@ public enum LinkStatus {
   /**
    * Used for missing links
    */
-  NOT_FOUND(LinkStatusGroup.PROBLEM, "Page not found!"),
+  NOT_FOUND(LinkStatusGroup.PROBLEM, "Product not found!"),
 
   /**
    * Used for not implemented links
