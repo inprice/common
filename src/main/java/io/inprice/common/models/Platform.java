@@ -35,4 +35,6 @@ public class Platform implements Serializable {
   private Boolean parked = Boolean.FALSE; //if it is under maintenance, this value is set TRUE
   private Boolean blocked = Boolean.FALSE; //if website doesn't allow us to scrape, this value is set TRUE
 
+  private String profile;
+
 }

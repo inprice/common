@@ -24,6 +24,7 @@ public class PlatformMapper implements RowMapper<Platform> {
     if (Helper.hasColumn(rs, "queue")) m.setQueue(rs.getString("queue"));
     if (Helper.hasColumn(rs, "parked")) m.setParked(rs.getBoolean("parked"));
     if (Helper.hasColumn(rs, "blocked")) m.setBlocked(rs.getBoolean("blocked"));
+    if (Helper.hasColumn(rs, "profile")) m.setProfile(rs.getString("profile"));
 
     return m;
   }

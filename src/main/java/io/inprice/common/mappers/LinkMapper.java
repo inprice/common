@@ -67,6 +67,7 @@ public class LinkMapper implements RowMapper<Link> {
     	if (Helper.hasColumn(rs, "queue")) platform.setQueue(rs.getString("queue"));
     	if (Helper.hasColumn(rs, "parked")) platform.setParked(rs.getBoolean("parked"));
     	if (Helper.hasColumn(rs, "blocked")) platform.setBlocked(rs.getBoolean("blocked"));
+    	if (Helper.hasColumn(rs, "profile")) platform.setProfile(rs.getString("profile"));
     	m.setPlatform(platform);
   	}
 

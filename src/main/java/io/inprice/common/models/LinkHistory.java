@@ -20,8 +20,7 @@ public class LinkHistory extends BaseModel {
   private Long linkId;
   @JsonIgnore
   private LinkStatus status;
-  @JsonIgnore
-  private String parseCode;
+  private String parseProblem;
   private Long groupId;
 
   public LinkHistory(LinkStatus status) {
