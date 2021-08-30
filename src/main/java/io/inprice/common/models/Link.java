@@ -34,7 +34,9 @@ public class Link extends BaseModel {
   @JsonIgnore
   private LinkStatus preStatus = LinkStatus.TOBE_CLASSIFIED;
   private LinkStatus status = LinkStatus.TOBE_CLASSIFIED;
-  
+
+  private LinkStatusGroup statusGroup = LinkStatusGroup.WAITING;
+
   @JsonIgnore
   private String parseCode;
   @JsonIgnore
@@ -68,10 +70,6 @@ public class Link extends BaseModel {
 
   public Link(String url) {
     this.url = url;
-  }
-
-  public LinkStatusGroup getStatusGroup() {
-  	return status.getGroup();
   }
   
   public String getStatusDescription() {

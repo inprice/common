@@ -11,7 +11,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonIgnoreProperties({ "id", "adminId" })
-//TODO: excludes dogru calisiyor mu diye kontrol edilmeli!!!
 public class Account extends BaseModel {
 
   private static final long serialVersionUID = 1818360516258349831L;
@@ -52,7 +51,6 @@ public class Account extends BaseModel {
   //transients
   private Plan plan;
   private String email;
-  private Long xid; //id for super user! 
 
   @Override
   public final Long getAccountId() {

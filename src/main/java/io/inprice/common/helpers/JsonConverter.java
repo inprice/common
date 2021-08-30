@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,7 +40,7 @@ public class JsonConverter {
 					private static final long serialVersionUID = 1L;
 					@Override
           protected <A extends Annotation> A _findAnnotation(Annotated annotated, Class<A> annoClass) {
-            if (annoClass == JsonIgnore.class) {
+            if (annoClass == JsonIgnore.class || annoClass == JsonIgnoreProperties.class) {
               return null;
             }
             return super._findAnnotation(annotated, annoClass);
@@ -74,7 +75,7 @@ public class JsonConverter {
     return null;
   }
 
-  public static <T> String toJsonWithoutJsonIgnore(T value) {
+  public static <T> String toJsonWithoutIgnoring(T value) {
     try {
       return mapperWithoutJsonIgnore.writeValueAsString(value);
     } catch (Exception e) {

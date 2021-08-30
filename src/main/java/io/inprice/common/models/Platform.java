@@ -28,13 +28,12 @@ public class Platform implements Serializable {
   private String currencyCode;
   private String currencyFormat;
 
-  //some websites must be handled than the others. to be able to do this, we manage them in a separated queue (singly queue)
+  //some websites must be handled than the others. to be able to do this, we manage them in a separated queue (ie singly queue)
   @JsonIgnore
   private String queue;
+  private String profile;
   
   private Boolean parked = Boolean.FALSE; //if it is under maintenance, this value is set TRUE
   private Boolean blocked = Boolean.FALSE; //if website doesn't allow us to scrape, this value is set TRUE
-
-  private String profile;
 
 }
