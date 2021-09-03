@@ -2,6 +2,7 @@ package io.inprice.common.repository;
 
 import java.math.BigDecimal;
 import java.sql.Types;
+import java.util.List;
 
 import org.jdbi.v3.core.statement.OutParameters;
 import org.jdbi.v3.sqlobject.customizer.Bind;
@@ -11,27 +12,31 @@ import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 import org.jdbi.v3.sqlobject.statement.UseRowMapper;
 
-import io.inprice.common.mappers.LinkPriceMapper;
-import io.inprice.common.models.LinkPrice;
+import io.inprice.common.mappers.LinkMapper;
+import io.inprice.common.models.Link;
 
 public interface CommonDao {
 
   @SqlQuery(
-    "select * from link_price " +
-    "where link_id = :linkId " +
-    "  and price > 0 " +
-    "order by id desc " +
-    "limit 1"
-  )
-  @UseRowMapper(LinkPriceMapper.class)
-  LinkPrice findLastPriceTransOfLink(@Bind("linkId") Long linkId);
+		"select l.* from link as l " +
+		"inner join account as a on a.id = l.account_id " + 
+		"where a.status in ('FREE', 'COUPONED', 'SUBSCRIBED') " +
+		"  and l.url_hash=:urlHash " +
+		"  and l.retry < 3"
+	)
+  @UseRowMapper(LinkMapper.class)
+  List<Link> findActiveLinksByHash(@Bind("urlHash") String urlHash);
+
+  @SqlUpdate("update link set checked_at = now() where id=:id")
+  boolean refreshCheckedAt(@Bind("id") long id); 
 
   @SqlUpdate(
     "insert into link_price " +
-    "(link_id, price, diff_amount, diff_rate, group_id, account_id) "+
-    "values (:linkId, :price, :diffAmount, :diffRate, :groupId, :accountId)"
+    "(link_id, old_price, new_price, diff_amount, diff_rate, group_id, account_id) "+
+    "values (:linkId, :oldPrice, :newPrice, :diffAmount, :diffRate, :groupId, :accountId)"
   )
-  boolean insertLinkPrice(@Bind("linkId") long linkId, @Bind("price") BigDecimal price, 
+  boolean insertLinkPrice(@Bind("linkId") long linkId, 
+		@Bind("oldPrice") BigDecimal oldPrice, @Bind("newPrice") BigDecimal newPrice, 
     @Bind("diffAmount") BigDecimal diffAmount, @Bind("diffRate") BigDecimal diffRate,
     @Bind("groupId") long groupId, @Bind("accountId") long accountId);
 
