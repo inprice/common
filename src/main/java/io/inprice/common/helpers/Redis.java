@@ -31,7 +31,9 @@ public class Redis {
    * Must be called during the application shutting down
    */
   public static void stop() {
-  	pool.close();
+  	try {
+  		pool.close();
+  	} catch (Exception ignore) {}
   }
 
 }

@@ -14,14 +14,16 @@ public class LinkPrice extends BaseModel {
   private static final long serialVersionUID = 6818942944451174569L;
 
   private Long linkId;
-  private BigDecimal price;
+  private BigDecimal oldPrice;
+  private BigDecimal newPrice;
   private BigDecimal diffAmount;
   private BigDecimal diffRate;
   private Long groupId;
 
-  public LinkPrice(Long linkId, BigDecimal price) {
+  public LinkPrice(Long linkId, BigDecimal oldPrice, BigDecimal newPrice) {
     this.linkId = linkId;
-    this.price = price;
+    this.oldPrice = oldPrice;
+    this.newPrice = newPrice;
   }
 
 }

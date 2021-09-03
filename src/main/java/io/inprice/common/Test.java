@@ -1,25 +1,30 @@
-package io.inprice.common;public class Test {
+package io.inprice.common;
+
+import java.util.Iterator;
+
+import io.inprice.common.lib.ExpiringHashSet;
+import io.inprice.common.lib.ExpiringSet;
+
+public class Test {
   
 	public static void main(String[] args) {
-		String word = "HOURS";
-		System.out.println(word.substring(0, word.length()-1));
-	}
-	
-  public static void main1(String[] args) {
-  	String[] strs = {
-			"{\"status\":113,\"reason\":\"Invalid email or password!\",\"ok\":false}",
-			"{\"Status\":114,\"reason\":\"Invalid email or password!\",\"ok\":false}",
-			"{\"ktatus\":115,\"reason\":\"Invalid email or password!\",\"ok\":false}",
-			"{\"reason\":\"Invalid email or password!\",\"status\":116,\"ok\":false}",
-  	};
-  	String indicator = "status\":";
-  	for (String s : strs) {
-  		int first = s.toLowerCase().indexOf(indicator);
-  		if (first > -1) {
-    		int last = s.toLowerCase().indexOf(",", first+indicator.length());
-  			System.out.println(s.substring(first+indicator.length(), last));
-  		}
+		ExpiringSet<String> expiringStringSet = new ExpiringHashSet<>();
+		expiringStringSet.add("Adana", 1000);
+		expiringStringSet.add("Bursa", 2000);
+		expiringStringSet.add("Ceyhan", 3000);
+		expiringStringSet.add("Diyarbakır", 4000);
+
+		for (int i = 0; i < 5; i++) {
+			for (Iterator<String> iterator = expiringStringSet.iterator(); iterator.hasNext();) {
+				System.out.print(iterator.next() + ", ");
+			}
+			System.out.println(expiringStringSet.size());
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {}
+			if (i==1)expiringStringSet.clear();
 		}
+		
   }
 
 }

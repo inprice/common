@@ -28,21 +28,17 @@ public class Helper {
    */
   public static Long nullLongHandler(ResultSet rs, String field) {
     try {
-      Long val = rs.getLong(field);
-      if (!rs.wasNull())
-        return val;
-    } catch (Exception ignored) {
-    }
+      long val = rs.getLong(field);
+      if (rs.wasNull() == false) return val;
+    } catch (Exception ignored) { }
     return null;
   }
 
   public static Integer nullIntegerHandler(ResultSet rs, String field) {
     try {
-      Integer val = rs.getInt(field);
-      if (!rs.wasNull())
-        return val;
-    } catch (Exception ignored) {
-    }
+      int val = rs.getInt(field);
+      if (rs.wasNull() == false) return val;
+    } catch (Exception ignored) { }
     return null;
   }
 

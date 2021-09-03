@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeoutException;
 
 import org.apache.commons.collections4.MapUtils;
@@ -41,21 +40,13 @@ public class RabbitMQ {
     connectionsMap = new HashMap<>();
   }
 
-  public static synchronized Connection createConnection(String forWhom) {
-  	return createConnection(forWhom, null);
-  }
-  
-  public static synchronized Connection createConnection(String forWhom, Integer capacity) {
+  public static Connection createConnection(String forWhom) {
   	if (factory != null) {
   		if (StringUtils.isNotBlank(forWhom)) {
       	try {
       		Connection con = connectionsMap.get(forWhom);
       		if (con == null || con.isOpen() == false) {
-      	  	if (capacity != null && capacity > 0 && capacity < 20) {
-      	  		con = factory.newConnection(Executors.newFixedThreadPool(capacity), forWhom);
-      	  	} else {
-      	  		con = factory.newConnection(forWhom);
-      	  	}
+    	  		con = factory.newConnection(forWhom);
       			connectionsMap.put(forWhom, con);
       		}
   				return con;
@@ -78,7 +69,7 @@ public class RabbitMQ {
     if (MapUtils.isNotEmpty(connectionsMap)) {
   		for (Entry<String, Connection> entry: connectionsMap.entrySet()) {
   			try {
-					entry.getValue().close();
+					if (entry.getValue().isOpen()) entry.getValue().close();
 	  			logger.info(" - Rabbit connection: " + entry.getKey() + " is closed.");
 				} catch (IOException e) {
 	  			logger.info(" - Failed to close rabbit connection: " + entry.getKey(), e);

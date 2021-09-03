@@ -63,7 +63,6 @@ public class AccountMapper implements RowMapper<Account> {
       m.setPlan(plan);
     }
 
-    if (Helper.hasColumn(rs, "xid")) m.setXid(rs.getLong("xid"));
     if (Helper.hasColumn(rs, "email")) m.setEmail(rs.getString("email"));
 
     return m;

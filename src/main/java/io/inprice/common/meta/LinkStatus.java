@@ -15,6 +15,16 @@ public enum LinkStatus {
    */
   AVAILABLE(LinkStatusGroup.ACTIVE, "Everything is fine."),
 
+  /**
+   * Used for the links after TOBE_IMPLEMENTED and INTERNAL_ERROR status
+   */
+  RESOLVED(LinkStatusGroup.ACTIVE, "Resolved and be updated."),
+
+  /**
+   * To refresh and fetch the data one more time
+   */
+  REFRESHED(LinkStatusGroup.ACTIVE, "Will be refreshed in a short while."),
+
   
   /*------------------------------------------------------------------------
     WAITING GROUP
@@ -26,35 +36,15 @@ public enum LinkStatus {
   TOBE_CLASSIFIED(LinkStatusGroup.WAITING, "Added."),
 
   /**
-   * Used for the links after TOBE_IMPLEMENTED and INTERNAL_ERROR status
-   */
-  RESOLVED(LinkStatusGroup.WAITING, "Resolved and be updated."),
-
-  /**
-   * Used for links paused by super user.
-   */
-  PAUSED(LinkStatusGroup.WAITING, "Manually paused."),
-
-  /**
    * For the links whose websites have not been implemented yet. 
    * Data will be collected after implemented by us
    */
   TOBE_IMPLEMENTED(LinkStatusGroup.WAITING, "New platform, we work on this."),
 
   /**
-   * To refresh and fetch the data one more time
+   * Used for links paused by super user.
    */
-  REFRESHED(LinkStatusGroup.WAITING, "Will be refreshed in a short while."),
-
-  /**
-   * Used for platforms which are under maintaining
-   */
-  PARKED(LinkStatusGroup.WAITING, "Website is under maintaining, it will be available soon."),
-
-  /**
-   * Used for links blocked by the website's protection system.
-   */
-  BLOCKED(LinkStatusGroup.WAITING, "Website seems not accessible for a while."),
+  PAUSED(LinkStatusGroup.WAITING, "Manually paused."),
 
 
   /*------------------------------------------------------------------------
@@ -65,18 +55,24 @@ public enum LinkStatus {
    * For the links have no sufficient stock
    */
   NOT_AVAILABLE(LinkStatusGroup.TRYING, "Insufficient stock."),
-  
+
   /**
    * Used for links returning http error codes greater than 399.
    */
   NETWORK_ERROR(LinkStatusGroup.TRYING, "Network problem."),
 
-  TIMED_OUT(LinkStatusGroup.TRYING, "Access problem."),
+  TIMED_OUT(LinkStatusGroup.TRYING, "Temporarily access problem."),
 
   /**
    * Website seems down
    */
   SITE_DOWN(LinkStatusGroup.TRYING, "Website is down."),
+
+  /**
+   * Used for internal error like 500.
+   * Data will be collected after implemented by us
+   */
+  INTERNAL_ERROR(LinkStatusGroup.TRYING, "Having technical problem, we are working on this!"),
 
   
   /*------------------------------------------------------------------------
@@ -91,7 +87,7 @@ public enum LinkStatus {
   /**
    * Used for missing links
    */
-  NOT_FOUND(LinkStatusGroup.PROBLEM, "Page not found!"),
+  NOT_FOUND(LinkStatusGroup.PROBLEM, "Product not found!"),
 
   /**
    * Used for not implemented links
@@ -101,13 +97,7 @@ public enum LinkStatus {
   /**
    * Used for blocked websites like walmart.ca
    */
-  NOT_ALLOWED(LinkStatusGroup.PROBLEM, "Access problem, unable to read data."),
-
-  /**
-   * Used for internal error like 500.
-   * Data will be collected after implemented by us
-   */
-  INTERNAL_ERROR(LinkStatusGroup.PROBLEM, "Facing a technical problem, we are working on this!");
+  NOT_ALLOWED(LinkStatusGroup.PROBLEM, "Access problem, unable to read data.");
 
   private LinkStatusGroup group;
   private String description;

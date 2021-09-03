@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import io.inprice.common.framework.Exclude;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.inprice.common.meta.Level;
 import io.inprice.common.meta.LinkStatus;
@@ -31,26 +31,28 @@ public class Link extends BaseModel {
   private BigDecimal price = BigDecimal.ZERO;
   private Level level = Level.NA;
 
-  @Exclude
+  @JsonIgnore
   private LinkStatus preStatus = LinkStatus.TOBE_CLASSIFIED;
   private LinkStatus status = LinkStatus.TOBE_CLASSIFIED;
-  
-  @Exclude
-  private String problem;
+
+  private LinkStatusGroup statusGroup = LinkStatusGroup.WAITING;
+
+  @JsonIgnore
+  private String parseCode;
+  @JsonIgnore
+  private String parseProblem;
+
   private Integer retry;
   private Boolean watchlisted = Boolean.FALSE;
   
-  @Exclude
-  private Integer httpStatus;
-  
-  @Exclude
+  @JsonIgnore
   private Long platformId;
   private Long groupId;
 
   private Date updatedAt;
   private Date checkedAt;
   
-  @Exclude
+  @JsonIgnore
   private String urlHash;
 
   private Long alarmId;
@@ -68,10 +70,6 @@ public class Link extends BaseModel {
 
   public Link(String url) {
     this.url = url;
-  }
-
-  public LinkStatusGroup getStatusGroup() {
-  	return status.getGroup();
   }
   
   public String getStatusDescription() {

@@ -11,7 +11,7 @@ import io.inprice.common.models.Plan;
 public class PlanFeatureReducer implements LinkedHashMapRowReducer<Integer, Plan> {
 
 	public void accumulate(Map<Integer, Plan> map, RowView rowView) {
-    final Plan plan = 
+    Plan plan = 
   		map.computeIfAbsent(
 				rowView.getColumn("p_id", Integer.class), id -> rowView.getRow(Plan.class)
 			);

@@ -19,4 +19,9 @@ public class GroupRefreshResult {
 	private Level level = Level.NA;
 	private Long alarmId;
 
+	private Integer actives = 0;
+	private Integer waitings = 0;
+	private Integer tryings = 0;
+	private Integer problems = 0;
+
 }

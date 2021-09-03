@@ -17,7 +17,7 @@ public class LinkHistoryMapper implements RowMapper<LinkHistory> {
     Helper.mapBaseFields(m, rs);
 
     if (Helper.hasColumn(rs, "link_id")) m.setLinkId(rs.getLong("link_id"));
-    if (Helper.hasColumn(rs, "http_status")) m.setHttpStatus(Helper.nullIntegerHandler(rs, "http_status"));
+    if (Helper.hasColumn(rs, "parse_problem")) m.setParseProblem(rs.getString("parse_problem"));
     if (Helper.hasColumn(rs, "group_id")) m.setGroupId(rs.getLong("group_id"));
 
     if (Helper.hasColumn(rs, "status")) {

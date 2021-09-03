@@ -8,6 +8,7 @@ import org.jdbi.v3.core.statement.StatementContext;
 
 import io.inprice.common.meta.Level;
 import io.inprice.common.meta.LinkStatus;
+import io.inprice.common.meta.LinkStatusGroup;
 import io.inprice.common.models.Link;
 import io.inprice.common.models.Platform;
 
@@ -29,8 +30,8 @@ public class LinkMapper implements RowMapper<Link> {
     if (Helper.hasColumn(rs, "retry")) m.setRetry(Helper.nullIntegerHandler(rs, "retry"));
     if (Helper.hasColumn(rs, "watchlisted")) m.setWatchlisted(rs.getBoolean("watchlisted"));
 
-    if (Helper.hasColumn(rs, "http_status")) m.setHttpStatus(Helper.nullIntegerHandler(rs, "http_status"));
-    if (Helper.hasColumn(rs, "problem")) m.setProblem(rs.getString("problem"));
+    if (Helper.hasColumn(rs, "parse_code")) m.setParseCode(rs.getString("parse_code"));
+    if (Helper.hasColumn(rs, "parse_problem")) m.setParseProblem(rs.getString("parse_problem"));
     if (Helper.hasColumn(rs, "group_id")) m.setGroupId(rs.getLong("group_id"));
 
     if (Helper.hasColumn(rs, "checked_at")) m.setCheckedAt(rs.getTimestamp("checked_at"));
@@ -51,6 +52,10 @@ public class LinkMapper implements RowMapper<Link> {
     	String val = rs.getString("status");
     	if (val != null) m.setStatus(LinkStatus.valueOf(val));
     }
+    if (Helper.hasColumn(rs, "status_group")) {
+    	String val = rs.getString("status_group");
+    	if (val != null) m.setStatusGroup(LinkStatusGroup.valueOf(val));
+    }
 
     //transients
     if (Helper.hasColumn(rs, "group_name")) m.setGroupName(rs.getString("group_name"));
@@ -60,9 +65,15 @@ public class LinkMapper implements RowMapper<Link> {
     	Platform platform = new Platform();
     	platform.setId(m.getPlatformId());
     	if (Helper.hasColumn(rs, "platform_name")) platform.setName(rs.getString("platform_name"));
+    	if (Helper.hasColumn(rs, "domain")) platform.setDomain(rs.getString("domain"));
+    	if (Helper.hasColumn(rs, "class_name")) platform.setClassName(rs.getString("class_name"));
     	if (Helper.hasColumn(rs, "currency_code")) platform.setCurrencyCode(rs.getString("currency_code"));
     	if (Helper.hasColumn(rs, "currency_format")) platform.setCurrencyFormat(rs.getString("currency_format"));
     	if (Helper.hasColumn(rs, "country")) platform.setCountry(rs.getString("country"));
+    	if (Helper.hasColumn(rs, "queue")) platform.setQueue(rs.getString("queue"));
+    	if (Helper.hasColumn(rs, "parked")) platform.setParked(rs.getBoolean("parked"));
+    	if (Helper.hasColumn(rs, "blocked")) platform.setBlocked(rs.getBoolean("blocked"));
+    	if (Helper.hasColumn(rs, "profile")) platform.setProfile(rs.getString("profile"));
     	m.setPlatform(platform);
   	}
 
