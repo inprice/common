@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ScheduleDef {
+public class SchedulerDef {
 
 	@JsonProperty("active")
 	public Boolean ACTIVE = Boolean.TRUE;

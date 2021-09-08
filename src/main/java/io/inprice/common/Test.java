@@ -1,30 +1,28 @@
 package io.inprice.common;
 
-import java.util.Iterator;
-
-import io.inprice.common.lib.ExpiringHashSet;
-import io.inprice.common.lib.ExpiringSet;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Test {
   
 	public static void main(String[] args) {
-		ExpiringSet<String> expiringStringSet = new ExpiringHashSet<>();
-		expiringStringSet.add("Adana", 1000);
-		expiringStringSet.add("Bursa", 2000);
-		expiringStringSet.add("Ceyhan", 3000);
-		expiringStringSet.add("Diyarbakır", 4000);
+		BigDecimal A_HUNDRED = new BigDecimal(100);
 
-		for (int i = 0; i < 5; i++) {
-			for (Iterator<String> iterator = expiringStringSet.iterator(); iterator.hasNext();) {
-				System.out.print(iterator.next() + ", ");
-			}
-			System.out.println(expiringStringSet.size());
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {}
-			if (i==1)expiringStringSet.clear();
-		}
+  	BigDecimal diffAmount = BigDecimal.ZERO;
+  	BigDecimal diffRate = BigDecimal.ZERO;
+
+		BigDecimal oldPrice = BigDecimal.valueOf(7264);
+		BigDecimal newPrice = BigDecimal.valueOf(7234);
 		
+  	if (oldPrice.compareTo(BigDecimal.ZERO) != 0) {
+    	diffAmount = newPrice.subtract(oldPrice).setScale(2, RoundingMode.HALF_UP);
+    	if (diffAmount.compareTo(BigDecimal.ZERO) != 0) {
+    		diffRate = diffAmount.divide(oldPrice, 6, RoundingMode.HALF_UP).multiply(A_HUNDRED).setScale(2, RoundingMode.HALF_UP);
+    	}
+  	}
+  	
+  	System.out.println("diffAmount --> " + diffAmount);
+  	System.out.println("diffRate   --> " + diffRate);
   }
 
 }
