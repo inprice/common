@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class LinkGroup extends BaseModel {
+public class Product extends BaseModel {
 
   private static final long serialVersionUID = 2010109845985968128L;
 

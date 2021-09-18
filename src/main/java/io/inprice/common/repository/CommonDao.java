@@ -32,21 +32,21 @@ public interface CommonDao {
 
   @SqlUpdate(
     "insert into link_price " +
-    "(link_id, old_price, new_price, diff_amount, diff_rate, group_id, account_id) "+
-    "values (:linkId, :oldPrice, :newPrice, :diffAmount, :diffRate, :groupId, :accountId)"
+    "(link_id, old_price, new_price, diff_amount, diff_rate, product_id, account_id) "+
+    "values (:linkId, :oldPrice, :newPrice, :diffAmount, :diffRate, :productId, :accountId)"
   )
   boolean insertLinkPrice(@Bind("linkId") long linkId, 
 		@Bind("oldPrice") BigDecimal oldPrice, @Bind("newPrice") BigDecimal newPrice, 
     @Bind("diffAmount") BigDecimal diffAmount, @Bind("diffRate") BigDecimal diffRate,
-    @Bind("groupId") long groupId, @Bind("accountId") long accountId);
+    @Bind("productId") long productId, @Bind("accountId") long accountId);
 
-  @SqlCall("call sp_refresh_group(:groupId, :minPrice, :avgPrice, :maxPrice, :total, :level, :alarmId)")
+  @SqlCall("call sp_refresh_product(:productId, :minPrice, :avgPrice, :maxPrice, :total, :level, :alarmId)")
   @OutParameter(name="minPrice", sqlType=Types.DOUBLE)
   @OutParameter(name="avgPrice", sqlType=Types.DOUBLE)
   @OutParameter(name="maxPrice", sqlType=Types.DOUBLE)
   @OutParameter(name="total", sqlType=Types.DOUBLE)
   @OutParameter(name="level", sqlType=Types.VARCHAR)
   @OutParameter(name="alarmId", sqlType=Types.BIGINT)
-  OutParameters refreshGroup(@Bind("groupId") Long groupId);
+  OutParameters refreshProduct(@Bind("productId") Long productId);
 
 }

@@ -2,8 +2,8 @@
 -- @since 2021-03-13
 DELIMITER $$
 
-create procedure sp_refresh_group (
-    in in_group_id bigint,
+create procedure sp_refresh_product (
+    in in_product_id bigint,
     out minPrice decimal(9,2),
     out avgPrice decimal(9,2),
     out maxPrice decimal(9,2),
@@ -14,18 +14,18 @@ create procedure sp_refresh_group (
 begin
   start transaction;
 
-  select price, alarm_id into @groupPrice, @alarmId from link_group where id = in_group_id for update;
+  select price, alarm_id into @productPrice, @alarmId from product where id = in_product_id for update;
 
   select
-    @total    := sum(case when status_group = 'ACTIVE' then price else 0 end),
-    @minPrice := min(case when status_group = 'ACTIVE' then price end),
-    @avgPrice := avg(case when status_group = 'ACTIVE' then price end),
-    @maxPrice := max(case when status_group = 'ACTIVE' then price end),
-    @actives  := sum(case when status_group = 'ACTIVE' then 1 else 0 end),
-    @tryings  := sum(case when status_group = 'TRYING' then 1 else 0 end),
-    @waitings := sum(case when status_group = 'WAITING' then 1 else 0 end),
-    @problems := sum(case when status_group = 'PROBLEM' then 1 else 0 end)
-  from link where group_id = in_group_id;
+    @total    := sum(case when grup = 'ACTIVE' then price else 0 end),
+    @minPrice := min(case when grup = 'ACTIVE' then price end),
+    @avgPrice := avg(case when grup = 'ACTIVE' then price end),
+    @maxPrice := max(case when grup = 'ACTIVE' then price end),
+    @actives  := sum(case when grup = 'ACTIVE' then 1 else 0 end),
+    @tryings  := sum(case when grup = 'TRYING' then 1 else 0 end),
+    @waitings := sum(case when grup = 'WAITING' then 1 else 0 end),
+    @problems := sum(case when grup = 'PROBLEM' then 1 else 0 end)
+  from link where product_id = in_product_id;
 
   if @total    is null then set @total    := 0; end if;
   if @minPrice is null then set @minPrice := 0; end if;
@@ -48,7 +48,7 @@ begin
 
   if @actives > 0 or @tryings > 0 or @waitings > 0 or @problems > 0 then
 
-    update link set level='NA' where group_id=in_group_id;
+    update link set level='NA' where product_id=in_product_id;
 
     if @actives > 1 then
 
@@ -60,27 +60,27 @@ begin
         set @avgPrice := @minPrice;
       end if;
 
-      if @groupPrice > 0 and @minPrice != @maxPrice then
-        set @minDiff := ROUND(((@minPrice / @groupPrice)-1)*100, 2);
-        set @avgDiff := ROUND(((@avgPrice / @groupPrice)-1)*100, 2);
-        set @maxDiff := ROUND(((@maxPrice / @groupPrice)-1)*100, 2);
+      if @productPrice > 0 and @minPrice != @maxPrice then
+        set @minDiff := ROUND(((@minPrice / @productPrice)-1)*100, 2);
+        set @avgDiff := ROUND(((@avgPrice / @productPrice)-1)*100, 2);
+        set @maxDiff := ROUND(((@maxPrice / @productPrice)-1)*100, 2);
 
-        if @groupPrice <= @minPrice then 
+        if @productPrice <= @minPrice then 
           set @level := 'LOWEST';
           set @minSeller := 'You';
           set @minPlatform := 'Yours';
-          set @minPrice := @groupPrice;
-        elseif @groupPrice < @avgPrice then 
+          set @minPrice := @productPrice;
+        elseif @productPrice < @avgPrice then 
           set @level := 'LOWER';
-        elseif @groupPrice = @avgPrice then 
+        elseif @productPrice = @avgPrice then 
           set @level := 'AVERAGE';
-        elseif @groupPrice < @maxPrice then 
+        elseif @productPrice < @maxPrice then 
           set @level := 'HIGHER';
-        elseif @groupPrice >= @maxPrice then 
+        elseif @productPrice >= @maxPrice then 
           set @level := 'HIGHEST';
           set @maxSeller := 'You';
           set @maxPlatform := 'Yours';
-          set @maxPrice := @groupPrice;
+          set @maxPrice := @productPrice;
         end if;
       end if;
 
@@ -93,22 +93,22 @@ begin
             when price > @avgPrice and price < @maxPrice then 'HIGHER'
             when price >= @maxPrice then 'HIGHEST'
           end)
-        where group_id=in_group_id and status_group='ACTIVE';
+        where product_id=in_product_id and grup='ACTIVE';
       else
-        update link set level = 'EQUAL' where group_id=in_group_id and status_group='ACTIVE';
+        update link set level = 'EQUAL' where product_id=in_product_id and grup='ACTIVE';
       end if;
 
     end if;
 
   end if;
 
-  update link_group set
+  update product set
     min_seller = @minSeller, min_platform = @minPlatform, min_price = @minPrice, min_diff = @minDiff,
     avg_price = @avgPrice, avg_diff = @avgDiff,
     max_seller = @maxSeller, max_platform = @maxPlatform, max_price = @maxPrice, max_diff = @maxDiff,
     actives = @actives, tryings = @tryings, waitings = @waitings, problems = @problems, 
     level = @level, total = @total, updated_at = now()
-  where id = in_group_id;
+  where id = in_product_id;
 
   commit;
 

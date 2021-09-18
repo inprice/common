@@ -18,7 +18,7 @@ public class LinkPrice extends BaseModel {
   private BigDecimal newPrice;
   private BigDecimal diffAmount;
   private BigDecimal diffRate;
-  private Long groupId;
+  private Long productId;
 
   public LinkPrice(Long linkId, BigDecimal oldPrice, BigDecimal newPrice) {
     this.linkId = linkId;

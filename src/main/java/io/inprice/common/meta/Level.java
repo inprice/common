@@ -1,7 +1,7 @@
 package io.inprice.common.meta;
 
 /**
- * Link and Group levels
+ * Link and Product levels
  * 
  * @author mdpinar
  *

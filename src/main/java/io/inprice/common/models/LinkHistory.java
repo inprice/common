@@ -3,7 +3,7 @@ package io.inprice.common.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.inprice.common.meta.LinkStatus;
-import io.inprice.common.meta.LinkStatusGroup;
+import io.inprice.common.meta.Grup;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,7 +21,7 @@ public class LinkHistory extends BaseModel {
   @JsonIgnore
   private LinkStatus status;
   private String parseProblem;
-  private Long groupId;
+  private Long productId;
 
   public LinkHistory(LinkStatus status) {
     this.status = status;
@@ -32,8 +32,8 @@ public class LinkHistory extends BaseModel {
     this.status = status;
   }
 
-  public LinkStatusGroup getStatusGroup() {
-  	return status.getGroup();
+  public Grup getGrup() {
+  	return status.getGrup();
   }
   
   public String getStatusDescription() {

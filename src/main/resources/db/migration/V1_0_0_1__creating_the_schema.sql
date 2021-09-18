@@ -150,9 +150,9 @@ create table platform (
 
 create table alarm (
   id                        bigint unsigned auto_increment not null,
-  group_id                  bigint unsigned,
+  product_id                bigint unsigned,
   link_id                   bigint unsigned,
-  topic                     enum('LINK', 'GROUP') not null default 'LINK',
+  topic                     enum('LINK', 'PRODUCT') not null default 'LINK',
   subject                   enum('STATUS', 'PRICE', 'MINIMUM', 'AVERAGE', 'MAXIMUM', 'TOTAL') not null default 'STATUS',
   subject_when              enum('CHANGED', 'EQUAL', 'NOT_EQUAL', 'INCREASED', 'DECREASED', 'OUT_OF_LIMITS') not null default 'CHANGED',
   certain_status            varchar(10),
@@ -169,7 +169,7 @@ create table alarm (
 ) engine=innodb;
 alter table alarm add foreign key (account_id) references account (id);
 
-create table link_group (
+create table product (
   id                        bigint unsigned auto_increment not null,
   name                      varchar(50) not null,
   description               varchar(128),
@@ -199,8 +199,8 @@ create table link_group (
   primary key (id),
   key (name)
 ) engine=innodb;
-alter table link_group add foreign key (alarm_id) references alarm (id);
-alter table link_group add foreign key (account_id) references account (id);
+alter table product add foreign key (alarm_id) references alarm (id);
+alter table product add foreign key (account_id) references account (id);
 
 create table link (
   id                        bigint unsigned auto_increment not null,
@@ -215,12 +215,12 @@ create table link (
   level                     enum('LOWEST', 'HIGHEST', 'LOWER', 'AVERAGE', 'HIGHER', 'EQUAL', 'NA') not null default 'NA',
   pre_status                varchar(25) not null default 'TOBE_CLASSIFIED',
   status                    varchar(25) not null default 'TOBE_CLASSIFIED',
-  status_group              enum('ACTIVE', 'TRYING', 'WAITING', 'PROBLEM') not null default 'WAITING',
+  grup                      enum('ACTIVE', 'WAITING', 'TRYING', 'PROBLEM') not null default 'WAITING',
   parse_code                varchar(30) not null default 'OK',
   parse_problem             varchar(255),
   retry                     smallint default 0,
   watchlisted               boolean default false,
-  group_id                  bigint unsigned not null,
+  product_id                bigint unsigned not null,
   platform_id               bigint unsigned,
   alarm_id                  bigint unsigned,
   account_id                bigint unsigned not null,
@@ -232,10 +232,10 @@ create table link (
   primary key (id),
   key (url_hash),
   key (status),
-  key (status_group),
+  key (grup),
   key (checked_at)
 ) engine=innodb;
-alter table link add foreign key (group_id) references link_group (id);
+alter table link add foreign key (product_id) references product (id);
 alter table link add foreign key (alarm_id) references alarm (id);
 alter table link add foreign key (platform_id) references platform (id);
 alter table link add foreign key (account_id) references account (id);
@@ -245,7 +245,7 @@ create table link_spec (
   link_id                   bigint unsigned not null,
   _key                      varchar(100),
   _value                    varchar(500),
-  group_id                  bigint unsigned not null,
+  product_id                bigint unsigned not null,
   account_id                bigint unsigned not null,
   primary key (id)
 ) engine=innodb;
@@ -258,7 +258,7 @@ create table link_price (
   new_price                 decimal(9,2) default 0,
   diff_amount               decimal(9,2) default 0,
   diff_rate                 decimal(9,2) default 0,
-  group_id                  bigint unsigned not null,
+  product_id                bigint unsigned not null,
   account_id                bigint unsigned not null,
   created_at                datetime not null default current_timestamp,
   primary key (id),
@@ -271,7 +271,7 @@ create table link_history (
   link_id                   bigint unsigned not null,
   status                    varchar(25) not null,
   parse_problem             varchar(255),
-  group_id                  bigint unsigned not null,
+  product_id                bigint unsigned not null,
   account_id                bigint unsigned not null,
   created_at                datetime not null default current_timestamp,
   primary key (id),
@@ -343,7 +343,7 @@ create table ticket (
   status                    enum('OPENED', 'IN_PROGRESS', 'WAITING_FOR_USER', 'WAITING_FOR_VERSION', 'CLOSED') not null default 'OPENED',
   priority                  enum('LOW', 'NORMAL', 'HIGH', 'CRITICAL') not null default 'NORMAL',
   type                      enum('SUPPORT', 'FEEDBACK', 'PROBLEM') not null default 'SUPPORT',
-  subject                   enum('SUBSCRIPTION', 'PAYMENT', 'LINK', 'GROUP', 'ACCOUNT', 'COUPON', 'OTHER') not null default 'OTHER',
+  subject                   enum('SUBSCRIPTION', 'PAYMENT', 'LINK', 'PRODUCT', 'ACCOUNT', 'COUPON', 'OTHER') not null default 'OTHER',
   body                      text not null,
   seen_by_user              boolean default true,
   seen_by_super             boolean default false,

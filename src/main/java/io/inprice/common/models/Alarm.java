@@ -38,7 +38,7 @@ public class Alarm implements Serializable {
   private Date updatedAt;
 	
   private Long linkId;
-  private Long groupId;
+  private Long productId;
 
   @JsonIgnore
   private Long accountId;

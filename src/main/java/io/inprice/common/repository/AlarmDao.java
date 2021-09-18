@@ -4,8 +4,8 @@ import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.UseRowMapper;
 
-import io.inprice.common.mappers.LinkGroupMapper;
-import io.inprice.common.models.LinkGroup;
+import io.inprice.common.mappers.ProductMapper;
+import io.inprice.common.models.Product;
 
 public interface AlarmDao {
 
@@ -14,11 +14,11 @@ public interface AlarmDao {
       ", al.amount_upper_limit, al.last_status, al.last_amount, al.tobe_notified, al.notified_at, al.updated_at as as_updated_at ";
 
 	@SqlQuery(
-  	"select g.*" + FIELDS + " from link_group g " + 
+  	"select g.*" + FIELDS + " from product g " + 
     "inner join alarm as al on al.id = g.alarm_id " + 
-		"where g.id =:groupId "
+		"where g.id =:productId "
 	)
-	@UseRowMapper(LinkGroupMapper.class)
-	LinkGroup findGroupAndAlarmById(@Bind("groupId") Long groupId);
+	@UseRowMapper(ProductMapper.class)
+	Product findProductAndAlarmById(@Bind("productId") Long productId);
   
 }

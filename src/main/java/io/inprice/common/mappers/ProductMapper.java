@@ -7,13 +7,13 @@ import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
 import io.inprice.common.meta.Level;
-import io.inprice.common.models.LinkGroup;
+import io.inprice.common.models.Product;
 
-public class LinkGroupMapper implements RowMapper<LinkGroup> {
+public class ProductMapper implements RowMapper<Product> {
 
   @Override
-  public LinkGroup map(ResultSet rs, StatementContext ctx) throws SQLException {
-    LinkGroup m = new LinkGroup();
+  public Product map(ResultSet rs, StatementContext ctx) throws SQLException {
+    Product m = new Product();
     Helper.mapBaseFields(m, rs);
 
     if (Helper.hasColumn(rs, "name")) m.setName(rs.getString("name"));

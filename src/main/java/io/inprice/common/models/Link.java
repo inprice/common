@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.inprice.common.meta.Level;
 import io.inprice.common.meta.LinkStatus;
-import io.inprice.common.meta.LinkStatusGroup;
+import io.inprice.common.meta.Grup;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,7 +35,7 @@ public class Link extends BaseModel {
   private LinkStatus preStatus = LinkStatus.TOBE_CLASSIFIED;
   private LinkStatus status = LinkStatus.TOBE_CLASSIFIED;
 
-  private LinkStatusGroup statusGroup = LinkStatusGroup.WAITING;
+  private Grup grup = Grup.WAITING;
 
   @JsonIgnore
   private String parseCode;
@@ -47,7 +47,7 @@ public class Link extends BaseModel {
   
   @JsonIgnore
   private Long platformId;
-  private Long groupId;
+  private Long productId;
 
   private Date updatedAt;
   private Date checkedAt;
@@ -58,8 +58,8 @@ public class Link extends BaseModel {
   private Long alarmId;
 
   //transients
-  private String groupName;
-  private BigDecimal groupPrice;
+  private String productName;
+  private BigDecimal productPrice;
 
   private List<LinkPrice> priceList;
   private List<LinkSpec> specList;

@@ -10,7 +10,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class GroupRefreshResult {
+public class ProductRefreshResult {
 
 	private BigDecimal minPrice = BigDecimal.ZERO;
 	private BigDecimal avgPrice = BigDecimal.ZERO;

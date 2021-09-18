@@ -26,8 +26,8 @@ set @p_enterprise_id = last_insert_id();
 -- ------------
 -- features
 -- ------------
-insert into plan_feature (description, allowed, order_no) values ('Unlimited groups', true, 5);
-set @f_unlimited_groups_id = last_insert_id();
+insert into plan_feature (description, allowed, order_no) values ('Unlimited products', true, 5);
+set @f_unlimited_products_id = last_insert_id();
 
 -- ------------
 
@@ -101,32 +101,32 @@ set @f_extra_5_user_id = last_insert_id();
 -- ------------
 
 insert into plans_and_features (plan_id, feature_id) values
-  (@p_basic_id, @f_unlimited_groups_id),
+  (@p_basic_id, @f_unlimited_products_id),
   (@p_basic_id, @f_upto_25_links_id),
   (@p_basic_id, @f_upto_5_alarms_id),
   (@p_basic_id, @f_no_user_id),
 
-  (@p_starter_id, @f_unlimited_groups_id),
+  (@p_starter_id, @f_unlimited_products_id),
   (@p_starter_id, @f_upto_50_links_id),
   (@p_starter_id, @f_upto_10_alarms_id),
   (@p_starter_id, @f_extra_1_user_id),
 
-  (@p_standard_id, @f_unlimited_groups_id),
+  (@p_standard_id, @f_unlimited_products_id),
   (@p_standard_id, @f_upto_100_links_id),
   (@p_standard_id, @f_upto_20_alarms_id),
   (@p_standard_id, @f_extra_2_user_id),
 
-  (@p_pro_id, @f_unlimited_groups_id),
+  (@p_pro_id, @f_unlimited_products_id),
   (@p_pro_id, @f_upto_250_links_id),
   (@p_pro_id, @f_upto_50_alarms_id),
   (@p_pro_id, @f_extra_3_user_id),
 
-  (@p_premium_id, @f_unlimited_groups_id),
+  (@p_premium_id, @f_unlimited_products_id),
   (@p_premium_id, @f_upto_500_links_id),
   (@p_premium_id, @f_upto_100_alarms_id),
   (@p_premium_id, @f_extra_4_user_id),
 
-  (@p_enterprise_id, @f_unlimited_groups_id),
+  (@p_enterprise_id, @f_unlimited_products_id),
   (@p_enterprise_id, @f_upto_1000_links_id),
   (@p_enterprise_id, @f_upto_200_alarms_id),
   (@p_enterprise_id, @f_extra_5_user_id)

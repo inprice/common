@@ -55,7 +55,7 @@ public class Helper {
   	return mapForAlarm(rs, null, null, null, null);
   }
 
-  public static Alarm mapForAlarm(ResultSet rs, Long alarmId, Long linkId, Long groupId, Long accountId) throws SQLException {
+  public static Alarm mapForAlarm(ResultSet rs, Long alarmId, Long linkId, Long productId, Long accountId) throws SQLException {
     Alarm m = new Alarm();
     
     String prefix = "";
@@ -64,11 +64,11 @@ public class Helper {
     	prefix = "al_";
   		m.setId(alarmId);
   		m.setLinkId(linkId);
-  		m.setLinkId(groupId);
+  		m.setProductId(productId);
   		m.setAccountId(accountId);
     } else {
       if (Helper.hasColumn(rs, "link_id")) m.setLinkId(Helper.nullLongHandler(rs, "link_id"));
-      if (Helper.hasColumn(rs, "group_id")) m.setGroupId(Helper.nullLongHandler(rs, "group_id"));
+      if (Helper.hasColumn(rs, "product_id")) m.setProductId(Helper.nullLongHandler(rs, "product_id"));
       if (Helper.hasColumn(rs, "account_id")) m.setAccountId(rs.getLong("account_id"));
     }
     

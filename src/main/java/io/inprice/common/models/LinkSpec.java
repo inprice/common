@@ -17,7 +17,7 @@ public class LinkSpec extends BaseModel {
    private Long linkId;
    private String key;
    private String value;
-   private Long groupId;
+   private Long productId;
 
    public LinkSpec(String key, String value) {
       this(null, key, value);

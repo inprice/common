@@ -5,13 +5,13 @@ import java.math.RoundingMode;
 
 import org.jdbi.v3.core.statement.OutParameters;
 
-import io.inprice.common.info.GroupRefreshResult;
+import io.inprice.common.info.ProductRefreshResult;
 import io.inprice.common.meta.Level;
 
-public class GroupRefreshResultConverter {
+public class ProductRefreshResultConverter {
 
-	public static GroupRefreshResult convert(OutParameters result) {
-		GroupRefreshResult m = new GroupRefreshResult();
+	public static ProductRefreshResult convert(OutParameters result) {
+		ProductRefreshResult m = new ProductRefreshResult();
 
   	if (result.getObject("minPrice") != null) m.setMinPrice(new BigDecimal(result.getDouble("minPrice")).setScale(2, RoundingMode.HALF_UP));
   	if (result.getObject("avgPrice") != null) m.setAvgPrice(new BigDecimal(result.getDouble("avgPrice")).setScale(2, RoundingMode.HALF_UP));
