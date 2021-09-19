@@ -16,7 +16,7 @@ public class Helper {
 
 	static void mapBaseFields(BaseModel m, ResultSet rs) throws SQLException {
 		if (Helper.hasColumn(rs, "id")) m.setId(rs.getLong("id"));
-    if (Helper.hasColumn(rs, "account_id")) m.setAccountId(rs.getLong("account_id"));
+    if (Helper.hasColumn(rs, "workspace_id")) m.setWorkspaceId(rs.getLong("workspace_id"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
     if (Helper.hasColumn(rs, "created_year")) m.setCreatedYear(rs.getInt("created_year"));
     if (Helper.hasColumn(rs, "created_month")) m.setCreatedMonth(rs.getString("created_month"));
@@ -55,7 +55,7 @@ public class Helper {
   	return mapForAlarm(rs, null, null, null, null);
   }
 
-  public static Alarm mapForAlarm(ResultSet rs, Long alarmId, Long linkId, Long productId, Long accountId) throws SQLException {
+  public static Alarm mapForAlarm(ResultSet rs, Long alarmId, Long linkId, Long productId, Long workspaceId) throws SQLException {
     Alarm m = new Alarm();
     
     String prefix = "";
@@ -65,11 +65,11 @@ public class Helper {
   		m.setId(alarmId);
   		m.setLinkId(linkId);
   		m.setProductId(productId);
-  		m.setAccountId(accountId);
+  		m.setWorkspaceId(workspaceId);
     } else {
       if (Helper.hasColumn(rs, "link_id")) m.setLinkId(Helper.nullLongHandler(rs, "link_id"));
       if (Helper.hasColumn(rs, "product_id")) m.setProductId(Helper.nullLongHandler(rs, "product_id"));
-      if (Helper.hasColumn(rs, "account_id")) m.setAccountId(rs.getLong("account_id"));
+      if (Helper.hasColumn(rs, "workspace_id")) m.setWorkspaceId(rs.getLong("workspace_id"));
     }
     
 		if (Helper.hasColumn(rs, prefix+"id")) m.setId(rs.getLong(prefix+"id"));

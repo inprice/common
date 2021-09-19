@@ -14,7 +14,7 @@ public class AccessLog extends BaseModel {
   private Long userId;
   private String userEmail;
   private String userRole;
-  private String accountName;
+  private String workspaceName;
   private String path;
   private String pathExt;
   private String method;

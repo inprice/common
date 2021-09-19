@@ -19,7 +19,7 @@ public interface CommonDao {
 
   @SqlQuery(
 		"select l.* from link as l " +
-		"inner join account as a on a.id = l.account_id " + 
+		"inner join workspace as a on a.id = l.workspace_id " + 
 		"where a.status in ('FREE', 'COUPONED', 'SUBSCRIBED') " +
 		"  and l.url_hash=:urlHash " +
 		"  and l.retry < 3"
@@ -32,13 +32,13 @@ public interface CommonDao {
 
   @SqlUpdate(
     "insert into link_price " +
-    "(link_id, old_price, new_price, diff_amount, diff_rate, product_id, account_id) "+
-    "values (:linkId, :oldPrice, :newPrice, :diffAmount, :diffRate, :productId, :accountId)"
+    "(link_id, old_price, new_price, diff_amount, diff_rate, product_id, workspace_id) "+
+    "values (:linkId, :oldPrice, :newPrice, :diffAmount, :diffRate, :productId, :workspaceId)"
   )
   boolean insertLinkPrice(@Bind("linkId") long linkId, 
 		@Bind("oldPrice") BigDecimal oldPrice, @Bind("newPrice") BigDecimal newPrice, 
     @Bind("diffAmount") BigDecimal diffAmount, @Bind("diffRate") BigDecimal diffRate,
-    @Bind("productId") long productId, @Bind("accountId") long accountId);
+    @Bind("productId") long productId, @Bind("workspaceId") long workspaceId);
 
   @SqlCall("call sp_refresh_product(:productId, :minPrice, :avgPrice, :maxPrice, :total, :level, :alarmId)")
   @OutParameter(name="minPrice", sqlType=Types.DOUBLE)

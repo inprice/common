@@ -18,7 +18,7 @@ public class AccessLogMapper implements RowMapper<AccessLog> {
     
     if (Helper.hasColumn(rs, "user_email")) m.setUserEmail(rs.getString("user_email"));
     if (Helper.hasColumn(rs, "user_role")) m.setUserRole(rs.getString("user_role"));
-    if (Helper.hasColumn(rs, "account_name")) m.setAccountName(rs.getString("account_name"));
+    if (Helper.hasColumn(rs, "workspace_name")) m.setWorkspaceName(rs.getString("workspace_name"));
     if (Helper.hasColumn(rs, "method")) m.setMethod(rs.getString("method"));
     if (Helper.hasColumn(rs, "path")) m.setPath(rs.getString("path"));
     if (Helper.hasColumn(rs, "path_ext")) m.setPathExt(rs.getString("path_ext"));
@@ -31,7 +31,7 @@ public class AccessLogMapper implements RowMapper<AccessLog> {
     if (Helper.hasColumn(rs, "agent")) m.setAgent(rs.getString("agent"));
 
     if (Helper.hasColumn(rs, "user_id")) m.setUserId(Helper.nullLongHandler(rs, "user_id"));
-    if (Helper.hasColumn(rs, "account_id")) m.setAccountId(Helper.nullLongHandler(rs, "account_id"));
+    if (Helper.hasColumn(rs, "workspace_id")) m.setWorkspaceId(Helper.nullLongHandler(rs, "workspace_id"));
 
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
     if (Helper.hasColumn(rs, "created_year")) m.setCreatedYear(rs.getInt("created_year"));

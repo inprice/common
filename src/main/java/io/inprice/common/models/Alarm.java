@@ -41,7 +41,7 @@ public class Alarm implements Serializable {
   private Long productId;
 
   @JsonIgnore
-  private Long accountId;
+  private Long workspaceId;
   
   //transients
   private String name;

@@ -27,9 +27,9 @@ public enum EmailTemplate {
   SUBSCRIPTION_CHANGE_SUCCESSFUL_COUPONED("subscription-change-successful-couponed"),
   SUBSCRIPTION_CHANGE_FAILED("subscription-change-failed"),
 
-  FREE_ACCOUNT_REMINDER("free-account-reminder"),
-  FREE_ACCOUNT_CANCELLED("free-account-cancelled"),
-  FREE_ACCOUNT_STOPPED("free-account-stopped"),
+  FREE_WORKSPACE_REMINDER("free-workspace-reminder"),
+  FREE_WORKSPACE_CANCELLED("free-workspace-cancelled"),
+  FREE_WORKSPACE_STOPPED("free-workspace-stopped"),
 
   ALARM_NOTIFICATION("alarm/body")
   

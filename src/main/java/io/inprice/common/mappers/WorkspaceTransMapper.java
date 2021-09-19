@@ -7,13 +7,13 @@ import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
 import io.inprice.common.meta.SubsEvent;
-import io.inprice.common.models.AccountTrans;
+import io.inprice.common.models.WorkspaceTrans;
 
-public class AccountTransMapper implements RowMapper<AccountTrans> {
+public class WorkspaceTransMapper implements RowMapper<WorkspaceTrans> {
 
   @Override
-  public AccountTrans map(ResultSet rs, StatementContext ctx) throws SQLException {
-    AccountTrans m = new AccountTrans();
+  public WorkspaceTrans map(ResultSet rs, StatementContext ctx) throws SQLException {
+    WorkspaceTrans m = new WorkspaceTrans();
     Helper.mapBaseFields(m, rs);
 
     if (Helper.hasColumn(rs, "event_id")) m.setEventId(rs.getString("event_id"));

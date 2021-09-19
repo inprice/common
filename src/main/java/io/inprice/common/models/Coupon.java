@@ -32,12 +32,12 @@ public class Coupon extends BaseModel {
   }
 
   @Override
-  public final Long getAccountId() {
+  public final Long getWorkspaceId() {
   	return null;
   }
   
   @Override
-  public void setAccountId(Long accountId) {
+  public void setWorkspaceId(Long workspaceId) {
   	;
   }
 

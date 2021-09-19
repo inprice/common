@@ -48,7 +48,7 @@ public class ProductMapper implements RowMapper<Product> {
 
     //transients
     if (m.getAlarmId() != null && (Helper.hasColumn(rs, "tobe_notified"))) {
-    	m.setAlarm(Helper.mapForAlarm(rs, m.getAlarmId(), null, m.getId(), m.getAccountId()));
+    	m.setAlarm(Helper.mapForAlarm(rs, m.getAlarmId(), null, m.getId(), m.getWorkspaceId()));
     }
 
     return m;

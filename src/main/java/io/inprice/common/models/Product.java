@@ -15,6 +15,7 @@ public class Product extends BaseModel {
 
   private static final long serialVersionUID = 2010109845985968128L;
 
+  private String code;
   private String name;
   private String description;
 
@@ -42,9 +43,13 @@ public class Product extends BaseModel {
 
   private Date updatedAt;
 
+  private Long brandId;
+  private Long categoryId;
   private Long alarmId;
 
   //transients
+  private String brandName;
+  private String categoryName;
   private Alarm alarm;
 
   public int getLinkCount() {

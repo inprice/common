@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * accountId is set only when super user switches account!
+ * workspaceId is set only when super user switches workspace!
  * 
  * @author mdpinar
  */

@@ -48,7 +48,7 @@ create table plans_and_features (
 alter table plans_and_features add foreign key (plan_id) references plan (id);
 alter table plans_and_features add foreign key (feature_id) references plan_feature (id);
 
-create table account (
+create table workspace (
   id                        bigint unsigned auto_increment not null,
   name                      varchar(70) not null,
   title                     varchar(255),
@@ -81,12 +81,12 @@ create table account (
   key (name),
   key (subs_renewal_at)
 ) engine=innodb;
-alter table account add foreign key (admin_id) references user (id);
-alter table account add foreign key (plan_id) references plan (id);
+alter table workspace add foreign key (admin_id) references user (id);
+alter table workspace add foreign key (plan_id) references plan (id);
 
-create table account_history (
+create table workspace_history (
   id                        bigint unsigned auto_increment not null,
-  account_id                bigint unsigned not null,
+  workspace_id              bigint unsigned not null,
   status                    enum('CREATED', 'FREE', 'COUPONED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'CREATED',
   plan_id                   int,
   created_year              smallint not null default (year(curdate())),
@@ -94,11 +94,11 @@ create table account_history (
   created_at                datetime not null default current_timestamp,
   primary key (id)
 ) engine=innodb;
-alter table account_history add foreign key (account_id) references account (id);
+alter table workspace_history add foreign key (workspace_id) references workspace (id);
 
-create table account_trans (
+create table workspace_trans (
   id                        bigint unsigned auto_increment not null,
-  account_id                bigint unsigned not null,
+  workspace_id              bigint unsigned not null,
   event_id                  varchar(255),
   event                     varchar(255) not null,
   successful                boolean default false,
@@ -111,13 +111,13 @@ create table account_trans (
   primary key (id),
   key (created_at)
 ) engine=innodb;
-alter table account_trans add foreign key (account_id) references account (id);
+alter table workspace_trans add foreign key (workspace_id) references workspace (id);
 
 create table membership (
   id                        bigint unsigned auto_increment not null,
   email                     varchar(128) not null,
   user_id                   bigint unsigned,
-  account_id                bigint unsigned not null,
+  workspace_id              bigint unsigned not null,
   role                      enum('SUPER', 'ADMIN', 'EDITOR', 'VIEWER') not null default 'EDITOR',
   pre_status                enum('PENDING', 'JOINED', 'REJECTED', 'LEFT', 'PAUSED', 'DELETED') not null default 'PENDING',
   status                    enum('PENDING', 'JOINED', 'REJECTED', 'LEFT', 'PAUSED', 'DELETED') not null default 'PENDING',
@@ -130,7 +130,7 @@ create table membership (
   key (email)
 ) engine=innodb;
 alter table membership add foreign key (user_id) references user (id);
-alter table membership add foreign key (account_id) references account (id);
+alter table membership add foreign key (workspace_id) references workspace (id);
 
 create table platform (
   id                        bigint unsigned auto_increment not null,
@@ -161,17 +161,36 @@ create table alarm (
   last_status               varchar(10),
   last_amount               decimal(9,2) default 0,
   tobe_notified             boolean default false,
-  account_id                bigint unsigned not null,
+  workspace_id              bigint unsigned not null,
   notified_at               datetime,
   updated_at                datetime,
   created_at                datetime not null default current_timestamp,
   primary key (id)
 ) engine=innodb;
-alter table alarm add foreign key (account_id) references account (id);
+alter table alarm add foreign key (workspace_id) references workspace (id);
+
+create table brand (
+  id                        bigint unsigned auto_increment not null,
+  name                      varchar(50) not null,
+  workspace_id              bigint unsigned not null,
+  primary key (id),
+  key (name)
+) engine=innodb;
+alter table brand add foreign key (workspace_id) references workspace (id);
+
+create table category (
+  id                        bigint unsigned auto_increment not null,
+  name                      varchar(50) not null,
+  workspace_id              bigint unsigned not null,
+  primary key (id),
+  key (name)
+) engine=innodb;
+alter table category add foreign key (workspace_id) references workspace (id);
 
 create table product (
   id                        bigint unsigned auto_increment not null,
-  name                      varchar(50) not null,
+  code                      varchar(50),
+  name                      varchar(250) not null,
   description               varchar(128),
   actives                   smallint default 0,
   waitings                  smallint default 0,
@@ -190,17 +209,22 @@ create table product (
   max_seller                varchar(50),
   max_price                 decimal(9,2) default 0,
   max_diff                  decimal(9,2) default 0,
+  brand_id                  bigint unsigned,
+  category_id               bigint unsigned,
   alarm_id                  bigint unsigned,
-  account_id                bigint unsigned not null,
+  workspace_id              bigint unsigned not null,
   updated_at                datetime,
   created_year              smallint not null default (year(curdate())),
   created_month             char(7) not null default (date_format(curdate(), '%Y-%m')),
   created_at                datetime not null default current_timestamp,
   primary key (id),
-  key (name)
+  key (name),
+  key (code)
 ) engine=innodb;
+alter table product add foreign key (workspace_id) references workspace (id);
 alter table product add foreign key (alarm_id) references alarm (id);
-alter table product add foreign key (account_id) references account (id);
+alter table product add foreign key (brand_id) references brand (id);
+alter table product add foreign key (category_id) references category (id);
 
 create table link (
   id                        bigint unsigned auto_increment not null,
@@ -223,7 +247,7 @@ create table link (
   product_id                bigint unsigned not null,
   platform_id               bigint unsigned,
   alarm_id                  bigint unsigned,
-  account_id                bigint unsigned not null,
+  workspace_id              bigint unsigned not null,
   checked_at                datetime,
   updated_at                datetime,
   created_year              smallint not null default (year(curdate())),
@@ -238,7 +262,7 @@ create table link (
 alter table link add foreign key (product_id) references product (id);
 alter table link add foreign key (alarm_id) references alarm (id);
 alter table link add foreign key (platform_id) references platform (id);
-alter table link add foreign key (account_id) references account (id);
+alter table link add foreign key (workspace_id) references workspace (id);
 
 create table link_spec (
   id                        bigint unsigned auto_increment not null,
@@ -246,7 +270,7 @@ create table link_spec (
   _key                      varchar(100),
   _value                    varchar(500),
   product_id                bigint unsigned not null,
-  account_id                bigint unsigned not null,
+  workspace_id              bigint unsigned not null,
   primary key (id)
 ) engine=innodb;
 alter table link_spec add foreign key (link_id) references link (id);
@@ -259,7 +283,7 @@ create table link_price (
   diff_amount               decimal(9,2) default 0,
   diff_rate                 decimal(9,2) default 0,
   product_id                bigint unsigned not null,
-  account_id                bigint unsigned not null,
+  workspace_id              bigint unsigned not null,
   created_at                datetime not null default current_timestamp,
   primary key (id),
   key (created_at)
@@ -272,7 +296,7 @@ create table link_history (
   status                    varchar(25) not null,
   parse_problem             varchar(255),
   product_id                bigint unsigned not null,
-  account_id                bigint unsigned not null,
+  workspace_id              bigint unsigned not null,
   created_at                datetime not null default current_timestamp,
   primary key (id),
   key (created_at)
@@ -310,7 +334,7 @@ create table user_mark (
 create table user_session (
   _hash                     varchar(32) not null,
   user_id                   bigint unsigned not null,
-  account_id                bigint unsigned not null,
+  workspace_id              bigint unsigned not null,
   ip                        varchar(255),
   os                        varchar(30),
   browser                   varchar(100),
@@ -320,13 +344,13 @@ create table user_session (
   key (accessed_at)
 ) engine=innodb;
 alter table user_session add foreign key (user_id) references user (id);
-alter table user_session add foreign key (account_id) references account (id);
+alter table user_session add foreign key (workspace_id) references workspace (id);
 
 create table checkout (
   _hash                     varchar(32) not null,
   session_id                varchar(255),
   status                    enum('PENDING', 'SUCCESSFUL', 'EXPIRED', 'CANCELLED', 'FAILED') not null default 'PENDING',
-  account_id                bigint unsigned not null,
+  workspace_id              bigint unsigned not null,
   plan_id                   int not null,
   description               varchar(255),
   updated_at                datetime,
@@ -336,20 +360,20 @@ create table checkout (
   primary key (_hash),
   key (created_at)
 ) engine=innodb;
-alter table checkout add foreign key (account_id) references account (id);
+alter table checkout add foreign key (workspace_id) references workspace (id);
 
 create table ticket (
   id                        bigint unsigned auto_increment not null,
   status                    enum('OPENED', 'IN_PROGRESS', 'WAITING_FOR_USER', 'WAITING_FOR_VERSION', 'CLOSED') not null default 'OPENED',
   priority                  enum('LOW', 'NORMAL', 'HIGH', 'CRITICAL') not null default 'NORMAL',
   type                      enum('SUPPORT', 'FEEDBACK', 'PROBLEM') not null default 'SUPPORT',
-  subject                   enum('SUBSCRIPTION', 'PAYMENT', 'LINK', 'PRODUCT', 'ACCOUNT', 'COUPON', 'OTHER') not null default 'OTHER',
+  subject                   enum('SUBSCRIPTION', 'PAYMENT', 'LINK', 'PRODUCT', 'WORKSPACE', 'COUPON', 'OTHER') not null default 'OTHER',
   body                      text not null,
   seen_by_user              boolean default true,
   seen_by_super             boolean default false,
   comment_count             smallint not null default 0,
   user_id                   bigint unsigned not null,
-  account_id                bigint unsigned not null,
+  workspace_id              bigint unsigned not null,
   progressed_at             datetime default current_timestamp,
   created_year              smallint not null default (year(curdate())),
   created_month             char(7) not null default (date_format(curdate(), '%Y-%m')),
@@ -364,7 +388,7 @@ create table ticket_comment (
   editable                  boolean default true,
   added_by_user             boolean default true,
   user_id                   bigint unsigned not null,
-  account_id                bigint unsigned not null,
+  workspace_id              bigint unsigned not null,
   created_at                datetime not null default current_timestamp,
   primary key (id)
 ) engine=innodb;
@@ -378,7 +402,7 @@ create table ticket_history (
   type                      varchar(8) not null,
   subject                   varchar(12) not null,
   user_id                   bigint unsigned not null,
-  account_id                bigint unsigned not null,
+  workspace_id              bigint unsigned not null,
   created_at                datetime not null default current_timestamp,
   primary key (id)
 ) engine=innodb;
@@ -386,7 +410,7 @@ alter table ticket_history add foreign key (ticket_id) references ticket (id);
 
 create table announce (
   id                        bigint unsigned auto_increment not null,
-  type                      enum('USER', 'ACCOUNT', 'SYSTEM') not null default 'USER',
+  type                      enum('USER', 'WORKSPACE', 'SYSTEM') not null default 'USER',
   level                     enum('INFO', 'WARNING') not null default 'INFO',
   title                     varchar(50) not null,
   body                      text,
@@ -394,7 +418,7 @@ create table announce (
   starting_at               datetime not null,
   ending_at                 datetime not null,
   user_id                   bigint unsigned,
-  account_id                bigint unsigned,
+  workspace_id              bigint unsigned,
   created_year              smallint not null default (year(curdate())),
   created_month             char(7) not null default (date_format(curdate(), '%Y-%m')),
   created_at                datetime not null default current_timestamp,
@@ -406,7 +430,7 @@ create table announce_log (
   id                        bigint unsigned auto_increment not null,
   announce_id               bigint unsigned not null,
   user_id                   bigint unsigned,
-  account_id                bigint unsigned,
+  workspace_id              bigint unsigned,
   created_at                datetime not null default current_timestamp,
   primary key (id)
 ) engine=innodb;
@@ -417,8 +441,8 @@ create table access_log (
   user_id                   bigint unsigned,
   user_email                varchar(128),
   user_role                 varchar(8),
-  account_id                bigint unsigned,
-  account_name              varchar(70),
+  workspace_id              bigint unsigned,
+  workspace_name            varchar(70),
   method                    varchar(6) not null,
   path                      varchar(128) not null,
   path_ext                  varchar(70),

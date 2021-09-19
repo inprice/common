@@ -30,7 +30,7 @@ public class Ticket extends BaseModel {
   private Long userId;
 
   //transients
-  private String account;
+  private String workspace;
   private String username;
   private List<TicketHistory> historyList;
   private List<TicketComment> commentList;
