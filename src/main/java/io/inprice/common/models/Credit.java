@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Coupon extends BaseModel {
+public class Credit extends BaseModel {
 
   private static final long serialVersionUID = 5125346359199270016L;
 

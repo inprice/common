@@ -17,7 +17,6 @@ public class Product extends BaseModel {
 
   private String code;
   private String name;
-  private String description;
 
   private Integer actives = 0;
   private Integer waitings = 0;

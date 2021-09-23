@@ -16,8 +16,8 @@ public class ProductMapper implements RowMapper<Product> {
     Product m = new Product();
     Helper.mapBaseFields(m, rs);
 
+    if (Helper.hasColumn(rs, "code")) m.setCode(rs.getString("code"));
     if (Helper.hasColumn(rs, "name")) m.setName(rs.getString("name"));
-    if (Helper.hasColumn(rs, "description")) m.setDescription(rs.getString("description"));
     if (Helper.hasColumn(rs, "total")) m.setTotal(rs.getBigDecimal("total"));
 
     if (Helper.hasColumn(rs, "actives")) m.setActives(rs.getInt("actives"));
@@ -39,7 +39,10 @@ public class ProductMapper implements RowMapper<Product> {
     if (Helper.hasColumn(rs, "max_price")) m.setMaxPrice(rs.getBigDecimal("max_price"));
     
     if (Helper.hasColumn(rs, "updated_at")) m.setUpdatedAt(rs.getTimestamp("updated_at"));
+
     if (Helper.hasColumn(rs, "alarm_id")) m.setAlarmId(Helper.nullLongHandler(rs, "alarm_id"));
+  	if (Helper.hasColumn(rs, "brand_id")) m.setBrandId(Helper.nullLongHandler(rs, "brand_id"));
+  	if (Helper.hasColumn(rs, "category_id")) m.setCategoryId(Helper.nullLongHandler(rs, "category_id"));
 
     if (Helper.hasColumn(rs, "level")) {
       String val = rs.getString("level");
@@ -50,6 +53,9 @@ public class ProductMapper implements RowMapper<Product> {
     if (m.getAlarmId() != null && (Helper.hasColumn(rs, "tobe_notified"))) {
     	m.setAlarm(Helper.mapForAlarm(rs, m.getAlarmId(), null, m.getId(), m.getWorkspaceId()));
     }
+
+  	if (Helper.hasColumn(rs, "brand_name")) m.setBrandName(rs.getString("brand_name"));
+  	if (Helper.hasColumn(rs, "category_name")) m.setCategoryName(rs.getString("category_name"));
 
     return m;
   }

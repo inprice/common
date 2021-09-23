@@ -9,9 +9,9 @@ public enum SubsEvent {
   FREE_USE_STOPPED("Free use stopped"),
   FREE_USE_CANCELLED("Free use cancelled"),
 
-  COUPON_USE_STARTED("Coupon use started"),
-  COUPON_USE_STOPPED("Coupon use stopped"),
-  COUPON_USE_CANCELLED("Coupon use cancelled"),
+  CREDIT_USE_STARTED("Credit use started"),
+  CREDIT_USE_STOPPED("Credit use stopped"),
+  CREDIT_USE_CANCELLED("Credit use cancelled"),
 
   SUBSCRIPTION_STARTED("Subscription started"),
   SUBSCRIPTION_RENEWED("Subscription renewed"),
@@ -19,7 +19,7 @@ public enum SubsEvent {
   SUBSCRIPTION_STOPPED("Subscription stopped"),
   SUBSCRIPTION_CANCELLED("Subscription cancelled"),
   
-  GIVEN_COUPON("Given coupon"),
+  GIVEN_CREDIT("Given credit"),
 
   PAYMENT_FAILED("Payment failed");
 

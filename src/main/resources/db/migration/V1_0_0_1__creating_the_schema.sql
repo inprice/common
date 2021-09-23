@@ -61,7 +61,7 @@ create table workspace (
   city                      varchar(50),
   state                     varchar(50),
   country                   varchar(50),
-  status                    enum('CREATED', 'FREE', 'COUPONED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED', 'BANNED') not null default 'CREATED',
+  status                    enum('CREATED', 'FREE', 'CREDITED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED', 'BANNED') not null default 'CREATED',
   pre_status                varchar(10) not null default 'CREATED',
   last_status_update        datetime not null default current_timestamp,
   plan_id                   int,
@@ -87,7 +87,7 @@ alter table workspace add foreign key (plan_id) references plan (id);
 create table workspace_history (
   id                        bigint unsigned auto_increment not null,
   workspace_id              bigint unsigned not null,
-  status                    enum('CREATED', 'FREE', 'COUPONED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'CREATED',
+  status                    enum('CREATED', 'FREE', 'CREDITED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'CREATED',
   plan_id                   int,
   created_year              smallint not null default (year(curdate())),
   created_month             char(7) not null default (date_format(curdate(), '%Y-%m')),
@@ -191,7 +191,6 @@ create table product (
   id                        bigint unsigned auto_increment not null,
   code                      varchar(50),
   name                      varchar(250) not null,
-  description               varchar(128),
   actives                   smallint default 0,
   waitings                  smallint default 0,
   tryings                   smallint default 0,
@@ -303,7 +302,7 @@ create table link_history (
 ) engine=innodb;
 alter table link_history add foreign key (link_id) references link (id);
 
-create table coupon (
+create table credit (
   code                      char(8) not null,
   plan_id                   int not null,
   days                      smallint not null,
@@ -316,7 +315,7 @@ create table coupon (
   created_at                datetime not null default current_timestamp,
   primary key (code)
 ) engine=innodb;
-alter table coupon add foreign key (plan_id) references plan (id);
+alter table credit add foreign key (plan_id) references plan (id);
 
 create table user_mark (
   id                        bigint unsigned auto_increment not null,
@@ -367,7 +366,7 @@ create table ticket (
   status                    enum('OPENED', 'IN_PROGRESS', 'WAITING_FOR_USER', 'WAITING_FOR_VERSION', 'CLOSED') not null default 'OPENED',
   priority                  enum('LOW', 'NORMAL', 'HIGH', 'CRITICAL') not null default 'NORMAL',
   type                      enum('SUPPORT', 'FEEDBACK', 'PROBLEM') not null default 'SUPPORT',
-  subject                   enum('SUBSCRIPTION', 'PAYMENT', 'LINK', 'PRODUCT', 'WORKSPACE', 'COUPON', 'OTHER') not null default 'OTHER',
+  subject                   enum('SUBSCRIPTION', 'PAYMENT', 'LINK', 'PRODUCT', 'WORKSPACE', 'CREDIT', 'OTHER') not null default 'OTHER',
   body                      text not null,
   seen_by_user              boolean default true,
   seen_by_super             boolean default false,

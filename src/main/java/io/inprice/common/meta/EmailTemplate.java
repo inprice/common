@@ -21,10 +21,10 @@ public enum EmailTemplate {
   SUBSCRIPTION_STARTED("subscription-started"),
   SUBSCRIPTION_RENEWAL("subscription-renewal"),
   SUBSCRIPTION_CANCELLED("subscription-cancelled"),
-  SUBSCRIPTION_CANCELLED_COUPONED("subscription-cancelled-couponed"),
+  SUBSCRIPTION_CANCELLED_CREDITED("subscription-cancelled-credited"),
   SUBSCRIPTION_STOPPED("subscription-stopped"),
   SUBSCRIPTION_CHANGE_SUCCESSFUL("subscription-change-successful"),
-  SUBSCRIPTION_CHANGE_SUCCESSFUL_COUPONED("subscription-change-successful-couponed"),
+  SUBSCRIPTION_CHANGE_SUCCESSFUL_CREDITED("subscription-change-successful-credited"),
   SUBSCRIPTION_CHANGE_FAILED("subscription-change-failed"),
 
   FREE_WORKSPACE_REMINDER("free-workspace-reminder"),

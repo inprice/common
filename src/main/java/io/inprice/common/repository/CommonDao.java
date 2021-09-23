@@ -20,7 +20,7 @@ public interface CommonDao {
   @SqlQuery(
 		"select l.* from link as l " +
 		"inner join workspace as a on a.id = l.workspace_id " + 
-		"where a.status in ('FREE', 'COUPONED', 'SUBSCRIBED') " +
+		"where a.status in ('FREE', 'CREDITED', 'SUBSCRIBED') " +
 		"  and l.url_hash=:urlHash " +
 		"  and l.retry < 3"
 	)

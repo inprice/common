@@ -6,13 +6,13 @@ import java.sql.SQLException;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
-import io.inprice.common.models.Coupon;
+import io.inprice.common.models.Credit;
 
-public class CouponMapper implements RowMapper<Coupon> {
+public class CreditMapper implements RowMapper<Credit> {
 
   @Override
-  public Coupon map(ResultSet rs, StatementContext ctx) throws SQLException {
-    Coupon m = new Coupon();
+  public Credit map(ResultSet rs, StatementContext ctx) throws SQLException {
+    Credit m = new Credit();
     Helper.mapBaseFields(m, rs);
 
     if (Helper.hasColumn(rs, "code")) m.setCode(rs.getString("code"));
