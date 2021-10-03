@@ -29,6 +29,6 @@ public class User extends BaseModel {
   @JsonIgnore
   private String password;
 
-  private Long accid; //for only super user!
+  private Long wsId; //for only super user!
   
 }

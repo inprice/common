@@ -21,7 +21,7 @@ create table plan (
   id                        int auto_increment not null,
   type                      enum('PUBLIC', 'PRIVATE') not null default 'PUBLIC',
   name                      varchar(30) not null,
-  description               varchar(50),
+  description               varchar(250),
   price                     decimal(6,2) default 0,
   user_limit                smallint default 0,
   link_limit                smallint default 0,
@@ -61,7 +61,7 @@ create table workspace (
   city                      varchar(50),
   state                     varchar(50),
   country                   varchar(50),
-  status                    enum('CREATED', 'FREE', 'CREDITED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED', 'BANNED') not null default 'CREATED',
+  status                    enum('CREATED', 'FREE', 'VOUCHERED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED', 'BANNED') not null default 'CREATED',
   pre_status                varchar(10) not null default 'CREATED',
   last_status_update        datetime not null default current_timestamp,
   plan_id                   int,
@@ -87,7 +87,7 @@ alter table workspace add foreign key (plan_id) references plan (id);
 create table workspace_history (
   id                        bigint unsigned auto_increment not null,
   workspace_id              bigint unsigned not null,
-  status                    enum('CREATED', 'FREE', 'CREDITED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'CREATED',
+  status                    enum('CREATED', 'FREE', 'VOUCHERED', 'SUBSCRIBED', 'CANCELLED', 'STOPPED') not null default 'CREATED',
   plan_id                   int,
   created_year              smallint not null default (year(curdate())),
   created_month             char(7) not null default (date_format(curdate(), '%Y-%m')),
@@ -302,7 +302,7 @@ create table link_history (
 ) engine=innodb;
 alter table link_history add foreign key (link_id) references link (id);
 
-create table credit (
+create table voucher (
   code                      char(8) not null,
   plan_id                   int not null,
   days                      smallint not null,
@@ -315,19 +315,21 @@ create table credit (
   created_at                datetime not null default current_timestamp,
   primary key (code)
 ) engine=innodb;
-alter table credit add foreign key (plan_id) references plan (id);
+alter table voucher add foreign key (plan_id) references plan (id);
 
-create table user_mark (
+create table user_marks (
   id                        bigint unsigned auto_increment not null,
   email                     varchar(128) not null,
-  type                      enum('FREE_USE', 'BANNED') not null default 'FREE_USE',
-  description               varchar(255),
-  whitelisted               boolean default false,
+  mark                      varchar(70) not null,
+  boolean_val               boolean default false,
+  string_val                varchar(250),
+  integer_val               int default 0,
+  date_val                  datetime,
   created_year              smallint not null default (year(curdate())),
   created_month             char(7) not null default (date_format(curdate(), '%Y-%m')),
   created_at                datetime not null default current_timestamp,
   primary key (id),
-  unique key (email, type)
+  unique key (email, mark)
 ) engine=innodb;
 
 create table user_session (
@@ -366,7 +368,7 @@ create table ticket (
   status                    enum('OPENED', 'IN_PROGRESS', 'WAITING_FOR_USER', 'WAITING_FOR_VERSION', 'CLOSED') not null default 'OPENED',
   priority                  enum('LOW', 'NORMAL', 'HIGH', 'CRITICAL') not null default 'NORMAL',
   type                      enum('SUPPORT', 'FEEDBACK', 'PROBLEM') not null default 'SUPPORT',
-  subject                   enum('SUBSCRIPTION', 'PAYMENT', 'LINK', 'PRODUCT', 'WORKSPACE', 'CREDIT', 'OTHER') not null default 'OTHER',
+  subject                   enum('SUBSCRIPTION', 'PAYMENT', 'LINK', 'PRODUCT', 'WORKSPACE', 'VOUCHER', 'OTHER') not null default 'OTHER',
   body                      text not null,
   seen_by_user              boolean default true,
   seen_by_super             boolean default false,

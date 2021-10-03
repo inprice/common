@@ -5,12 +5,12 @@ import java.util.Random;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Generates and verifies totally random credits.
+ * Generates and verifies totally random vouchers.
  *
  * @author mdpinar
  *
  */
-public class CreditManager {
+public class VoucherManager {
 
   /*
    * Length is 33 Some characters like O, I, 0 are reserved.
@@ -22,26 +22,26 @@ public class CreditManager {
   private static final Random random = new Random();
 
   /**
-   * Verifies whether given credit is valid or not
+   * Verifies whether given voucher is valid or not
    * 
    * @return boolean
    */
-  public static boolean isValid(String credit) {
-    if (StringUtils.isBlank(credit)) return false;
+  public static boolean isValid(String voucher) {
+    if (StringUtils.isBlank(voucher)) return false;
 
     int checkSum = 0;
-    for (int i = 0; i < credit.length() - 1; i++) {
-      checkSum += credit.charAt(i);
+    for (int i = 0; i < voucher.length() - 1; i++) {
+      checkSum += voucher.charAt(i);
     }
 
     // the last char is the checksum
-    return (credit.charAt(credit.length() - 1) == checksumSet[checkSum % checksumSet.length]);
+    return (voucher.charAt(voucher.length() - 1) == checksumSet[checkSum % checksumSet.length]);
   }
 
   /**
-   * Generates random credit code
+   * Generates random voucher code
    *
-   * @return 8 chars credit code
+   * @return 8 chars voucher code
    */
   public static String generate() {
     int checkSum = 0;
@@ -84,7 +84,7 @@ public class CreditManager {
    * 
    */
   public static void main(String[] args) {
-    System.err.println("Generated credit:");
+    System.err.println("Generated voucher:");
     //for (int i = 0; i < 5; i++) {
       System.err.println(generate());
     //}

@@ -7,7 +7,7 @@ public enum WorkspaceStatus {
   
   CREATED(false, true, true, true, false),
   FREE(true, false, true, true, true),
-  CREDITED(true, false, false, true, true),
+  VOUCHERED(true, false, false, true, true),
   SUBSCRIBED(true, false, false, false, true),
   CANCELLED(false, false, true, true, false),  //user decission
   STOPPED(false, false, true, true, false), //system decission
@@ -15,16 +15,16 @@ public enum WorkspaceStatus {
 
   private boolean active;
   private boolean okForFreeUse;
-  private boolean okForCredit;
+  private boolean okForVoucher;
   private boolean okForSubscription;
   private boolean okForCancel;
 
-  public static final List<WorkspaceStatus> ACTIVE_STATUSES = Arrays.asList( FREE, CREDITED, SUBSCRIBED );
+  public static final List<WorkspaceStatus> ACTIVE_STATUSES = Arrays.asList( FREE, VOUCHERED, SUBSCRIBED );
 
-  private WorkspaceStatus(boolean active, boolean okForFreeUse, boolean okForCredit, boolean okForSubscription, boolean okForCancel) {
+  private WorkspaceStatus(boolean active, boolean okForFreeUse, boolean okForVoucher, boolean okForSubscription, boolean okForCancel) {
     this.active = active;
     this.okForFreeUse = okForFreeUse;
-    this.okForCredit = okForCredit;
+    this.okForVoucher = okForVoucher;
     this.okForSubscription = okForSubscription;
     this.okForCancel = okForCancel;
   }
@@ -37,8 +37,8 @@ public enum WorkspaceStatus {
     return okForFreeUse;
   }
 
-  public boolean isOKForCredit() {
-    return okForCredit;
+  public boolean isOKForVoucher() {
+    return okForVoucher;
   }
 
   public boolean isOKForSubscription() {

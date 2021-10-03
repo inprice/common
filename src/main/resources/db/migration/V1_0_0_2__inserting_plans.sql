@@ -4,22 +4,22 @@
 -- ------------
 -- plans
 -- ------------
-insert into plan (name, user_limit, alarm_limit, link_limit, price) values ('Basic Plan', 0, 5, 25, 20.00);
+insert into plan (name, description, user_limit, alarm_limit, link_limit, price) values ('Basic Plan', 'Suitable for individuals who want to track only a few products.', 0, 5, 25, 20.00);
 set @p_basic_id = last_insert_id();
 
-insert into plan (name, user_limit, alarm_limit, link_limit, price) values ('Starter Plan', 1, 10, 50, 40.00);
+insert into plan (name, description, user_limit, alarm_limit, link_limit, price) values ('Starter Plan', 'Suitable for sole traders who want to track only a few products.', 1, 10, 50, 40.00);
 set @p_starter_id = last_insert_id();
 
-insert into plan (name, user_limit, alarm_limit, link_limit, price) values ('Standard Plan', 2, 20, 100, 60.00);
+insert into plan (name, description, user_limit, alarm_limit, link_limit, price) values ('Standard Plan', 'Suitable for sole traders who want to track some more products.', 2, 20, 100, 60.00);
 set @p_standard_id = last_insert_id();
 
-insert into plan (name, user_limit, alarm_limit, link_limit, price) values ('Pro Plan', 3, 50, 250, 80.00);
+insert into plan (name, description, user_limit, alarm_limit, link_limit, price) values ('Pro Plan', 'Suitable for middle-sized companies.', 3, 50, 250, 80.00);
 set @p_pro_id = last_insert_id();
 
-insert into plan (name, user_limit, alarm_limit, link_limit, price) values ('Premium Plan', 4, 100, 500, 150.00);
+insert into plan (name, description, user_limit, alarm_limit, link_limit, price) values ('Premium Plan', 'Suitable for large companies.', 4, 100, 500, 150.00);
 set @p_premium_id = last_insert_id();
 
-insert into plan (name, user_limit, alarm_limit, link_limit, price) values ('Enterprise Plan', 5, 200, 1000, 220.00);
+insert into plan (name, description, user_limit, alarm_limit, link_limit, price) values ('Enterprise Plan', 'Suitable for enterprise level companies.', 5, 200, 1000, 220.00);
 set @p_enterprise_id = last_insert_id();
 
 
