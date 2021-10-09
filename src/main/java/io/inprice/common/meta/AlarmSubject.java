@@ -2,11 +2,10 @@ package io.inprice.common.meta;
 
 public enum AlarmSubject {
   
-	STATUS,
+	POSITION,
 	PRICE,
 	MINIMUM,
 	AVERAGE,
-	MAXIMUM,
-	TOTAL;
+	MAXIMUM;
 
 }

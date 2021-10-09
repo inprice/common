@@ -22,7 +22,7 @@ public class TicketCommentMapper implements RowMapper<TicketComment> {
     if (Helper.hasColumn(rs, "user_id")) m.setUserId(rs.getLong("user_id"));
 
     //transients
-    if (Helper.hasColumn(rs, "username")) m.setUsername(rs.getString("username"));
+    if (Helper.hasColumn(rs, "full_name")) m.setFullName(rs.getString("full_name"));
     
     return m;
   }

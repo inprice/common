@@ -43,7 +43,7 @@ public class TicketHistoryMapper implements RowMapper<TicketHistory> {
     }
 
     //transients
-    if (Helper.hasColumn(rs, "username")) m.setUsername(rs.getString("username"));
+    if (Helper.hasColumn(rs, "full_name")) m.setFullName(rs.getString("full_name"));
    
     return m;
   }

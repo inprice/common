@@ -40,12 +40,11 @@ public interface CommonDao {
     @Bind("diffAmount") BigDecimal diffAmount, @Bind("diffRate") BigDecimal diffRate,
     @Bind("productId") long productId, @Bind("workspaceId") long workspaceId);
 
-  @SqlCall("call sp_refresh_product(:productId, :minPrice, :avgPrice, :maxPrice, :total, :level, :alarmId)")
+  @SqlCall("call sp_refresh_product(:productId, :minPrice, :avgPrice, :maxPrice, :position, :alarmId)")
   @OutParameter(name="minPrice", sqlType=Types.DOUBLE)
   @OutParameter(name="avgPrice", sqlType=Types.DOUBLE)
   @OutParameter(name="maxPrice", sqlType=Types.DOUBLE)
-  @OutParameter(name="total", sqlType=Types.DOUBLE)
-  @OutParameter(name="level", sqlType=Types.VARCHAR)
+  @OutParameter(name="position", sqlType=Types.VARCHAR)
   @OutParameter(name="alarmId", sqlType=Types.BIGINT)
   OutParameters refreshProduct(@Bind("productId") Long productId);
 

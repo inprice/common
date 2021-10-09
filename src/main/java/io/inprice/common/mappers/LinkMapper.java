@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
-import io.inprice.common.meta.Level;
+import io.inprice.common.meta.Position;
 import io.inprice.common.meta.LinkStatus;
 import io.inprice.common.meta.Grup;
 import io.inprice.common.models.Link;
@@ -27,6 +27,7 @@ public class LinkMapper implements RowMapper<Link> {
     if (Helper.hasColumn(rs, "seller")) m.setSeller(rs.getString("seller"));
     if (Helper.hasColumn(rs, "shipment")) m.setShipment(rs.getString("shipment"));
     if (Helper.hasColumn(rs, "price")) m.setPrice(rs.getBigDecimal("price"));
+    if (Helper.hasColumn(rs, "price_direction")) m.setPriceDirection(Helper.nullIntegerHandler(rs, "price_direction"));
     if (Helper.hasColumn(rs, "retry")) m.setRetry(Helper.nullIntegerHandler(rs, "retry"));
     if (Helper.hasColumn(rs, "watchlisted")) m.setWatchlisted(rs.getBoolean("watchlisted"));
 
@@ -40,9 +41,9 @@ public class LinkMapper implements RowMapper<Link> {
     if (Helper.hasColumn(rs, "platform_id")) m.setPlatformId(Helper.nullLongHandler(rs, "platform_id"));
     if (Helper.hasColumn(rs, "alarm_id")) m.setAlarmId(Helper.nullLongHandler(rs, "alarm_id"));
 
-    if (Helper.hasColumn(rs, "level")) {
-    	String val = rs.getString("level");
-    	if (val != null) m.setLevel(Level.valueOf(val));
+    if (Helper.hasColumn(rs, "position")) {
+    	String val = rs.getString("position");
+    	if (val != null) m.setPosition(Position.valueOf(val));
     }
     if (Helper.hasColumn(rs, "pre_status")) {
     	String val = rs.getString("pre_status");

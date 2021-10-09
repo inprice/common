@@ -26,11 +26,11 @@ public class Alarm implements Serializable {
 	private AlarmSubject subject;
 	private AlarmSubjectWhen subjectWhen;
 
-	private String certainStatus;
+	private String certainPosition;
 	private BigDecimal amountLowerLimit;
 	private BigDecimal amountUpperLimit;
 
-	private String lastStatus;
+	private String lastPosition;
 	private BigDecimal lastAmount;
 	
 	private Boolean tobeNotified;
@@ -48,7 +48,7 @@ public class Alarm implements Serializable {
   private String linkUrl;
 
   private String email;
-  private String username;
+  private String fullName;
   private String currencyFormat;
 
 }

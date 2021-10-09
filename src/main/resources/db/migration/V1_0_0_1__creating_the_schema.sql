@@ -3,8 +3,8 @@
 create table user (
   id                        bigint unsigned auto_increment not null,
   email                     varchar(128) not null,
+  full_name                 varchar(70) not null,
   password                  varchar(88) not null,
-  name                      varchar(70) not null,
   timezone                  varchar(30),
   privileged                boolean default false,
   banned                    boolean default false,
@@ -153,12 +153,12 @@ create table alarm (
   product_id                bigint unsigned,
   link_id                   bigint unsigned,
   topic                     enum('LINK', 'PRODUCT') not null default 'LINK',
-  subject                   enum('STATUS', 'PRICE', 'MINIMUM', 'AVERAGE', 'MAXIMUM', 'TOTAL') not null default 'STATUS',
+  subject                   enum('POSITION', 'PRICE', 'MINIMUM', 'AVERAGE', 'MAXIMUM') not null default 'POSITION',
   subject_when              enum('CHANGED', 'EQUAL', 'NOT_EQUAL', 'INCREASED', 'DECREASED', 'OUT_OF_LIMITS') not null default 'CHANGED',
-  certain_status            varchar(10),
+  certain_position          varchar(10),
   amount_lower_limit        decimal(9,2) not null default 0,
   amount_upper_limit        decimal(9,2) not null default 0,
-  last_status               varchar(10),
+  last_position             varchar(10),
   last_amount               decimal(9,2) default 0,
   tobe_notified             boolean default false,
   workspace_id              bigint unsigned not null,
@@ -189,15 +189,14 @@ alter table category add foreign key (workspace_id) references workspace (id);
 
 create table product (
   id                        bigint unsigned auto_increment not null,
-  code                      varchar(50),
+  sku                       varchar(50),
   name                      varchar(250) not null,
   actives                   smallint default 0,
   waitings                  smallint default 0,
   tryings                   smallint default 0,
   problems                  smallint default 0,
   price                     decimal(9,2) default 0,
-  level                     enum('LOWEST', 'HIGHEST', 'LOWER', 'AVERAGE', 'HIGHER', 'EQUAL', 'NA') not null default 'NA',
-  total                     decimal(9,2) default 0,
+  position                  enum('LOWEST', 'HIGHEST', 'LOWER', 'AVERAGE', 'HIGHER', 'EQUAL', 'UNKNOWN') not null default 'UNKNOWN',
   min_platform              varchar(50),
   min_seller                varchar(50),
   min_price                 decimal(9,2) default 0,
@@ -218,7 +217,7 @@ create table product (
   created_at                datetime not null default current_timestamp,
   primary key (id),
   key (name),
-  key (code)
+  key (sku)
 ) engine=innodb;
 alter table product add foreign key (workspace_id) references workspace (id);
 alter table product add foreign key (alarm_id) references alarm (id);
@@ -235,7 +234,8 @@ create table link (
   seller                    varchar(150),
   shipment                  varchar(150),
   price                     decimal(9,2) default 0,
-  level                     enum('LOWEST', 'HIGHEST', 'LOWER', 'AVERAGE', 'HIGHER', 'EQUAL', 'NA') not null default 'NA',
+  price_direction           smallint default 0,
+  position                  enum('LOWEST', 'HIGHEST', 'LOWER', 'AVERAGE', 'HIGHER', 'EQUAL', 'UNKNOWN') not null default 'UNKNOWN',
   pre_status                varchar(25) not null default 'TOBE_CLASSIFIED',
   status                    varchar(25) not null default 'TOBE_CLASSIFIED',
   grup                      enum('ACTIVE', 'WAITING', 'TRYING', 'PROBLEM') not null default 'WAITING',

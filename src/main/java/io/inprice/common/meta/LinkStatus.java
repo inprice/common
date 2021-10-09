@@ -1,7 +1,7 @@
 package io.inprice.common.meta;
 
 /**
- * This class consists of several statuses that are used to manage links's levels
+ * This class consists of several statuses that are used to manage links's positions
  *
  */
 public enum LinkStatus {

@@ -3,7 +3,7 @@ package io.inprice.common.models;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import io.inprice.common.meta.Level;
+import io.inprice.common.meta.Position;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +15,7 @@ public class Product extends BaseModel {
 
   private static final long serialVersionUID = 2010109845985968128L;
 
-  private String code;
+  private String sku;
   private String name;
 
   private Integer actives = 0;
@@ -24,8 +24,7 @@ public class Product extends BaseModel {
   private Integer problems = 0;
   
   private BigDecimal price = BigDecimal.ZERO; //if greater than zero then competitiveness starts!
-  private Level level = Level.NA;
-  private BigDecimal total = BigDecimal.ZERO;
+  private Position position = Position.UNKNOWN;
   
   private String minPlatform;
   private String minSeller;

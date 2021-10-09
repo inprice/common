@@ -19,7 +19,7 @@ public class User extends BaseModel {
   private static final long serialVersionUID = 1753526228909974777L;
 
   private String email;
-  private String name;
+  private String fullName;
   private String timezone;
   private boolean privileged;
   private boolean banned;

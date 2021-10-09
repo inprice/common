@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.inprice.common.meta.Level;
+import io.inprice.common.meta.Position;
 import io.inprice.common.meta.LinkStatus;
 import io.inprice.common.meta.Grup;
 import lombok.Getter;
@@ -29,7 +29,8 @@ public class Link extends BaseModel {
   private String seller;
   private String shipment;
   private BigDecimal price = BigDecimal.ZERO;
-  private Level level = Level.NA;
+  private Integer priceDirection = 0;
+  private Position position = Position.UNKNOWN;
 
   @JsonIgnore
   private LinkStatus preStatus = LinkStatus.TOBE_CLASSIFIED;

@@ -10,6 +10,7 @@ public enum EmailTemplate {
   
   FORGOT_PASSWORD("forgot-password"),
   REGISTRATION_REQUEST("registration-request"),
+  REGISTRATION_COMPLETE("registration-complete"),
 
   INVITATION_FOR_NEW_USERS("invitation-for-new-users"),
   INVITATION_FOR_EXISTING_USERS("invitation-for-existing-users"),

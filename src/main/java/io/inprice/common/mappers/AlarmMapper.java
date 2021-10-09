@@ -20,7 +20,7 @@ public class AlarmMapper implements RowMapper<Alarm> {
   	}
 
   	if (Helper.hasColumn(rs, "email")) m.setEmail(rs.getString("email"));
-  	if (Helper.hasColumn(rs, "username")) m.setUsername(rs.getString("username"));
+  	if (Helper.hasColumn(rs, "full_name")) m.setFullName(rs.getString("full_name"));
     if (Helper.hasColumn(rs, "currency_format")) m.setCurrencyFormat(rs.getString("currency_format"));
   	
   	return m;

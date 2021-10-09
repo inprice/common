@@ -18,6 +18,6 @@ public class TicketComment extends BaseModel {
   private Long userId;
 
   //transients
-  private String username;
+  private String fullName;
 
 }
