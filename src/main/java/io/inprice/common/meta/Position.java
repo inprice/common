@@ -1,12 +1,12 @@
 package io.inprice.common.meta;
 
 /**
- * Link and Product levels
+ * Link and Product positions
  * 
  * @author mdpinar
  *
  */
-public enum Level {
+public enum Position {
 
   LOWEST,
   HIGHEST,
@@ -14,6 +14,6 @@ public enum Level {
   HIGHER,
   AVERAGE,
   EQUAL,
-  NA;
+  UNKNOWN;
 
 }

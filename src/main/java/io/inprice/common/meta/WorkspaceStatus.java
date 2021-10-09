@@ -3,11 +3,11 @@ package io.inprice.common.meta;
 import java.util.Arrays;
 import java.util.List;
 
-public enum AccountStatus {
+public enum WorkspaceStatus {
   
   CREATED(false, true, true, true, false),
   FREE(true, false, true, true, true),
-  COUPONED(true, false, false, true, true),
+  VOUCHERED(true, false, false, true, true),
   SUBSCRIBED(true, false, false, false, true),
   CANCELLED(false, false, true, true, false),  //user decission
   STOPPED(false, false, true, true, false), //system decission
@@ -15,16 +15,16 @@ public enum AccountStatus {
 
   private boolean active;
   private boolean okForFreeUse;
-  private boolean okForCoupon;
+  private boolean okForVoucher;
   private boolean okForSubscription;
   private boolean okForCancel;
 
-  public static final List<AccountStatus> ACTIVE_STATUSES = Arrays.asList( FREE, COUPONED, SUBSCRIBED );
+  public static final List<WorkspaceStatus> ACTIVE_STATUSES = Arrays.asList( FREE, VOUCHERED, SUBSCRIBED );
 
-  private AccountStatus(boolean active, boolean okForFreeUse, boolean okForCoupon, boolean okForSubscription, boolean okForCancel) {
+  private WorkspaceStatus(boolean active, boolean okForFreeUse, boolean okForVoucher, boolean okForSubscription, boolean okForCancel) {
     this.active = active;
     this.okForFreeUse = okForFreeUse;
-    this.okForCoupon = okForCoupon;
+    this.okForVoucher = okForVoucher;
     this.okForSubscription = okForSubscription;
     this.okForCancel = okForCancel;
   }
@@ -37,8 +37,8 @@ public enum AccountStatus {
     return okForFreeUse;
   }
 
-  public boolean isOKForCoupon() {
-    return okForCoupon;
+  public boolean isOKForVoucher() {
+    return okForVoucher;
   }
 
   public boolean isOKForSubscription() {

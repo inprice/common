@@ -10,6 +10,7 @@ public enum EmailTemplate {
   
   FORGOT_PASSWORD("forgot-password"),
   REGISTRATION_REQUEST("registration-request"),
+  REGISTRATION_COMPLETE("registration-complete"),
 
   INVITATION_FOR_NEW_USERS("invitation-for-new-users"),
   INVITATION_FOR_EXISTING_USERS("invitation-for-existing-users"),
@@ -21,15 +22,15 @@ public enum EmailTemplate {
   SUBSCRIPTION_STARTED("subscription-started"),
   SUBSCRIPTION_RENEWAL("subscription-renewal"),
   SUBSCRIPTION_CANCELLED("subscription-cancelled"),
-  SUBSCRIPTION_CANCELLED_COUPONED("subscription-cancelled-couponed"),
+  SUBSCRIPTION_CANCELLED_VOUCHERED("subscription-cancelled-vouchered"),
   SUBSCRIPTION_STOPPED("subscription-stopped"),
   SUBSCRIPTION_CHANGE_SUCCESSFUL("subscription-change-successful"),
-  SUBSCRIPTION_CHANGE_SUCCESSFUL_COUPONED("subscription-change-successful-couponed"),
+  SUBSCRIPTION_CHANGE_SUCCESSFUL_VOUCHERED("subscription-change-successful-vouchered"),
   SUBSCRIPTION_CHANGE_FAILED("subscription-change-failed"),
 
-  FREE_ACCOUNT_REMINDER("free-account-reminder"),
-  FREE_ACCOUNT_CANCELLED("free-account-cancelled"),
-  FREE_ACCOUNT_STOPPED("free-account-stopped"),
+  FREE_WORKSPACE_REMINDER("free-workspace-reminder"),
+  FREE_WORKSPACE_CANCELLED("free-workspace-cancelled"),
+  FREE_WORKSPACE_STOPPED("free-workspace-stopped"),
 
   ALARM_NOTIFICATION("alarm/body")
   

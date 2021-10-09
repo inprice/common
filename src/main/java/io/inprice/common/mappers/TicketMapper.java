@@ -27,8 +27,8 @@ public class TicketMapper implements RowMapper<Ticket> {
     if (Helper.hasColumn(rs, "user_id")) m.setUserId(rs.getLong("user_id"));
 
     //transients
-    if (Helper.hasColumn(rs, "account")) m.setAccount(rs.getString("account"));
-    if (Helper.hasColumn(rs, "username")) m.setUsername(rs.getString("username"));
+    if (Helper.hasColumn(rs, "workspace")) m.setWorkspace(rs.getString("workspace"));
+    if (Helper.hasColumn(rs, "full_name")) m.setFullName(rs.getString("full_name"));
     
     if (Helper.hasColumn(rs, "status")) {
     	String val = rs.getString("status");

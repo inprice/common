@@ -10,8 +10,8 @@ import io.inprice.common.models.Product;
 public interface AlarmDao {
 
   final String FIELDS = 
-      ", al.subject, al.subject_when, al.certain_status, al.amount_lower_limit " +
-      ", al.amount_upper_limit, al.last_status, al.last_amount, al.tobe_notified, al.notified_at, al.updated_at as as_updated_at ";
+      ", al.subject, al.subject_when, al.certain_position, al.amount_lower_limit " +
+      ", al.amount_upper_limit, al.last_position, al.last_amount, al.tobe_notified, al.notified_at, al.updated_at as as_updated_at ";
 
 	@SqlQuery(
   	"select g.*" + FIELDS + " from product g " + 

@@ -7,8 +7,7 @@ create procedure sp_refresh_product (
     out minPrice decimal(9,2),
     out avgPrice decimal(9,2),
     out maxPrice decimal(9,2),
-    out total decimal(9,2),
-    out level varchar(10),
+    out position varchar(10),
     out alarmId bigint unsigned
   )
 begin
@@ -17,7 +16,6 @@ begin
   select price, alarm_id into @productPrice, @alarmId from product where id = in_product_id for update;
 
   select
-    @total    := sum(case when grup = 'ACTIVE' then price else 0 end),
     @minPrice := min(case when grup = 'ACTIVE' then price end),
     @avgPrice := avg(case when grup = 'ACTIVE' then price end),
     @maxPrice := max(case when grup = 'ACTIVE' then price end),
@@ -27,7 +25,6 @@ begin
     @problems := sum(case when grup = 'PROBLEM' then 1 else 0 end)
   from link where product_id = in_product_id;
 
-  if @total    is null then set @total    := 0; end if;
   if @minPrice is null then set @minPrice := 0; end if;
   if @avgPrice is null then set @avgPrice := 0; end if;
   if @maxPrice is null then set @maxPrice := 0; end if;
@@ -36,7 +33,7 @@ begin
   if @waitings is null then set @waitings := 0; end if;
   if @problems is null then set @problems := 0; end if;
 
-  set @level       := 'NA';
+  set @position    := 'UNKNOWN';
   set @minSeller   := 'NA';
   set @minPlatform := 'NA';
   set @maxSeller   := 'NA';
@@ -48,7 +45,7 @@ begin
 
   if @actives > 0 or @tryings > 0 or @waitings > 0 or @problems > 0 then
 
-    update link set level='NA' where product_id=in_product_id;
+    update link set position='UNKNOWN' where product_id=in_product_id;
 
     if @actives > 1 then
 
@@ -56,7 +53,7 @@ begin
         select @minSeller := seller, @minPlatform:= p.name from link as l inner join platform as p on p.id = l.platform_id where price = @minPrice;
         select @maxSeller := seller, @maxPlatform:= p.name from link as l inner join platform as p on p.id = l.platform_id where price = @maxPrice;
       else
-        set @level := 'EQUAL';
+        set @position := 'EQUAL';
         set @avgPrice := @minPrice;
       end if;
 
@@ -66,18 +63,18 @@ begin
         set @maxDiff := ROUND(((@maxPrice / @productPrice)-1)*100, 2);
 
         if @productPrice <= @minPrice then 
-          set @level := 'LOWEST';
+          set @position := 'LOWEST';
           set @minSeller := 'You';
           set @minPlatform := 'Yours';
           set @minPrice := @productPrice;
         elseif @productPrice < @avgPrice then 
-          set @level := 'LOWER';
+          set @position := 'LOWER';
         elseif @productPrice = @avgPrice then 
-          set @level := 'AVERAGE';
+          set @position := 'AVERAGE';
         elseif @productPrice < @maxPrice then 
-          set @level := 'HIGHER';
+          set @position := 'HIGHER';
         elseif @productPrice >= @maxPrice then 
-          set @level := 'HIGHEST';
+          set @position := 'HIGHEST';
           set @maxSeller := 'You';
           set @maxPlatform := 'Yours';
           set @maxPrice := @productPrice;
@@ -85,7 +82,7 @@ begin
       end if;
 
       if @minPrice != @maxPrice then
-        update link set level = 
+        update link set position = 
         (case
             when price <= @minPrice then 'LOWEST'
             when price > @minPrice and price < @avgPrice then 'LOWER'
@@ -95,7 +92,7 @@ begin
           end)
         where product_id=in_product_id and grup='ACTIVE';
       else
-        update link set level = 'EQUAL' where product_id=in_product_id and grup='ACTIVE';
+        update link set position = 'EQUAL' where product_id=in_product_id and grup='ACTIVE';
       end if;
 
     end if;
@@ -107,12 +104,12 @@ begin
     avg_price = @avgPrice, avg_diff = @avgDiff,
     max_seller = @maxSeller, max_platform = @maxPlatform, max_price = @maxPrice, max_diff = @maxDiff,
     actives = @actives, tryings = @tryings, waitings = @waitings, problems = @problems, 
-    level = @level, total = @total, updated_at = now()
+    position = @position, updated_at = now()
   where id = in_product_id;
 
   commit;
 
-  select @minPrice, @avgPrice, @maxPrice, @total, @level, @alarmId into minPrice, avgPrice, maxPrice, total, level, alarmId;
+  select @minPrice, @avgPrice, @maxPrice, @position, @alarmId into minPrice, avgPrice, maxPrice, position, alarmId;
 
 end$$
 

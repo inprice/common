@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Coupon extends BaseModel {
+public class Voucher extends BaseModel {
 
   private static final long serialVersionUID = 5125346359199270016L;
 
@@ -32,12 +32,12 @@ public class Coupon extends BaseModel {
   }
 
   @Override
-  public final Long getAccountId() {
+  public final Long getWorkspaceId() {
   	return null;
   }
   
   @Override
-  public void setAccountId(Long accountId) {
+  public void setWorkspaceId(Long workspaceId) {
   	;
   }
 

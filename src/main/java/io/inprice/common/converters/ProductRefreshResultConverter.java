@@ -6,7 +6,7 @@ import java.math.RoundingMode;
 import org.jdbi.v3.core.statement.OutParameters;
 
 import io.inprice.common.info.ProductRefreshResult;
-import io.inprice.common.meta.Level;
+import io.inprice.common.meta.Position;
 
 public class ProductRefreshResultConverter {
 
@@ -16,12 +16,11 @@ public class ProductRefreshResultConverter {
   	if (result.getObject("minPrice") != null) m.setMinPrice(new BigDecimal(result.getDouble("minPrice")).setScale(2, RoundingMode.HALF_UP));
   	if (result.getObject("avgPrice") != null) m.setAvgPrice(new BigDecimal(result.getDouble("avgPrice")).setScale(2, RoundingMode.HALF_UP));
   	if (result.getObject("maxPrice") != null) m.setMaxPrice(new BigDecimal(result.getDouble("maxPrice")).setScale(2, RoundingMode.HALF_UP));
-  	if (result.getObject("total") != null) m.setTotal(new BigDecimal(result.getDouble("total")).setScale(2, RoundingMode.HALF_UP));
   	if (result.getObject("alarmId") != null) m.setAlarmId(result.getLong("alarmId"));
 
-  	if (result.getObject("level") != null) { 
-    	String val = result.getString("level");
-    	if (val != null) m.setLevel(Level.valueOf(val));
+  	if (result.getObject("position") != null) { 
+    	String val = result.getString("position");
+    	if (val != null) m.setPosition(Position.valueOf(val));
   	}
 
 		return m;

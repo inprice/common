@@ -4,14 +4,14 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import io.inprice.common.meta.AccountStatus;
+import io.inprice.common.meta.WorkspaceStatus;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @JsonIgnoreProperties({ "id", "adminId" })
-public class Account extends BaseModel {
+public class Workspace extends BaseModel {
 
   private static final long serialVersionUID = 1818360516258349831L;
 
@@ -30,7 +30,7 @@ public class Account extends BaseModel {
   private String country;
 
   private String preStatus; //used when returning from BANNED status!
-  private AccountStatus status;
+  private WorkspaceStatus status;
   private Date lastStatusUpdate = new Date();
 
   private Integer planId;
@@ -53,12 +53,12 @@ public class Account extends BaseModel {
   private String email;
 
   @Override
-  public final Long getAccountId() {
+  public final Long getWorkspaceId() {
   	return null;
   }
   
   @Override
-  public void setAccountId(Long accountId) {
+  public void setWorkspaceId(Long workspaceId) {
   	;
   }
 

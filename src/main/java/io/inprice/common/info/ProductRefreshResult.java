@@ -2,7 +2,7 @@ package io.inprice.common.info;
 
 import java.math.BigDecimal;
 
-import io.inprice.common.meta.Level;
+import io.inprice.common.meta.Position;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,8 +15,7 @@ public class ProductRefreshResult {
 	private BigDecimal minPrice = BigDecimal.ZERO;
 	private BigDecimal avgPrice = BigDecimal.ZERO;
 	private BigDecimal maxPrice = BigDecimal.ZERO;
-	private BigDecimal total = BigDecimal.ZERO;
-	private Level level = Level.NA;
+	private Position position = Position.UNKNOWN;
 	private Long alarmId;
 
 	private Integer actives = 0;

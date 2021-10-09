@@ -6,15 +6,15 @@ import java.sql.SQLException;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
-import io.inprice.common.meta.AccountStatus;
-import io.inprice.common.models.Account;
+import io.inprice.common.meta.WorkspaceStatus;
+import io.inprice.common.models.Workspace;
 import io.inprice.common.models.Plan;
 
-public class AccountMapper implements RowMapper<Account> {
+public class WorkspaceMapper implements RowMapper<Workspace> {
 
   @Override
-  public Account map(ResultSet rs, StatementContext ctx) throws SQLException {
-    Account m = new Account();
+  public Workspace map(ResultSet rs, StatementContext ctx) throws SQLException {
+    Workspace m = new Workspace();
     Helper.mapBaseFields(m, rs);
 
     if (Helper.hasColumn(rs, "name")) m.setName(rs.getString("name"));
@@ -47,7 +47,7 @@ public class AccountMapper implements RowMapper<Account> {
     if (Helper.hasColumn(rs, "last_status_update")) m.setLastStatusUpdate(rs.getTimestamp("last_status_update"));
     if (Helper.hasColumn(rs, "status")) {
       String status = rs.getString("status");
-      if (status != null) m.setStatus(AccountStatus.valueOf(status));
+      if (status != null) m.setStatus(WorkspaceStatus.valueOf(status));
     }
 
     if (Helper.hasColumn(rs, "plan_id")) m.setPlanId(Helper.nullIntegerHandler(rs, "plan_id"));

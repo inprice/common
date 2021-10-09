@@ -2,7 +2,7 @@ package io.inprice.common.models;
 
 import java.util.Date;
 
-import io.inprice.common.meta.AccountStatus;
+import io.inprice.common.meta.WorkspaceStatus;
 import io.inprice.common.meta.UserRole;
 import io.inprice.common.meta.UserStatus;
 import lombok.Getter;
@@ -25,10 +25,10 @@ public class Membership extends BaseModel {
   private Date updatedAt;
 
   // transient
-  private String accountName;
+  private String workspaceName;
   private String contactName;
-  private AccountStatus accountStatus = AccountStatus.CREATED;
-  private Date lastStatusUpdate; //for account
+  private WorkspaceStatus workspaceStatus = WorkspaceStatus.CREATED;
+  private Date lastStatusUpdate; //for workspace
   private Integer planId;
   private String planName;
   private Date subsRenewalAt;

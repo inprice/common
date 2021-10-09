@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AccountTrans extends BaseModel {
+public class WorkspaceTrans extends BaseModel {
 
   private static final long serialVersionUID = -4787008755878198572L;
 

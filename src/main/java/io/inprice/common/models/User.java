@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * accountId is set only when super user switches account!
+ * workspaceId is set only when super user switches workspace!
  * 
  * @author mdpinar
  */
@@ -19,7 +19,7 @@ public class User extends BaseModel {
   private static final long serialVersionUID = 1753526228909974777L;
 
   private String email;
-  private String name;
+  private String fullName;
   private String timezone;
   private boolean privileged;
   private boolean banned;
@@ -29,6 +29,6 @@ public class User extends BaseModel {
   @JsonIgnore
   private String password;
 
-  private Long accid; //for only super user!
+  private Long wsId; //for only super user!
   
 }

@@ -16,7 +16,7 @@ public class Helper {
 
 	static void mapBaseFields(BaseModel m, ResultSet rs) throws SQLException {
 		if (Helper.hasColumn(rs, "id")) m.setId(rs.getLong("id"));
-    if (Helper.hasColumn(rs, "account_id")) m.setAccountId(rs.getLong("account_id"));
+    if (Helper.hasColumn(rs, "workspace_id")) m.setWorkspaceId(rs.getLong("workspace_id"));
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
     if (Helper.hasColumn(rs, "created_year")) m.setCreatedYear(rs.getInt("created_year"));
     if (Helper.hasColumn(rs, "created_month")) m.setCreatedMonth(rs.getString("created_month"));
@@ -55,7 +55,7 @@ public class Helper {
   	return mapForAlarm(rs, null, null, null, null);
   }
 
-  public static Alarm mapForAlarm(ResultSet rs, Long alarmId, Long linkId, Long productId, Long accountId) throws SQLException {
+  public static Alarm mapForAlarm(ResultSet rs, Long alarmId, Long linkId, Long productId, Long workspaceId) throws SQLException {
     Alarm m = new Alarm();
     
     String prefix = "";
@@ -65,19 +65,19 @@ public class Helper {
   		m.setId(alarmId);
   		m.setLinkId(linkId);
   		m.setProductId(productId);
-  		m.setAccountId(accountId);
+  		m.setWorkspaceId(workspaceId);
     } else {
       if (Helper.hasColumn(rs, "link_id")) m.setLinkId(Helper.nullLongHandler(rs, "link_id"));
       if (Helper.hasColumn(rs, "product_id")) m.setProductId(Helper.nullLongHandler(rs, "product_id"));
-      if (Helper.hasColumn(rs, "account_id")) m.setAccountId(rs.getLong("account_id"));
+      if (Helper.hasColumn(rs, "workspace_id")) m.setWorkspaceId(rs.getLong("workspace_id"));
     }
     
 		if (Helper.hasColumn(rs, prefix+"id")) m.setId(rs.getLong(prefix+"id"));
-    if (Helper.hasColumn(rs, "certain_status")) m.setCertainStatus(rs.getString("certain_status"));
+    if (Helper.hasColumn(rs, "certain_position")) m.setCertainPosition(rs.getString("certain_position"));
     if (Helper.hasColumn(rs, "amount_lower_limit")) m.setAmountLowerLimit(rs.getBigDecimal("amount_lower_limit"));
     if (Helper.hasColumn(rs, "amount_upper_limit")) m.setAmountUpperLimit(rs.getBigDecimal("amount_upper_limit"));
 
-    if (Helper.hasColumn(rs, "last_status")) m.setLastStatus(rs.getString("last_status"));
+    if (Helper.hasColumn(rs, "last_position")) m.setLastPosition(rs.getString("last_position"));
     if (Helper.hasColumn(rs, "last_amount")) m.setLastAmount(rs.getBigDecimal("last_amount"));
 
     if (Helper.hasColumn(rs, "tobe_notified")) m.setTobeNotified(rs.getBoolean("tobe_notified"));

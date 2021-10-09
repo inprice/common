@@ -6,8 +6,8 @@ public enum TicketSubject {
 	PAYMENT,
 	LINK,
 	PRODUCT,
-	ACCOUNT,
-	COUPON,
+	WORKSPACE,
+	VOUCHER,
 	OTHER;
 
 }

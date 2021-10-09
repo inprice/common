@@ -5,12 +5,12 @@ import java.util.Random;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Generates and verifies totally random coupons.
+ * Generates and verifies totally random vouchers.
  *
  * @author mdpinar
  *
  */
-public class CouponManager {
+public class VoucherManager {
 
   /*
    * Length is 33 Some characters like O, I, 0 are reserved.
@@ -22,26 +22,26 @@ public class CouponManager {
   private static final Random random = new Random();
 
   /**
-   * Verifies whether given coupon is valid or not
+   * Verifies whether given voucher is valid or not
    * 
    * @return boolean
    */
-  public static boolean isValid(String coupon) {
-    if (StringUtils.isBlank(coupon)) return false;
+  public static boolean isValid(String voucher) {
+    if (StringUtils.isBlank(voucher)) return false;
 
     int checkSum = 0;
-    for (int i = 0; i < coupon.length() - 1; i++) {
-      checkSum += coupon.charAt(i);
+    for (int i = 0; i < voucher.length() - 1; i++) {
+      checkSum += voucher.charAt(i);
     }
 
     // the last char is the checksum
-    return (coupon.charAt(coupon.length() - 1) == checksumSet[checkSum % checksumSet.length]);
+    return (voucher.charAt(voucher.length() - 1) == checksumSet[checkSum % checksumSet.length]);
   }
 
   /**
-   * Generates random coupon code
+   * Generates random voucher code
    *
-   * @return 8 chars coupon code
+   * @return 8 chars voucher code
    */
   public static String generate() {
     int checkSum = 0;
@@ -84,7 +84,7 @@ public class CouponManager {
    * 
    */
   public static void main(String[] args) {
-    System.err.println("Generated coupon:");
+    System.err.println("Generated voucher:");
     //for (int i = 0; i < 5; i++) {
       System.err.println(generate());
     //}

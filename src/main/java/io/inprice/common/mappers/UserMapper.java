@@ -17,7 +17,7 @@ public class UserMapper implements RowMapper<User> {
 
     if (Helper.hasColumn(rs, "email")) m.setEmail(rs.getString("email"));
     if (Helper.hasColumn(rs, "password")) m.setPassword(rs.getString("password"));
-    if (Helper.hasColumn(rs, "name")) m.setName(rs.getString("name"));
+    if (Helper.hasColumn(rs, "full_name")) m.setFullName(rs.getString("full_name"));
     if (Helper.hasColumn(rs, "timezone")) m.setTimezone(rs.getString("timezone"));
     if (Helper.hasColumn(rs, "privileged")) m.setPrivileged(rs.getBoolean("privileged"));
     if (Helper.hasColumn(rs, "banned")) m.setBanned(rs.getBoolean("banned"));

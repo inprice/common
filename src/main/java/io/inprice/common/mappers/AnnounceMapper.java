@@ -25,7 +25,7 @@ public class AnnounceMapper implements RowMapper<Announce> {
     if (Helper.hasColumn(rs, "ending_at")) m.setEndingAt(rs.getTimestamp("ending_at"));
 
     if (Helper.hasColumn(rs, "user_id")) m.setUserId(Helper.nullLongHandler(rs, "user_id"));
-    if (Helper.hasColumn(rs, "account_id")) m.setAccountId(Helper.nullLongHandler(rs, "account_id"));
+    if (Helper.hasColumn(rs, "workspace_id")) m.setWorkspaceId(Helper.nullLongHandler(rs, "workspace_id"));
 
     if (Helper.hasColumn(rs, "created_at")) m.setCreatedAt(rs.getTimestamp("created_at"));
     if (Helper.hasColumn(rs, "created_year")) m.setCreatedYear(rs.getInt("created_year"));

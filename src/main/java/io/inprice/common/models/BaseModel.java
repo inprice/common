@@ -19,7 +19,7 @@ public class BaseModel implements Serializable {
 	private Long id;
 
   @JsonIgnore
-  private Long accountId;
+  private Long workspaceId;
 
   private Date createdAt;
 	private Integer createdYear;

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
-import io.inprice.common.meta.Level;
+import io.inprice.common.meta.Position;
 import io.inprice.common.models.Product;
 
 public class ProductMapper implements RowMapper<Product> {
@@ -16,9 +16,8 @@ public class ProductMapper implements RowMapper<Product> {
     Product m = new Product();
     Helper.mapBaseFields(m, rs);
 
+    if (Helper.hasColumn(rs, "sku")) m.setSku(rs.getString("sku"));
     if (Helper.hasColumn(rs, "name")) m.setName(rs.getString("name"));
-    if (Helper.hasColumn(rs, "description")) m.setDescription(rs.getString("description"));
-    if (Helper.hasColumn(rs, "total")) m.setTotal(rs.getBigDecimal("total"));
 
     if (Helper.hasColumn(rs, "actives")) m.setActives(rs.getInt("actives"));
     if (Helper.hasColumn(rs, "waitings")) m.setWaitings(rs.getInt("waitings"));
@@ -39,17 +38,23 @@ public class ProductMapper implements RowMapper<Product> {
     if (Helper.hasColumn(rs, "max_price")) m.setMaxPrice(rs.getBigDecimal("max_price"));
     
     if (Helper.hasColumn(rs, "updated_at")) m.setUpdatedAt(rs.getTimestamp("updated_at"));
-    if (Helper.hasColumn(rs, "alarm_id")) m.setAlarmId(Helper.nullLongHandler(rs, "alarm_id"));
 
-    if (Helper.hasColumn(rs, "level")) {
-      String val = rs.getString("level");
-      if (val != null) m.setLevel(Level.valueOf(val));
+    if (Helper.hasColumn(rs, "alarm_id")) m.setAlarmId(Helper.nullLongHandler(rs, "alarm_id"));
+  	if (Helper.hasColumn(rs, "brand_id")) m.setBrandId(Helper.nullLongHandler(rs, "brand_id"));
+  	if (Helper.hasColumn(rs, "category_id")) m.setCategoryId(Helper.nullLongHandler(rs, "category_id"));
+
+    if (Helper.hasColumn(rs, "position")) {
+    	String val = rs.getString("position");
+    	if (val != null) m.setPosition(Position.valueOf(val));
     }
 
     //transients
     if (m.getAlarmId() != null && (Helper.hasColumn(rs, "tobe_notified"))) {
-    	m.setAlarm(Helper.mapForAlarm(rs, m.getAlarmId(), null, m.getId(), m.getAccountId()));
+    	m.setAlarm(Helper.mapForAlarm(rs, m.getAlarmId(), null, m.getId(), m.getWorkspaceId()));
     }
+
+  	if (Helper.hasColumn(rs, "brand_name")) m.setBrandName(rs.getString("brand_name"));
+  	if (Helper.hasColumn(rs, "category_name")) m.setCategoryName(rs.getString("category_name"));
 
     return m;
   }
