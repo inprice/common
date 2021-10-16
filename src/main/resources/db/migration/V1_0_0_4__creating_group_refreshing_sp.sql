@@ -4,16 +4,19 @@ DELIMITER $$
 
 create procedure sp_refresh_product (
     in in_product_id bigint,
+    out productPrice decimal(9,2),
     out minPrice decimal(9,2),
     out avgPrice decimal(9,2),
     out maxPrice decimal(9,2),
     out position varchar(10),
-    out alarmId bigint unsigned
+    out alarmId bigint unsigned,
+    out smartPriceId bigint unsigned,
+    out actives int
   )
 begin
   start transaction;
 
-  select price, alarm_id into @productPrice, @alarmId from product where id = in_product_id for update;
+  select price, alarm_id, smart_price_id into @productPrice, @alarmId, @smartPriceId from product where id = in_product_id for update;
 
   select
     @minPrice := min(case when grup = 'ACTIVE' then price end),
@@ -109,7 +112,8 @@ begin
 
   commit;
 
-  select @minPrice, @avgPrice, @maxPrice, @position, @alarmId into minPrice, avgPrice, maxPrice, position, alarmId;
+  select @productPrice, @minPrice, @avgPrice, @maxPrice, @position, @alarmId, @smartPriceId, @actives 
+  into productPrice, minPrice, avgPrice, maxPrice, position, alarmId, smartPriceId, actives;
 
 end$$
 

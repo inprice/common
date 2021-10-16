@@ -18,14 +18,15 @@ import io.inprice.common.models.Link;
 public interface CommonDao {
 
   @SqlQuery(
-		"select l.* from link as l " +
+		"select l.*, p.alarm_id as product_alarm_id, p.smart_price_id as product_smart_price_id from link as l " +
+		"inner join product as p on p.id = l.product_id " +
 		"inner join workspace as a on a.id = l.workspace_id " + 
 		"where a.status in ('FREE', 'VOUCHERED', 'SUBSCRIBED') " +
 		"  and l.url_hash=:urlHash " +
 		"  and l.retry < 3"
 	)
   @UseRowMapper(LinkMapper.class)
-  List<Link> findActiveLinksByHash(@Bind("urlHash") String urlHash);
+  List<Link> findAllLinksByHash(@Bind("urlHash") String urlHash);
 
   @SqlUpdate("update link set checked_at = now() where id=:id")
   boolean refreshCheckedAt(@Bind("id") long id); 
@@ -40,12 +41,23 @@ public interface CommonDao {
     @Bind("diffAmount") BigDecimal diffAmount, @Bind("diffRate") BigDecimal diffRate,
     @Bind("productId") long productId, @Bind("workspaceId") long workspaceId);
 
-  @SqlCall("call sp_refresh_product(:productId, :minPrice, :avgPrice, :maxPrice, :position, :alarmId)")
+  @SqlUpdate(
+    "insert into link_price " +
+    "(link_id, new_price, product_id, workspace_id) "+
+    "values (:linkId, :newPrice, :productId, :workspaceId)"
+  )
+  boolean insertLinkPrice(@Bind("linkId") long linkId, @Bind("newPrice") BigDecimal newPrice, 
+  		@Bind("productId") long productId, @Bind("workspaceId") long workspaceId);
+
+  @SqlCall("call sp_refresh_product(:productId, :productPrice, :minPrice, :avgPrice, :maxPrice, :position, :alarmId, :smartPriceId, :actives)")
+  @OutParameter(name="productPrice", sqlType=Types.DOUBLE)
   @OutParameter(name="minPrice", sqlType=Types.DOUBLE)
   @OutParameter(name="avgPrice", sqlType=Types.DOUBLE)
   @OutParameter(name="maxPrice", sqlType=Types.DOUBLE)
   @OutParameter(name="position", sqlType=Types.VARCHAR)
   @OutParameter(name="alarmId", sqlType=Types.BIGINT)
+  @OutParameter(name="smartPriceId", sqlType=Types.BIGINT)
+  @OutParameter(name="actives", sqlType=Types.INTEGER)
   OutParameters refreshProduct(@Bind("productId") Long productId);
 
 }

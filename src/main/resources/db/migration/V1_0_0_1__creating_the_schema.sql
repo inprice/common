@@ -174,7 +174,7 @@ create table brand (
   name                      varchar(50) not null,
   workspace_id              bigint unsigned not null,
   primary key (id),
-  key (name)
+  key (workspace_id, name)
 ) engine=innodb;
 alter table brand add foreign key (workspace_id) references workspace (id);
 
@@ -183,7 +183,19 @@ create table category (
   name                      varchar(50) not null,
   workspace_id              bigint unsigned not null,
   primary key (id),
-  key (name)
+  key (workspace_id, name)
+) engine=innodb;
+alter table category add foreign key (workspace_id) references workspace (id);
+
+create table smart_price (
+  id                        bigint unsigned auto_increment not null,
+  name                      varchar(70) not null,
+  formula                   varchar(255) not null,
+  lower_limit_formula       varchar(255),
+  upper_limit_formula       varchar(255),
+  workspace_id              bigint unsigned not null,
+  primary key (id),
+  key (workspace_id, name)
 ) engine=innodb;
 alter table category add foreign key (workspace_id) references workspace (id);
 
@@ -196,7 +208,7 @@ create table product (
   tryings                   smallint default 0,
   problems                  smallint default 0,
   price                     decimal(9,2) default 0,
-  position                  enum('LOWEST', 'HIGHEST', 'LOWER', 'AVERAGE', 'HIGHER', 'EQUAL', 'UNKNOWN') not null default 'UNKNOWN',
+  position                  enum('LOWEST', 'LOWER', 'EQUAL', 'AVERAGE', 'HIGHER', 'HIGHEST', 'UNKNOWN') not null default 'UNKNOWN',
   min_platform              varchar(50),
   min_seller                varchar(50),
   min_price                 decimal(9,2) default 0,
@@ -210,14 +222,17 @@ create table product (
   brand_id                  bigint unsigned,
   category_id               bigint unsigned,
   alarm_id                  bigint unsigned,
+  smart_price               decimal(9,2) default 0,
+  smart_price_id            bigint unsigned,
+  smart_price_problem       varchar(255),
   workspace_id              bigint unsigned not null,
   updated_at                datetime,
   created_year              smallint not null default (year(curdate())),
   created_month             char(7) not null default (date_format(curdate(), '%Y-%m')),
   created_at                datetime not null default current_timestamp,
   primary key (id),
-  key (name),
-  key (sku)
+  key (workspace_id, name),
+  key (workspace_id, sku)
 ) engine=innodb;
 alter table product add foreign key (workspace_id) references workspace (id);
 alter table product add foreign key (alarm_id) references alarm (id);
@@ -235,7 +250,7 @@ create table link (
   shipment                  varchar(150),
   price                     decimal(9,2) default 0,
   price_direction           smallint default 0,
-  position                  enum('LOWEST', 'HIGHEST', 'LOWER', 'AVERAGE', 'HIGHER', 'EQUAL', 'UNKNOWN') not null default 'UNKNOWN',
+  position                  enum('LOWEST', 'LOWER', 'EQUAL', 'AVERAGE', 'HIGHER', 'HIGHEST', 'UNKNOWN') not null default 'UNKNOWN',
   pre_status                varchar(25) not null default 'TOBE_CLASSIFIED',
   status                    varchar(25) not null default 'TOBE_CLASSIFIED',
   grup                      enum('ACTIVE', 'WAITING', 'TRYING', 'PROBLEM') not null default 'WAITING',
@@ -253,9 +268,8 @@ create table link (
   created_month             char(7) not null default (date_format(curdate(), '%Y-%m')),
   created_at                datetime not null default current_timestamp,
   primary key (id),
-  key (url_hash),
-  key (status),
-  key (grup),
+  key (workspace_id, name),
+  key (workspace_id, url_hash),
   key (checked_at)
 ) engine=innodb;
 alter table link add foreign key (product_id) references product (id);

@@ -45,10 +45,15 @@ public class Product extends BaseModel {
   private Long categoryId;
   private Long alarmId;
 
+  private Long smartPriceId;
+  private BigDecimal smartPrice = BigDecimal.ZERO;
+  private String smartPriceProblem;
+  
   //transients
   private String brandName;
   private String categoryName;
   private Alarm alarm;
+  private SmartPrice smartPriceModel;
 
   public int getLinkCount() {
   	return actives+waitings+tryings+problems;

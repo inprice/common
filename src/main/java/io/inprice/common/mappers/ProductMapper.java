@@ -8,6 +8,7 @@ import org.jdbi.v3.core.statement.StatementContext;
 
 import io.inprice.common.meta.Position;
 import io.inprice.common.models.Product;
+import io.inprice.common.models.SmartPrice;
 
 public class ProductMapper implements RowMapper<Product> {
 
@@ -43,6 +44,10 @@ public class ProductMapper implements RowMapper<Product> {
   	if (Helper.hasColumn(rs, "brand_id")) m.setBrandId(Helper.nullLongHandler(rs, "brand_id"));
   	if (Helper.hasColumn(rs, "category_id")) m.setCategoryId(Helper.nullLongHandler(rs, "category_id"));
 
+    if (Helper.hasColumn(rs, "smart_price_id")) m.setSmartPriceId(Helper.nullLongHandler(rs, "smart_price_id"));
+    if (Helper.hasColumn(rs, "smart_price")) m.setSmartPrice(rs.getBigDecimal("smart_price"));
+    if (Helper.hasColumn(rs, "smart_price_problem")) m.setSmartPriceProblem(rs.getString("smart_price_problem"));
+
     if (Helper.hasColumn(rs, "position")) {
     	String val = rs.getString("position");
     	if (val != null) m.setPosition(Position.valueOf(val));
@@ -51,6 +56,15 @@ public class ProductMapper implements RowMapper<Product> {
     //transients
     if (m.getAlarmId() != null && (Helper.hasColumn(rs, "tobe_notified"))) {
     	m.setAlarm(Helper.mapForAlarm(rs, m.getAlarmId(), null, m.getId(), m.getWorkspaceId()));
+    }
+
+    if (m.getSmartPriceId() != null && (Helper.hasColumn(rs, "formula"))) {
+    	SmartPrice smartPrice = new SmartPrice();
+    	smartPrice.setId(m.getSmartPriceId());
+      if (Helper.hasColumn(rs, "formula")) smartPrice.setFormula(rs.getString("formula"));
+      if (Helper.hasColumn(rs, "lower_limit_formula")) smartPrice.setLowerLimitFormula(rs.getString("lower_limit_formula"));
+      if (Helper.hasColumn(rs, "upper_limit_formula")) smartPrice.setUpperLimitFormula(rs.getString("upper_limit_formula"));
+    	m.setSmartPriceModel(smartPrice);
     }
 
   	if (Helper.hasColumn(rs, "brand_name")) m.setBrandName(rs.getString("brand_name"));
