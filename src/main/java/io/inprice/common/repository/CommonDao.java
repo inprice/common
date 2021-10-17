@@ -20,8 +20,8 @@ public interface CommonDao {
   @SqlQuery(
 		"select l.*, p.alarm_id as product_alarm_id, p.smart_price_id as product_smart_price_id from link as l " +
 		"inner join product as p on p.id = l.product_id " +
-		"inner join workspace as a on a.id = l.workspace_id " + 
-		"where a.status in ('FREE', 'VOUCHERED', 'SUBSCRIBED') " +
+		"inner join workspace as w on w.id = l.workspace_id " + 
+		"where w.status in ('FREE', 'VOUCHERED', 'SUBSCRIBED') " +
 		"  and l.url_hash=:urlHash " +
 		"  and l.retry < 3"
 	)

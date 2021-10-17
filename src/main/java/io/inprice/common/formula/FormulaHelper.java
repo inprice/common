@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import io.inprice.common.info.ProductRefreshResult;
+import io.inprice.common.meta.Position;
 import io.inprice.common.models.SmartPrice;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
@@ -53,6 +54,8 @@ public class FormulaHelper {
 	 */
   public static String verify(SmartPriceDTO dto) {
   	ProductRefreshResult prr = new ProductRefreshResult();
+  	prr.setPosition(Position.AVERAGE);
+  	prr.setActives(3);
 		prr.setProductPrice(BigDecimal.valueOf(110));
 		prr.setMinPrice(BigDecimal.valueOf(100));
 		prr.setAvgPrice(BigDecimal.valueOf(150));
@@ -75,9 +78,10 @@ public class FormulaHelper {
    * @return main value as double
    */
   public static EvaluationResult evaluate(SmartPrice smartPrice, ProductRefreshResult prr) {
-  	if (smartPrice == null || smartPrice.getFormula() == null) {
-  		return new EvaluationResult(0, 0, 0, "Formula is empty (" + (smartPrice == null ? "1)" : "2)"));
+  	if (smartPrice == null || smartPrice.getFormula() == null || prr.getActives().compareTo(0) == 0 || prr.getPosition().equals(Position.UNKNOWN)) {
+  		return new EvaluationResult(0, 0, 0, null);
   	}
+
   	//assignings the prices
   	Map<String, Double> variablesMap = Map.of(
 			"p", prr.getProductPrice().doubleValue(),

@@ -45,8 +45,8 @@ public class ProductMapper implements RowMapper<Product> {
   	if (Helper.hasColumn(rs, "category_id")) m.setCategoryId(Helper.nullLongHandler(rs, "category_id"));
 
     if (Helper.hasColumn(rs, "smart_price_id")) m.setSmartPriceId(Helper.nullLongHandler(rs, "smart_price_id"));
-    if (Helper.hasColumn(rs, "smart_price")) m.setSmartPrice(rs.getBigDecimal("smart_price"));
-    if (Helper.hasColumn(rs, "smart_price_problem")) m.setSmartPriceProblem(rs.getString("smart_price_problem"));
+    if (Helper.hasColumn(rs, "suggested_price")) m.setSuggestedPrice(rs.getBigDecimal("suggested_price"));
+    if (Helper.hasColumn(rs, "suggested_price_problem")) m.setSuggestedPriceProblem(rs.getString("suggested_price_problem"));
 
     if (Helper.hasColumn(rs, "position")) {
     	String val = rs.getString("position");
@@ -64,7 +64,7 @@ public class ProductMapper implements RowMapper<Product> {
       if (Helper.hasColumn(rs, "formula")) smartPrice.setFormula(rs.getString("formula"));
       if (Helper.hasColumn(rs, "lower_limit_formula")) smartPrice.setLowerLimitFormula(rs.getString("lower_limit_formula"));
       if (Helper.hasColumn(rs, "upper_limit_formula")) smartPrice.setUpperLimitFormula(rs.getString("upper_limit_formula"));
-    	m.setSmartPriceModel(smartPrice);
+    	m.setSmartPrice(smartPrice);
     }
 
   	if (Helper.hasColumn(rs, "brand_name")) m.setBrandName(rs.getString("brand_name"));
