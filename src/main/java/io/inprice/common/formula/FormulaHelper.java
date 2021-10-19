@@ -1,6 +1,7 @@
 package io.inprice.common.formula;
 
 import java.math.BigDecimal;
+import java.util.EmptyStackException;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -78,7 +79,7 @@ public class FormulaHelper {
    * @return main value as double
    */
   public static EvaluationResult evaluate(SmartPrice smartPrice, ProductRefreshResult prr) {
-  	if (smartPrice == null || smartPrice.getFormula() == null || prr.getActives().compareTo(0) == 0 || prr.getPosition().equals(Position.UNKNOWN)) {
+  	if (smartPrice == null || smartPrice.getFormula() == null || prr.getActives().compareTo(0) == 0) {
   		return new EvaluationResult(0, 0, 0, null);
   	}
 
@@ -107,7 +108,11 @@ public class FormulaHelper {
   	try {
 			mainExp = generateExpression(smartPrice.getFormula(), variablesMap);
 		} catch (Exception e) {
-			mainProblem = e.getMessage();
+			if (e instanceof EmptyStackException) {
+				mainProblem = "Invalid formula";
+			} else {
+				mainProblem = e.getMessage();
+			}
 		}
 
   	//if given, checking lower limit formula
@@ -115,7 +120,11 @@ public class FormulaHelper {
 	  	try {
 	  		lowerLimitExp = generateExpression(smartPrice.getLowerLimitFormula(), variablesMap);
 			} catch (Exception e) {
-				lowerLimitProblem = e.getMessage();
+				if (e instanceof EmptyStackException) {
+					lowerLimitProblem = "Invalid formula";
+				} else {
+					lowerLimitProblem = e.getMessage();
+				}
 			}
 		}
 
@@ -124,7 +133,11 @@ public class FormulaHelper {
 	  	try {
 	  		upperLimitExp = generateExpression(smartPrice.getUpperLimitFormula(), variablesMap);
 			} catch (Exception e) {
-				upperLimitProblem = e.getMessage();
+				if (e instanceof EmptyStackException) {
+					upperLimitProblem = "Invalid formula";
+				} else {
+					upperLimitProblem = e.getMessage();
+				}
 			}
 		}
 
@@ -134,7 +147,7 @@ public class FormulaHelper {
 	  	if (mainRes.isValid()) {
 		  	try {
 		  		mainValue = mainExp.evaluate();
-				} catch (Exception e) {
+				} catch (ArithmeticException e) {
 					mainProblem = e.getMessage();
 				}
 	  	} else {
@@ -148,7 +161,7 @@ public class FormulaHelper {
 	  	if (lowerLimitRes.isValid()) {
 	  		try {
 	  			lowerLimitValue = lowerLimitExp.evaluate();
-				} catch (Exception e) {
+				} catch (ArithmeticException e) {
 					lowerLimitProblem = e.getMessage();
 				}
 			} else {
@@ -162,7 +175,7 @@ public class FormulaHelper {
 	  	if (upperLimitRes.isValid()) {
 	  		try {
 	  			upperLimitValue = upperLimitExp.evaluate();
-				} catch (Exception e) {
+				} catch (ArithmeticException e) {
 					upperLimitProblem = e.getMessage();
 				}
 			} else {
