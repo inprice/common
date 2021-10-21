@@ -61,7 +61,10 @@ public class LinkMapper implements RowMapper<Link> {
     //transients
     if (Helper.hasColumn(rs, "product_name")) m.setProductName(rs.getString("product_name"));
     if (Helper.hasColumn(rs, "product_price")) m.setProductPrice(rs.getBigDecimal("product_price"));
+    if (Helper.hasColumn(rs, "product_alarm_id")) m.setProductAlarmId(Helper.nullLongHandler(rs, "product_alarm_id"));
+    if (Helper.hasColumn(rs, "product_smart_price_id")) m.setProductSmartPriceId(Helper.nullLongHandler(rs, "product_smart_price_id"));
 
+    
   	if (m.getPlatformId() != null) {
     	Platform platform = new Platform();
     	platform.setId(m.getPlatformId());

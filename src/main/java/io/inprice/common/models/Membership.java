@@ -39,6 +39,7 @@ public class Membership extends BaseModel {
   private Integer linkCount;
   private Integer alarmLimit;
   private Integer alarmCount;
+  private String currencyCode;
   private String currencyFormat;
 
 }

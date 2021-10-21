@@ -12,11 +12,15 @@ import lombok.ToString;
 @ToString
 public class ProductRefreshResult {
 
+	private BigDecimal productPrice = BigDecimal.ZERO;
 	private BigDecimal minPrice = BigDecimal.ZERO;
 	private BigDecimal avgPrice = BigDecimal.ZERO;
 	private BigDecimal maxPrice = BigDecimal.ZERO;
+
 	private Position position = Position.UNKNOWN;
+
 	private Long alarmId;
+	private Long smartPriceId;
 
 	private Integer actives = 0;
 	private Integer waitings = 0;
