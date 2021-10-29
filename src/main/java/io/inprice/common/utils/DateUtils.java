@@ -22,6 +22,7 @@ public class DateUtils {
 
   private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
   private static final SimpleDateFormat sdfForDB = new SimpleDateFormat("yyyy-MM-dd");
+  private static final SimpleDateFormat sdfMediumForReport = new SimpleDateFormat("MMM dd, yyyy - HH:mm");
   private static final SimpleDateFormat sdfLongForDB = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
   private static final SimpleDateFormat sdfLongForLogging = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
   private static final SimpleDateFormat sdfStandart = new SimpleDateFormat("dd/MM/yyyy");
@@ -32,6 +33,13 @@ public class DateUtils {
   public static String formatDateForDB(Date date) {
     if (date != null)
       return "'" + sdfForDB.format(date) + "'";
+    else
+      return "";
+  }
+
+  public static String formatReportDate(Date date) {
+    if (date != null)
+      return sdfMediumForReport.format(date);
     else
       return "";
   }

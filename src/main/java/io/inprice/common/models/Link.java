@@ -61,6 +61,7 @@ public class Link extends BaseModel {
   //transients
   private String productName;
   private BigDecimal productPrice;
+  private BigDecimal productBasePrice;
   private Long productAlarmId;
   private Long productSmartPriceId;
 

@@ -14,6 +14,7 @@ public class ProductRefreshResultConverter {
 		ProductRefreshResult m = new ProductRefreshResult();
 
 		if (result.getObject("productPrice") != null) m.setProductPrice(new BigDecimal(result.getDouble("productPrice")).setScale(2, RoundingMode.HALF_UP));
+		if (result.getObject("basePrice") != null) m.setBasePrice(new BigDecimal(result.getDouble("basePrice")).setScale(2, RoundingMode.HALF_UP));
   	if (result.getObject("minPrice") != null) m.setMinPrice(new BigDecimal(result.getDouble("minPrice")).setScale(2, RoundingMode.HALF_UP));
   	if (result.getObject("avgPrice") != null) m.setAvgPrice(new BigDecimal(result.getDouble("avgPrice")).setScale(2, RoundingMode.HALF_UP));
   	if (result.getObject("maxPrice") != null) m.setMaxPrice(new BigDecimal(result.getDouble("maxPrice")).setScale(2, RoundingMode.HALF_UP));

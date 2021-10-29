@@ -9,11 +9,11 @@ package io.inprice.common.meta;
 public enum Position {
 
   LOWEST,
-  HIGHEST,
   LOWER,
-  HIGHER,
-  AVERAGE,
   EQUAL,
+  AVERAGE,
+  HIGHER,
+  HIGHEST,
   UNKNOWN;
 
 }

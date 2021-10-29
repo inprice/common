@@ -208,6 +208,7 @@ create table product (
   tryings                   smallint default 0,
   problems                  smallint default 0,
   price                     decimal(9,2) default 0,
+  base_price                decimal(9,2) default 0,
   position                  enum('LOWEST', 'LOWER', 'EQUAL', 'AVERAGE', 'HIGHER', 'HIGHEST', 'UNKNOWN') not null default 'UNKNOWN',
   min_platform              varchar(50),
   min_seller                varchar(50),

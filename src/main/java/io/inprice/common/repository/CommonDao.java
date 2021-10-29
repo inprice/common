@@ -49,8 +49,9 @@ public interface CommonDao {
   boolean insertLinkPrice(@Bind("linkId") long linkId, @Bind("newPrice") BigDecimal newPrice, 
   		@Bind("productId") long productId, @Bind("workspaceId") long workspaceId);
 
-  @SqlCall("call sp_refresh_product(:productId, :productPrice, :minPrice, :avgPrice, :maxPrice, :position, :alarmId, :smartPriceId, :actives)")
+  @SqlCall("call sp_refresh_product(:productId, :productPrice, :basePrice, :minPrice, :avgPrice, :maxPrice, :position, :alarmId, :smartPriceId, :actives)")
   @OutParameter(name="productPrice", sqlType=Types.DOUBLE)
+  @OutParameter(name="basePrice", sqlType=Types.DOUBLE)
   @OutParameter(name="minPrice", sqlType=Types.DOUBLE)
   @OutParameter(name="avgPrice", sqlType=Types.DOUBLE)
   @OutParameter(name="maxPrice", sqlType=Types.DOUBLE)

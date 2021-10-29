@@ -58,6 +58,7 @@ public class FormulaHelper {
   	prr.setPosition(Position.AVERAGE);
   	prr.setActives(3);
 		prr.setProductPrice(BigDecimal.valueOf(110));
+		prr.setBasePrice(BigDecimal.valueOf(80));
 		prr.setMinPrice(BigDecimal.valueOf(100));
 		prr.setAvgPrice(BigDecimal.valueOf(150));
 		prr.setMaxPrice(BigDecimal.valueOf(200));
@@ -86,6 +87,7 @@ public class FormulaHelper {
   	//assignings the prices
   	Map<String, Double> variablesMap = Map.of(
 			"p", prr.getProductPrice().doubleValue(),
+			"b", prr.getBasePrice().doubleValue(),
 			"i", prr.getMinPrice().doubleValue(),
 			"a", prr.getAvgPrice().doubleValue(),
 			"x", prr.getMaxPrice().doubleValue()
@@ -241,7 +243,7 @@ public class FormulaHelper {
    */
   public static void main(String[] args) {
   	SmartPriceDTO dto = new SmartPriceDTO();
-  	dto.setFormula("min((p*1.10)+0.75,a)"); //returns which one is less; a) 10% more of the price plus 75 cent, b) average
+  	dto.setFormula("min((b*1.10)+0.75,a)"); //returns which one is less; a) 10% more of the price plus 75 cent, b) average
   	dto.setLowerLimitFormula("(i-(i*10/100))"); //cannot be less than minimum minus 10% of minimum  
   	dto.setUpperLimitFormula("a"); //average is the upper limit
 
