@@ -30,7 +30,7 @@ public class Link extends BaseModel {
   private String shipment;
   private BigDecimal price = BigDecimal.ZERO;
   private Integer priceDirection = 0;
-  private Position position = Position.UNKNOWN;
+  private Position position = Position.NotSet;
 
   @JsonIgnore
   private LinkStatus preStatus = LinkStatus.TOBE_CLASSIFIED;

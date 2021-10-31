@@ -8,12 +8,12 @@ package io.inprice.common.meta;
  */
 public enum Position {
 
-  LOWEST,
-  LOWER,
-  EQUAL,
-  AVERAGE,
-  HIGHER,
-  HIGHEST,
-  UNKNOWN;
+  Lowest,
+  Lower,
+  Equal,
+  Average,
+  Higher,
+  Highest,
+  NotSet;
 
 }

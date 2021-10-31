@@ -25,7 +25,7 @@ public class Product extends BaseModel {
   
   private BigDecimal price = BigDecimal.ZERO; //if greater than zero then competitiveness starts!
   private BigDecimal basePrice = BigDecimal.ZERO;
-  private Position position = Position.UNKNOWN;
+  private Position position = Position.NotSet;
   
   private String minPlatform;
   private String minSeller;

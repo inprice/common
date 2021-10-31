@@ -55,7 +55,7 @@ public class FormulaHelper {
 	 */
   public static String verify(SmartPriceDTO dto) {
   	ProductRefreshResult prr = new ProductRefreshResult();
-  	prr.setPosition(Position.AVERAGE);
+  	prr.setPosition(Position.Average);
   	prr.setActives(3);
 		prr.setProductPrice(BigDecimal.valueOf(110));
 		prr.setBasePrice(BigDecimal.valueOf(80));

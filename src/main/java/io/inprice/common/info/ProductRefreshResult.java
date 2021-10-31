@@ -18,7 +18,7 @@ public class ProductRefreshResult {
 	private BigDecimal avgPrice = BigDecimal.ZERO;
 	private BigDecimal maxPrice = BigDecimal.ZERO;
 
-	private Position position = Position.UNKNOWN;
+	private Position position = Position.NotSet;
 
 	private Long alarmId;
 	private Long smartPriceId;
