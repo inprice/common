@@ -1,5 +1,11 @@
 -- @author mdpinar
 
+-- demo websites
+insert into platform (name, domain, country, class_name, currency_code, currency_format) values
+  ('Demo Magaza', 'sanal.com', 'Neverland', 'zz.Sanal', 'TRY', '#,##0.00 TL')
+  ;
+
+-- standard websites
 insert into platform (name, domain, country, class_name, currency_code, currency_format) values
   ('Amazon US', 'amazon.com', 'United States', 'xx.AmazonXX', 'USD', '$#,##0.00'),
   ('Ebay US', 'ebay.com', 'United States', 'xx.EbayXX', 'USD', '$#,##0.00'),
@@ -111,10 +117,12 @@ insert into platform (name, domain, country, class_name, currency_code, currency
   ('Trendyol TR', 'trendyol.com', 'Turkey', 'tr.TrendyolTR', 'TRY', '#,##0.00 TL')
   ;
 
+-- websites having separated queue
 insert into platform (name, domain, country, class_name, currency_code, currency_format, queue) values
   ('Walmart CA', 'walmart.ca', 'Canada', 'ca.WalmartCA', 'CAD', '$#,##0.00', 'active.links.queue.cap1')
   ;
 
+-- blocked websites
 insert into platform (name, domain, country, class_name, currency_code, currency_format, blocked) values
   ('Fnac FR', 'fnac.com', 'France', 'fr.FnacFR', 'EUR', '#,##0.00 €', true),
   ('MediaMarkt ES', 'mediamarkt.es', 'Spain', 'xx.MediaMarktXX_1', 'EUR', '€ #,##0.00', true)

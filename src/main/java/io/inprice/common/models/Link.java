@@ -30,7 +30,7 @@ public class Link extends BaseModel {
   private String shipment;
   private BigDecimal price = BigDecimal.ZERO;
   private Integer priceDirection = 0;
-  private Position position = Position.UNKNOWN;
+  private Position position = Position.NotSet;
 
   @JsonIgnore
   private LinkStatus preStatus = LinkStatus.TOBE_CLASSIFIED;
@@ -61,6 +61,7 @@ public class Link extends BaseModel {
   //transients
   private String productName;
   private BigDecimal productPrice;
+  private BigDecimal productBasePrice;
   private Long productAlarmId;
   private Long productSmartPriceId;
 

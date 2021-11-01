@@ -5,6 +5,7 @@ DELIMITER $$
 create procedure sp_refresh_product (
     in in_product_id bigint,
     out productPrice decimal(9,2),
+    out basePrice decimal(9,2),
     out minPrice decimal(9,2),
     out avgPrice decimal(9,2),
     out maxPrice decimal(9,2),
@@ -16,7 +17,7 @@ create procedure sp_refresh_product (
 begin
   start transaction;
 
-  select price, alarm_id, smart_price_id into @productPrice, @alarmId, @smartPriceId from product where id = in_product_id for update;
+  select price, base_price, alarm_id, smart_price_id into @productPrice, @basePrice, @alarmId, @smartPriceId from product where id = in_product_id for update;
 
   select
     @minPrice := min(case when grup = 'ACTIVE' then price end),
@@ -36,7 +37,7 @@ begin
   if @waitings is null then set @waitings := 0; end if;
   if @problems is null then set @problems := 0; end if;
 
-  set @position    := 'UNKNOWN';
+  set @position    := 'NotSet';
   set @minSeller   := 'NA';
   set @minPlatform := 'NA';
   set @maxSeller   := 'NA';
@@ -48,7 +49,7 @@ begin
 
   if @actives > 0 or @tryings > 0 or @waitings > 0 or @problems > 0 then
 
-    update link set position='UNKNOWN' where product_id=in_product_id;
+    update link set position='NotSet' where product_id=in_product_id;
 
     if @actives > 1 then
 
@@ -56,28 +57,33 @@ begin
         select @minSeller := seller, @minPlatform:= p.name from link as l inner join platform as p on p.id = l.platform_id where price = @minPrice;
         select @maxSeller := seller, @maxPlatform:= p.name from link as l inner join platform as p on p.id = l.platform_id where price = @maxPrice;
       else
-        set @position := 'EQUAL';
+        set @position := 'Equal';
         set @avgPrice := @minPrice;
       end if;
 
       if @productPrice > 0 and @minPrice != @maxPrice then
+
+        if @minPrice != 0 then set @minPrice := ROUND(@minPrice, 2); end if;
+        if @avgPrice != 0 then set @avgPrice := ROUND(@avgPrice, 2); end if;
+        if @maxPrice != 0 then set @maxPrice := ROUND(@maxPrice, 2); end if;
+
         set @minDiff := ROUND(((@minPrice / @productPrice)-1)*100, 2);
         set @avgDiff := ROUND(((@avgPrice / @productPrice)-1)*100, 2);
         set @maxDiff := ROUND(((@maxPrice / @productPrice)-1)*100, 2);
 
         if @productPrice <= @minPrice then 
-          set @position := 'LOWEST';
+          set @position := 'Lowest';
           set @minSeller := 'You';
           set @minPlatform := 'Yours';
           set @minPrice := @productPrice;
         elseif @productPrice < @avgPrice then 
-          set @position := 'LOWER';
+          set @position := 'Lower';
         elseif @productPrice = @avgPrice then 
-          set @position := 'AVERAGE';
+          set @position := 'Average';
         elseif @productPrice < @maxPrice then 
-          set @position := 'HIGHER';
+          set @position := 'Higher';
         elseif @productPrice >= @maxPrice then 
-          set @position := 'HIGHEST';
+          set @position := 'Highest';
           set @maxSeller := 'You';
           set @maxPlatform := 'Yours';
           set @maxPrice := @productPrice;
@@ -87,15 +93,15 @@ begin
       if @minPrice != @maxPrice then
         update link set position = 
         (case
-            when price <= @minPrice then 'LOWEST'
-            when price > @minPrice and price < @avgPrice then 'LOWER'
-            when price = @avgPrice then 'AVERAGE'
-            when price > @avgPrice and price < @maxPrice then 'HIGHER'
-            when price >= @maxPrice then 'HIGHEST'
+            when price <= @minPrice then 'Lowest'
+            when price > @minPrice and price < @avgPrice then 'Lower'
+            when price = @avgPrice then 'Average'
+            when price > @avgPrice and price < @maxPrice then 'Higher'
+            when price >= @maxPrice then 'Highest'
           end)
         where product_id=in_product_id and grup='ACTIVE';
       else
-        update link set position = 'EQUAL' where product_id=in_product_id and grup='ACTIVE';
+        update link set position = 'Equal' where product_id=in_product_id and grup='ACTIVE';
       end if;
 
     end if;
@@ -112,8 +118,8 @@ begin
 
   commit;
 
-  select @productPrice, @minPrice, @avgPrice, @maxPrice, @position, @alarmId, @smartPriceId, @actives 
-  into productPrice, minPrice, avgPrice, maxPrice, position, alarmId, smartPriceId, actives;
+  select @productPrice, @basePrice, @minPrice, @avgPrice, @maxPrice, @position, @alarmId, @smartPriceId, @actives 
+  into productPrice, basePrice, minPrice, avgPrice, maxPrice, position, alarmId, smartPriceId, actives;
 
 end$$
 

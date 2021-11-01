@@ -13,11 +13,12 @@ import lombok.ToString;
 public class ProductRefreshResult {
 
 	private BigDecimal productPrice = BigDecimal.ZERO;
+	private BigDecimal basePrice = BigDecimal.ZERO;
 	private BigDecimal minPrice = BigDecimal.ZERO;
 	private BigDecimal avgPrice = BigDecimal.ZERO;
 	private BigDecimal maxPrice = BigDecimal.ZERO;
 
-	private Position position = Position.UNKNOWN;
+	private Position position = Position.NotSet;
 
 	private Long alarmId;
 	private Long smartPriceId;

@@ -26,6 +26,8 @@ public class ProductMapper implements RowMapper<Product> {
     if (Helper.hasColumn(rs, "problems")) m.setProblems(rs.getInt("problems"));
 
     if (Helper.hasColumn(rs, "price")) m.setPrice(rs.getBigDecimal("price"));
+    if (Helper.hasColumn(rs, "base_price")) m.setBasePrice(rs.getBigDecimal("base_price"));
+
     if (Helper.hasColumn(rs, "min_diff")) m.setMinDiff(rs.getBigDecimal("min_diff"));
     if (Helper.hasColumn(rs, "avg_diff")) m.setAvgDiff(rs.getBigDecimal("avg_diff"));
     if (Helper.hasColumn(rs, "max_diff")) m.setMaxDiff(rs.getBigDecimal("max_diff"));
