@@ -2,7 +2,7 @@ package io.inprice.common.utils;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class NumberUtils {
+public class NumberHelper {
 
   public static String extractPrice(String numString) {
     if (numString == null || numString.trim().isEmpty())

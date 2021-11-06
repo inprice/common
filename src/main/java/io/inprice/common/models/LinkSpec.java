@@ -1,6 +1,6 @@
 package io.inprice.common.models;
 
-import io.inprice.common.utils.StringUtils;
+import io.inprice.common.utils.StringHelper;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,8 +25,8 @@ public class LinkSpec extends BaseModel {
 
    public LinkSpec(Long linkId, String key, String value) {
       this.linkId = linkId;
-      this.key = StringUtils.fixQuotes(key.trim());
-      this.value = StringUtils.fixQuotes(value.trim());
+      this.key = StringHelper.fixQuotes(key.trim());
+      this.value = StringHelper.fixQuotes(value.trim());
    }
 
 	@Override

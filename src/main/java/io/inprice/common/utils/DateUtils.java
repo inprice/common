@@ -185,7 +185,7 @@ public class DateUtils {
         break;
       }
     }
-    int interval = NumberUtils.toInteger(timePeriodStatement.substring(0, timePeriodStatement.length() - 1));
+    int interval = NumberHelper.toInteger(timePeriodStatement.substring(0, timePeriodStatement.length() - 1));
     return new TimePeriod(interval, timeUnit);
   }
 

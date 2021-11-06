@@ -8,7 +8,8 @@ public class SqlHelper {
   public static String clear(String val) {
     if (StringUtils.isBlank(val)) return val;
 
-    int length = val.length();
+    String newVal = val.trim();
+    int length = newVal.length();
     int newLength = length;
     // first check for characters that might
     // be dangerous and calculate a length
@@ -25,13 +26,14 @@ public class SqlHelper {
           break;
       }
     }
+    // nothing to escape in the string
     if (length == newLength) {
-      // nothing to escape in the string
-      return val;
+      return newVal;
     }
+
     StringBuffer sb = new StringBuffer(newLength);
     for (int i = 0; i < length; i++) {
-      char c = val.charAt(i);
+      char c = newVal.charAt(i);
       switch (c) {
         case '\\': {
           sb.append("\\\\");

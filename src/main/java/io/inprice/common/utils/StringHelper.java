@@ -1,13 +1,16 @@
 package io.inprice.common.utils;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import io.inprice.common.helpers.SqlHelper;
 
-public class StringUtils {
+public class StringHelper {
 	
 	private static final String QUOTELESS_CHARS = "((?<=(\\{|\\[|\\,|:))\\s*')|('\\s*(?=(\\}|(\\])|(\\,|:))))";
 	private static final String EMOJILESS_CHARS = "[^\\p{L}\\p{M}\\p{N}\\p{P}\\p{Z}\\p{Cf}\\p{Cs}\\s]";
+	private static final String CSV_SPLITTER = "(?<!\".*[^\"]),|,(?![^\"].*\")";
 	
 	public static String fixQuotes(String raw) {
 		return raw.replaceAll(QUOTELESS_CHARS, "\"");
@@ -50,5 +53,30 @@ public class StringUtils {
     else
     	return "";
   }
-  
+
+  /**
+   * Splits given csv row by comma. Double quotes are considered for the columns having comma in it
+   * 
+   * @param csv row
+   * @return column list
+   */
+	public static List<String> splitCSV(String row) {
+		List<String> result = new ArrayList<>();
+		String[] columns = row.split(CSV_SPLITTER);
+		for (String column: columns) {
+			if (column.charAt(0) == '"' && column.charAt(column.length()-1) == '"') {
+				result.add(column.substring(1, column.length()-1));
+			} else {
+				result.add(column);
+			}
+		}
+		return result;
+	}
+
+  public static String escapeJSON(String json) {
+    return json
+      .replaceAll("\n", " ")
+      .replaceAll("\r", "");     
+  }
+
 }
