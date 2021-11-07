@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import io.inprice.common.helpers.SqlHelper;
 
 public class StringHelper {
@@ -64,6 +66,7 @@ public class StringHelper {
 		List<String> result = new ArrayList<>();
 		String[] columns = row.split(CSV_SPLITTER);
 		for (String column: columns) {
+			if (StringUtils.isBlank(column)) continue;
 			if (column.charAt(0) == '"' && column.charAt(column.length()-1) == '"') {
 				result.add(column.substring(1, column.length()-1));
 			} else {

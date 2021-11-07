@@ -5,16 +5,14 @@ import org.apache.commons.lang3.StringUtils;
 public class NumberHelper {
 
   public static String extractPrice(String numString) {
-    if (numString == null || numString.trim().isEmpty())
-      return "0";
-
     StringBuilder sb = new StringBuilder();
-    for (Character ch : numString.toCharArray()) {
+    for (Character ch : numString.trim().toCharArray()) {
       if ((ch >= '0' && ch <= '9') || ch == ',' || ch == '.')
         sb.append(ch);
     }
 
     String trimmed = sb.toString();
+    if (trimmed.isEmpty()) return "0";
 
     if (trimmed.charAt(0) == '.' || trimmed.charAt(0) == ',') {
       trimmed = "0" + trimmed;

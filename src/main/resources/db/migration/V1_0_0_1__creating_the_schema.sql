@@ -201,7 +201,7 @@ alter table category add foreign key (workspace_id) references workspace (id);
 
 create table product (
   id                        bigint unsigned auto_increment not null,
-  sku                       varchar(50),
+  sku                       varchar(50) not null,
   name                      varchar(250) not null,
   actives                   smallint default 0,
   waitings                  smallint default 0,
