@@ -66,11 +66,10 @@ public class StringHelper {
 		List<String> result = new ArrayList<>();
 		String[] columns = row.split(CSV_SPLITTER);
 		for (String column: columns) {
-			if (StringUtils.isBlank(column)) continue;
-			if (column.charAt(0) == '"' && column.charAt(column.length()-1) == '"') {
-				result.add(column.substring(1, column.length()-1));
+			if (StringUtils.isNotBlank(column) && column.charAt(0) == '"' && column.charAt(column.length()-1) == '"') {
+				result.add(column.substring(1, column.length()-1).trim());
 			} else {
-				result.add(column);
+				result.add(column.trim());
 			}
 		}
 		return result;
@@ -81,5 +80,12 @@ public class StringHelper {
       .replaceAll("\n", " ")
       .replaceAll("\r", "");     
   }
+
+  public static void main(String[] args) {
+		String line1 = "006,\"Çamaşır Teli, 10 Lu Paket 10\",50, ,TEMİZLİK";
+		String line2 = "005,Zımba Teli 10 Lu Paket 10\",30,,KIRTASİYE";
+		System.out.println(splitCSV(line1));
+		System.out.println(splitCSV(line2));
+	}
 
 }
