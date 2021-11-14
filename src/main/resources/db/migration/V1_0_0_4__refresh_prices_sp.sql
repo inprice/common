@@ -15,8 +15,6 @@ create procedure sp_refresh_product (
     out actives int
   )
 begin
-  start transaction;
-
   select price, base_price, alarm_id, smart_price_id into @productPrice, @basePrice, @alarmId, @smartPriceId from product where id = in_product_id for update;
 
   select
@@ -61,25 +59,23 @@ begin
         set @avgPrice := @minPrice;
       end if;
 
-      if @productPrice > 0 and @minPrice != @maxPrice then
+      if @minPrice != @maxPrice then
 
-        if @minPrice != 0 then set @minPrice := ROUND(@minPrice, 2); end if;
-        if @avgPrice != 0 then set @avgPrice := ROUND(@avgPrice, 2); end if;
-        if @maxPrice != 0 then set @maxPrice := ROUND(@maxPrice, 2); end if;
-
-        set @minDiff := ROUND(((@minPrice / @productPrice)-1)*100, 2);
-        set @avgDiff := ROUND(((@avgPrice / @productPrice)-1)*100, 2);
-        set @maxDiff := ROUND(((@maxPrice / @productPrice)-1)*100, 2);
+        if @minPrice != 0 then set @minDiff := @minPrice - @productPrice; end if;
+        if @avgPrice != 0 then set @avgDiff := @avgPrice - @productPrice; end if;
+        if @maxPrice != 0 then set @maxDiff := @maxPrice - @productPrice; end if;
 
         if @productPrice <= @minPrice then 
           set @position := 'Lowest';
           set @minSeller := 'You';
           set @minPlatform := 'Yours';
           set @minPrice := @productPrice;
+          set @minDiff := 0;
         elseif @productPrice < @avgPrice then 
           set @position := 'Lower';
         elseif @productPrice = @avgPrice then 
           set @position := 'Average';
+          set @avgDiff := 0;
         elseif @productPrice < @maxPrice then 
           set @position := 'Higher';
         elseif @productPrice >= @maxPrice then 
@@ -87,6 +83,7 @@ begin
           set @maxSeller := 'You';
           set @maxPlatform := 'Yours';
           set @maxPrice := @productPrice;
+          set @maxDiff := 0;
         end if;
       end if;
 
@@ -115,8 +112,6 @@ begin
     actives = @actives, tryings = @tryings, waitings = @waitings, problems = @problems, 
     position = @position, updated_at = now()
   where id = in_product_id;
-
-  commit;
 
   select @productPrice, @basePrice, @minPrice, @avgPrice, @maxPrice, @position, @alarmId, @smartPriceId, @actives 
   into productPrice, basePrice, minPrice, avgPrice, maxPrice, position, alarmId, smartPriceId, actives;

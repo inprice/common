@@ -50,11 +50,11 @@ public interface CommonDao {
   		@Bind("productId") long productId, @Bind("workspaceId") long workspaceId);
 
   @SqlCall("call sp_refresh_product(:productId, :productPrice, :basePrice, :minPrice, :avgPrice, :maxPrice, :position, :alarmId, :smartPriceId, :actives)")
-  @OutParameter(name="productPrice", sqlType=Types.DOUBLE)
-  @OutParameter(name="basePrice", sqlType=Types.DOUBLE)
-  @OutParameter(name="minPrice", sqlType=Types.DOUBLE)
-  @OutParameter(name="avgPrice", sqlType=Types.DOUBLE)
-  @OutParameter(name="maxPrice", sqlType=Types.DOUBLE)
+  @OutParameter(name="productPrice", sqlType=Types.DECIMAL)
+  @OutParameter(name="basePrice", sqlType=Types.DECIMAL)
+  @OutParameter(name="minPrice", sqlType=Types.DECIMAL)
+  @OutParameter(name="avgPrice", sqlType=Types.DECIMAL)
+  @OutParameter(name="maxPrice", sqlType=Types.DECIMAL)
   @OutParameter(name="position", sqlType=Types.VARCHAR)
   @OutParameter(name="alarmId", sqlType=Types.BIGINT)
   @OutParameter(name="smartPriceId", sqlType=Types.BIGINT)
