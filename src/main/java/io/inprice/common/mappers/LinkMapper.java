@@ -33,13 +33,16 @@ public class LinkMapper implements RowMapper<Link> {
 
     if (Helper.hasColumn(rs, "parse_code")) m.setParseCode(rs.getString("parse_code"));
     if (Helper.hasColumn(rs, "parse_problem")) m.setParseProblem(rs.getString("parse_problem"));
+
+    if (Helper.hasColumn(rs, "alarm_id")) m.setAlarmId(Helper.nullLongHandler(rs, "alarm_id"));
+    if (Helper.hasColumn(rs, "alarmed_at")) m.setAlarmedAt(rs.getTimestamp("alarmed_at"));
+    if (Helper.hasColumn(rs, "tobe_alarmed")) m.setTobeAlarmed(rs.getBoolean("tobe_alarmed"));
+    
+    if (Helper.hasColumn(rs, "platform_id")) m.setPlatformId(Helper.nullLongHandler(rs, "platform_id"));
     if (Helper.hasColumn(rs, "product_id")) m.setProductId(rs.getLong("product_id"));
 
     if (Helper.hasColumn(rs, "checked_at")) m.setCheckedAt(rs.getTimestamp("checked_at"));
     if (Helper.hasColumn(rs, "updated_at")) m.setUpdatedAt(rs.getTimestamp("updated_at"));
-
-    if (Helper.hasColumn(rs, "platform_id")) m.setPlatformId(Helper.nullLongHandler(rs, "platform_id"));
-    if (Helper.hasColumn(rs, "alarm_id")) m.setAlarmId(Helper.nullLongHandler(rs, "alarm_id"));
 
     if (Helper.hasColumn(rs, "position")) {
     	String val = rs.getString("position");
@@ -62,10 +65,15 @@ public class LinkMapper implements RowMapper<Link> {
     if (Helper.hasColumn(rs, "product_name")) m.setProductName(rs.getString("product_name"));
     if (Helper.hasColumn(rs, "product_price")) m.setProductPrice(rs.getBigDecimal("product_price"));
     if (Helper.hasColumn(rs, "product_base_price")) m.setProductBasePrice(rs.getBigDecimal("product_base_price"));
+
+    if (Helper.hasColumn(rs, "product_position")) {
+    	String val = rs.getString("product_position");
+    	if (val != null) m.setProductPosition(Position.valueOf(val));
+    }
+
     if (Helper.hasColumn(rs, "product_alarm_id")) m.setProductAlarmId(Helper.nullLongHandler(rs, "product_alarm_id"));
     if (Helper.hasColumn(rs, "product_smart_price_id")) m.setProductSmartPriceId(Helper.nullLongHandler(rs, "product_smart_price_id"));
 
-    
   	if (m.getPlatformId() != null) {
     	Platform platform = new Platform();
     	platform.setId(m.getPlatformId());
@@ -82,10 +90,8 @@ public class LinkMapper implements RowMapper<Link> {
     	m.setPlatform(platform);
   	}
 
-  	if (m.getAlarmId() != null && (Helper.hasColumn(rs, "tobe_notified"))) {
-    	m.setAlarm(Helper.mapForAlarm(rs, m.getAlarmId(), m.getId(), null, m.getWorkspaceId()));
-    }
-
+    if (Helper.hasColumn(rs, "al_name")) m.setAlarmName(rs.getString("al_name"));
+  	
     return m;
   }
 

@@ -20,6 +20,9 @@ public class SmartPriceMapper implements RowMapper<SmartPrice> {
     if (Helper.hasColumn(rs, "lower_limit_formula")) m.setLowerLimitFormula(rs.getString("lower_limit_formula"));
     if (Helper.hasColumn(rs, "upper_limit_formula")) m.setUpperLimitFormula(rs.getString("upper_limit_formula"));
     if (Helper.hasColumn(rs, "workspace_id")) m.setWorkspaceId(rs.getLong("workspace_id"));
+    
+    //transients
+    if (Helper.hasColumn(rs, "product_id")) m.setProductId(rs.getLong("product_id"));
 
     return m;
   }

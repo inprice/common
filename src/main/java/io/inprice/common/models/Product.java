@@ -23,15 +23,15 @@ public class Product extends BaseModel {
   private Integer tryings = 0;
   private Integer problems = 0;
   
-  private BigDecimal price = BigDecimal.ZERO; //if greater than zero then competitiveness starts!
+  private BigDecimal price = BigDecimal.ZERO;
   private BigDecimal basePrice = BigDecimal.ZERO;
   private Position position = Position.NotSet;
   
   private String minPlatform;
   private String minSeller;
+  private BigDecimal minPrice = BigDecimal.ZERO;
   private BigDecimal minDiff= BigDecimal.ZERO;
 
-  private BigDecimal minPrice = BigDecimal.ZERO;
   private BigDecimal avgPrice = BigDecimal.ZERO;
   private BigDecimal avgDiff = BigDecimal.ZERO;
   
@@ -40,22 +40,25 @@ public class Product extends BaseModel {
   private BigDecimal maxPrice = BigDecimal.ZERO;
   private BigDecimal maxDiff = BigDecimal.ZERO;
 
-  private Date updatedAt;
-
-  private Long brandId;
-  private Long categoryId;
   private Long alarmId;
-
+  private Boolean tobeAlarmed;
+  private Date alarmedAt;
+  
   private Long smartPriceId;
   private BigDecimal suggestedPrice = BigDecimal.ZERO;
   private String suggestedPriceProblem;
+
+  private Long brandId;
+  private Long categoryId;
+
+  private Date updatedAt;
   
   //transients
+  private String alarmName;
+  private String smartPriceName;
+
   private String brandName;
   private String categoryName;
-
-  private Alarm alarm;
-  private SmartPrice smartPrice;
 
   public int getLinkCount() {
   	return actives+waitings+tryings+problems;

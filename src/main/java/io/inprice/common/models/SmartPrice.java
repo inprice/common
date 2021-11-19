@@ -15,5 +15,8 @@ public class SmartPrice extends BaseModel {
 	private String formula;
 	private String lowerLimitFormula;
 	private String upperLimitFormula;
+	
+	//transients
+	private Long productId;
 
 }

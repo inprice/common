@@ -45,7 +45,11 @@ public class Link extends BaseModel {
 
   private Integer retry;
   private Boolean watchlisted = Boolean.FALSE;
-  
+
+  private Long alarmId;
+  private Boolean tobeAlarmed;
+  private Date alarmedAt;
+
   @JsonIgnore
   private Long platformId;
   private Long productId;
@@ -56,12 +60,12 @@ public class Link extends BaseModel {
   @JsonIgnore
   private String urlHash;
 
-  private Long alarmId;
-
   //transients
   private String productName;
   private BigDecimal productPrice;
   private BigDecimal productBasePrice;
+  private Position productPosition;
+
   private Long productAlarmId;
   private Long productSmartPriceId;
 
@@ -70,8 +74,9 @@ public class Link extends BaseModel {
   private List<LinkHistory> historyList;
 
   private Platform platform;
-  private Alarm alarm;
 
+  private String alarmName;
+  
   public Link(String url) {
     this.url = url;
   }

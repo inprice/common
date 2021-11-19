@@ -3,10 +3,6 @@ package io.inprice.common.mappers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import io.inprice.common.meta.AlarmSubject;
-import io.inprice.common.meta.AlarmSubjectWhen;
-import io.inprice.common.meta.AlarmTopic;
-import io.inprice.common.models.Alarm;
 import io.inprice.common.models.BaseModel;
 
 /**
@@ -49,61 +45,6 @@ public class Helper {
       return false;
     }
     return true;
-  }
-  
-  public static Alarm mapForAlarm(ResultSet rs) throws SQLException {
-  	return mapForAlarm(rs, null, null, null, null);
-  }
-
-  public static Alarm mapForAlarm(ResultSet rs, Long alarmId, Long linkId, Long productId, Long workspaceId) throws SQLException {
-    Alarm m = new Alarm();
-    
-    String prefix = "";
-    
-    if (alarmId != null) {
-    	prefix = "al_";
-  		m.setId(alarmId);
-  		m.setLinkId(linkId);
-  		m.setProductId(productId);
-  		m.setWorkspaceId(workspaceId);
-    } else {
-      if (Helper.hasColumn(rs, "link_id")) m.setLinkId(Helper.nullLongHandler(rs, "link_id"));
-      if (Helper.hasColumn(rs, "product_id")) m.setProductId(Helper.nullLongHandler(rs, "product_id"));
-      if (Helper.hasColumn(rs, "workspace_id")) m.setWorkspaceId(rs.getLong("workspace_id"));
-    }
-    
-		if (Helper.hasColumn(rs, prefix+"id")) m.setId(rs.getLong(prefix+"id"));
-    if (Helper.hasColumn(rs, "certain_position")) m.setCertainPosition(rs.getString("certain_position"));
-    if (Helper.hasColumn(rs, "amount_lower_limit")) m.setAmountLowerLimit(rs.getBigDecimal("amount_lower_limit"));
-    if (Helper.hasColumn(rs, "amount_upper_limit")) m.setAmountUpperLimit(rs.getBigDecimal("amount_upper_limit"));
-
-    if (Helper.hasColumn(rs, "last_position")) m.setLastPosition(rs.getString("last_position"));
-    if (Helper.hasColumn(rs, "last_amount")) m.setLastAmount(rs.getBigDecimal("last_amount"));
-
-    if (Helper.hasColumn(rs, "tobe_notified")) m.setTobeNotified(rs.getBoolean("tobe_notified"));
-    if (Helper.hasColumn(rs, "notified_at")) m.setNotifiedAt(rs.getTimestamp("notified_at"));
-
-    if (Helper.hasColumn(rs, "updated_at")) {
-    	m.setUpdatedAt(rs.getTimestamp("updated_at"));
-    } else if (Helper.hasColumn(rs, "al_updated_at")) {
-    	m.setUpdatedAt(rs.getTimestamp("al_updated_at"));
-    }
-    
-    if (Helper.hasColumn(rs, "topic")) {
-    	String val = rs.getString("topic");
-    	if (val != null) m.setTopic(AlarmTopic.valueOf(val));
-    }
-
-    if (Helper.hasColumn(rs, "subject")) {
-    	String val = rs.getString("subject");
-    	if (val != null) m.setSubject(AlarmSubject.valueOf(val));
-    }
-		if (Helper.hasColumn(rs, "subject_when")) {
-			String val = rs.getString("subject_when");
-			if (val != null) m.setSubjectWhen(AlarmSubjectWhen.valueOf(val));
-		}
-		
-    return m;
   }
 
 }

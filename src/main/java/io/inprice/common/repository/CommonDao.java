@@ -13,7 +13,11 @@ import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 import org.jdbi.v3.sqlobject.statement.UseRowMapper;
 
 import io.inprice.common.mappers.LinkMapper;
+import io.inprice.common.mappers.ProductMapper;
+import io.inprice.common.mappers.SmartPriceMapper;
 import io.inprice.common.models.Link;
+import io.inprice.common.models.Product;
+import io.inprice.common.models.SmartPrice;
 
 public interface CommonDao {
 
@@ -60,5 +64,13 @@ public interface CommonDao {
   @OutParameter(name="smartPriceId", sqlType=Types.BIGINT)
   @OutParameter(name="actives", sqlType=Types.INTEGER)
   OutParameters refreshProduct(@Bind("productId") Long productId);
+
+	@SqlQuery("select * from produc where id=:id")
+	@UseRowMapper(ProductMapper.class)
+	Product findProductById(@Bind("id") Long id);
+
+	@SqlQuery("select * from smart_price where id=:id")
+  @UseRowMapper(SmartPriceMapper.class)
+  SmartPrice findById(@Bind("id") Long id);
 
 }

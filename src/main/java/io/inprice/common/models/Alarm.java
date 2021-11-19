@@ -9,19 +9,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.inprice.common.meta.AlarmSubject;
 import io.inprice.common.meta.AlarmSubjectWhen;
 import io.inprice.common.meta.AlarmTopic;
+import io.inprice.common.meta.Position;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 public class Alarm implements Serializable {
 
 	private static final long serialVersionUID = -7971852075540080006L;
 
 	private Long id;
-	
+	private String name;
+
   private AlarmTopic topic;
 	private AlarmSubject subject;
 	private AlarmSubjectWhen subjectWhen;
@@ -30,22 +30,21 @@ public class Alarm implements Serializable {
 	private BigDecimal amountLowerLimit;
 	private BigDecimal amountUpperLimit;
 
-	private String lastPosition;
-	private BigDecimal lastAmount;
-	
-	private Boolean tobeNotified;
-	private Date notifiedAt;
-  private Date updatedAt;
-	
-  private Long linkId;
-  private Long productId;
+	private Date updatedAt;
+  private Date createdAt;
 
   @JsonIgnore
   private Long workspaceId;
   
   //transients
-  private String name;
-  private String linkUrl;
+  private Long entityId; //link or product
+  private String entitySku;
+  private String entityName;
+  private Position entityPosition = Position.NotSet;
+  private BigDecimal entityPrice;
+  private BigDecimal entityMinPrice;
+  private BigDecimal entityAvgPrice;
+  private BigDecimal entityMaxPrice;
 
   private String email;
   private String fullName;
