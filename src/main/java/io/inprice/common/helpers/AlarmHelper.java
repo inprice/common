@@ -103,14 +103,14 @@ public class AlarmHelper {
   public static String generateAlarmUpdateQueryForLink(Link linkFromDb, Link linkFromParser, Alarm alarm) {
   	boolean willBeUpdated = false;
 
-  	if (AlarmSubject.POSITION.equals(alarm.getSubject()) && linkFromDb.getStatus().equals(linkFromParser.getStatus()) == false) {
+  	if (AlarmSubject.POSITION.equals(alarm.getSubject()) && linkFromDb.getGrup().equals(linkFromParser.getGrup()) == false) {
   		switch (alarm.getSubjectWhen()) {
   			case EQUAL: {
-  				willBeUpdated = linkFromParser.getStatus().name().equals(alarm.getCertainPosition());
+  				willBeUpdated = linkFromParser.getGrup().name().equals(alarm.getCertainPosition());
   				break;
   			}
   			case NOT_EQUAL: {
-  				willBeUpdated = linkFromParser.getStatus().name().equals(alarm.getCertainPosition()) == false;
+  				willBeUpdated = linkFromParser.getGrup().name().equals(alarm.getCertainPosition()) == false;
   				break;
   			}
   			default: {
