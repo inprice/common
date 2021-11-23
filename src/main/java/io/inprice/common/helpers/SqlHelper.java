@@ -60,10 +60,12 @@ public class SqlHelper {
   }
 
   public static void main(String[] args) {
+  	String line0 = "006,Çamaşır Teli, 10 Lu Paket 10\",50, ,TEMİZLİK";
 		String line1 = "006,\"Çamaşır Teli, 10 Lu Paket 10\",50, ,TEMİZLİK";
 		String line2 = "005,Zımba Teli 10 Lu Paket 10\",30,,KIRTASİYE";
 		String line3 = "005,Zımba Teli 10 Lu Paket 10\\\",30,,KIRTASİYE";
 		String line4 = "005,Zımba Teli 10 Lu Paket 10\\\\\",30,,KIRTASİYE";
+		System.out.println(clear(line0));
 		System.out.println(clear(line1));
 		System.out.println(clear(line2));
 		System.out.println(clear(line3));

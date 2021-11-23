@@ -34,6 +34,7 @@ public class Link extends BaseModel {
 
   @JsonIgnore
   private LinkStatus preStatus = LinkStatus.TOBE_CLASSIFIED;
+  @JsonIgnore
   private LinkStatus status = LinkStatus.TOBE_CLASSIFIED;
 
   private Grup grup = Grup.WAITING;
@@ -44,9 +45,11 @@ public class Link extends BaseModel {
   private String parseProblem;
 
   private Integer retry;
+  @JsonIgnore
   private Boolean watchlisted = Boolean.FALSE;
 
   private Long alarmId;
+  @JsonIgnore
   private Boolean tobeAlarmed;
   private Date alarmedAt;
 

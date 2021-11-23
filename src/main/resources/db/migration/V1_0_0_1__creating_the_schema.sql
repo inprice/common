@@ -151,7 +151,7 @@ create table platform (
 create table alarm (
   id                        bigint unsigned auto_increment not null,
   name                      varchar(100) not null,
-  topic                     enum('LINK', 'PRODUCT') not null default 'LINK',
+  topic                     enum('PRODUCT', 'LINK') not null default 'PRODUCT',
   subject                   enum('POSITION', 'PRICE', 'MINIMUM', 'AVERAGE', 'MAXIMUM') not null default 'POSITION',
   subject_when              enum('CHANGED', 'EQUAL', 'NOT_EQUAL', 'INCREASED', 'DECREASED', 'OUT_OF_LIMITS') not null default 'CHANGED',
   certain_position          varchar(10),

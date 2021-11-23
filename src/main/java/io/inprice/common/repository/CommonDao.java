@@ -65,7 +65,7 @@ public interface CommonDao {
   @OutParameter(name="actives", sqlType=Types.INTEGER)
   OutParameters refreshProduct(@Bind("productId") Long productId);
 
-	@SqlQuery("select * from produc where id=:id")
+	@SqlQuery("select * from product where id=:id")
 	@UseRowMapper(ProductMapper.class)
 	Product findProductById(@Bind("id") Long id);
 
