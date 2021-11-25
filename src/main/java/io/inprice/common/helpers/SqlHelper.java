@@ -15,7 +15,7 @@ public class SqlHelper {
     // be dangerous and calculate a length
     // of the string that has escapes.
     for (int i = 0; i < length; i++) {
-      char c = val.charAt(i);
+      char c = newVal.charAt(i);
       switch (c) {
         case '\\':
         case '\"':
@@ -23,7 +23,7 @@ public class SqlHelper {
         case '\0': {
           newLength += 1;
         }
-          break;
+        break;
       }
     }
     // nothing to escape in the string
@@ -59,4 +59,17 @@ public class SqlHelper {
     return sb.toString().trim();
   }
 
+  public static void main(String[] args) {
+  	String line0 = "006,Çamaşır Teli, 10 Lu Paket 10\",50, ,TEMİZLİK";
+		String line1 = "006,\"Çamaşır Teli, 10 Lu Paket 10\",50, ,TEMİZLİK";
+		String line2 = "005,Zımba Teli 10 Lu Paket 10\",30,,KIRTASİYE";
+		String line3 = "005,Zımba Teli 10 Lu Paket 10\\\",30,,KIRTASİYE";
+		String line4 = "005,Zımba Teli 10 Lu Paket 10\\\\\",30,,KIRTASİYE";
+		System.out.println(clear(line0));
+		System.out.println(clear(line1));
+		System.out.println(clear(line2));
+		System.out.println(clear(line3));
+		System.out.println(clear(line4));
+	}
+  
 }

@@ -13,7 +13,11 @@ import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 import org.jdbi.v3.sqlobject.statement.UseRowMapper;
 
 import io.inprice.common.mappers.LinkMapper;
+import io.inprice.common.mappers.ProductMapper;
+import io.inprice.common.mappers.SmartPriceMapper;
 import io.inprice.common.models.Link;
+import io.inprice.common.models.Product;
+import io.inprice.common.models.SmartPrice;
 
 public interface CommonDao {
 
@@ -50,15 +54,23 @@ public interface CommonDao {
   		@Bind("productId") long productId, @Bind("workspaceId") long workspaceId);
 
   @SqlCall("call sp_refresh_product(:productId, :productPrice, :basePrice, :minPrice, :avgPrice, :maxPrice, :position, :alarmId, :smartPriceId, :actives)")
-  @OutParameter(name="productPrice", sqlType=Types.DOUBLE)
-  @OutParameter(name="basePrice", sqlType=Types.DOUBLE)
-  @OutParameter(name="minPrice", sqlType=Types.DOUBLE)
-  @OutParameter(name="avgPrice", sqlType=Types.DOUBLE)
-  @OutParameter(name="maxPrice", sqlType=Types.DOUBLE)
+  @OutParameter(name="productPrice", sqlType=Types.DECIMAL)
+  @OutParameter(name="basePrice", sqlType=Types.DECIMAL)
+  @OutParameter(name="minPrice", sqlType=Types.DECIMAL)
+  @OutParameter(name="avgPrice", sqlType=Types.DECIMAL)
+  @OutParameter(name="maxPrice", sqlType=Types.DECIMAL)
   @OutParameter(name="position", sqlType=Types.VARCHAR)
   @OutParameter(name="alarmId", sqlType=Types.BIGINT)
   @OutParameter(name="smartPriceId", sqlType=Types.BIGINT)
   @OutParameter(name="actives", sqlType=Types.INTEGER)
   OutParameters refreshProduct(@Bind("productId") Long productId);
+
+	@SqlQuery("select * from product where id=:id")
+	@UseRowMapper(ProductMapper.class)
+	Product findProductById(@Bind("id") Long id);
+
+	@SqlQuery("select * from smart_price where id=:id")
+  @UseRowMapper(SmartPriceMapper.class)
+  SmartPrice findById(@Bind("id") Long id);
 
 }

@@ -2,7 +2,7 @@ package io.inprice.common.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class BaseSystem {
+public class AppBase {
 
 	@JsonProperty("env")
 	public String ENV;

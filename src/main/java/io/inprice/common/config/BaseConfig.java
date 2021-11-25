@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class BaseConfig {
 
-	@JsonProperty("env")
-	public String ENV = "dev";
-
 	@JsonProperty("mysql")
 	public MysqlConf MYSQL_CONF;
 

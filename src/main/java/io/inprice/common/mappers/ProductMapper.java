@@ -8,7 +8,6 @@ import org.jdbi.v3.core.statement.StatementContext;
 
 import io.inprice.common.meta.Position;
 import io.inprice.common.models.Product;
-import io.inprice.common.models.SmartPrice;
 
 public class ProductMapper implements RowMapper<Product> {
 
@@ -39,35 +38,28 @@ public class ProductMapper implements RowMapper<Product> {
     if (Helper.hasColumn(rs, "max_platform")) m.setMaxPlatform(rs.getString("max_platform"));
     if (Helper.hasColumn(rs, "max_seller")) m.setMaxSeller(rs.getString("max_seller"));
     if (Helper.hasColumn(rs, "max_price")) m.setMaxPrice(rs.getBigDecimal("max_price"));
-    
-    if (Helper.hasColumn(rs, "updated_at")) m.setUpdatedAt(rs.getTimestamp("updated_at"));
 
-    if (Helper.hasColumn(rs, "alarm_id")) m.setAlarmId(Helper.nullLongHandler(rs, "alarm_id"));
-  	if (Helper.hasColumn(rs, "brand_id")) m.setBrandId(Helper.nullLongHandler(rs, "brand_id"));
-  	if (Helper.hasColumn(rs, "category_id")) m.setCategoryId(Helper.nullLongHandler(rs, "category_id"));
+  	if (Helper.hasColumn(rs, "alarm_id")) m.setAlarmId(Helper.nullLongHandler(rs, "alarm_id"));
+    if (Helper.hasColumn(rs, "alarmed_at")) m.setAlarmedAt(rs.getTimestamp("alarmed_at"));
+    if (Helper.hasColumn(rs, "tobe_alarmed")) m.setTobeAlarmed(rs.getBoolean("tobe_alarmed"));
 
     if (Helper.hasColumn(rs, "smart_price_id")) m.setSmartPriceId(Helper.nullLongHandler(rs, "smart_price_id"));
     if (Helper.hasColumn(rs, "suggested_price")) m.setSuggestedPrice(rs.getBigDecimal("suggested_price"));
     if (Helper.hasColumn(rs, "suggested_price_problem")) m.setSuggestedPriceProblem(rs.getString("suggested_price_problem"));
+    
+  	if (Helper.hasColumn(rs, "brand_id")) m.setBrandId(Helper.nullLongHandler(rs, "brand_id"));
+  	if (Helper.hasColumn(rs, "category_id")) m.setCategoryId(Helper.nullLongHandler(rs, "category_id"));
 
     if (Helper.hasColumn(rs, "position")) {
     	String val = rs.getString("position");
     	if (val != null) m.setPosition(Position.valueOf(val));
     }
 
+    if (Helper.hasColumn(rs, "updated_at")) m.setUpdatedAt(rs.getTimestamp("updated_at"));
+    
     //transients
-    if (m.getAlarmId() != null && (Helper.hasColumn(rs, "tobe_notified"))) {
-    	m.setAlarm(Helper.mapForAlarm(rs, m.getAlarmId(), null, m.getId(), m.getWorkspaceId()));
-    }
-
-    if (m.getSmartPriceId() != null && (Helper.hasColumn(rs, "formula"))) {
-    	SmartPrice smartPrice = new SmartPrice();
-    	smartPrice.setId(m.getSmartPriceId());
-      if (Helper.hasColumn(rs, "formula")) smartPrice.setFormula(rs.getString("formula"));
-      if (Helper.hasColumn(rs, "lower_limit_formula")) smartPrice.setLowerLimitFormula(rs.getString("lower_limit_formula"));
-      if (Helper.hasColumn(rs, "upper_limit_formula")) smartPrice.setUpperLimitFormula(rs.getString("upper_limit_formula"));
-    	m.setSmartPrice(smartPrice);
-    }
+    if (Helper.hasColumn(rs, "al_name")) m.setAlarmName(rs.getString("al_name"));
+  	if (Helper.hasColumn(rs, "sp_name")) m.setSmartPriceName(rs.getString("sp_name"));
 
   	if (Helper.hasColumn(rs, "brand_name")) m.setBrandName(rs.getString("brand_name"));
   	if (Helper.hasColumn(rs, "category_name")) m.setCategoryName(rs.getString("category_name"));
