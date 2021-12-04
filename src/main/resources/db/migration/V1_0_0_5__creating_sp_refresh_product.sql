@@ -34,6 +34,8 @@ begin
   declare _waitings smallint default 0;
   declare _problems smallint default 0;
 
+  declare _priceTotal decimal(10,2) default 0;
+
   select price, base_price, alarm_id, smart_price_id into _productPrice, _basePrice, _alarmId, _smartPriceId from product where id = in_product_id for update;
 
   select sum(if(grup = 'ACTIVE', 1, 0)), sum(if(grup = 'TRYING', 1, 0)), sum(if(grup = 'WAITING', 1, 0)), sum(if(grup = 'PROBLEM', 1, 0))
@@ -42,8 +44,13 @@ begin
   if _actives > 0 or _tryings > 0 or _waitings > 0 or _problems > 0 then
     update link set position='NotSet' where product_id=in_product_id;
 
-    if _actives > 1 then
-      select ifnull(min(price),0), ifnull(avg(price),0), ifnull(max(price),0) into _minPrice, _avgPrice, _maxPrice from link where product_id = in_product_id and grup = 'ACTIVE';
+    if _actives > 0 then
+      select sum(price), min(price), max(price) into _priceTotal, _minPrice, _maxPrice from link where product_id = in_product_id and grup = 'ACTIVE';
+
+      if _productPrice < _minPrice then set _minPrice := _productPrice; end if;
+      if _productPrice > _maxPrice then set _maxPrice := _productPrice; end if;
+
+      set _avgPrice := ROUND((_priceTotal + _productPrice) / (_actives + 1));
 
       if _minPrice != _maxPrice then
         select seller, p.name into _minSeller, _minPlatform from link as l inner join platform as p on p.id = l.platform_id where price = _minPrice;
@@ -55,11 +62,11 @@ begin
           set _minPlatform := 'Yours';
           set _minPrice := _productPrice;
         elseif _productPrice < _avgPrice then 
-          set _position := 'Lower';
+          set _position := 'Low';
         elseif _productPrice = _avgPrice then 
           set _position := 'Average';
         elseif _productPrice < _maxPrice then 
-          set _position := 'Higher';
+          set _position := 'High';
         elseif _productPrice >= _maxPrice then 
           set _position := 'Highest';
           set _maxSeller := 'You';
@@ -70,9 +77,9 @@ begin
         update link set position = 
         (case
             when price <= _minPrice then 'Lowest'
-            when price > _minPrice and price < _avgPrice then 'Lower'
+            when price > _minPrice and price < _avgPrice then 'Low'
             when price = _avgPrice then 'Average'
-            when price > _avgPrice and price < _maxPrice then 'Higher'
+            when price > _avgPrice and price < _maxPrice then 'High'
             when price >= _maxPrice then 'Highest'
           end)
         where product_id=in_product_id and grup='ACTIVE';

@@ -63,6 +63,8 @@ public class Link extends BaseModel {
   @JsonIgnore
   private String urlHash;
 
+  private Long importerWsId;
+
   //transients
   private String productName;
   private BigDecimal productPrice;

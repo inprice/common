@@ -61,6 +61,8 @@ public class LinkMapper implements RowMapper<Link> {
     	if (val != null) m.setGrup(Grup.valueOf(val));
     }
 
+    if (Helper.hasColumn(rs, "importer_ws_id")) m.setImporterWsId(Helper.nullLongHandler(rs, "importer_ws_id"));
+
     //transients
     if (Helper.hasColumn(rs, "product_name")) m.setProductName(rs.getString("product_name"));
     if (Helper.hasColumn(rs, "product_price")) m.setProductPrice(rs.getBigDecimal("product_price"));
