@@ -56,7 +56,7 @@ public class SqlHelper {
         }
       }
     }
-    return sb.toString().trim();
+    return sb.toString();
   }
 
   public static void main(String[] args) {
