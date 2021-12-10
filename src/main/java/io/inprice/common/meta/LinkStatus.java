@@ -15,16 +15,6 @@ public enum LinkStatus {
    */
   AVAILABLE(Grup.ACTIVE, "Everything is fine."),
 
-  /**
-   * Used for the links after TOBE_IMPLEMENTED and INTERNAL_ERROR status
-   */
-  RESOLVED(Grup.ACTIVE, "Resolved and be updated."),
-
-  /**
-   * To refresh and fetch the data one more time
-   */
-  REFRESHED(Grup.ACTIVE, "Will be refreshed in a short while."),
-
   
   /*------------------------------------------------------------------------
     WAITING PRODUCT
@@ -40,6 +30,16 @@ public enum LinkStatus {
    * Data will be collected after implemented by us
    */
   TOBE_IMPLEMENTED(Grup.WAITING, "New platform, we work on this."),
+
+  /**
+   * Used for the links after TOBE_IMPLEMENTED and INTERNAL_ERROR status
+   */
+  RESOLVED(Grup.WAITING, "Resolved and be updated soon."),
+
+  /**
+   * To refresh and fetch the data one more time
+   */
+  REFRESHED(Grup.WAITING, "Will be refreshed in a short while."),
 
   /**
    * Used for links paused by super user.
