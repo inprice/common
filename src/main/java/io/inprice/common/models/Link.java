@@ -34,7 +34,6 @@ public class Link extends BaseModel {
 
   @JsonIgnore
   private LinkStatus preStatus = LinkStatus.TOBE_CLASSIFIED;
-  @JsonIgnore
   private LinkStatus status = LinkStatus.TOBE_CLASSIFIED;
 
   private Grup grup = Grup.WAITING;
