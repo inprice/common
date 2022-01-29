@@ -33,12 +33,12 @@ public class Membership extends BaseModel {
   private String planName;
   private Date subsRenewalAt;
   private Date subsStartedAt;
-  private Integer userLimit;
-  private Integer userCount;
-  private Integer linkLimit;
-  private Integer linkCount;
+  private Integer productLimit;
+  private Integer productCount;
   private Integer alarmLimit;
   private Integer alarmCount;
+  private Integer userLimit;
+  private Integer userCount;
   private String currencyCode;
   private String currencyFormat;
 

@@ -18,7 +18,7 @@ set @demo_user_id = last_insert_id();
 
 -- broker workspace
 insert into workspace (name, plan_id, status, subs_started_at, subs_renewal_at, user_count, currency_code, currency_format, admin_id) 
-values ('Broker Workspace', 6, 'SUBSCRIBED', now(), '2025-12-31 23:59', 1, 'EUR', '#,##0.00 €', @admin_id);
+values ('Broker Workspace', 4, 'SUBSCRIBED', now(), '2025-12-31 23:59', 1, 'EUR', '#,##0.00 €', @admin_id);
 set @broker_ws_id = last_insert_id();
 
 -- workspace history

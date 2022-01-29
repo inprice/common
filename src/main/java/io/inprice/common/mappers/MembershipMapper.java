@@ -31,12 +31,12 @@ public class MembershipMapper implements RowMapper<Membership> {
     if (Helper.hasColumn(rs, "contact_name")) m.setContactName(rs.getString("contact_name"));
     if (Helper.hasColumn(rs, "plan_id")) m.setPlanId(rs.getInt("plan_id"));
     if (Helper.hasColumn(rs, "plan_name")) m.setPlanName(rs.getString("plan_name"));
-    if (Helper.hasColumn(rs, "user_limit")) m.setUserLimit(rs.getInt("user_limit"));
-    if (Helper.hasColumn(rs, "user_count")) m.setUserCount(rs.getInt("user_count"));
-    if (Helper.hasColumn(rs, "link_limit")) m.setLinkLimit(rs.getInt("link_limit"));
-    if (Helper.hasColumn(rs, "link_count")) m.setLinkCount(rs.getInt("link_count"));
+    if (Helper.hasColumn(rs, "product_limit")) m.setProductLimit(rs.getInt("product_limit"));
+    if (Helper.hasColumn(rs, "product_count")) m.setProductCount(rs.getInt("product_count"));
     if (Helper.hasColumn(rs, "alarm_limit")) m.setAlarmLimit(rs.getInt("alarm_limit"));
     if (Helper.hasColumn(rs, "alarm_count")) m.setAlarmCount(rs.getInt("alarm_count"));
+    if (Helper.hasColumn(rs, "user_limit")) m.setUserLimit(rs.getInt("user_limit"));
+    if (Helper.hasColumn(rs, "user_count")) m.setUserCount(rs.getInt("user_count"));
     if (Helper.hasColumn(rs, "subs_started_at")) m.setSubsStartedAt(rs.getTimestamp("subs_started_at"));
     if (Helper.hasColumn(rs, "subs_renewal_at")) m.setSubsRenewalAt(rs.getTimestamp("subs_renewal_at"));
     if (Helper.hasColumn(rs, "currency_code")) m.setCurrencyCode(rs.getString("currency_code"));
