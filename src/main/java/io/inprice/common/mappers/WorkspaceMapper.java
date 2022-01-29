@@ -30,9 +30,9 @@ public class WorkspaceMapper implements RowMapper<Workspace> {
     if (Helper.hasColumn(rs, "state")) m.setState(rs.getString("state"));
     if (Helper.hasColumn(rs, "country")) m.setCountry(rs.getString("country"));
 
-    if (Helper.hasColumn(rs, "user_count")) m.setUserCount(Helper.nullIntegerHandler(rs, "user_count"));
-    if (Helper.hasColumn(rs, "link_count")) m.setLinkCount(Helper.nullIntegerHandler(rs, "link_count"));
+    if (Helper.hasColumn(rs, "product_count")) m.setProductCount(Helper.nullIntegerHandler(rs, "product_count"));
     if (Helper.hasColumn(rs, "alarm_count")) m.setAlarmCount(Helper.nullIntegerHandler(rs, "alarm_count"));
+    if (Helper.hasColumn(rs, "user_count")) m.setUserCount(Helper.nullIntegerHandler(rs, "user_count"));
 
     if (Helper.hasColumn(rs, "subs_started_at")) m.setSubsStartedAt(rs.getTimestamp("subs_started_at"));
     if (Helper.hasColumn(rs, "subs_renewal_at")) m.setSubsRenewalAt(rs.getTimestamp("subs_renewal_at"));
@@ -57,9 +57,12 @@ public class WorkspaceMapper implements RowMapper<Workspace> {
       Plan plan = new Plan();
     	plan.setId(m.getPlanId());
     	if (Helper.hasColumn(rs, "plan_name")) plan.setName(rs.getString("plan_name"));
-    	if (Helper.hasColumn(rs, "user_limit")) plan.setUserLimit(rs.getInt("user_limit"));
-    	if (Helper.hasColumn(rs, "link_limit")) plan.setLinkLimit(rs.getInt("link_limit"));
+    	if (Helper.hasColumn(rs, "product_limit")) plan.setProductLimit(rs.getInt("product_limit"));
     	if (Helper.hasColumn(rs, "alarm_limit")) plan.setAlarmLimit(rs.getInt("alarm_limit"));
+    	if (Helper.hasColumn(rs, "user_limit")) plan.setUserLimit(rs.getInt("user_limit"));
+    	if (Helper.hasColumn(rs, "api_allowed")) plan.setApiAllowed(rs.getBoolean("api_allowed"));
+    	if (Helper.hasColumn(rs, "integrations_allowed")) plan.setIntegrationsAllowed(rs.getBoolean("integrations_allowed"));
+    	if (Helper.hasColumn(rs, "search_insert_allowed")) plan.setSearcAndInsertAllowed(rs.getBoolean("search_insert_allowed"));
       m.setPlan(plan);
     }
 

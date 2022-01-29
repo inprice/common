@@ -35,9 +35,9 @@ public class Workspace extends BaseModel {
 
   private Integer planId;
 
-  private Integer userCount = 0;
-  private Integer linkCount = 0;
+  private Integer productCount = 0;
   private Integer alarmCount = 0;
+  private Integer userCount = 1;
 
   private Date subsStartedAt;
   private Date subsRenewalAt;

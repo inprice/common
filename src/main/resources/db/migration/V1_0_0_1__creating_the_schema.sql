@@ -23,30 +23,15 @@ create table plan (
   name                      varchar(30) not null,
   description               varchar(250),
   price                     decimal(10,2) default 0,
-  user_limit                smallint default 0,
-  link_limit                smallint default 0,
+  product_limit             smallint default 0,
   alarm_limit               smallint default 0,
+  user_limit                smallint default 0,
+  integrations_allowed      boolean default false,
+  api_allowed               boolean default false,
+  search_insert_allowed     boolean default false,
   created_at                datetime not null default current_timestamp,
   primary key (id)
 ) engine=innodb;
-
-create table plan_feature (
-  id                        int auto_increment not null,
-  description               varchar(50) not null,
-  allowed                   boolean default true,
-  order_no                  int not null default 0,
-  primary key (id)
-) engine=innodb;
-
--- many-to-many relationship between plan and plan_feature
-create table plans_and_features (
-  id                        int auto_increment not null,
-  plan_id                   int not null,
-  feature_id                int not null,
-  primary key (id)
-) engine=innodb;
-alter table plans_and_features add foreign key (plan_id) references plan (id);
-alter table plans_and_features add foreign key (feature_id) references plan_feature (id);
 
 create table workspace (
   id                        bigint unsigned auto_increment not null,
@@ -65,9 +50,9 @@ create table workspace (
   pre_status                varchar(10) not null default 'CREATED',
   last_status_update        datetime not null default current_timestamp,
   plan_id                   int,
-  user_count                smallint default 1,
-  link_count                smallint default 0,
+  product_count             smallint default 0,
   alarm_count               smallint default 0,
+  user_count                smallint default 1,
   subs_started_at           datetime,
   subs_renewal_at           datetime,
   admin_id                  bigint unsigned not null,
@@ -382,7 +367,7 @@ create table ticket (
   status                    enum('OPENED', 'IN_PROGRESS', 'WAITING_FOR_USER', 'WAITING_FOR_VERSION', 'CLOSED') not null default 'OPENED',
   priority                  enum('LOW', 'NORMAL', 'HIGH', 'CRITICAL') not null default 'NORMAL',
   type                      enum('SUPPORT', 'FEEDBACK', 'PROBLEM') not null default 'SUPPORT',
-  subject                   enum('SUBSCRIPTION', 'PAYMENT', 'LINK', 'PRODUCT', 'WORKSPACE', 'VOUCHER', 'OTHER') not null default 'OTHER',
+  subject                   enum('SUBSCRIPTION', 'PAYMENT', 'LINK', 'PRODUCT', 'WORKSPACE', 'ACCOUNT', 'VOUCHER', 'OTHER') not null default 'OTHER',
   body                      text not null,
   seen_by_user              boolean default true,
   seen_by_super             boolean default false,
