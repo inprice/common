@@ -3,14 +3,17 @@ package io.inprice.common.mappers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
 import io.inprice.common.meta.Position;
 import io.inprice.common.meta.LinkStatus;
+import io.inprice.common.helpers.GlobalConsts;
 import io.inprice.common.meta.Grup;
 import io.inprice.common.models.Link;
 import io.inprice.common.models.Platform;
+import io.inprice.common.utils.StringHelper;
 
 public class LinkMapper implements RowMapper<Link> {
 
@@ -93,7 +96,17 @@ public class LinkMapper implements RowMapper<Link> {
   	}
 
     if (Helper.hasColumn(rs, "al_name")) m.setAlarmName(rs.getString("al_name"));
-  	
+
+    //seller and url must be masked for demo account!
+    if (rs.getLong("workspace_id") == GlobalConsts.DEMO_WS_ID && Helper.hasColumn(rs, "is_masked") && rs.getBoolean("is_masked")) {
+			String maskedSeller = (StringUtils.isNotBlank(m.getSeller()) && GlobalConsts.NOT_AVAILABLE.equals(m.getSeller()) == false ? StringHelper.maskString(m.getSeller()) : null);
+			if (maskedSeller != null) {
+				m.setUrl(m.getUrl().replaceAll(m.getSeller(), maskedSeller));
+				m.setSeller(maskedSeller);
+			}
+			m.setUrl(m.getUrl().substring(0, m.getUrl().length()-12) + "-masked-url");
+    }
+
     return m;
   }
 

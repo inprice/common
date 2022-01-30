@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import io.inprice.common.helpers.GlobalConsts;
 import io.inprice.common.helpers.SqlHelper;
 
 public class StringHelper {
@@ -13,7 +14,7 @@ public class StringHelper {
 	private static final String QUOTELESS_CHARS = "((?<=(\\{|\\[|\\,|:))\\s*')|('\\s*(?=(\\}|(\\])|(\\,|:))))";
 	private static final String EMOJILESS_CHARS = "[^\\p{L}\\p{M}\\p{N}\\p{P}\\p{Z}\\p{Cf}\\p{Cs}\\s]";
 	private static final String CSV_SPLITTER = "(?<!\".*[^\"]),|,(?![^\"].*\")";
-	
+
 	public static String fixQuotes(String raw) {
 		return raw.replaceAll(QUOTELESS_CHARS, "\"");
 	}
@@ -80,6 +81,48 @@ public class StringHelper {
       .replaceAll("\n", " ")
       .replaceAll("\r", "");     
   }
+
+  /**
+   * Used by reports!
+   * 
+   * @param str
+   * @param workspaceId
+   * @return
+   */
+  public static String maskString(String str, Long workspaceId) {
+    if (StringUtils.isBlank(str) || workspaceId != GlobalConsts.DEMO_WS_ID) 
+    	return str;
+    else
+    	return maskString(str);
+	}
+
+  /**
+   * Used by reports!
+   * 
+   * @param url
+   * @param workspaceId
+   * @return
+   */
+  public static String maskUrl(String url, Long workspaceId) {
+    if (StringUtils.isBlank(url) || workspaceId != GlobalConsts.DEMO_WS_ID) 
+    	return url;
+    else
+    	return maskUrl(url);
+	}
+
+  public static String maskString(String str) {
+    if (StringUtils.isBlank(str)) 
+    	return str;
+    else
+    	return str.substring(0, str.length()/2) + "***";
+	}
+
+  public static String maskUrl(String url) {
+    if (StringUtils.isBlank(url) || url.length() < 16) 
+    	return url;
+    else
+    	return url.substring(0, url.length()-12) + "-masked-url";
+	}
 
   public static void main(String[] args) {
 		String line1 = "006,\"Çamaşır Teli, 10 Lu Paket 10\",50, ,TEMİZLİK";

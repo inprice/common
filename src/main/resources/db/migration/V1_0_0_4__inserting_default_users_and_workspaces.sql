@@ -16,14 +16,14 @@ set @admin_id = last_insert_id();
 insert into user (email, full_name, password, timezone) values ('demo@inprice.io', 'Demo User', 'fFL6hw26ZP+B+zf+TlTk1H6CPonKN3x7f0WQVb+vzPkYohFh2fPikZxuodkSTh6AYCZP6YyYMHZXrEvI3ki99A', 'Europe/Berlin');
 set @demo_user_id = last_insert_id();
 
--- broker workspace
+-- reserved workspace
 insert into workspace (name, plan_id, status, subs_started_at, subs_renewal_at, user_count, currency_code, currency_format, admin_id) 
-values ('Broker Workspace', 4, 'SUBSCRIBED', now(), '2025-12-31 23:59', 1, 'EUR', '#,##0.00 €', @admin_id);
-set @broker_ws_id = last_insert_id();
+values ('Reserved Workspace', 4, 'SUBSCRIBED', now(), '2025-12-31 23:59', 1, 'EUR', '#,##0.00 €', @admin_id);
+set @reserved_ws_id = last_insert_id();
 
 -- workspace history
-insert into workspace_history (workspace_id, status) values (@broker_ws_id, 'CREATED');
-insert into workspace_history (workspace_id, status) values (@broker_ws_id, 'SUBSCRIBED');
+insert into workspace_history (workspace_id, status) values (@reserved_ws_id, 'CREATED');
+insert into workspace_history (workspace_id, status) values (@reserved_ws_id, 'SUBSCRIBED');
 
 -- demo workspace
 insert into workspace (name, plan_id, status, subs_started_at, subs_renewal_at, user_count, currency_code, currency_format, admin_id) 
