@@ -119,15 +119,14 @@ alter table membership add foreign key (workspace_id) references workspace (id);
 
 create table platform (
   id                        bigint unsigned auto_increment not null,
-  name                      varchar(50) not null,
-  domain                    varchar(70) not null,
-  country                   varchar(100) not null,
+  domain                    varchar(50) not null,
   class_name                varchar(100) not null,
+  country                   varchar(100) not null,
   currency_code             char(3) not null,
   currency_format           varchar(30) not null,
   parked                    boolean default false,
   blocked                   boolean default false,
-  profile                   varchar(15),
+  profile                   varchar(25),
   queue                     varchar(50) not null default 'active.links.queue.cap3',
   primary key (id),
   key (domain)
@@ -435,26 +434,3 @@ create table announce_log (
   primary key (id)
 ) engine=innodb;
 alter table announce_log add foreign key (announce_id) references announce (id);
-
-create table access_log (
-  id                        bigint unsigned auto_increment not null,
-  user_id                   bigint unsigned,
-  user_email                varchar(128),
-  user_role                 varchar(8),
-  workspace_id              bigint unsigned,
-  workspace_name            varchar(70),
-  method                    varchar(6) not null,
-  path                      varchar(128) not null,
-  path_ext                  varchar(70),
-  req_body                  text,
-  status                    int default 200,
-  res_body                  text,
-  elapsed                   int default 0,
-  slow                      boolean default false,
-  ip                        varchar(128),
-  agent                     varchar(1024),
-  created_year              smallint not null default (year(curdate())),
-  created_month             char(7) not null default (date_format(curdate(), '%Y-%m')),
-  created_at                datetime not null default current_timestamp,
-  primary key (id)
-) engine=innodb;

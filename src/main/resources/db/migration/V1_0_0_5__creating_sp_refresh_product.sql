@@ -53,8 +53,8 @@ begin
       set _avgPrice := ROUND((_priceTotal + _productPrice) / (_actives + 1));
 
       if _minPrice != _maxPrice then
-        select seller, p.name into _minSeller, _minPlatform from link as l inner join platform as p on p.id = l.platform_id where price = _minPrice limit 1;
-        select seller, p.name into _maxSeller, _maxPlatform from link as l inner join platform as p on p.id = l.platform_id where price = _maxPrice limit 1;
+        select seller, p.domain into _minSeller, _minPlatform from link as l inner join platform as p on p.id = l.platform_id where price = _minPrice limit 1;
+        select seller, p.domain into _maxSeller, _maxPlatform from link as l inner join platform as p on p.id = l.platform_id where price = _maxPrice limit 1;
 
         if _productPrice <= _minPrice then 
           set _position := 'Lowest';

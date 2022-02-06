@@ -1,6 +1,7 @@
 package io.inprice.common.models;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -78,9 +79,10 @@ public class Link extends BaseModel {
   private List<LinkHistory> historyList;
 
   private Platform platform;
-
   private String alarmName;
-  
+
+  private List<BigDecimal> prices = new ArrayList<>();
+
   public Link(String url) {
     this.url = url;
   }

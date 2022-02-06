@@ -82,15 +82,14 @@ public class LinkMapper implements RowMapper<Link> {
   	if (m.getPlatformId() != null) {
     	Platform platform = new Platform();
     	platform.setId(m.getPlatformId());
-    	if (Helper.hasColumn(rs, "platform_name")) platform.setName(rs.getString("platform_name"));
     	if (Helper.hasColumn(rs, "domain")) platform.setDomain(rs.getString("domain"));
     	if (Helper.hasColumn(rs, "class_name")) platform.setClassName(rs.getString("class_name"));
+    	if (Helper.hasColumn(rs, "country")) platform.setCountry(rs.getString("country"));
     	if (Helper.hasColumn(rs, "currency_code")) platform.setCurrencyCode(rs.getString("currency_code"));
     	if (Helper.hasColumn(rs, "currency_format")) platform.setCurrencyFormat(rs.getString("currency_format"));
-    	if (Helper.hasColumn(rs, "country")) platform.setCountry(rs.getString("country"));
-    	if (Helper.hasColumn(rs, "queue")) platform.setQueue(rs.getString("queue"));
     	if (Helper.hasColumn(rs, "parked")) platform.setParked(rs.getBoolean("parked"));
     	if (Helper.hasColumn(rs, "blocked")) platform.setBlocked(rs.getBoolean("blocked"));
+    	if (Helper.hasColumn(rs, "queue")) platform.setQueue(rs.getString("queue"));
     	if (Helper.hasColumn(rs, "profile")) platform.setProfile(rs.getString("profile"));
     	m.setPlatform(platform);
   	}

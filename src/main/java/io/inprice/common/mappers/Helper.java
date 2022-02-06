@@ -3,6 +3,8 @@ package io.inprice.common.mappers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.jdbi.v3.core.result.RowView;
+
 import io.inprice.common.models.BaseModel;
 
 /**
@@ -45,6 +47,17 @@ public class Helper {
       return false;
     }
     return true;
+  }
+
+  public static <T> T getColumnVal(RowView rw, String column, Class<T> clazz) {
+  	return getColumnVal(rw, column, clazz, null);
+  }
+
+  public static <T> T getColumnVal(RowView rw, String column, Class<T> clazz, T defauld) {
+  	try {
+    	return (T) rw.getColumn(column, clazz);
+    } catch (Exception sqlex) { }
+    return defauld;
   }
 
 }

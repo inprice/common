@@ -11,7 +11,7 @@ import io.inprice.common.models.Platform;
 
 public interface PlatformDao {
 
-	final String FIELDS = ", pl.name as platform_name, pl.domain, pl.class_name, pl.currency_code, pl.currency_format, pl.country, pl.queue, pl.parked, pl.blocked, pl.profile ";
+	final String FIELDS = ", pl.domain, pl.class_name, pl.country, pl.currency_code, pl.currency_format, pl.queue, pl.parked, pl.blocked, pl.profile ";
 
   @SqlQuery("select * from platform where domain in (<domainList>) order by domain desc limit 1")
   @UseRowMapper(PlatformMapper.class)

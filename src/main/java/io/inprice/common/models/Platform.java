@@ -17,23 +17,21 @@ public class Platform implements Serializable {
 
   @JsonIgnore
   private Long id;
-  private String name;
 
-  @JsonIgnore
   private String domain;
-  private String country;
-
   @JsonIgnore
   private String className;
+  private String country;
+
   private String currencyCode;
   private String currencyFormat;
+  
+  private Boolean parked = Boolean.FALSE; //if it is under maintenance, this value is set TRUE
+  private Boolean blocked = Boolean.FALSE; //if website doesn't allow us to scrape, this value is set TRUE
 
   //some websites must be handled than the others. to be able to do this, we manage them in a separated queue (ie singly queue)
   @JsonIgnore
   private String queue;
   private String profile;
-  
-  private Boolean parked = Boolean.FALSE; //if it is under maintenance, this value is set TRUE
-  private Boolean blocked = Boolean.FALSE; //if website doesn't allow us to scrape, this value is set TRUE
 
 }
