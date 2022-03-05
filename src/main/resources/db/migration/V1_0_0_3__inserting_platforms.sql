@@ -10,16 +10,14 @@ insert into platform (domain, class_name, country, currency_code, currency_forma
   ('lidl.com', 'us.LidlUS', 'United States', 'USD', '$#,##0.00'),
   ('target.com', 'us.TargetUS', 'United States', 'USD', '$#,##0.00'),
   ('vidaxl.us', 'xx.VidaXLXX', 'United States', 'USD', '$#,##0.00'),
-  ('walmart.com', 'us.WalmartUS', 'United States', 'USD', '$#,##0.00'),
 
   ('amazon.co.uk', 'xx.AmazonXX', 'United Kingdom', 'GBP', '£#,##0.00'),
   ('ebay.co.uk', 'xx.EbayXX', 'United Kingdom', 'GBP', '£#,##0.00'),
   ('apple.com/uk', 'xx.AppleXX', 'United Kingdom', 'GBP', '£#,##0.00'),
   ('argos.co.uk', 'uk.ArgosUK', 'United Kingdom', 'GBP', '£#,##0.00'),
   ('global.direct.asda.com', 'uk.AsdaDirectUK', 'United Kingdom', 'GBP', '£#,##0.00'),
-  ('groceries.argos.com', 'uk.AsdaGroceryUK', 'United Kingdom', 'GBP', '£#,##0.00'),
   ('asda-photo.co.uk', 'uk.AsdaDirectUK', 'United Kingdom', 'GBP', '£#,##0.00'),
-  ('asos.com', 'uk.AsosUK', 'United Kingdom', 'GBP', '£#,##0.00'),
+  ('asos.com', 'uk.AsosUK', 'United Kingdom', 'GBP', '£#,##0.00')
   ('bonprix.co.uk', 'xx.BonprixXX', 'United Kingdom', 'GBP', '£#,##0.00'),
   ('currys.co.uk', 'uk.CurrysUK', 'United Kingdom', 'GBP', '£#,##0.00'),
   ('debenhams.com', 'uk.DebenhamsUK', 'United Kingdom', 'GBP', '£#,##0.00'),
@@ -42,19 +40,19 @@ insert into platform (domain, class_name, country, currency_code, currency_forma
   ('bigw.com.au', 'au.BigWAU', 'Australia', 'AUD', '$#,##0.00'),
   ('harveynorman.com.au', 'au.HarveyNormanAU', 'Australia', 'AUD', '$#,##0.00'),
   ('kogan.com', 'au.KoganAU', 'Australia', 'AUD', '$#,##0.00'),
-  ('vidaxl.com.au', 'xx.VidaXLXX', 'Australia', 'AUD', '$#,##0.00'),
   ('thegoodguys.com.au', 'au.TheGoodGuysAU', 'Australia', 'AUD', '$#,##0.00'),
+  ('vidaxl.com.au', 'xx.VidaXLXX', 'Australia', 'AUD', '$#,##0.00'),
 
   ('amazon.de', 'xx.AmazonXX', 'Germany', 'EUR', '#,##0.00 €'),
   ('ebay.de', 'xx.EbayXX', 'Germany', 'EUR', '#,##0.00 €'),
   ('apple.com/de', 'xx.AppleXX', 'Germany', 'EUR', '#,##0.00 €'),
   ('bonprix.de', 'xx.BonprixXX', 'Germany', 'EUR', '#,##0.00 €'),
   ('euronics.de', 'de.EuronicsDE', 'Germany', 'EUR', '#,##0.00 €'),
+  ('lidl.de', 'de.LidlDE', 'Germany', 'EUR', '#,##0.00 €'),
   ('mediamarkt.de', 'xx.MediaMarktXX_1', 'Germany', 'EUR', '#,##0.00 €'),
   ('notebooksbilliger.de', 'de.NotebooksBilligerDE', 'Germany', 'EUR', '#,##0.00 €'),
   ('otto.de', 'de.OttoDE', 'Germany', 'EUR', '#,##0.00 €'),
   ('saturn.de', 'xx.MediaMarktXX_1', 'Germany', 'EUR', '#,##0.00 €'),
-  ('lidl.de', 'de.LidlDE', 'Germany', 'EUR', '#,##0.00 €'),
   ('zalando.de', 'xx.ZalandoXX', 'Germany', 'EUR', '#,##0.00 €'),
 
   ('amazon.nl', 'xx.AmazonXX', 'Netherlands', 'EUR', '€ #,##0.00'),
@@ -64,7 +62,7 @@ insert into platform (domain, class_name, country, currency_code, currency_forma
   ('bonprix.nl', 'xx.BonprixXX', 'Netherlands', 'EUR', '€ #,##0.00'),
   ('coolblue.nl', 'nl.CoolBlueNL', 'Netherlands', 'EUR', '€ #,##0.00'),
   ('debijenkorf.nl', 'nl.DeBijenkorfNL', 'Netherlands', 'EUR', '€ #,##0.00'),
-  ('lidl.nl', 'xx.LidlXX', 'Netherlands', 'EUR', '€ #,##0.00'),
+  ('lidl.nl', 'nl.LidlNL', 'Netherlands', 'EUR', '€ #,##0.00'),
   ('mediamarkt.nl', 'xx.MediaMarktXX_2', 'Netherlands', 'EUR', '€ #,##0.00'),
   ('vidaxl.nl', 'xx.VidaXLXX', 'Netherlands', 'EUR', '€ #,##0.00'),
   ('wehkamp.nl', 'nl.WehkampNL', 'Netherlands', 'EUR', '€ #,##0.00'),
@@ -75,8 +73,6 @@ insert into platform (domain, class_name, country, currency_code, currency_forma
   ('apple.com/fr', 'xx.AppleXX', 'France', 'EUR', '#,##0.00 €'),
   ('auchan.fr', 'fr.AuchanFR', 'France', 'EUR', '#,##0.00 €'),
   ('bonprix.fr', 'xx.BonprixXX', 'France', 'EUR', '#,##0.00 €'),
-  ('cdiscount.com', 'fr.CDiscountFR', 'France', 'EUR', '#,##0.00 €'),
-  ('laredoute.fr', 'fr.LaredouteFR', 'France', 'EUR', '#,##0.00 €'),
   ('lidl.fr', 'xx.LidlXX', 'France', 'EUR', '#,##0.00 €'),
   ('zalando.fr', 'xx.ZalandoXX', 'France', 'EUR', '#,##0.00 €'),
 
@@ -110,14 +106,17 @@ insert into platform (domain, class_name, country, currency_code, currency_forma
   ('trendyol.com', 'tr.TrendyolTR', 'Turkey', 'TRY', '#,##0.00 TL')
   ;
 
--- websites having separated queue
 insert into platform (domain, class_name, country, currency_code, currency_format, queue) values
-  ('walmart.ca', 'ca.WalmartCA', 'Canada', 'CAD', '$#,##0.00', 'active.links.queue.cap1')
+  ('walmart.com', 'xx.WalmartXX', 'United States', 'USD', '$#,##0.00', 'active.links.queue.cap1'),
+  ('walmart.ca', 'xx.WalmartXX', 'Canada', 'CAD', '$#,##0.00', 'active.links.queue.cap1')
   ;
 
 -- blocked websites
 insert into platform (domain, class_name, country, currency_code, currency_format, blocked) values
+  ('cdiscount.com', 'fr.CDiscountFR', 'France', 'EUR', '#,##0.00 €', true),
   ('fnac.com', 'fr.FnacFR', 'France', 'EUR', '#,##0.00 €', true),
+  ('laredoute.fr', 'fr.LaredouteFR', 'France', 'EUR', '#,##0.00 €', true),
+  
   ('mediamarkt.es', 'xx.MediaMarktXX_1', 'Spain', 'EUR', '€ #,##0.00', true),
   ('eprice.it', 'it.EPriceIT', 'Italy', 'EUR', '€ #,##0.00', true)
   ;

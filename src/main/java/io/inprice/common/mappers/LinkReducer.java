@@ -87,7 +87,6 @@ public class LinkReducer implements LinkedHashMapRowReducer<Long, Link> {
 	    	platform.setParked(Helper.getColumnVal(rw, "parked", Boolean.class, Boolean.FALSE));
 	    	platform.setBlocked(Helper.getColumnVal(rw, "blocked", Boolean.class, Boolean.FALSE));
 	    	platform.setQueue(Helper.getColumnVal(rw, "queue", String.class));
-	    	platform.setProfile(Helper.getColumnVal(rw, "profile", String.class));
 	    	m.setPlatform(platform);
 	  	}
 	
@@ -104,14 +103,13 @@ public class LinkReducer implements LinkedHashMapRowReducer<Long, Link> {
 	    }
     }
 
+  	BigDecimal lpPrice = Helper.getColumnVal(rw, "lp_price", BigDecimal.class, BigDecimal.ZERO);
+    m.getPrices().add(lpPrice);
     //duplication for the first price is needed because sparkline component at fe side doesn't render properly without this!!!
-    if (m.getPrices().size() < 25) {
-    	BigDecimal lpPrice = Helper.getColumnVal(rw, "lp_price", BigDecimal.class, BigDecimal.ZERO);
-      m.getPrices().add(lpPrice);
-      if (m.getPrices().size() == 1) m.getPrices().add(lpPrice);
+    if (m.getPrices().size() == 1) m.getPrices().add(lpPrice);
+    if (m.getPrices().size() > 25) m.getPrices().remove(0);
 
-      map.put(m.getId(), m);
-    }
+    map.put(m.getId(), m);
   }
 
 }

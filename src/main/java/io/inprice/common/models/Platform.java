@@ -32,6 +32,5 @@ public class Platform implements Serializable {
   //some websites must be handled than the others. to be able to do this, we manage them in a separated queue (ie singly queue)
   @JsonIgnore
   private String queue;
-  private String profile;
 
 }
